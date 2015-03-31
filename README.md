@@ -1,4 +1,4 @@
-# ooprojekt2015
+# Calendar++
 Calendar++ Object-oriented project DIT212 2015
 
 Initial ideas on functionalities: https://docs.google.com/document/d/1yEA_iie6Ezxm9xay5WS6icpMF5bSOBJ8TQHIVAIvUwk/edit?usp=sharing
