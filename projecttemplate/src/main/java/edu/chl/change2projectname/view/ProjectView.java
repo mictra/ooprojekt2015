@@ -72,7 +72,7 @@ public class ProjectView extends javax.swing.JFrame {
 
         menuCalendarLabel.setFont(new java.awt.Font("Source Sans Pro", 1, 24)); // NOI18N
         menuCalendarLabel.setForeground(new java.awt.Color(255, 255, 255));
-        menuCalendarLabel.setIcon(new javax.swing.ImageIcon("/home/cain/arrow_down.png")); // NOI18N
+        menuCalendarLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arrow_down.png"))); // NOI18N
         menuCalendarLabel.setText("Calendar");
         menuCalendarLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -125,7 +125,7 @@ public class ProjectView extends javax.swing.JFrame {
 
         menuContactsLabel.setFont(new java.awt.Font("Source Sans Pro", 1, 24)); // NOI18N
         menuContactsLabel.setForeground(java.awt.Color.white);
-        menuContactsLabel.setIcon(new javax.swing.ImageIcon("/home/cain/arrow_down.png")); // NOI18N
+        menuContactsLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arrow_down.png"))); // NOI18N
         menuContactsLabel.setText("Contacts");
         menuContactsLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -185,7 +185,7 @@ public class ProjectView extends javax.swing.JFrame {
 
         menuSettingsLabel.setFont(new java.awt.Font("Source Sans Pro", 1, 24)); // NOI18N
         menuSettingsLabel.setForeground(java.awt.Color.white);
-        menuSettingsLabel.setIcon(new javax.swing.ImageIcon("/home/cain/arrow_right.png")); // NOI18N
+        menuSettingsLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arrow_right.png"))); // NOI18N
         menuSettingsLabel.setText("Settings");
         menuSettingsLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -316,12 +316,12 @@ public class ProjectView extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (menuCalendarPanel.isVisible()) {
             menuCalendarPanel.setVisible(false);
-            menuCalendarLabel.setIcon((new javax.swing.ImageIcon("/home/cain/arrow_right.png")));
+            menuCalendarLabel.setIcon((new javax.swing.ImageIcon(getClass().getResource("/arrow_right.png"))));
         } else {
             menuCalendarPanel.setVisible(true);
-            menuCalendarLabel.setIcon((new javax.swing.ImageIcon("/home/cain/arrow_down.png")));
+            menuCalendarLabel.setIcon((new javax.swing.ImageIcon(getClass().getResource("/arrow_down.png"))));
             menuContactsPanel.setVisible(false);
-            menuContactsLabel.setIcon((new javax.swing.ImageIcon("/home/cain/arrow_right.png")));
+            menuContactsLabel.setIcon((new javax.swing.ImageIcon(getClass().getResource("/arrow_right.png"))));
         }
         
     }//GEN-LAST:event_menuCalendarLabelMousePressed
@@ -330,21 +330,21 @@ public class ProjectView extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (menuContactsPanel.isVisible()) {
             menuContactsPanel.setVisible(false);
-            menuContactsLabel.setIcon((new javax.swing.ImageIcon("/home/cain/arrow_right.png")));
+            menuContactsLabel.setIcon((new javax.swing.ImageIcon(getClass().getResource("/arrow_right.png"))));
         } else {
             menuContactsPanel.setVisible(true);
-            menuContactsLabel.setIcon((new javax.swing.ImageIcon("/home/cain/arrow_down.png")));
+            menuContactsLabel.setIcon((new javax.swing.ImageIcon(getClass().getResource("/arrow_down.png"))));
             menuCalendarPanel.setVisible(false);
-            menuCalendarLabel.setIcon((new javax.swing.ImageIcon("/home/cain/arrow_right.png")));
+            menuCalendarLabel.setIcon((new javax.swing.ImageIcon(getClass().getResource("/arrow_right.png"))));
         }
     }//GEN-LAST:event_menuContactsLabelMousePressed
 
     private void menuSettingsLabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuSettingsLabelMousePressed
         // TODO add your handling code here:
         menuContactsPanel.setVisible(false);
-        menuContactsLabel.setIcon((new javax.swing.ImageIcon("/home/cain/arrow_right.png")));
+        menuContactsLabel.setIcon((new javax.swing.ImageIcon(getClass().getResource("/arrow_right.png"))));
         menuCalendarPanel.setVisible(false);
-        menuCalendarLabel.setIcon((new javax.swing.ImageIcon("/home/cain/arrow_right.png")));
+        menuCalendarLabel.setIcon((new javax.swing.ImageIcon(getClass().getResource("/arrow_right.png"))));
     }//GEN-LAST:event_menuSettingsLabelMousePressed
 
     /**
@@ -408,6 +408,6 @@ public class ProjectView extends javax.swing.JFrame {
 
     private void tweekingInitComponents() {
             menuContactsPanel.setVisible(false);
-            menuContactsLabel.setIcon((new javax.swing.ImageIcon("/home/cain/arrow_right.png")));
+            menuContactsLabel.setIcon((new javax.swing.ImageIcon(getClass().getResource("/arrow_right.png"))));
     }
 }
