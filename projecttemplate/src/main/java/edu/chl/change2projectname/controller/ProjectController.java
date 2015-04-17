@@ -15,7 +15,7 @@ public class ProjectController {
 	}
 
 	private ProjectController(Project project, ProjectView projectView) {
-		projectView.getButton().addActionListener(new ProjectButtonPressed());
+		//projectView.getButton().addActionListener(new ProjectButtonPressed());
 
 		this.project = project;
 		this.projectView = projectView;
@@ -24,8 +24,8 @@ public class ProjectController {
 	private class ProjectButtonPressed implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			project.incrementPresses();
-			projectView.getPressesLabel().setText(String.valueOf(project.getPresses()));
+			//project.incrementPresses();
+			//projectView.getPressesLabel().setText(String.valueOf(project.getPresses()));
 		}
 	}
 }
