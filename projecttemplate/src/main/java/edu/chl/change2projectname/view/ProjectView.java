@@ -55,7 +55,8 @@ public class ProjectView extends javax.swing.JFrame {
         menuSettingsLabel = new javax.swing.JLabel();
         searchTextField = new javax.swing.JTextField();
         mainPanel = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
+        topPanel = new javax.swing.JPanel();
+        headlineLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1270, 750));
@@ -261,17 +262,22 @@ public class ProjectView extends javax.swing.JFrame {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        jPanel1.setBackground(new java.awt.Color(165, 214, 167));
+        topPanel.setBackground(new java.awt.Color(165, 214, 167));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 996, Short.MAX_VALUE)
+        headlineLabel.setFont(new java.awt.Font("Source Sans Pro", 1, 36)); // NOI18N
+        headlineLabel.setText("Headline");
+
+        javax.swing.GroupLayout topPanelLayout = new javax.swing.GroupLayout(topPanel);
+        topPanel.setLayout(topPanelLayout);
+        topPanelLayout.setHorizontalGroup(
+            topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(topPanelLayout.createSequentialGroup()
+                .addComponent(headlineLabel)
+                .addGap(0, 845, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 60, Short.MAX_VALUE)
+        topPanelLayout.setVerticalGroup(
+            topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(headlineLabel)
         );
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
@@ -282,7 +288,7 @@ public class ProjectView extends javax.swing.JFrame {
                 .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(topPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -290,13 +296,13 @@ public class ProjectView extends javax.swing.JFrame {
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(menuPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 920, Short.MAX_VALUE)
             .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(topPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jLayeredPane1.setLayer(menuPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(mainPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(jPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(topPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -320,6 +326,7 @@ public class ProjectView extends javax.swing.JFrame {
         } else {
             menuCalendarPanel.setVisible(true);
             menuCalendarLabel.setIcon((new javax.swing.ImageIcon(getClass().getResource("/arrow_down.png"))));
+            headlineLabel.setText("Calendar // #SUBSECTION");
             menuContactsPanel.setVisible(false);
             menuContactsLabel.setIcon((new javax.swing.ImageIcon(getClass().getResource("/arrow_right.png"))));
         }
@@ -334,6 +341,7 @@ public class ProjectView extends javax.swing.JFrame {
         } else {
             menuContactsPanel.setVisible(true);
             menuContactsLabel.setIcon((new javax.swing.ImageIcon(getClass().getResource("/arrow_down.png"))));
+            headlineLabel.setText("Contacts // #SUBSECTION");
             menuCalendarPanel.setVisible(false);
             menuCalendarLabel.setIcon((new javax.swing.ImageIcon(getClass().getResource("/arrow_right.png"))));
         }
@@ -345,6 +353,7 @@ public class ProjectView extends javax.swing.JFrame {
         menuContactsLabel.setIcon((new javax.swing.ImageIcon(getClass().getResource("/arrow_right.png"))));
         menuCalendarPanel.setVisible(false);
         menuCalendarLabel.setIcon((new javax.swing.ImageIcon(getClass().getResource("/arrow_right.png"))));
+        headlineLabel.setText("Settings");
     }//GEN-LAST:event_menuSettingsLabelMousePressed
 
     /**
@@ -384,10 +393,10 @@ public class ProjectView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel allContactsLabel;
+    private javax.swing.JLabel headlineLabel;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLayeredPane jLayeredPane1;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel listViewLabel;
     private javax.swing.JLabel logoLabel;
     private javax.swing.JSeparator logoSeparator;
@@ -403,11 +412,13 @@ public class ProjectView extends javax.swing.JFrame {
     private javax.swing.JLabel newContactsLabel;
     private javax.swing.JLabel newGroupLabel;
     private javax.swing.JTextField searchTextField;
+    private javax.swing.JPanel topPanel;
     private javax.swing.JLabel weekViewLabel;
     // End of variables declaration//GEN-END:variables
 
     private void tweekingInitComponents() {
             menuContactsPanel.setVisible(false);
             menuContactsLabel.setIcon((new javax.swing.ImageIcon(getClass().getResource("/arrow_right.png"))));
+            headlineLabel.setText("Calendar // #SUBSECTION");
     }
 }
