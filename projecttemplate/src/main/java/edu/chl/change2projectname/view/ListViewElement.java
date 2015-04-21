@@ -22,7 +22,7 @@ public class ListViewElement extends javax.swing.JPanel {
         nameLabel.setText(a.getName());
         Calendar c = a.getStartTime();
         System.out.println(c.toString());
-        String date = c.get(c.DAY_OF_MONTH) + "." + c.get(c.MONTH+1) + "." + c.get(c.YEAR) + " - kl. " + c.get(c.HOUR_OF_DAY) + ":" + c.get(c.MINUTE);
+        String date = c.get(c.DAY_OF_MONTH) + "." + (c.get(c.MONTH)+1) + "." + c.get(c.YEAR) + " - kl. " + c.get(c.HOUR_OF_DAY) + ":" + c.get(c.MINUTE);
         dateLabel.setText(date);
         locationLabel.setText(a.getLocation());
     }

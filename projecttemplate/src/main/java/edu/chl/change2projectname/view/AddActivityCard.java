@@ -229,7 +229,7 @@ public class AddActivityCard extends javax.swing.JPanel {
         endDate.set(eYear, eMonth, eDay, eHour, eMinute);
         String location = locationTextField.getText();
         String description = descriptionTextArea.getText();
-        Activity a = new Activity(endDate, endDate, name);
+        Activity a = new Activity(startDate, endDate, name);
         a.setLocation(location);
         a.setDescription(description);
         return a;
