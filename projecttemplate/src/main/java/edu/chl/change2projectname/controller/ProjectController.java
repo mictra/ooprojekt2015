@@ -35,6 +35,7 @@ public class ProjectController implements MouseListener, ActionListener {
             projectView.changeCard("AddActivityCard");
         } else if(e.getSource() == projectView.getListViewLabel()){
             projectView.changeCard("ListViewCard");
+            projectView.updateListView(cal.getActivityList());
         }
         
     }
