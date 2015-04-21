@@ -5,6 +5,9 @@
  */
 package edu.chl.change2projectname.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author erikforsberg
@@ -13,5 +16,57 @@ package edu.chl.change2projectname.model;
  * 
  */
 public class Calendar {
+    
+    private ArrayList<Activity> activities;
+    private ArrayList<ContactGroup> groups;
+    private ArrayList<Alarm> alarms;
+    
+    public void addActivity(Activity a){
+        activities.add(a);
+    }
+    
+    public void addContactGroup(ContactGroup group){
+        groups.add(group);
+    }
+    
+    public void addAlarm(Alarm a){
+        alarms.add(a);
+    }
+    
+    public void removeActivity(Activity a){
+        activities.remove(a);
+    }
+    
+    public void removeContactGroup(ContactGroup g){
+        groups.remove(g);
+    }
+    
+    public void removeAlarm(Alarm a){
+        alarms.remove(a);
+    }
+    
+    public void setActivityList(ArrayList l){
+        activities = l;
+    }
+    
+    public void setContactGroupList(ArrayList l){
+        groups = l;
+    }
+    
+    public void setAlarmList(ArrayList l){
+        alarms = l;
+    }
+    
+    public List getActivityList(){
+        return activities;
+    }
+    
+    public List getContactGroupList(){
+        return groups;
+    }
+    
+    public List getAlarmList(){
+        return alarms;
+    }
     
 }

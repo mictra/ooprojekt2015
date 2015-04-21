@@ -22,6 +22,11 @@ public abstract class Alarm {
     Date alarmTime = new Date();
     String name, description;
     
+    public Alarm(Date d, String n){
+        this.alarmTime = d;
+        this.name = n;
+    }
+    
     public void setAlarm(Date time){
         this.alarmTime = time;
     }

@@ -16,7 +16,7 @@ public class ContactGroup {
     
     //Implementing the variables right over here.
     String name;
-    Arraylist<Contact> members = new ArrayList<>();
+    ArrayList<Contact> members = new ArrayList<>();
     
     
     //Set- & get-methods for the name-variable...

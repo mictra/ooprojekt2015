@@ -20,6 +20,12 @@ import java.util.Date;
 */
 public class Notification extends Alarm {
     
+    //private final Activity activity;
+
+    public Notification(Date d, String n) {
+        super(d, n);
+    }
+    
     @Override
     public void setAlarm(Date time){
         this.alarmTime = time;
