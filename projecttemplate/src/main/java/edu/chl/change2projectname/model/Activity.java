@@ -25,6 +25,11 @@ public class Activity {
     
     //public Notification eventNot;
     
+    public Activity(Date st, Date et, String name) {
+        this.startTime = st;
+        this.endTime = et;
+        this.name = name;
+    }
     
     // Setters and getters
     
@@ -43,8 +48,6 @@ public class Activity {
     public Date getEndTime(){
         return this.endTime;
     }
-
- //////////////////////////////////////////////////////////////   
     
     public void setName(String n){
        this.name = n;
@@ -68,5 +71,13 @@ public class Activity {
     
     public String getLocation(){
         return this.location;
+    }
+        
+    public void addAtendee(Contact contact){
+         this.atendees.add(contact);
+    }
+    
+    public void removeAtendee(Contact contact){
+        this.atendees.remove(contact);
     }
 }
