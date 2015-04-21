@@ -15,11 +15,11 @@ import java.util.List;
  * Class to represent a calendar object.
  * 
  */
-public class Calendar {
+public class CalendarPlus {
     
-    private ArrayList<Activity> activities;
-    private ArrayList<ContactGroup> groups;
-    private ArrayList<Alarm> alarms;
+    private ArrayList<Activity> activities = new ArrayList<>();
+    private ArrayList<ContactGroup> groups = new ArrayList<>();
+    private ArrayList<Alarm> alarms = new ArrayList<>();
     
     public void addActivity(Activity a){
         activities.add(a);
@@ -57,15 +57,15 @@ public class Calendar {
         alarms = l;
     }
     
-    public List getActivityList(){
+    public List<Activity> getActivityList(){
         return activities;
     }
     
-    public List getContactGroupList(){
+    public List<ContactGroup> getContactGroupList(){
         return groups;
     }
     
-    public List getAlarmList(){
+    public List<Alarm> getAlarmList(){
         return alarms;
     }
     

@@ -5,6 +5,11 @@
  */
 package edu.chl.change2projectname.view;
 
+import edu.chl.change2projectname.model.Activity;
+import java.util.Calendar;
+import java.util.Date;
+import javax.swing.JButton;
+
 /**
  *
  * @author cain
@@ -205,6 +210,39 @@ public class AddActivityCard extends javax.swing.JPanel {
     private javax.swing.JLabel startDateLabel;
     // End of variables declaration//GEN-END:variables
 
+    public Activity getAsActivity(){
+        //TODO: Handle errors when missing fields not in there... Maybe disable Save button?
+        String name = nameTextfield.getText();
+        Calendar startDate = Calendar.getInstance();
+        int sYear = (Integer) sYearComboBox.getSelectedItem();
+        int sMonth = sMonthComboBox.getSelectedIndex();
+        int sDay = sDayComboBox.getSelectedIndex()+1;
+        int sHour = Integer.parseInt((String) sHourComboBox.getSelectedItem());
+        int sMinute = Integer.parseInt((String) sMinuteComboBox.getSelectedItem());
+        startDate.set(sYear, sMonth, sDay, sHour, sMinute);
+        Calendar endDate = Calendar.getInstance();
+        int eYear = (Integer) eYearComboBox.getSelectedItem();
+        int eMonth = eMonthComboBox.getSelectedIndex();
+        int eDay = eDayComboBox.getSelectedIndex()+1;
+        int eHour = Integer.parseInt((String) eHourComboBox.getSelectedItem());
+        int eMinute = Integer.parseInt((String) eMinuteComboBox.getSelectedItem());
+        endDate.set(eYear, eMonth, eDay, eHour, eMinute);
+        String location = locationTextField.getText();
+        String description = descriptionTextArea.getText();
+        Activity a = new Activity(endDate, endDate, name);
+        a.setLocation(location);
+        a.setDescription(description);
+        return a;
+    }
+    
+    public JButton getSaveButton(){
+        return saveButton;
+    }
+    
+    public JButton getCancelButton(){
+        return cancelButton;
+    }
+    
     private void initComboBoxes() {
         // Set the days
         sDayComboBox.removeAllItems();

@@ -351,6 +351,10 @@ public class ProjectView extends javax.swing.JFrame {
         return this.newActivityLabel;
     }
     
+    public JLabel getListViewLabel(){
+        return this.listViewLabel;
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -418,6 +422,9 @@ public class ProjectView extends javax.swing.JFrame {
     
     // Non-generated variables end
     
+    public AddActivityCard getActivityCard(){
+        return addActivity;
+    }
     
     private void tweekingInitComponents() {
             menuContactsPanel.setVisible(false);

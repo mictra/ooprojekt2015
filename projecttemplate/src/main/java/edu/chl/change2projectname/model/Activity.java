@@ -6,7 +6,7 @@
 package edu.chl.change2projectname.model;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Calendar;
 
 /**
  *
@@ -14,8 +14,8 @@ import java.util.Date;
  */
 public class Activity {
     
-    public Date startTime;
-    public Date endTime;
+    public Calendar startTime;
+    public Calendar endTime;
     
     public String name;
     public String description;
@@ -25,7 +25,7 @@ public class Activity {
     
     //public Notification eventNot;
     
-    public Activity(Date st, Date et, String name) {
+    public Activity(Calendar st, Calendar et, String name) {
         this.startTime = st;
         this.endTime = et;
         this.name = name;
@@ -33,19 +33,19 @@ public class Activity {
     
     // Setters and getters
     
-    public void setStartTIime(Date st){
+    public void setStartTIime(Calendar st){
         this.startTime = st;
     }
     
-    public Date getStartTime(){
+    public Calendar getStartTime(){
         return this.startTime;
     }
     
-    public void setEndTime(Date et){
+    public void setEndTime(Calendar et){
         this.endTime = et;   
     }
     
-    public Date getEndTime(){
+    public Calendar getEndTime(){
         return this.endTime;
     }
     
