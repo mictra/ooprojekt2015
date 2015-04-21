@@ -5,8 +5,11 @@
  */
 package edu.chl.change2projectname.view;
 
+import edu.chl.change2projectname.model.Activity;
 import edu.chl.change2projectname.model.Project;
 import java.awt.CardLayout;
+import java.awt.Dimension;
+import java.util.List;
 import javax.swing.JLabel;
 
 /**
@@ -37,7 +40,7 @@ public class ProjectView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLayeredPane1 = new javax.swing.JLayeredPane();
+        mainLayeredPane = new javax.swing.JLayeredPane();
         menuPanel = new javax.swing.JPanel();
         logoLabel = new javax.swing.JLabel();
         logoSeparator = new javax.swing.JSeparator();
@@ -62,7 +65,7 @@ public class ProjectView extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLayeredPane1.setPreferredSize(new java.awt.Dimension(1270, 750));
+        mainLayeredPane.setPreferredSize(new java.awt.Dimension(1270, 750));
 
         menuPanel.setBackground(new java.awt.Color(63, 81, 181));
         menuPanel.setPreferredSize(new java.awt.Dimension(300, 700));
@@ -245,7 +248,7 @@ public class ProjectView extends javax.swing.JFrame {
                 .addComponent(menuContactsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(menuSettingsLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 382, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 172, Short.MAX_VALUE)
                 .addComponent(searchTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -271,39 +274,39 @@ public class ProjectView extends javax.swing.JFrame {
             .addComponent(headlineLabel)
         );
 
-        javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
-        jLayeredPane1.setLayout(jLayeredPane1Layout);
-        jLayeredPane1Layout.setHorizontalGroup(
-            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jLayeredPane1Layout.createSequentialGroup()
+        javax.swing.GroupLayout mainLayeredPaneLayout = new javax.swing.GroupLayout(mainLayeredPane);
+        mainLayeredPane.setLayout(mainLayeredPaneLayout);
+        mainLayeredPaneLayout.setHorizontalGroup(
+            mainLayeredPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(mainLayeredPaneLayout.createSequentialGroup()
                 .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(mainLayeredPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(topPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
-        jLayeredPane1Layout.setVerticalGroup(
-            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(menuPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 920, Short.MAX_VALUE)
-            .addGroup(jLayeredPane1Layout.createSequentialGroup()
+        mainLayeredPaneLayout.setVerticalGroup(
+            mainLayeredPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainLayeredPaneLayout.createSequentialGroup()
                 .addComponent(topPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(menuPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 710, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
-        jLayeredPane1.setLayer(menuPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(mainPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(topPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        mainLayeredPane.setLayer(menuPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        mainLayeredPane.setLayer(mainPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        mainLayeredPane.setLayer(topPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(mainLayeredPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLayeredPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 920, Short.MAX_VALUE)
+            .addComponent(mainLayeredPane, javax.swing.GroupLayout.PREFERRED_SIZE, 710, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -395,10 +398,10 @@ public class ProjectView extends javax.swing.JFrame {
     private javax.swing.JLabel headlineLabel;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JLabel listViewLabel;
     private javax.swing.JLabel logoLabel;
     private javax.swing.JSeparator logoSeparator;
+    private javax.swing.JLayeredPane mainLayeredPane;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JLabel menuCalendarLabel;
     private javax.swing.JPanel menuCalendarPanel;
@@ -427,17 +430,29 @@ public class ProjectView extends javax.swing.JFrame {
     }
     
     private void tweekingInitComponents() {
-            menuContactsPanel.setVisible(false);
-            menuContactsLabel.setIcon((new javax.swing.ImageIcon(getClass().getResource("/arrow_right.png"))));
-            headlineLabel.setText("Calendar // #SUBSECTION");
+        mainLayeredPane.setPreferredSize(new Dimension(1270,750));
+        mainLayeredPane.setSize(new Dimension(1270,750));
+        
+        menuContactsPanel.setVisible(false);
+        menuContactsLabel.setIcon((new javax.swing.ImageIcon(getClass().getResource("/arrow_right.png"))));
+        headlineLabel.setText("Calendar // #SUBSECTION");
             
-            tabCards = (CardLayout) mainPanel.getLayout();
-            mainPanel.add(addActivity, "AddActivityCard");
-            mainPanel.add(listView, "ListViewCard");
-            tabCards.show(mainPanel, "ListViewCard");
+        tabCards = (CardLayout) mainPanel.getLayout();
+        mainPanel.add(addActivity, "AddActivityCard");
+        mainPanel.add(listView, "ListViewCard");
+        tabCards.show(mainPanel, "ListViewCard");
     }
     
     public void changeCard(String card) {
         tabCards.show(mainPanel, card);
+        if (card.equals("AddActivityCard")) {
+            headlineLabel.setText("Add an activity");
+        } else if (card.equals("ListViewCard")) {
+            headlineLabel.setText("Calendar // Listview");
+        }
+    }
+
+    public void updateListView(List<Activity> activityList) {
+        listView.updateListView(activityList);
     }
 }

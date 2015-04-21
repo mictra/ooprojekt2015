@@ -5,6 +5,10 @@
  */
 package edu.chl.change2projectname.view;
 
+import edu.chl.change2projectname.model.Activity;
+import java.awt.Dimension;
+import java.util.List;
+
 /**
  *
  * @author cain
@@ -16,6 +20,21 @@ public class ListViewCard extends javax.swing.JPanel {
      */
     public ListViewCard() {
         initComponents();
+        listViewScrollPane.getVerticalScrollBar().setUnitIncrement(20);
+    }
+    
+    public void updateListView (List<Activity> actlist) {
+        elementList.removeAll();
+        elementList.setPreferredSize(new Dimension(684,500));
+        elementList.setSize(684, 500);
+        for (Activity a: actlist) {
+            ListViewElement lve = new ListViewElement(a);
+            lve.setPreferredSize(new Dimension(650,141));
+            elementList.add(lve);
+            revalidate();
+            repaint();
+            revalidate();
+        }
     }
 
     /**
@@ -27,19 +46,34 @@ public class ListViewCard extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        listViewScrollPane = new javax.swing.JScrollPane();
+        elementList = new javax.swing.JPanel();
+
+        setPreferredSize(new java.awt.Dimension(710, 850));
+
+        listViewScrollPane.setViewportView(elementList);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(listViewScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 686, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(listViewScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel elementList;
+    private javax.swing.JScrollPane listViewScrollPane;
     // End of variables declaration//GEN-END:variables
 }
