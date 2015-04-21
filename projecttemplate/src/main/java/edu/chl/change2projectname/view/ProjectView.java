@@ -6,6 +6,7 @@
 package edu.chl.change2projectname.view;
 
 import edu.chl.change2projectname.model.Project;
+import java.awt.CardLayout;
 import javax.swing.JLabel;
 
 /**
@@ -86,11 +87,6 @@ public class ProjectView extends javax.swing.JFrame {
         newActivityLabel.setFont(new java.awt.Font("Source Sans Pro", 1, 18)); // NOI18N
         newActivityLabel.setForeground(java.awt.Color.white);
         newActivityLabel.setText("Add an activity");
-        newActivityLabel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                newActivityLabelMouseClicked(evt);
-            }
-        });
 
         listViewLabel.setFont(new java.awt.Font("Source Sans Pro", 1, 18)); // NOI18N
         listViewLabel.setForeground(java.awt.Color.white);
@@ -210,7 +206,7 @@ public class ProjectView extends javax.swing.JFrame {
                     .addGroup(menuPanelLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(logoLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
+                            .addComponent(logoLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
                             .addComponent(logoSeparator, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuPanelLayout.createSequentialGroup()
                                 .addGap(12, 12, 12)
@@ -255,17 +251,7 @@ public class ProjectView extends javax.swing.JFrame {
         );
 
         mainPanel.setBackground(new java.awt.Color(187, 222, 251));
-
-        javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
-        mainPanel.setLayout(mainPanelLayout);
-        mainPanelLayout.setHorizontalGroup(
-            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        mainPanelLayout.setVerticalGroup(
-            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
+        mainPanel.setLayout(new java.awt.CardLayout());
 
         topPanel.setBackground(new java.awt.Color(165, 214, 167));
 
@@ -278,7 +264,7 @@ public class ProjectView extends javax.swing.JFrame {
             topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(topPanelLayout.createSequentialGroup()
                 .addComponent(headlineLabel)
-                .addGap(0, 852, Short.MAX_VALUE))
+                .addGap(0, 845, Short.MAX_VALUE))
         );
         topPanelLayout.setVerticalGroup(
             topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -361,10 +347,6 @@ public class ProjectView extends javax.swing.JFrame {
         headlineLabel.setText("Settings");
     }//GEN-LAST:event_menuSettingsLabelMousePressed
 
-    private void newActivityLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_newActivityLabelMouseClicked
-        
-    }//GEN-LAST:event_newActivityLabelMouseClicked
-
     public JLabel getNewActivityLabel(){
         return this.newActivityLabel;
     }
@@ -428,10 +410,27 @@ public class ProjectView extends javax.swing.JFrame {
     private javax.swing.JPanel topPanel;
     private javax.swing.JLabel weekViewLabel;
     // End of variables declaration//GEN-END:variables
-
+    
+    // Non-generated variables declaration
+    private CardLayout tabCards;
+    private AddActivityCard addActivity = new AddActivityCard();
+    private ListViewCard listView = new ListViewCard();
+    
+    // Non-generated variables end
+    
+    
     private void tweekingInitComponents() {
             menuContactsPanel.setVisible(false);
             menuContactsLabel.setIcon((new javax.swing.ImageIcon(getClass().getResource("/arrow_right.png"))));
             headlineLabel.setText("Calendar // #SUBSECTION");
+            
+            tabCards = (CardLayout) mainPanel.getLayout();
+            mainPanel.add(addActivity, "AddActivityCard");
+            mainPanel.add(listView, "ListViewCard");
+            tabCards.show(mainPanel, "ListViewCard");
+    }
+    
+    public void changeCard(String card) {
+        tabCards.show(mainPanel, card);
     }
 }

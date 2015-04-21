@@ -60,26 +60,26 @@ public class AddActivityCard extends javax.swing.JPanel {
 
         sDayComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1" }));
 
-        sMonthComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        sMonthComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" }));
 
         sYearComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2015" }));
 
-        sHourComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        sHourComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" }));
 
-        sMinuteComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00" }));
+        sMinuteComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "05", "10", "15", "20", "25", "30", "35", "40", "45", "50", "55" }));
 
         endDateLabel.setFont(new java.awt.Font("Source Sans Pro", 1, 14)); // NOI18N
         endDateLabel.setText("Enddate*");
 
         eDayComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1" }));
 
-        eMonthComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        eMonthComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" }));
 
         eYearComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2015" }));
 
-        eHourComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        eHourComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" }));
 
-        eMinuteComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00" }));
+        eMinuteComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "05", "10", "15", "20", "25", "30", "35", "40", "45", "50", "55" }));
 
         locationLabel.setFont(new java.awt.Font("Source Sans Pro", 1, 14)); // NOI18N
         locationLabel.setText("Location");
@@ -214,12 +214,12 @@ public class AddActivityCard extends javax.swing.JPanel {
             eDayComboBox.addItem(i);
         }
         // Set the months
-        String[] months = { "January", "February", "March", "April", "May", "June",
-            "July", "August", "September", "October", "November", "December" };
-        sMonthComboBox.removeAllItems();
-        eMonthComboBox.removeAllItems();
-        sMonthComboBox.addItem(months);
-        eMonthComboBox.addItem(months);
+//        String[] months = { "January", "February", "March", "April", "May", "June",
+//            "July", "August", "September", "October", "November", "December" };
+//        sMonthComboBox.removeAllItems();
+//        eMonthComboBox.removeAllItems();
+//        sMonthComboBox.addItem(months);
+//        eMonthComboBox.addItem(months);
         // Set the years
         sYearComboBox.removeAllItems();
         eYearComboBox.removeAllItems();
@@ -228,19 +228,19 @@ public class AddActivityCard extends javax.swing.JPanel {
             eYearComboBox.addItem(i);
         }
         // Set the hours
-        sHourComboBox.removeAllItems();
-        eHourComboBox.removeAllItems();
-        for (int i = 0; i <= 23; i++) {
-            sHourComboBox.addItem(i);
-            eHourComboBox.addItem(i);
-        }
+//        sHourComboBox.removeAllItems();
+//        eHourComboBox.removeAllItems();
+//        for (int i = 0; i <= 23; i++) {
+//            sHourComboBox.addItem(i);
+//            eHourComboBox.addItem(i);
+//        }
         // Set the minutes
         //sMinuteComboBox.removeAllItems();
         //eMinuteComboBox.removeAllItems();
-        for (int i = 10; i <= 55; i = i+5) {
-            sMinuteComboBox.addItem(i);
-            eMinuteComboBox.addItem(i);
-        }
+//        for (int i = 10; i <= 55; i = i+5) {
+//            sMinuteComboBox.addItem(i);
+//            eMinuteComboBox.addItem(i);
+//        }
         
         }
 }

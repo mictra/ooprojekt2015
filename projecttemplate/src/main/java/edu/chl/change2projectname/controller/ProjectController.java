@@ -23,7 +23,10 @@ public class ProjectController implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        System.out.println("CLICKED ADD ACTIVITY!");
+        if (e.getSource() == projectView.getNewActivityLabel()) {
+            projectView.changeCard("AddActivityCard");
+        }
+        
     }
 
     @Override
