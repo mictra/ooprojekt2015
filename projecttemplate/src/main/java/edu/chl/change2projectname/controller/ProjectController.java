@@ -2,10 +2,10 @@ package edu.chl.change2projectname.controller;
 
 import edu.chl.change2projectname.model.Project;
 import edu.chl.change2projectname.view.ProjectView;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
-public class ProjectController {
+public class ProjectController implements MouseListener {
 	private final Project project;
 	private final ProjectView projectView;
 	public static final int KO = 1;
@@ -16,16 +16,35 @@ public class ProjectController {
 
 	private ProjectController(Project project, ProjectView projectView) {
 		//projectView.getButton().addActionListener(new ProjectButtonPressed());
-
 		this.project = project;
 		this.projectView = projectView;
+                this.projectView.getNewActivityLabel().addMouseListener(this);
 	}
 
-	private class ProjectButtonPressed implements ActionListener {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			//project.incrementPresses();
-			//projectView.getPressesLabel().setText(String.valueOf(project.getPresses()));
-		}
-	}
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        System.out.println("CLICKED ADD ACTIVITY!");
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+	
 }

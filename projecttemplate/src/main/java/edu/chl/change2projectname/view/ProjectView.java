@@ -6,6 +6,7 @@
 package edu.chl.change2projectname.view;
 
 import edu.chl.change2projectname.model.Project;
+import javax.swing.JLabel;
 
 /**
  *
@@ -59,7 +60,6 @@ public class ProjectView extends javax.swing.JFrame {
         headlineLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1270, 750));
 
         jLayeredPane1.setPreferredSize(new java.awt.Dimension(1270, 750));
 
@@ -86,6 +86,11 @@ public class ProjectView extends javax.swing.JFrame {
         newActivityLabel.setFont(new java.awt.Font("Source Sans Pro", 1, 18)); // NOI18N
         newActivityLabel.setForeground(java.awt.Color.white);
         newActivityLabel.setText("Add an activity");
+        newActivityLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                newActivityLabelMouseClicked(evt);
+            }
+        });
 
         listViewLabel.setFont(new java.awt.Font("Source Sans Pro", 1, 18)); // NOI18N
         listViewLabel.setForeground(java.awt.Color.white);
@@ -356,6 +361,14 @@ public class ProjectView extends javax.swing.JFrame {
         headlineLabel.setText("Settings");
     }//GEN-LAST:event_menuSettingsLabelMousePressed
 
+    private void newActivityLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_newActivityLabelMouseClicked
+        
+    }//GEN-LAST:event_newActivityLabelMouseClicked
+
+    public JLabel getNewActivityLabel(){
+        return this.newActivityLabel;
+    }
+    
     /**
      * @param args the command line arguments
      */

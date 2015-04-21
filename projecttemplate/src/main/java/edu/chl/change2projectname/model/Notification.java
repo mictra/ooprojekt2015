@@ -20,10 +20,11 @@ import java.util.Date;
 */
 public class Notification extends Alarm {
     
-    //private final Activity activity;
+    private final Activity activity;
 
-    public Notification(Date d, String n) {
+    public Notification(Date d, String n, Activity a) {
         super(d, n);
+        activity = a;
     }
     
     @Override
