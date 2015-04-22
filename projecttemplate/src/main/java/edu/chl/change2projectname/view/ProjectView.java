@@ -52,8 +52,8 @@ public class ProjectView extends javax.swing.JFrame {
         monthViewLabel = new javax.swing.JLabel();
         menuContactsLabel = new javax.swing.JLabel();
         menuContactsPanel = new javax.swing.JPanel();
-        newContactsLabel = new javax.swing.JLabel();
-        newGroupLabel = new javax.swing.JLabel();
+        addContactLabel = new javax.swing.JLabel();
+        addContactGroupLabel = new javax.swing.JLabel();
         allContactsLabel = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -140,13 +140,13 @@ public class ProjectView extends javax.swing.JFrame {
 
         menuContactsPanel.setBackground(new java.awt.Color(63, 81, 181));
 
-        newContactsLabel.setFont(new java.awt.Font("Source Sans Pro", 1, 18)); // NOI18N
-        newContactsLabel.setForeground(java.awt.Color.white);
-        newContactsLabel.setText("Add new contact");
+        addContactLabel.setFont(new java.awt.Font("Source Sans Pro", 1, 18)); // NOI18N
+        addContactLabel.setForeground(java.awt.Color.white);
+        addContactLabel.setText("Add new contact");
 
-        newGroupLabel.setFont(new java.awt.Font("Source Sans Pro", 1, 18)); // NOI18N
-        newGroupLabel.setForeground(java.awt.Color.white);
-        newGroupLabel.setText("Add new group");
+        addContactGroupLabel.setFont(new java.awt.Font("Source Sans Pro", 1, 18)); // NOI18N
+        addContactGroupLabel.setForeground(java.awt.Color.white);
+        addContactGroupLabel.setText("Add new group");
 
         allContactsLabel.setFont(new java.awt.Font("Source Sans Pro", 1, 18)); // NOI18N
         allContactsLabel.setForeground(java.awt.Color.white);
@@ -167,8 +167,8 @@ public class ProjectView extends javax.swing.JFrame {
             .addGroup(menuContactsPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(menuContactsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(newContactsLabel)
-                    .addComponent(newGroupLabel)
+                    .addComponent(addContactLabel)
+                    .addComponent(addContactGroupLabel)
                     .addComponent(allContactsLabel)
                     .addComponent(jLabel3)
                     .addComponent(jLabel5))
@@ -177,9 +177,9 @@ public class ProjectView extends javax.swing.JFrame {
         menuContactsPanelLayout.setVerticalGroup(
             menuContactsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(menuContactsPanelLayout.createSequentialGroup()
-                .addComponent(newContactsLabel)
+                .addComponent(addContactLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(newGroupLabel)
+                .addComponent(addContactGroupLabel)
                 .addGap(18, 18, 18)
                 .addComponent(allContactsLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -358,6 +358,14 @@ public class ProjectView extends javax.swing.JFrame {
         return this.listViewLabel;
     }
     
+    public JLabel getAddContactGroupLabel() {
+        return this.addContactGroupLabel;
+    }
+    
+    public JLabel getAddContactLabel() {
+        return this.addContactLabel;
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -394,6 +402,8 @@ public class ProjectView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel addContactGroupLabel;
+    private javax.swing.JLabel addContactLabel;
     private javax.swing.JLabel allContactsLabel;
     private javax.swing.JLabel headlineLabel;
     private javax.swing.JLabel jLabel3;
@@ -411,8 +421,6 @@ public class ProjectView extends javax.swing.JFrame {
     private javax.swing.JLabel menuSettingsLabel;
     private javax.swing.JLabel monthViewLabel;
     private javax.swing.JLabel newActivityLabel;
-    private javax.swing.JLabel newContactsLabel;
-    private javax.swing.JLabel newGroupLabel;
     private javax.swing.JTextField searchTextField;
     private javax.swing.JPanel topPanel;
     private javax.swing.JLabel weekViewLabel;
@@ -421,6 +429,8 @@ public class ProjectView extends javax.swing.JFrame {
     // Non-generated variables declaration
     private CardLayout tabCards;
     private AddActivityCard addActivity = new AddActivityCard();
+    private AddContactGroupCard addContactGroup = new AddContactGroupCard();
+    private AddContactCard addContact = new AddContactCard();
     private ListViewCard listView = new ListViewCard();
     
     // Non-generated variables end
@@ -439,6 +449,8 @@ public class ProjectView extends javax.swing.JFrame {
             
         tabCards = (CardLayout) mainPanel.getLayout();
         mainPanel.add(addActivity, "AddActivityCard");
+        mainPanel.add(addContactGroup, "AddContactGroupCard");
+        mainPanel.add(addContact, "AddContactCard");
         mainPanel.add(listView, "ListViewCard");
         tabCards.show(mainPanel, "ListViewCard");
     }
@@ -447,6 +459,10 @@ public class ProjectView extends javax.swing.JFrame {
         tabCards.show(mainPanel, card);
         if (card.equals("AddActivityCard")) {
             headlineLabel.setText("Add an activity");
+        } else if (card.equals("AddContactGroupCard")) {
+            headlineLabel.setText("Add a contactgroup");
+        } else if (card.equals("AddContactCard")) {
+            headlineLabel.setText("Add a contact");
         } else if (card.equals("ListViewCard")) {
             headlineLabel.setText("Calendar // Listview");
         }

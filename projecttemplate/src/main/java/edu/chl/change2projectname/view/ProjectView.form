@@ -286,8 +286,8 @@
                       <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="newContactsLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="newGroupLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="addContactLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="addContactGroupLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="allContactsLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -299,9 +299,9 @@
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="newContactsLabel" min="-2" max="-2" attributes="0"/>
+                          <Component id="addContactLabel" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="newGroupLabel" min="-2" max="-2" attributes="0"/>
+                          <Component id="addContactGroupLabel" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="allContactsLabel" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
@@ -313,7 +313,7 @@
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JLabel" name="newContactsLabel">
+                <Component class="javax.swing.JLabel" name="addContactLabel">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Source Sans Pro" size="18" style="1"/>
@@ -324,7 +324,7 @@
                     <Property name="text" type="java.lang.String" value="Add new contact"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="newGroupLabel">
+                <Component class="javax.swing.JLabel" name="addContactGroupLabel">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Source Sans Pro" size="18" style="1"/>
