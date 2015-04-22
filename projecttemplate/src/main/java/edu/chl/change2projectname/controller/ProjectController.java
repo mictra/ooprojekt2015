@@ -2,7 +2,6 @@ package edu.chl.change2projectname.controller;
 
 import edu.chl.change2projectname.model.Activity;
 import edu.chl.change2projectname.model.CalendarPlus;
-import edu.chl.change2projectname.model.Project;
 import edu.chl.change2projectname.view.ProjectView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,10 +9,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 public class ProjectController implements MouseListener, ActionListener {
-	//private final Project project;
         private final CalendarPlus cal;
 	private final ProjectView projectView;
-	public static final int KO = 1;
 
 	public static ProjectController create(CalendarPlus cal, ProjectView projectView) {
 		return new ProjectController(cal, projectView);

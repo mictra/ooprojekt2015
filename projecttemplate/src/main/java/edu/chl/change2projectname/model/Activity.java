@@ -14,14 +14,14 @@ import java.util.Calendar;
  */
 public class Activity {
     
-    public Calendar startTime;
-    public Calendar endTime;
+    private Calendar startTime;
+    private Calendar endTime;
     
-    public String name;
-    public String description;
-    public String location;
+    private String name;
+    private String description;
+    private String location;
     
-    public ArrayList<Contact> atendees;
+    private ArrayList<Contact> attendees;
     
     //public Notification eventNot;
     
@@ -29,6 +29,7 @@ public class Activity {
         this.startTime = st;
         this.endTime = et;
         this.name = name;
+        this.attendees = new ArrayList<>();
     }
     
     // Setters and getters
@@ -73,11 +74,12 @@ public class Activity {
         return this.location;
     }
         
-    public void addAtendee(Contact contact){
-         this.atendees.add(contact);
+    public void addAttendee(Contact contact){
+         this.attendees.add(contact);
     }
     
-    public void removeAtendee(Contact contact){
-        this.atendees.remove(contact);
+    public void removeAttendee(Contact contact){
+        this.attendees.remove(contact);
     }
+    
 }

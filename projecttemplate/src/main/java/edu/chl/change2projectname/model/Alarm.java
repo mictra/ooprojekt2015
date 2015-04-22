@@ -5,7 +5,7 @@
  */
 
 package edu.chl.change2projectname.model;
-import java.util.Date;
+import java.util.Calendar;
 
 /**
  *
@@ -17,21 +17,22 @@ import java.util.Date;
    like to have a set- and a get-method for each one of them. So that we can
    both modify them and receive its data, since that is the purpose after all.
 */
-public abstract class Alarm {
+public class Alarm {
     
-    Date alarmTime = new Date();
-    String name, description;
+    private Calendar alarmTime;
+    private String name;
+    private String description;
     
-    public Alarm(Date d, String n){
+    public Alarm(Calendar d, String n){
         this.alarmTime = d;
         this.name = n;
     }
     
-    public void setAlarm(Date time){
+    public void setAlarm(Calendar time){
         this.alarmTime = time;
     }
     
-    public Date getAlarm(){
+    public Calendar getAlarm(){
         return alarmTime;
     }
     

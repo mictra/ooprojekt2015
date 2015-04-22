@@ -13,12 +13,11 @@ import java.util.ArrayList;
  */
 public class Contact {
     
-    public String name;
-    public String phone;
-    public String email;
+    private String name;
+    private String phone;
+    private String email;
     
-    public ArrayList<String> groups;
-    
+    private ArrayList<String> groups;
     
     public Contact(String name){
         this.name = name;

@@ -5,7 +5,7 @@
  */
 
 package edu.chl.change2projectname.model;
-import java.util.Date;
+import java.util.Calendar;
 
 
 /**
@@ -20,20 +20,23 @@ import java.util.Date;
 */
 public class Notification extends Alarm {
     
+    private Calendar alarmTime;
+    private String name;
+    private String description;
     private final Activity activity;
 
-    public Notification(Date d, String n, Activity a) {
+    public Notification(Calendar d, String n, Activity a) {
         super(d, n);
         activity = a;
     }
     
     @Override
-    public void setAlarm(Date time){
+    public void setAlarm(Calendar time){
         this.alarmTime = time;
     }
     
     @Override
-    public Date getAlarm(){
+    public Calendar getAlarm(){
         return alarmTime;
     }
     
@@ -56,6 +59,5 @@ public class Notification extends Alarm {
     public String getDescName(){
         return name;
     }
-    
     
 }

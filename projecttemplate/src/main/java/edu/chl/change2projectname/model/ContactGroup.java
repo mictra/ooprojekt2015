@@ -15,8 +15,8 @@ import java.util.ArrayList;
 public class ContactGroup {
     
     //Implementing the variables right over here.
-    String name;
-    ArrayList<Contact> members = new ArrayList<>();
+    private String name;
+    private ArrayList<Contact> members = new ArrayList<>();
     
     
     //Set- & get-methods for the name-variable...
@@ -27,7 +27,6 @@ public class ContactGroup {
     public String getGroupName(){
         return name;
     }
-    
     
     /* Here we request the group as well as adding a contact to a group.
        We might want to change the add()-method so that it includes a parameter
