@@ -5,6 +5,7 @@
  */
 package edu.chl.change2projectname.view;
 
+import edu.chl.change2projectname.controller.ProjectController;
 import edu.chl.change2projectname.model.Activity;
 import java.util.Calendar;
 import java.util.Date;
@@ -234,6 +235,13 @@ public class AddActivityCard extends javax.swing.JPanel {
         a.setDescription(description);
         return a;
     }
+    
+    /*
+    public void registerListener(ProjectController controller){
+        saveButton.addActionListener(controller);
+        cancelButton.addActionListener(controller);
+    }
+    */
     
     public JButton getSaveButton(){
         return saveButton;

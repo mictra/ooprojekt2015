@@ -1,7 +1,9 @@
 package edu.chl.change2projectname.model;
 
 /*
- * TODO: Remove, not used.
+ * TODO: Remove, not used?
+ * Maybe use this class to update the view, for example 
+ * updateListView, changeCard method etc. from ProjectView should be here...
 */
 public class Project {
 	public static final String PROJECT_WINDOW_TEXT = "ProjectTemplate";

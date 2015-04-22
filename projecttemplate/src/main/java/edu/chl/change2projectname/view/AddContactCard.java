@@ -5,6 +5,9 @@
  */
 package edu.chl.change2projectname.view;
 
+import edu.chl.change2projectname.controller.ProjectController;
+import javax.swing.JButton;
+
 /**
  *
  * @author cain
@@ -109,4 +112,20 @@ public class AddContactCard extends javax.swing.JPanel {
     private javax.swing.JTextField phoneTextField;
     private javax.swing.JButton saveButton;
     // End of variables declaration//GEN-END:variables
+
+    /*
+    public void registerListener(ProjectController controller) {
+        saveButton.addActionListener(controller);
+        cancelButton.addActionListener(controller);
+    }
+    */
+    
+    public JButton getSaveButton(){
+        return saveButton;
+    }
+    
+    public JButton getCancelButton(){
+        return cancelButton;
+    }
+
 }

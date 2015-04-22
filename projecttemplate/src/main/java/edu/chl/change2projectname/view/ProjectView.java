@@ -5,6 +5,7 @@
  */
 package edu.chl.change2projectname.view;
 
+import edu.chl.change2projectname.controller.ProjectController;
 import edu.chl.change2projectname.model.Activity;
 import edu.chl.change2projectname.model.Project;
 import java.awt.CardLayout;
@@ -324,7 +325,7 @@ public class ProjectView extends javax.swing.JFrame {
             menuContactsPanel.setVisible(false);
             menuContactsLabel.setIcon((new javax.swing.ImageIcon(getClass().getResource("/arrow_right.png"))));
         }
-        
+
     }//GEN-LAST:event_menuCalendarLabelMousePressed
 
     private void menuContactsLabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuContactsLabelMousePressed
@@ -350,22 +351,6 @@ public class ProjectView extends javax.swing.JFrame {
         headlineLabel.setText("Settings");
     }//GEN-LAST:event_menuSettingsLabelMousePressed
 
-    public JLabel getNewActivityLabel(){
-        return this.newActivityLabel;
-    }
-    
-    public JLabel getListViewLabel(){
-        return this.listViewLabel;
-    }
-    
-    public JLabel getAddContactGroupLabel() {
-        return this.addContactGroupLabel;
-    }
-    
-    public JLabel getAddContactLabel() {
-        return this.addContactLabel;
-    }
-    
     /**
      * @param args the command line arguments
      */
@@ -425,28 +410,64 @@ public class ProjectView extends javax.swing.JFrame {
     private javax.swing.JPanel topPanel;
     private javax.swing.JLabel weekViewLabel;
     // End of variables declaration//GEN-END:variables
-    
+
     // Non-generated variables declaration
     private CardLayout tabCards;
     private AddActivityCard addActivity = new AddActivityCard();
     private AddContactGroupCard addContactGroup = new AddContactGroupCard();
     private AddContactCard addContact = new AddContactCard();
     private ListViewCard listView = new ListViewCard();
-    
+
     // Non-generated variables end
-    
-    public AddActivityCard getActivityCard(){
+    public JLabel getNewActivityLabel() {
+        return this.newActivityLabel;
+    }
+
+    public JLabel getListViewLabel() {
+        return this.listViewLabel;
+    }
+
+    public JLabel getAddContactGroupLabel() {
+        return this.addContactGroupLabel;
+    }
+
+    public JLabel getAddContactLabel() {
+        return this.addContactLabel;
+    }
+
+    public AddActivityCard getActivityCard() {
         return addActivity;
     }
-    
+
+    public AddContactGroupCard getContactGroupCard() {
+        return addContactGroup;
+    }
+
+    public AddContactCard getContactCard() {
+        return addContact;
+    }
+
+    /* Maybe use this to add listener?
+    public void registerListener(ProjectController controller) {
+        newActivityLabel.addMouseListener(controller);
+        listViewLabel.addMouseListener(controller);
+        addContactGroupLabel.addMouseListener(controller);
+        addContactLabel.addMouseListener(controller);
+        allContactsLabel.addMouseListener(controller);
+        addActivity.registerListener(controller);
+        addContact.registerListener(controller);
+        addContactGroup.registerListener(controller);
+    }
+    */
+
     private void tweekingInitComponents() {
-        mainLayeredPane.setPreferredSize(new Dimension(1270,750));
-        mainLayeredPane.setSize(new Dimension(1270,750));
-        
+        mainLayeredPane.setPreferredSize(new Dimension(1270, 750));
+        mainLayeredPane.setSize(new Dimension(1270, 750));
+
         menuContactsPanel.setVisible(false);
         menuContactsLabel.setIcon((new javax.swing.ImageIcon(getClass().getResource("/arrow_right.png"))));
         headlineLabel.setText("Calendar // #SUBSECTION");
-            
+
         tabCards = (CardLayout) mainPanel.getLayout();
         mainPanel.add(addActivity, "AddActivityCard");
         mainPanel.add(addContactGroup, "AddContactGroupCard");
@@ -454,7 +475,7 @@ public class ProjectView extends javax.swing.JFrame {
         mainPanel.add(listView, "ListViewCard");
         tabCards.show(mainPanel, "ListViewCard");
     }
-    
+
     public void changeCard(String card) {
         tabCards.show(mainPanel, card);
         if (card.equals("AddActivityCard")) {
