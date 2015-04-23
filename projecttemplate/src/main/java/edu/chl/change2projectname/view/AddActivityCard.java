@@ -23,6 +23,7 @@ public class AddActivityCard extends javax.swing.JPanel {
     public AddActivityCard() {
         initComponents();
         initComboBoxes();
+        resetFields();
     }
 
     /**
@@ -289,4 +290,21 @@ public class AddActivityCard extends javax.swing.JPanel {
 //        }
         
         }
+    
+    public void resetFields() {
+        nameTextfield.setText("");
+        Calendar c = Calendar.getInstance();
+        sDayComboBox.setSelectedIndex(c.get(c.DAY_OF_MONTH)-1);
+        sMonthComboBox.setSelectedIndex(c.get(c.MONTH));
+        sYearComboBox.setSelectedItem(c.get(c.YEAR));
+        sHourComboBox.setSelectedIndex(c.get(c.HOUR_OF_DAY));
+        sMinuteComboBox.setSelectedItem(Integer.toString(c.get(c.MINUTE) - (c.get(c.MINUTE) % 5)));
+        eDayComboBox.setSelectedIndex(c.get(c.DAY_OF_MONTH)-1);
+        eMonthComboBox.setSelectedIndex(c.get(c.MONTH));
+        eYearComboBox.setSelectedItem(c.get(c.YEAR));
+        eHourComboBox.setSelectedIndex(c.get(c.HOUR_OF_DAY)+1);
+        eMinuteComboBox.setSelectedItem(Integer.toString(c.get(c.MINUTE) - (c.get(c.MINUTE) % 5)));
+        locationTextField.setText("");
+        descriptionTextArea.setText("");
+    }
 }

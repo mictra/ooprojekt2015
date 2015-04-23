@@ -102,5 +102,9 @@ public class AddContactGroupCard extends javax.swing.JPanel {
         ContactGroup cg = new ContactGroup(nameTextField.getText());
         return cg;
     }
+    
+    public void resetFields() {
+        nameTextField.setText("");
+    }
 
 }

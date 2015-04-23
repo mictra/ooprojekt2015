@@ -136,4 +136,10 @@ public class AddContactCard extends javax.swing.JPanel {
         c.addGroup("Default");
         return c;
     }
+    
+    public void resetFields() {
+        nameTextField.setText("");
+        emailTextField.setText("");
+        phoneTextField.setText("");
+    }
 }
