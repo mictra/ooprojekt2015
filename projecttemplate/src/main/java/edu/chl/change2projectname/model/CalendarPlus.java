@@ -77,4 +77,14 @@ public class CalendarPlus {
         return alarms;
     }
     
+    public List<Contact> getAllContacts(){
+        ArrayList<Contact> contacts = new ArrayList<>();
+        for(ContactGroup cg : groups){
+            for(Contact c : cg.getContacts()){
+                contacts.add(c);
+            }
+        }
+        return contacts;
+    }
+    
 }

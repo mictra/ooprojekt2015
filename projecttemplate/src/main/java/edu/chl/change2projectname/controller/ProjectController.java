@@ -2,6 +2,7 @@ package edu.chl.change2projectname.controller;
 
 import edu.chl.change2projectname.model.Activity;
 import edu.chl.change2projectname.model.CalendarPlus;
+import edu.chl.change2projectname.model.Contact;
 import edu.chl.change2projectname.view.ProjectView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -81,7 +82,7 @@ public class ProjectController implements MouseListener, ActionListener {
             projectView.changeCard("AddContactCard");
         } else if (e.getSource() == allContactsLabel) {
             projectView.changeCard("ContactCard");
-            // ToDo get all contacts
+            projectView.updateContacts(cal.getAllContacts());
         } else if (e.getSource() == allContactGroupsLabel) {
             projectView.changeCard("ContactGroupCard");
             projectView.updateContactGroups(cal.getContactGroupList());
@@ -121,6 +122,10 @@ public class ProjectController implements MouseListener, ActionListener {
         }
         if (e.getSource() == contactGroupSave) {
             cal.addContactGroup(projectView.getContactGroupCard().getAsContactGroup());
+        }
+        if(e.getSource() == contactSave){
+            Contact contact = projectView.getContactCard().getAsContact();
+            cal.getContactGroupList().get(0).addContact(contact);
         }
     }
 
