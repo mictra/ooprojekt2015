@@ -486,10 +486,13 @@ public class ProjectView extends javax.swing.JFrame {
         tabCards.show(mainPanel, card);
         if (card.equals("AddActivityCard")) {
             headlineLabel.setText("Add an activity");
+            addActivity.resetFields();
         } else if (card.equals("AddContactGroupCard")) {
             headlineLabel.setText("Add a contactgroup");
+            addContactGroup.resetFields();
         } else if (card.equals("AddContactCard")) {
             headlineLabel.setText("Add a contact");
+            addContact.resetFields();
         } else if (card.equals("ListViewCard")) {
             headlineLabel.setText("Calendar // Listview");
         } else if (card.endsWith("ContactGroupCard")) {
