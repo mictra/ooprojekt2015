@@ -16,8 +16,12 @@ public class ContactGroup {
     
     //Implementing the variables right over here.
     private String name;
-    private ArrayList<Contact> members = new ArrayList<>();
+    private ArrayList<Contact> members;
     
+    public ContactGroup(String name){
+        this.name = name;
+        members = new ArrayList<>();
+    }
     
     //Set- & get-methods for the name-variable...
     public void setGroupName(String name){
@@ -37,7 +41,7 @@ public class ContactGroup {
         members.add(member);
     }
     
-    public ArrayList<Contact> getGroup(){
+    public ArrayList<Contact> getContacts(){
         return members;
     }
     

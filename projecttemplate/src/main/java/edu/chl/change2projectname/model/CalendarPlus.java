@@ -17,9 +17,17 @@ import java.util.List;
  */
 public class CalendarPlus {
     
-    private ArrayList<Activity> activities = new ArrayList<>();
-    private ArrayList<ContactGroup> groups = new ArrayList<>();
-    private ArrayList<Alarm> alarms = new ArrayList<>();
+    private ArrayList<Activity> activities;
+    private ArrayList<ContactGroup> groups;
+    private ArrayList<Alarm> alarms;
+    
+    public CalendarPlus(){
+        activities = new ArrayList<>();
+        groups = new ArrayList<>();
+        alarms = new ArrayList<>();
+        ContactGroup defaultGroup = new ContactGroup("Default");
+        groups.add(defaultGroup);
+    }
     
     public void addActivity(Activity a){
         activities.add(a);
