@@ -6,6 +6,7 @@
 package edu.chl.change2projectname.view;
 
 import edu.chl.change2projectname.controller.ProjectController;
+import edu.chl.change2projectname.model.Contact;
 import javax.swing.JButton;
 
 /**
@@ -128,4 +129,11 @@ public class AddContactCard extends javax.swing.JPanel {
         return cancelButton;
     }
 
+    public Contact getAsContact() {
+        Contact c = new Contact(nameTextField.getText());
+        c.setEmail(emailTextField.getText());
+        c.setPhone(phoneTextField.getText());
+        c.addGroup("Default");
+        return c;
+    }
 }
