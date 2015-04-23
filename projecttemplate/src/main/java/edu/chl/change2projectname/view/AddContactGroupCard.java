@@ -99,7 +99,7 @@ public class AddContactGroupCard extends javax.swing.JPanel {
     }
 
     public ContactGroup getAsContactGroup() {
-        ContactGroup cg = new ContactGroup(nameLabel.getText());
+        ContactGroup cg = new ContactGroup(nameTextField.getText());
         return cg;
     }
 
