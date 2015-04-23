@@ -18,6 +18,8 @@ public class ProjectController implements MouseListener, ActionListener {
     private JLabel listViewLabel;
     private JLabel addContactLabel;
     private JLabel addContactGroupLabel;
+    private JLabel allContactsLabel;
+    private JLabel allContactGroupsLabel;
     private JButton activityCardSave;
     private JButton activityCardCancel;
     private JButton contactGroupSave;
@@ -41,6 +43,8 @@ public class ProjectController implements MouseListener, ActionListener {
         listViewLabel = projectView.getListViewLabel();
         addContactLabel = projectView.getAddContactLabel();
         addContactGroupLabel = projectView.getAddContactGroupLabel();
+        allContactsLabel = projectView.getAllContactsLabel();
+        allContactGroupsLabel = projectView.getAllContactGroupsLabel();
         activityCardSave = projectView.getActivityCard().getSaveButton();
         activityCardCancel = projectView.getActivityCard().getCancelButton();
         contactGroupSave = projectView.getContactGroupCard().getSaveButton();
@@ -54,6 +58,8 @@ public class ProjectController implements MouseListener, ActionListener {
         listViewLabel.addMouseListener(this);
         addContactLabel.addMouseListener(this);
         addContactGroupLabel.addMouseListener(this);
+        allContactsLabel.addMouseListener(this);
+        allContactGroupsLabel.addMouseListener(this);
         activityCardSave.addActionListener(this);
         activityCardCancel.addActionListener(this);
         contactGroupSave.addActionListener(this);
@@ -69,6 +75,16 @@ public class ProjectController implements MouseListener, ActionListener {
         } else if (e.getSource() == listViewLabel) {
             projectView.changeCard("ListViewCard");
             projectView.updateListView(cal.getActivityList());
+        } else if (e.getSource() == addContactGroupLabel) {
+            projectView.changeCard("AddContactGroupCard");
+        } else if (e.getSource() == addContactLabel) {
+            projectView.changeCard("AddContactCard");
+        } else if (e.getSource() == allContactsLabel) {
+            projectView.changeCard("ContactCard");
+            // ToDo get all contacts
+        } else if (e.getSource() == allContactGroupsLabel) {
+            projectView.changeCard("ContactGroupCard");
+            projectView.updateContactGroups(cal.getContactGroupList());
         }
 
     }
@@ -102,6 +118,9 @@ public class ProjectController implements MouseListener, ActionListener {
             for (Activity a : cal.getActivityList()) {
                 System.out.println("Name: " + a.getName());
             }
+        }
+        if (e.getSource() == contactGroupSave) {
+            cal.addContactGroup(projectView.getContactGroupCard().getAsContactGroup());
         }
     }
 

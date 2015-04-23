@@ -7,6 +7,8 @@ package edu.chl.change2projectname.view;
 
 import edu.chl.change2projectname.controller.ProjectController;
 import edu.chl.change2projectname.model.Activity;
+import edu.chl.change2projectname.model.Contact;
+import edu.chl.change2projectname.model.ContactGroup;
 import edu.chl.change2projectname.model.Project;
 import java.awt.CardLayout;
 import java.awt.Dimension;
@@ -56,8 +58,7 @@ public class ProjectView extends javax.swing.JFrame {
         addContactLabel = new javax.swing.JLabel();
         addContactGroupLabel = new javax.swing.JLabel();
         allContactsLabel = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        allContactGroupsLabel = new javax.swing.JLabel();
         menuSettingsLabel = new javax.swing.JLabel();
         searchTextField = new javax.swing.JTextField();
         mainPanel = new javax.swing.JPanel();
@@ -153,13 +154,9 @@ public class ProjectView extends javax.swing.JFrame {
         allContactsLabel.setForeground(java.awt.Color.white);
         allContactsLabel.setText("All contacts");
 
-        jLabel3.setFont(new java.awt.Font("Source Sans Pro", 1, 18)); // NOI18N
-        jLabel3.setForeground(java.awt.Color.white);
-        jLabel3.setText("Family");
-
-        jLabel5.setFont(new java.awt.Font("Source Sans Pro", 1, 18)); // NOI18N
-        jLabel5.setForeground(java.awt.Color.white);
-        jLabel5.setText("Work");
+        allContactGroupsLabel.setFont(new java.awt.Font("Source Sans Pro", 1, 18)); // NOI18N
+        allContactGroupsLabel.setForeground(java.awt.Color.white);
+        allContactGroupsLabel.setText("All contactgroups");
 
         javax.swing.GroupLayout menuContactsPanelLayout = new javax.swing.GroupLayout(menuContactsPanel);
         menuContactsPanel.setLayout(menuContactsPanelLayout);
@@ -171,9 +168,8 @@ public class ProjectView extends javax.swing.JFrame {
                     .addComponent(addContactLabel)
                     .addComponent(addContactGroupLabel)
                     .addComponent(allContactsLabel)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel5))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(allContactGroupsLabel))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
         menuContactsPanelLayout.setVerticalGroup(
             menuContactsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -184,9 +180,8 @@ public class ProjectView extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(allContactsLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel5))
+                .addComponent(allContactGroupsLabel)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         menuSettingsLabel.setFont(new java.awt.Font("Source Sans Pro", 1, 24)); // NOI18N
@@ -249,7 +244,7 @@ public class ProjectView extends javax.swing.JFrame {
                 .addComponent(menuContactsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(menuSettingsLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 172, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 189, Short.MAX_VALUE)
                 .addComponent(searchTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -389,10 +384,9 @@ public class ProjectView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel addContactGroupLabel;
     private javax.swing.JLabel addContactLabel;
+    private javax.swing.JLabel allContactGroupsLabel;
     private javax.swing.JLabel allContactsLabel;
     private javax.swing.JLabel headlineLabel;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel listViewLabel;
     private javax.swing.JLabel logoLabel;
     private javax.swing.JSeparator logoSeparator;
@@ -417,6 +411,8 @@ public class ProjectView extends javax.swing.JFrame {
     private AddContactGroupCard addContactGroup = new AddContactGroupCard();
     private AddContactCard addContact = new AddContactCard();
     private ListViewCard listView = new ListViewCard();
+    private ContactGroupCard contactGroups = new ContactGroupCard();
+    private ContactCard contacts = new ContactCard();
 
     // Non-generated variables end
     public JLabel getNewActivityLabel() {
@@ -433,6 +429,14 @@ public class ProjectView extends javax.swing.JFrame {
 
     public JLabel getAddContactLabel() {
         return this.addContactLabel;
+    }
+    
+    public JLabel getAllContactsLabel() {
+        return this.allContactsLabel;
+    }
+    
+    public JLabel getAllContactGroupsLabel() {
+        return this.allContactGroupsLabel;
     }
 
     public AddActivityCard getActivityCard() {
@@ -473,6 +477,8 @@ public class ProjectView extends javax.swing.JFrame {
         mainPanel.add(addContactGroup, "AddContactGroupCard");
         mainPanel.add(addContact, "AddContactCard");
         mainPanel.add(listView, "ListViewCard");
+        mainPanel.add(contactGroups, "ContactGroupCard");
+        mainPanel.add(contacts, "ContactCard");
         tabCards.show(mainPanel, "ListViewCard");
     }
 
@@ -486,10 +492,22 @@ public class ProjectView extends javax.swing.JFrame {
             headlineLabel.setText("Add a contact");
         } else if (card.equals("ListViewCard")) {
             headlineLabel.setText("Calendar // Listview");
+        } else if (card.endsWith("ContactGroupCard")) {
+            headlineLabel.setText("Contactgroups");
+        } else if (card.endsWith("ContactCard")) {
+            headlineLabel.setText("Contacts");
         }
     }
 
     public void updateListView(List<Activity> activityList) {
         listView.updateListView(activityList);
+    }
+    
+    public void updateContactGroups(List<ContactGroup> contactgroups) {
+        contactGroups.updateContactGroups(contactgroups);
+    }
+    
+    public void updateContacts(List<Contact> contactlist) {
+        contacts.updateContacts(contactlist);
     }
 }

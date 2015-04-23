@@ -6,6 +6,7 @@
 package edu.chl.change2projectname.view;
 
 import edu.chl.change2projectname.controller.ProjectController;
+import edu.chl.change2projectname.model.ContactGroup;
 import javax.swing.JButton;
 
 /**
@@ -95,6 +96,11 @@ public class AddContactGroupCard extends javax.swing.JPanel {
     
     public JButton getCancelButton(){
         return cancelButton;
+    }
+
+    public ContactGroup getAsContactGroup() {
+        ContactGroup cg = new ContactGroup(nameLabel.getText());
+        return cg;
     }
 
 }
