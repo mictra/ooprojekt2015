@@ -73,6 +73,15 @@ public class CalendarPlus {
         return groups;
     }
     
+    public ContactGroup getContactGroupByName(String name){
+        for(ContactGroup cg : groups){
+            if(cg.getGroupName().equals(name)){
+                return cg;
+            }
+        }
+        return groups.get(0);
+    }
+    
     public List<Alarm> getAlarmList(){
         return alarms;
     }
