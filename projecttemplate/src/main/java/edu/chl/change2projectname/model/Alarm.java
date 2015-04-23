@@ -49,6 +49,6 @@ public class Alarm {
     }
     
     public String getDescName(){
-        return name;
+        return description;
     }
 }
