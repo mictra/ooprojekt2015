@@ -14,9 +14,8 @@ import java.util.Calendar;
  */
 
 
-/* For now: The notification class includes all of the methods from the Alarm
-   class, since Alarm is an abstract class. For now: This class does not have
-   any unique method.
+/* The notification class includes all of the methods from the Alarm
+   class, since Alarm is an abstract class. But it also gives an activity.
 */
 public class Notification extends Alarm {
     
@@ -57,7 +56,11 @@ public class Notification extends Alarm {
     
     @Override
     public String getDescName(){
-        return name;
+        return description;
+    }
+    
+    public Activity getActivity(){
+        return activity;
     }
     
 }
