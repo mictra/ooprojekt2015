@@ -21,6 +21,7 @@ public class Contact {
     
     public Contact(String name){
         this.name = name;
+        groups = new ArrayList<>();
     }
     
     public void setName(String n){
