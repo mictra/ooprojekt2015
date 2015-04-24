@@ -27,6 +27,8 @@ public class ProjectController implements MouseListener, ActionListener {
     private JButton contactGroupCancel;
     private JButton contactSave;
     private JButton contactCancel;
+    private JButton contactAddGroup;
+    private JButton contactRemoveGroup;
     
     public static ProjectController create(CalendarPlus cal, ProjectView projectView) {
         return new ProjectController(cal, projectView);
@@ -52,6 +54,8 @@ public class ProjectController implements MouseListener, ActionListener {
         contactGroupCancel = projectView.getContactGroupCard().getCancelButton();
         contactSave = projectView.getContactCard().getSaveButton();
         contactCancel = projectView.getContactCard().getCancelButton();
+        contactAddGroup = projectView.getContactCard().getAddGroupButton();
+        contactRemoveGroup = projectView.getContactCard().getRemoveGroupButton();
     }
     
     private void addListeners(){
@@ -67,6 +71,8 @@ public class ProjectController implements MouseListener, ActionListener {
         contactGroupCancel.addActionListener(this);
         contactSave.addActionListener(this);
         contactCancel.addActionListener(this);
+        contactAddGroup.addActionListener(this);
+        contactRemoveGroup.addActionListener(this);
     }
 
     @Override
@@ -126,6 +132,9 @@ public class ProjectController implements MouseListener, ActionListener {
         if(e.getSource() == contactSave){
             Contact contact = projectView.getContactCard().getAsContact();
             cal.getContactGroupList().get(0).addContact(contact);
+        }
+        if (e.getSource() == contactAddGroup || e.getSource() == contactRemoveGroup) {
+            projectView.getContactCard().updateMemberLists();
         }
     }
 

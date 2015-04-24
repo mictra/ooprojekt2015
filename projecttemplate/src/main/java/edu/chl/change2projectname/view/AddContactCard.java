@@ -16,7 +16,7 @@ import javax.swing.JButton;
  * @author cain
  */
 public class AddContactCard extends javax.swing.JPanel {
-    private CalendarPlus cal;
+    private final CalendarPlus cal;
 
     /**
      * Creates new form AddContactCard
@@ -45,9 +45,13 @@ public class AddContactCard extends javax.swing.JPanel {
         phoneTextField = new javax.swing.JTextField();
         saveButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        nonMemberScrollPane = new javax.swing.JScrollPane();
         nonMemberList = new javax.swing.JList();
         chooseGroupLabel = new javax.swing.JLabel();
+        addButton = new javax.swing.JButton();
+        removeButton = new javax.swing.JButton();
+        memberScrollPane = new javax.swing.JScrollPane();
+        memberList = new javax.swing.JList();
 
         nameLabel.setFont(new java.awt.Font("Source Sans Pro", 1, 14)); // NOI18N
         nameLabel.setText("Name*");
@@ -68,10 +72,22 @@ public class AddContactCard extends javax.swing.JPanel {
             public Object getElementAt(int i) { return strings[i]; }
         });
         nonMemberList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jScrollPane1.setViewportView(nonMemberList);
+        nonMemberScrollPane.setViewportView(nonMemberList);
 
         chooseGroupLabel.setFont(new java.awt.Font("Source Sans Pro", 1, 14)); // NOI18N
         chooseGroupLabel.setText("Choose group");
+
+        addButton.setText(">>");
+
+        removeButton.setText("<<");
+
+        memberList.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        memberList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        memberScrollPane.setViewportView(memberList);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -100,7 +116,14 @@ public class AddContactCard extends javax.swing.JPanel {
                                 .addGap(18, 18, 18)
                                 .addComponent(saveButton))
                             .addComponent(phoneTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(nonMemberScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(addButton)
+                                    .addComponent(removeButton))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(memberScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -118,10 +141,18 @@ public class AddContactCard extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(phoneLabel)
                     .addComponent(phoneTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(chooseGroupLabel))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(nonMemberScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(chooseGroupLabel)
+                            .addComponent(memberScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(addButton)
+                        .addGap(18, 18, 18)
+                        .addComponent(removeButton)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(saveButton)
@@ -132,16 +163,20 @@ public class AddContactCard extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addButton;
     private javax.swing.JButton cancelButton;
     private javax.swing.JLabel chooseGroupLabel;
     private javax.swing.JLabel emailLabel;
     private javax.swing.JTextField emailTextField;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JList memberList;
+    private javax.swing.JScrollPane memberScrollPane;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JTextField nameTextField;
     private javax.swing.JList nonMemberList;
+    private javax.swing.JScrollPane nonMemberScrollPane;
     private javax.swing.JLabel phoneLabel;
     private javax.swing.JTextField phoneTextField;
+    private javax.swing.JButton removeButton;
     private javax.swing.JButton saveButton;
     // End of variables declaration//GEN-END:variables
 
@@ -152,6 +187,14 @@ public class AddContactCard extends javax.swing.JPanel {
     
     public JButton getCancelButton(){
         return cancelButton;
+    }
+    
+    public JButton getAddGroupButton() {
+        return addButton;
+    }
+    
+    public JButton getRemoveGroupButton() {
+        return removeButton;
     }
 
     public Contact getAsContact() {
@@ -167,12 +210,24 @@ public class AddContactCard extends javax.swing.JPanel {
         phoneTextField.setText("");
         nonMemberList.removeAll();
               
+        // Set the non-member groups
         DefaultListModel memberListModel = new DefaultListModel();
-        // TODO - do NOT add default group
+        // TODO - do NOT add default group and filter out all non-member groups
         for (ContactGroup cg : cal.getContactGroupList()) {
             memberListModel.addElement(cg.getGroupName());
         }        
         nonMemberList.setModel(memberListModel);
+        
+        //Set the member groups
+        memberListModel.removeAllElements();
+        for (ContactGroup cg : cal.getContactGroupList()) {
+            memberListModel.addElement(cg.getGroupName());
+        }
+        memberList.setModel(memberListModel);
+        
+    }
+
+    public void updateMemberLists() {
         
     }
 }
