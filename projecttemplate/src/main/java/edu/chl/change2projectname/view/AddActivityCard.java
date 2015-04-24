@@ -299,10 +299,11 @@ public class AddActivityCard extends javax.swing.JPanel {
         sYearComboBox.setSelectedItem(c.get(c.YEAR));
         sHourComboBox.setSelectedIndex(c.get(c.HOUR_OF_DAY));
         sMinuteComboBox.setSelectedItem(Integer.toString(c.get(c.MINUTE) - (c.get(c.MINUTE) % 5)));
+        c.add(c.HOUR, 1);
         eDayComboBox.setSelectedIndex(c.get(c.DAY_OF_MONTH)-1);
         eMonthComboBox.setSelectedIndex(c.get(c.MONTH));
         eYearComboBox.setSelectedItem(c.get(c.YEAR));
-        eHourComboBox.setSelectedIndex(c.get(c.HOUR_OF_DAY)+1);
+        eHourComboBox.setSelectedIndex(c.get(c.HOUR_OF_DAY));
         eMinuteComboBox.setSelectedItem(Integer.toString(c.get(c.MINUTE) - (c.get(c.MINUTE) % 5)));
         locationTextField.setText("");
         descriptionTextArea.setText("");
