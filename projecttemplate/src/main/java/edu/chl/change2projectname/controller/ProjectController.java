@@ -133,8 +133,11 @@ public class ProjectController implements MouseListener, ActionListener {
             Contact contact = projectView.getContactCard().getAsContact();
             cal.getContactGroupList().get(0).addContact(contact);
         }
-        if (e.getSource() == contactAddGroup || e.getSource() == contactRemoveGroup) {
-            projectView.getContactCard().updateMemberLists();
+        if (e.getSource() == contactAddGroup) {
+            projectView.getContactCard().addMemberGroup();
+        }
+        if (e.getSource() == contactRemoveGroup) {
+            projectView.getContactCard().removeMemberGroup();
         }
     }
 
