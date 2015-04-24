@@ -17,6 +17,7 @@ import javax.swing.JButton;
  */
 public class AddContactCard extends javax.swing.JPanel {
     private final CalendarPlus cal;
+    DefaultListModel nonMemberListModel, memberListModel;
 
     /**
      * Creates new form AddContactCard
@@ -25,6 +26,8 @@ public class AddContactCard extends javax.swing.JPanel {
     public AddContactCard(CalendarPlus cal) {
         initComponents();
         this.cal = cal;
+        nonMemberListModel = new DefaultListModel();
+        memberListModel = new DefaultListModel();
         resetFields();
     }
 
@@ -208,17 +211,18 @@ public class AddContactCard extends javax.swing.JPanel {
         nameTextField.setText("");
         emailTextField.setText("");
         phoneTextField.setText("");
-        nonMemberList.removeAll();
               
         // Set the non-member groups
-        DefaultListModel memberListModel = new DefaultListModel();
         // TODO - do NOT add default group and filter out all non-member groups
+        nonMemberList.removeAll();
+        nonMemberListModel.removeAllElements();
         for (ContactGroup cg : cal.getContactGroupList()) {
-            memberListModel.addElement(cg.getGroupName());
+            nonMemberListModel.addElement(cg.getGroupName());
         }        
-        nonMemberList.setModel(memberListModel);
+        nonMemberList.setModel(nonMemberListModel);
         
         //Set the member groups
+        memberList.removeAll();
         memberListModel.removeAllElements();
         for (ContactGroup cg : cal.getContactGroupList()) {
             memberListModel.addElement(cg.getGroupName());
@@ -227,7 +231,13 @@ public class AddContactCard extends javax.swing.JPanel {
         
     }
 
-    public void updateMemberLists() {
-        
+    public void addMemberGroup() {
+        memberListModel.addElement(nonMemberList.getSelectedValue());
+        nonMemberListModel.remove(nonMemberList.getSelectedIndex());
+    }
+
+    public void removeMemberGroup() {
+        nonMemberListModel.addElement(memberList.getSelectedValue());
+        memberListModel.remove(memberList.getSelectedIndex());
     }
 }
