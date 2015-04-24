@@ -17,11 +17,9 @@ public class Contact {
     private String phone;
     private String email;
     
-    private ArrayList<String> groups;
     
     public Contact(String name){
         this.name = name;
-        groups = new ArrayList<>();
     }
     
     public void setName(String n){
@@ -48,12 +46,5 @@ public class Contact {
         return this.email;
     }
     
-    public void addGroup(String group){
-        this.groups.add(group);
-    }
-    
-    public void removeGroup(String group){
-        this.groups.remove(group);
-    }
 
 }

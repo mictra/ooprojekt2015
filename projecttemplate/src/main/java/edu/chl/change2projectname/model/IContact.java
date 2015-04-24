@@ -1,0 +1,27 @@
+/*
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
+*/
+package edu.chl.change2projectname.model;
+
+/**
+ *
+ * @author erikforsberg
+ */
+public interface IContact {
+    
+    void setName(String n);
+    
+    String getName();
+    
+    void setPhone(String p);
+    
+    String getPhone();
+    
+    void setEmail(String e);
+    
+    String getEmail();
+    
+    
+}
