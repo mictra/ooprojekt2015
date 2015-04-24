@@ -67,7 +67,4 @@ public class Notification extends Alarm {
         this.activity = act;
     }
     
-    public Activity getActivity(){
-        return this.activity;
-    }
 }
