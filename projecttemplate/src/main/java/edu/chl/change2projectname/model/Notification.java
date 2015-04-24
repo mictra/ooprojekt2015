@@ -22,7 +22,7 @@ public class Notification extends Alarm {
     private Calendar alarmTime;
     private String name;
     private String description;
-    private final Activity activity;
+    private Activity activity;
 
     public Notification(Calendar d, String n, Activity a) {
         super(d, n);
@@ -61,6 +61,10 @@ public class Notification extends Alarm {
     
     public Activity getActivity(){
         return activity;
+    }
+    
+    public void setActivity(Activity act){
+        this.activity = act;
     }
     
 }
