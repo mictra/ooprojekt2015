@@ -18,7 +18,7 @@ public final class Main {
 		SwingUtilities.invokeLater(() -> {
                     final Project project = new Project();
                     final CalendarPlus cal = new CalendarPlus();
-                    final ProjectView projectView = new ProjectView(project);
+                    final ProjectView projectView = new ProjectView(project, cal);
                     
                     ProjectController.create(cal, projectView);
                     projectView.setVisible(true);

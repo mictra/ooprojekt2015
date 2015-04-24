@@ -5,8 +5,10 @@
  */
 package edu.chl.change2projectname.view;
 
-import edu.chl.change2projectname.controller.ProjectController;
+import edu.chl.change2projectname.model.CalendarPlus;
 import edu.chl.change2projectname.model.Contact;
+import edu.chl.change2projectname.model.ContactGroup;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 
 /**
@@ -14,12 +16,16 @@ import javax.swing.JButton;
  * @author cain
  */
 public class AddContactCard extends javax.swing.JPanel {
+    private CalendarPlus cal;
 
     /**
      * Creates new form AddContactCard
+     * @param cal
      */
-    public AddContactCard() {
+    public AddContactCard(CalendarPlus cal) {
         initComponents();
+        this.cal = cal;
+        resetFields();
     }
 
     /**
@@ -39,6 +45,9 @@ public class AddContactCard extends javax.swing.JPanel {
         phoneTextField = new javax.swing.JTextField();
         saveButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        nonMemberList = new javax.swing.JList();
+        chooseGroupLabel = new javax.swing.JLabel();
 
         nameLabel.setFont(new java.awt.Font("Source Sans Pro", 1, 14)); // NOI18N
         nameLabel.setText("Name*");
@@ -53,30 +62,45 @@ public class AddContactCard extends javax.swing.JPanel {
 
         cancelButton.setText("Cancel");
 
+        nonMemberList.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        nonMemberList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane1.setViewportView(nonMemberList);
+
+        chooseGroupLabel.setFont(new java.awt.Font("Source Sans Pro", 1, 14)); // NOI18N
+        chooseGroupLabel.setText("Choose group");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(cancelButton)
+                        .addComponent(nameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(saveButton))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(nameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(nameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(emailLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(emailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
+                        .addComponent(nameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(emailLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(emailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(phoneLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(phoneTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(chooseGroupLabel))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(298, 298, 298)
+                                .addComponent(cancelButton)
+                                .addGap(18, 18, 18)
+                                .addComponent(saveButton))
+                            .addComponent(phoneTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -95,6 +119,10 @@ public class AddContactCard extends javax.swing.JPanel {
                     .addComponent(phoneLabel)
                     .addComponent(phoneTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(chooseGroupLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(saveButton)
                     .addComponent(cancelButton))
@@ -105,21 +133,18 @@ public class AddContactCard extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
+    private javax.swing.JLabel chooseGroupLabel;
     private javax.swing.JLabel emailLabel;
     private javax.swing.JTextField emailTextField;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JTextField nameTextField;
+    private javax.swing.JList nonMemberList;
     private javax.swing.JLabel phoneLabel;
     private javax.swing.JTextField phoneTextField;
     private javax.swing.JButton saveButton;
     // End of variables declaration//GEN-END:variables
 
-    /*
-    public void registerListener(ProjectController controller) {
-        saveButton.addActionListener(controller);
-        cancelButton.addActionListener(controller);
-    }
-    */
     
     public JButton getSaveButton(){
         return saveButton;
@@ -133,7 +158,6 @@ public class AddContactCard extends javax.swing.JPanel {
         Contact c = new Contact(nameTextField.getText());
         c.setEmail(emailTextField.getText());
         c.setPhone(phoneTextField.getText());
-        c.addGroup("Default");
         return c;
     }
     
@@ -141,5 +165,14 @@ public class AddContactCard extends javax.swing.JPanel {
         nameTextField.setText("");
         emailTextField.setText("");
         phoneTextField.setText("");
+        nonMemberList.removeAll();
+              
+        DefaultListModel memberListModel = new DefaultListModel();
+        // TODO - do NOT add default group
+        for (ContactGroup cg : cal.getContactGroupList()) {
+            memberListModel.addElement(cg.getGroupName());
+        }        
+        nonMemberList.setModel(memberListModel);
+        
     }
 }

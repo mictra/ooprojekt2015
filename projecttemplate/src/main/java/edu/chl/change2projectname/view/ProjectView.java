@@ -5,8 +5,8 @@
  */
 package edu.chl.change2projectname.view;
 
-import edu.chl.change2projectname.controller.ProjectController;
 import edu.chl.change2projectname.model.Activity;
+import edu.chl.change2projectname.model.CalendarPlus;
 import edu.chl.change2projectname.model.Contact;
 import edu.chl.change2projectname.model.ContactGroup;
 import edu.chl.change2projectname.model.Project;
@@ -20,6 +20,7 @@ import javax.swing.JLabel;
  * @author cain
  */
 public class ProjectView extends javax.swing.JFrame {
+    private CalendarPlus cal;
 
     /**
      * Creates new form ProjectView
@@ -29,8 +30,9 @@ public class ProjectView extends javax.swing.JFrame {
         tweekingInitComponents();
     }
 
-    public ProjectView(Project project) {
+    public ProjectView(Project project, CalendarPlus cal) {
         initComponents();
+        this.cal = cal;
         tweekingInitComponents();
     }
 
@@ -409,7 +411,7 @@ public class ProjectView extends javax.swing.JFrame {
     private CardLayout tabCards;
     private AddActivityCard addActivity = new AddActivityCard();
     private AddContactGroupCard addContactGroup = new AddContactGroupCard();
-    private AddContactCard addContact = new AddContactCard();
+    private AddContactCard addContact;
     private ListViewCard listView = new ListViewCard();
     private ContactGroupCard contactGroups = new ContactGroupCard();
     private ContactCard contacts = new ContactCard();
@@ -465,6 +467,7 @@ public class ProjectView extends javax.swing.JFrame {
     */
 
     private void tweekingInitComponents() {
+        addContact = new AddContactCard(cal);
         mainLayeredPane.setPreferredSize(new Dimension(1270, 750));
         mainLayeredPane.setSize(new Dimension(1270, 750));
 
@@ -483,7 +486,6 @@ public class ProjectView extends javax.swing.JFrame {
     }
 
     public void changeCard(String card) {
-        tabCards.show(mainPanel, card);
         if (card.equals("AddActivityCard")) {
             headlineLabel.setText("Add an activity");
             addActivity.resetFields();
@@ -500,6 +502,7 @@ public class ProjectView extends javax.swing.JFrame {
         } else if (card.endsWith("ContactCard")) {
             headlineLabel.setText("Contacts");
         }
+        tabCards.show(mainPanel, card);
     }
 
     public void updateListView(List<Activity> activityList) {
