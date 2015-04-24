@@ -63,6 +63,10 @@ public class ProjectView extends javax.swing.JFrame {
         allContactGroupsLabel = new javax.swing.JLabel();
         menuSettingsLabel = new javax.swing.JLabel();
         searchTextField = new javax.swing.JTextField();
+        menuAlarmLabel = new javax.swing.JLabel();
+        menuAlarmPanel = new javax.swing.JPanel();
+        addAlarmLabel = new javax.swing.JLabel();
+        allAlarmsLabel = new javax.swing.JLabel();
         mainPanel = new javax.swing.JPanel();
         topPanel = new javax.swing.JPanel();
         headlineLabel = new javax.swing.JLabel();
@@ -182,8 +186,7 @@ public class ProjectView extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(allContactsLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(allContactGroupsLabel)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(allContactGroupsLabel))
         );
 
         menuSettingsLabel.setFont(new java.awt.Font("Source Sans Pro", 1, 24)); // NOI18N
@@ -198,6 +201,45 @@ public class ProjectView extends javax.swing.JFrame {
 
         searchTextField.setText("Search...");
 
+        menuAlarmLabel.setFont(new java.awt.Font("Source Sans Pro", 1, 24)); // NOI18N
+        menuAlarmLabel.setForeground(java.awt.Color.white);
+        menuAlarmLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arrow_down.png"))); // NOI18N
+        menuAlarmLabel.setText("Alarm");
+        menuAlarmLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                menuAlarmLabelMousePressed(evt);
+            }
+        });
+
+        menuAlarmPanel.setBackground(new java.awt.Color(63, 81, 181));
+
+        addAlarmLabel.setFont(new java.awt.Font("Source Sans Pro", 1, 18)); // NOI18N
+        addAlarmLabel.setForeground(java.awt.Color.white);
+        addAlarmLabel.setText("Add an alarm");
+
+        allAlarmsLabel.setFont(new java.awt.Font("Source Sans Pro", 1, 18)); // NOI18N
+        allAlarmsLabel.setForeground(java.awt.Color.white);
+        allAlarmsLabel.setText("All alarms");
+
+        javax.swing.GroupLayout menuAlarmPanelLayout = new javax.swing.GroupLayout(menuAlarmPanel);
+        menuAlarmPanel.setLayout(menuAlarmPanelLayout);
+        menuAlarmPanelLayout.setHorizontalGroup(
+            menuAlarmPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(menuAlarmPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(menuAlarmPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(addAlarmLabel)
+                    .addComponent(allAlarmsLabel))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        menuAlarmPanelLayout.setVerticalGroup(
+            menuAlarmPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(menuAlarmPanelLayout.createSequentialGroup()
+                .addComponent(addAlarmLabel)
+                .addGap(18, 18, 18)
+                .addComponent(allAlarmsLabel))
+        );
+
         javax.swing.GroupLayout menuPanelLayout = new javax.swing.GroupLayout(menuPanel);
         menuPanel.setLayout(menuPanelLayout);
         menuPanelLayout.setHorizontalGroup(
@@ -207,7 +249,7 @@ public class ProjectView extends javax.swing.JFrame {
                     .addGroup(menuPanelLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(logoLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
+                            .addComponent(logoLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(logoSeparator, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuPanelLayout.createSequentialGroup()
                                 .addGap(12, 12, 12)
@@ -219,15 +261,24 @@ public class ProjectView extends javax.swing.JFrame {
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(menuPanelLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(menuSettingsLabel)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(menuPanelLayout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(searchTextField))
                     .addGroup(menuPanelLayout.createSequentialGroup()
                         .addGap(24, 24, 24)
-                        .addComponent(menuContactsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(menuContactsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(menuPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(menuPanelLayout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addComponent(menuAlarmPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(menuPanelLayout.createSequentialGroup()
+                                .addComponent(menuAlarmLabel)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
+            .addGroup(menuPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(menuSettingsLabel)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         menuPanelLayout.setVerticalGroup(
             menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -245,8 +296,12 @@ public class ProjectView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(menuContactsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                .addComponent(menuAlarmLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(menuAlarmPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(menuSettingsLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 218, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
                 .addComponent(searchTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -265,7 +320,7 @@ public class ProjectView extends javax.swing.JFrame {
             topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(topPanelLayout.createSequentialGroup()
                 .addComponent(headlineLabel)
-                .addGap(0, 839, Short.MAX_VALUE))
+                .addGap(0, 845, Short.MAX_VALUE))
         );
         topPanelLayout.setVerticalGroup(
             topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -318,9 +373,10 @@ public class ProjectView extends javax.swing.JFrame {
         } else {
             menuCalendarPanel.setVisible(true);
             menuCalendarLabel.setIcon((new javax.swing.ImageIcon(getClass().getResource("/arrow_down.png"))));
-            headlineLabel.setText("Calendar // #SUBSECTION");
             menuContactsPanel.setVisible(false);
             menuContactsLabel.setIcon((new javax.swing.ImageIcon(getClass().getResource("/arrow_right.png"))));
+            menuAlarmPanel.setVisible(false);
+            menuAlarmLabel.setIcon((new javax.swing.ImageIcon(getClass().getResource("/arrow_right.png"))));
         }
 
     }//GEN-LAST:event_menuCalendarLabelMousePressed
@@ -333,9 +389,10 @@ public class ProjectView extends javax.swing.JFrame {
         } else {
             menuContactsPanel.setVisible(true);
             menuContactsLabel.setIcon((new javax.swing.ImageIcon(getClass().getResource("/arrow_down.png"))));
-            headlineLabel.setText("Contacts // #SUBSECTION");
             menuCalendarPanel.setVisible(false);
             menuCalendarLabel.setIcon((new javax.swing.ImageIcon(getClass().getResource("/arrow_right.png"))));
+            menuAlarmPanel.setVisible(false);
+            menuAlarmLabel.setIcon((new javax.swing.ImageIcon(getClass().getResource("/arrow_right.png"))));
         }
     }//GEN-LAST:event_menuContactsLabelMousePressed
 
@@ -347,6 +404,21 @@ public class ProjectView extends javax.swing.JFrame {
         menuCalendarLabel.setIcon((new javax.swing.ImageIcon(getClass().getResource("/arrow_right.png"))));
         headlineLabel.setText("Settings");
     }//GEN-LAST:event_menuSettingsLabelMousePressed
+
+    private void menuAlarmLabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuAlarmLabelMousePressed
+        // TODO add your handling code here:
+        if (menuAlarmPanel.isVisible()) {
+            menuAlarmPanel.setVisible(false);
+            menuAlarmLabel.setIcon((new javax.swing.ImageIcon(getClass().getResource("/arrow_right.png"))));
+        } else {
+            menuAlarmPanel.setVisible(true);
+            menuAlarmLabel.setIcon((new javax.swing.ImageIcon(getClass().getResource("/arrow_down.png"))));
+            menuCalendarPanel.setVisible(false);
+            menuCalendarLabel.setIcon((new javax.swing.ImageIcon(getClass().getResource("/arrow_right.png"))));
+            menuContactsPanel.setVisible(false);
+            menuContactsLabel.setIcon((new javax.swing.ImageIcon(getClass().getResource("/arrow_right.png"))));
+        }
+    }//GEN-LAST:event_menuAlarmLabelMousePressed
 
     /**
      * @param args the command line arguments
@@ -384,8 +456,10 @@ public class ProjectView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel addAlarmLabel;
     private javax.swing.JLabel addContactGroupLabel;
     private javax.swing.JLabel addContactLabel;
+    private javax.swing.JLabel allAlarmsLabel;
     private javax.swing.JLabel allContactGroupsLabel;
     private javax.swing.JLabel allContactsLabel;
     private javax.swing.JLabel headlineLabel;
@@ -394,6 +468,8 @@ public class ProjectView extends javax.swing.JFrame {
     private javax.swing.JSeparator logoSeparator;
     private javax.swing.JLayeredPane mainLayeredPane;
     private javax.swing.JPanel mainPanel;
+    private javax.swing.JLabel menuAlarmLabel;
+    private javax.swing.JPanel menuAlarmPanel;
     private javax.swing.JLabel menuCalendarLabel;
     private javax.swing.JPanel menuCalendarPanel;
     private javax.swing.JLabel menuContactsLabel;
@@ -473,7 +549,9 @@ public class ProjectView extends javax.swing.JFrame {
 
         menuContactsPanel.setVisible(false);
         menuContactsLabel.setIcon((new javax.swing.ImageIcon(getClass().getResource("/arrow_right.png"))));
-        headlineLabel.setText("Calendar // #SUBSECTION");
+        menuAlarmPanel.setVisible(false);
+        menuAlarmLabel.setIcon((new javax.swing.ImageIcon(getClass().getResource("/arrow_right.png"))));
+        headlineLabel.setText("CalendarPlusPlus");
 
         tabCards = (CardLayout) mainPanel.getLayout();
         mainPanel.add(addActivity, "AddActivityCard");
