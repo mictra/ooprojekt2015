@@ -15,7 +15,7 @@ import java.util.List;
  * Class to represent a calendar object.
  * 
  */
-public class CalendarPlus {
+public class CalendarPlus implements ICalendarPlus{
     
     private ArrayList<Activity> activities;
     private ArrayList<ContactGroup> groups;

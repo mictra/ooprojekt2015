@@ -11,7 +11,7 @@ import java.util.ArrayList;
  *
  * @author erikforsberg
  */
-public class Contact {
+public class Contact implements IContact{
     
     private String name;
     private String phone;

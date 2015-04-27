@@ -12,7 +12,7 @@ import java.util.Calendar;
  *
  * @author erikforsberg
  */
-public class Activity {
+public class Activity implements IActivity {
     
     private Calendar startTime;
     private Calendar endTime;

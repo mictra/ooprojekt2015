@@ -12,7 +12,7 @@ import java.util.ArrayList;
  *
  * @author johan
  */
-public class ContactGroup {
+public class ContactGroup implements IContactGroup {
     
     private String name;
     private final ArrayList<Contact> members;
