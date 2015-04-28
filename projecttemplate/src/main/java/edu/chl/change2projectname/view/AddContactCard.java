@@ -16,11 +16,13 @@ import javax.swing.JButton;
  * @author cain
  */
 public class AddContactCard extends javax.swing.JPanel {
+
     private final CalendarPlus cal;
     DefaultListModel nonMemberListModel, memberListModel;
 
     /**
      * Creates new form AddContactCard
+     *
      * @param cal
      */
     public AddContactCard(CalendarPlus cal) {
@@ -183,19 +185,18 @@ public class AddContactCard extends javax.swing.JPanel {
     private javax.swing.JButton saveButton;
     // End of variables declaration//GEN-END:variables
 
-    
-    public JButton getSaveButton(){
+    public JButton getSaveButton() {
         return saveButton;
     }
-    
-    public JButton getCancelButton(){
+
+    public JButton getCancelButton() {
         return cancelButton;
     }
-    
+
     public JButton getAddGroupButton() {
         return addButton;
     }
-    
+
     public JButton getRemoveGroupButton() {
         return removeButton;
     }
@@ -206,31 +207,33 @@ public class AddContactCard extends javax.swing.JPanel {
         c.setPhone(phoneTextField.getText());
         return c;
     }
-    
+
     public void resetFields() {
         nameTextField.setText("");
         emailTextField.setText("");
         phoneTextField.setText("");
-              
+
         // Set the non-member groups
         // TODO - do NOT add default group and filter out all non-member groups
         nonMemberList.removeAll();
         nonMemberListModel.removeAllElements();
         for (ContactGroup cg : cal.getContactGroupList()) {
-            if(!cg.getGroupName().equals("Default")){
+            if (!cg.getGroupName().equals("Default")) {
                 nonMemberListModel.addElement(cg.getGroupName());
             }
-        }        
+        }
         nonMemberList.setModel(nonMemberListModel);
-        
+
         //Set the member groups
         memberList.removeAll();
         memberListModel.removeAllElements();
         for (ContactGroup cg : cal.getContactGroupList()) {
-            memberListModel.addElement(cg.getGroupName());
+            if(cg.getGroupName().equals("Default")){
+                memberListModel.addElement(cg.getGroupName());
+            }
         }
         memberList.setModel(memberListModel);
-        
+
     }
 
     public void addMemberGroup() {
