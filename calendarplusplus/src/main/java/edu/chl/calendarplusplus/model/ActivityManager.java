@@ -5,12 +5,31 @@
  */
 package edu.chl.calendarplusplus.model;
 
+import java.util.HashMap;
+import java.util.List;
+
 /**
  *
  * @author Michael
  */
-public class ActivityManager {
+public class ActivityManager implements IActivityManager {
     
+    HashMap<Contact, List<Activity>> activityManager;
     
+    public ActivityManager(){
+        activityManager = new HashMap<>();
+    }
+    
+    public void setContactActivities(Contact c, List<Activity> activities){
+        activityManager.put(c, activities);
+    }
+    
+    public List<Activity> getContactActivities(Contact c){
+        return activityManager.get(c);
+    }
+    
+    public void removeContact(Contact c){
+        activityManager.remove(c);
+    }
     
 }

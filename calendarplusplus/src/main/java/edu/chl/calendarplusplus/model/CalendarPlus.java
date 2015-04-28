@@ -21,6 +21,7 @@ public class CalendarPlus implements ICalendarPlus{
     private ArrayList<ContactGroup> groups;
     private ArrayList<Alarm> alarms;
     private ContactManager contactManager;
+    private ActivityManager activityManager;
     
     public CalendarPlus(){
         activities = new ArrayList<>();
@@ -29,6 +30,7 @@ public class CalendarPlus implements ICalendarPlus{
         ContactGroup defaultGroup = new ContactGroup("Default");
         groups.add(defaultGroup);
         contactManager = new ContactManager();
+        activityManager = new ActivityManager();
     }
     
     public void addActivity(Activity a){
