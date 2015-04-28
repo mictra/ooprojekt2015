@@ -217,7 +217,9 @@ public class AddContactCard extends javax.swing.JPanel {
         nonMemberList.removeAll();
         nonMemberListModel.removeAllElements();
         for (ContactGroup cg : cal.getContactGroupList()) {
-            nonMemberListModel.addElement(cg.getGroupName());
+            if(!cg.getGroupName().equals("Default")){
+                nonMemberListModel.addElement(cg.getGroupName());
+            }
         }        
         nonMemberList.setModel(nonMemberListModel);
         
