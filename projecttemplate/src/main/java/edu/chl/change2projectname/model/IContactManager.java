@@ -21,5 +21,8 @@ public interface IContactManager{
     
     void removeGroup(Contact c, ContactGroup cg);
     
+    void clearGroups(Contact c);
+    
+    void removeContact(Contact c);
     
 }

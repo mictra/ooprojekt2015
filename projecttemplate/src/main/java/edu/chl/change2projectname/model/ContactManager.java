@@ -1,8 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
+*/
 package edu.chl.change2projectname.model;
 
 import java.util.ArrayList;
@@ -13,16 +13,20 @@ import java.util.Map;
 /**
  *
  * @author erikforsberg
- * 
+ *
  * Manager for contact groups. HashMap with a specific contact as key and a list
  * with its groups as value.
- * 
+ *
  */
 public class ContactManager implements IContactManager{
     
-
     
-    Map<Contact, List<ContactGroup>> groups = new HashMap<Contact, List<ContactGroup>>();
+    
+   private Map<Contact, List<ContactGroup>> groups;
+    
+    public ContactManager(){
+        groups = new HashMap<Contact, List<ContactGroup>>();
+    }
     
     public List<ContactGroup> getContactGroups(Contact c){
         return groups.get(c);
@@ -43,6 +47,16 @@ public class ContactManager implements IContactManager{
         List<ContactGroup> temp = groups.get(c);
         temp.remove(cg);
         groups.put(c, temp);
+    }
+    
+    public void clearGroups(Contact c){
+        List<ContactGroup> temp = groups.get(c);
+        temp.clear();
+        groups.put(c, temp);
+    }
+    
+    public void removeContact(Contact c){
+        groups.remove(c);
     }
     
 }
