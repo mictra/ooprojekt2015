@@ -32,7 +32,7 @@ public class NotificationTest {
         alarm.set(Calendar.HOUR_OF_DAY, 2);
         Activity a = new Activity(time, time, "An Activity");
         Notification n = new Notification(alarm, "A Notification", a);
-        Assert.assertEquals(a, n.getActivity());
+        Assert.assertNull(n.getActivity());
     }
     
     @Test

@@ -24,8 +24,10 @@ public class Alarm {
     private String description;
     
     public Alarm(Calendar d, String n){
-        this.alarmTime = d;
-        this.name = n;
+        if (d.after(Calendar.getInstance()) || d.equals(Calendar.getInstance())){
+            this.alarmTime = d;
+            this.name = n;
+        }
     }
     
     public void setAlarm(Calendar time){

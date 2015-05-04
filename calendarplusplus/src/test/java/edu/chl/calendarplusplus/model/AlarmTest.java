@@ -39,7 +39,8 @@ public class AlarmTest {
         Calendar time = Calendar.getInstance();
         time.set(Calendar.HOUR_OF_DAY, -12);
         Alarm a = new Alarm(time, "An Alarm");
-        Assert.assertNull(a);
+        Assert.assertNull(a.getAlarm());
+        Assert.assertNull(a.getAlarmName());
     }
     
     @Test

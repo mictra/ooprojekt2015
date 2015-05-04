@@ -40,7 +40,7 @@ public class ActivityManagerTest {
         ArrayList<Activity> activities = new ArrayList<>();
         ActivityManager a = new ActivityManager();
         
-        activities.add(a1); activities.add(a1);
+        activities.add(a1); activities.add(a1); //ARRAYLIST CONTROLS THIS!
         a.setContactActivities(c, activities);
         Assert.assertEquals(1, a.getContactActivities(c).size());
     }
