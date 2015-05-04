@@ -5,7 +5,7 @@
  */
 package edu.chl.calendarplusplus.view;
 
-import edu.chl.calendarplusplus.controller.ProjectController;
+import edu.chl.calendarplusplus.controller.ProjectViewController;
 import edu.chl.calendarplusplus.model.ContactGroup;
 import javax.swing.JButton;
 
@@ -84,7 +84,7 @@ public class AddContactGroupCard extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     /*
-    public void registerListener(ProjectController controller){
+    public void registerListener(ProjectViewController controller){
         saveButton.addActionListener(controller);
         cancelButton.addActionListener(controller);
     }

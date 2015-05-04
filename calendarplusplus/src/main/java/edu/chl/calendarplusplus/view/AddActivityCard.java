@@ -5,7 +5,7 @@
  */
 package edu.chl.calendarplusplus.view;
 
-import edu.chl.calendarplusplus.controller.ProjectController;
+import edu.chl.calendarplusplus.controller.ProjectViewController;
 import edu.chl.calendarplusplus.model.Activity;
 import java.util.Calendar;
 import java.util.Date;
@@ -238,7 +238,7 @@ public class AddActivityCard extends javax.swing.JPanel {
     }
     
     /*
-    public void registerListener(ProjectController controller){
+    public void registerListener(ProjectViewController controller){
         saveButton.addActionListener(controller);
         cancelButton.addActionListener(controller);
     }

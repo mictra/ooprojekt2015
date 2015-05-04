@@ -1,6 +1,6 @@
 package edu.chl.calendarplusplus;
 
-import edu.chl.calendarplusplus.controller.ProjectController;
+import edu.chl.calendarplusplus.controller.ProjectViewController;
 import edu.chl.calendarplusplus.model.CalendarPlus;
 import edu.chl.calendarplusplus.model.Project;
 import edu.chl.calendarplusplus.view.ProjectView;
@@ -20,7 +20,7 @@ public final class Main {
                     final CalendarPlus cal = new CalendarPlus();
                     final ProjectView projectView = new ProjectView(project, cal);
                     
-                    ProjectController.create(cal, projectView);
+                    ProjectViewController.create(cal, projectView);
                     projectView.setVisible(true);
                 });
 	}

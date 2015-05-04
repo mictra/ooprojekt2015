@@ -11,7 +11,7 @@ import java.awt.event.MouseListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
-public class ProjectController implements MouseListener, ActionListener {
+public class ProjectViewController implements MouseListener, ActionListener {
 
     private final CalendarPlus cal;
     private final ProjectView projectView;
@@ -30,11 +30,11 @@ public class ProjectController implements MouseListener, ActionListener {
     private JButton contactAddGroup;
     private JButton contactRemoveGroup;
     
-    public static ProjectController create(CalendarPlus cal, ProjectView projectView) {
-        return new ProjectController(cal, projectView);
+    public static ProjectViewController create(CalendarPlus cal, ProjectView projectView) {
+        return new ProjectViewController(cal, projectView);
     }
 
-    private ProjectController(CalendarPlus cal, ProjectView projectView) {
+    private ProjectViewController(CalendarPlus cal, ProjectView projectView) {
         this.cal = cal;
         this.projectView = projectView;
         initComponents();
