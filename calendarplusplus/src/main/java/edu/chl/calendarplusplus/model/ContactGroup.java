@@ -31,7 +31,14 @@ public class ContactGroup implements IContactGroup {
     }
     
     public void addContact(Contact member){
+        // Check if the contact's name already exist in the group.
+        for(Contact c : members){
+            if (member.getName().equals(c.getName())){
+                return;
+            }
+        }
         members.add(member);
+            
     }
     
     public ArrayList<Contact> getContacts(){
