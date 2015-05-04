@@ -45,6 +45,31 @@ public class ActivityManagerTest {
         Assert.assertEquals(1, a.getContactActivities(c).size());
     }
     
+    // The Activity-list should be sorted based on the which time is closest
+    // to the current time, as long as the activity has not passed.
+    // "activity" should be equal to {Third Activity, First Activity}
+    @Test
+    public void sortedActivityList(){
+        Contact c = new Contact("Cathryn");
+        ArrayList<Activity> activities = new ArrayList<>();
+        Calendar time_1 = Calendar.getInstance();
+        time_1.set(Calendar.MINUTE, -20);
+        Calendar time_2 = Calendar.getInstance();
+        time_2.set(Calendar.MINUTE, 40);
+        Calendar time_3 = Calendar.getInstance();
+        time_3.set(Calendar.HOUR_OF_DAY, 1);
+        Activity a1 = new Activity(time_2, time_3, "First Activity");
+        Activity a2 = new Activity(time_1, time_1, "Second Activity");
+        Activity a3 = new Activity(time_1, time_3, "Third Activity");
+        ActivityManager a = new ActivityManager();
+        
+        activities.add(a1); activities.add(a2); activities.add(a3);
+        a.setContactActivities(c, activities);
+        Assert.assertEquals("First Activity",
+                a.getContactActivities(c).get(1).getName());
+        Assert.assertEquals(2, a.getContactActivities(c).size());
+    }
+    
     @Test
     public void removedContact(){
         Contact c = new Contact("Karl");

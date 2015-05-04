@@ -35,7 +35,7 @@ public class ContactGroupTest {
     // We might want to have our list sorted by name, therefore, the
     // contacts should be ordered as fast as it gets added to the list.
     @Test
-    public void sortedList(){
+    public void sortedGroupList(){
         Contact c1 = new Contact("Roger");
         Contact c2 = new Contact("Adam");
         Contact c3 = new Contact("Josh");

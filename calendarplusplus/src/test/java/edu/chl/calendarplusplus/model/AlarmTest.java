@@ -33,6 +33,15 @@ public class AlarmTest {
         Assert.assertNotSame(time_1, a.getAlarm());
     }
     
+    // The alarm should be invalid if the time/date has already passed.
+    @Test
+    public void invalidAlarm(){
+        Calendar time = Calendar.getInstance();
+        time.set(Calendar.HOUR_OF_DAY, -12);
+        Alarm a = new Alarm(time, "An Alarm");
+        Assert.assertNull(a);
+    }
+    
     @Test
     public void editAlarmName(){
         Alarm a = new Alarm(Calendar.getInstance(), "Old Alarm name");
