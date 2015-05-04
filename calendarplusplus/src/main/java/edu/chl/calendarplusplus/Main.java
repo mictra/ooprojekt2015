@@ -1,6 +1,6 @@
 package edu.chl.calendarplusplus;
 
-import edu.chl.calendarplusplus.controller.ProjectViewController;
+import edu.chl.calendarplusplus.controller.*;
 import edu.chl.calendarplusplus.model.CalendarPlus;
 import edu.chl.calendarplusplus.model.Project;
 import edu.chl.calendarplusplus.view.ProjectView;
@@ -21,6 +21,11 @@ public final class Main {
                     final ProjectView projectView = new ProjectView(project, cal);
                     
                     ProjectViewController.create(cal, projectView);
+                    //Maybe we should create own view objects here and use them instead of in the projectView?
+                    //Still have to add the created views to the mainPanel though...
+                    AddActivityCardController.create(cal, projectView.getActivityCard());
+                    AddContactCardController.create(cal, projectView.getContactCard());
+                    AddContactGroupCardController.create(cal, projectView.getContactGroupCard());
                     projectView.setVisible(true);
                 });
 	}

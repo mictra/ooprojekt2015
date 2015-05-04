@@ -5,6 +5,7 @@
  */
 package edu.chl.calendarplusplus.controller;
 
+import edu.chl.calendarplusplus.model.Activity;
 import edu.chl.calendarplusplus.model.CalendarPlus;
 import edu.chl.calendarplusplus.view.AddActivityCard;
 import java.awt.event.ActionEvent;
@@ -16,12 +17,12 @@ import javax.swing.JButton;
  * @author Michael
  */
 public class AddActivityCardController implements ActionListener {
-    
+
     private CalendarPlus cal;
     private AddActivityCard ac;
     private JButton activityCardSave;
     private JButton activityCardCancel;
-    
+
     public static AddActivityCardController create(CalendarPlus cal, AddActivityCard ac) {
         return new AddActivityCardController(cal, ac);
     }
@@ -32,20 +33,26 @@ public class AddActivityCardController implements ActionListener {
         initComponents();
         addListeners();
     }
-    
-    private void initComponents(){
+
+    private void initComponents() {
         activityCardSave = ac.getSaveButton();
         activityCardCancel = ac.getCancelButton();
     }
-    
-    private void addListeners(){
+
+    private void addListeners() {
         activityCardSave.addActionListener(this);
         activityCardCancel.addActionListener(this);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        
+        if (e.getSource() == activityCardSave) {
+            cal.addActivity(ac.getAsActivity());
+        } else if (e.getSource() == activityCardCancel) {
+            for (Activity a : cal.getActivityList()) {
+                System.out.println("Name: " + a.getName());
+            }
+        }
     }
-    
+
 }

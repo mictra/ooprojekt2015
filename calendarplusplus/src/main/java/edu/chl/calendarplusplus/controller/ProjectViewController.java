@@ -1,17 +1,12 @@
 package edu.chl.calendarplusplus.controller;
 
-import edu.chl.calendarplusplus.model.Activity;
 import edu.chl.calendarplusplus.model.CalendarPlus;
-import edu.chl.calendarplusplus.model.Contact;
 import edu.chl.calendarplusplus.view.ProjectView;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 
-public class ProjectViewController implements MouseListener, ActionListener {
+public class ProjectViewController implements MouseListener {
 
     private final CalendarPlus cal;
     private final ProjectView projectView;
@@ -21,15 +16,7 @@ public class ProjectViewController implements MouseListener, ActionListener {
     private JLabel addContactGroupLabel;
     private JLabel allContactsLabel;
     private JLabel allContactGroupsLabel;
-    private JButton activityCardSave;
-    private JButton activityCardCancel;
-    private JButton contactGroupSave;
-    private JButton contactGroupCancel;
-    private JButton contactSave;
-    private JButton contactCancel;
-    private JButton contactAddGroup;
-    private JButton contactRemoveGroup;
-    
+
     public static ProjectViewController create(CalendarPlus cal, ProjectView projectView) {
         return new ProjectViewController(cal, projectView);
     }
@@ -40,39 +27,23 @@ public class ProjectViewController implements MouseListener, ActionListener {
         initComponents();
         addListeners();
     }
-    
-    private void initComponents(){
+
+    private void initComponents() {
         newActivityLabel = projectView.getNewActivityLabel();
         listViewLabel = projectView.getListViewLabel();
         addContactLabel = projectView.getAddContactLabel();
         addContactGroupLabel = projectView.getAddContactGroupLabel();
         allContactsLabel = projectView.getAllContactsLabel();
         allContactGroupsLabel = projectView.getAllContactGroupsLabel();
-        activityCardSave = projectView.getActivityCard().getSaveButton();
-        activityCardCancel = projectView.getActivityCard().getCancelButton();
-        contactGroupSave = projectView.getContactGroupCard().getSaveButton();
-        contactGroupCancel = projectView.getContactGroupCard().getCancelButton();
-        contactSave = projectView.getContactCard().getSaveButton();
-        contactCancel = projectView.getContactCard().getCancelButton();
-        contactAddGroup = projectView.getContactCard().getAddGroupButton();
-        contactRemoveGroup = projectView.getContactCard().getRemoveGroupButton();
     }
-    
-    private void addListeners(){
+
+    private void addListeners() {
         newActivityLabel.addMouseListener(this);
         listViewLabel.addMouseListener(this);
         addContactLabel.addMouseListener(this);
         addContactGroupLabel.addMouseListener(this);
         allContactsLabel.addMouseListener(this);
         allContactGroupsLabel.addMouseListener(this);
-        activityCardSave.addActionListener(this);
-        activityCardCancel.addActionListener(this);
-        contactGroupSave.addActionListener(this);
-        contactGroupCancel.addActionListener(this);
-        contactSave.addActionListener(this);
-        contactCancel.addActionListener(this);
-        contactAddGroup.addActionListener(this);
-        contactRemoveGroup.addActionListener(this);
     }
 
     @Override
@@ -114,31 +85,6 @@ public class ProjectViewController implements MouseListener, ActionListener {
     @Override
     public void mouseExited(MouseEvent e) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == activityCardSave) {
-            cal.addActivity(projectView.getActivityCard().getAsActivity());
-        }
-        if (e.getSource() == activityCardCancel) {
-            for (Activity a : cal.getActivityList()) {
-                System.out.println("Name: " + a.getName());
-            }
-        }
-        if (e.getSource() == contactGroupSave) {
-            cal.addContactGroup(projectView.getContactGroupCard().getAsContactGroup());
-        }
-        if(e.getSource() == contactSave){
-            Contact contact = projectView.getContactCard().getAsContact();
-            cal.getContactGroupList().get(0).addContact(contact);
-        }
-        if (e.getSource() == contactAddGroup) {
-            projectView.getContactCard().addMemberGroup();
-        }
-        if (e.getSource() == contactRemoveGroup) {
-            projectView.getContactCard().removeMemberGroup();
-        }
     }
 
 }
