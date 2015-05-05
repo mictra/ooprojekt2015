@@ -100,4 +100,12 @@ public class CalendarPlus implements ICalendarPlus{
         return contacts;
     }
     
+    public ContactManager getContactManager(){
+        return contactManager;
+    }
+    
+    public ActivityManager getActivityManager(){
+        return activityManager;
+    }
+    
 }
