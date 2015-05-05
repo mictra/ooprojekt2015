@@ -9,6 +9,8 @@ import edu.chl.calendarplusplus.model.CalendarPlus;
 import edu.chl.calendarplusplus.model.Contact;
 import edu.chl.calendarplusplus.model.ContactGroup;
 import java.beans.PropertyChangeSupport;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 
@@ -215,7 +217,7 @@ public class AddContactCard extends javax.swing.JPanel {
                         .addGap(29, 29, 29)
                         .addComponent(removeButton)))
                 .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cancelButton)
                     .addComponent(saveButton))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -306,6 +308,14 @@ public class AddContactCard extends javax.swing.JPanel {
         //c.setEmail(emailTextField.getText());
         //c.setPhone(phoneTextField.getText());
         return c;
+    }
+    
+    public List<String> getContactGroups(){
+        List<String> contactGroups = new ArrayList<>();
+        for(int i=0; i < memberList.getModel().getSize(); i++){
+            contactGroups.add(memberList.getModel().getElementAt(i).toString());
+        }
+        return contactGroups;
     }
 
     public void resetFields() {
