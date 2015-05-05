@@ -21,6 +21,9 @@ public class ActivityManager implements IActivityManager {
     }
     
     public void setContactActivities(Contact c, List<Activity> activities){
+        for (Activity a : activities) {
+            a.addAttendee(c);
+        }
         activityManager.put(c, activities);
     }
     
