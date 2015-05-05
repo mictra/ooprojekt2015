@@ -26,7 +26,9 @@ public class Notification extends Alarm {
 
     public Notification(Calendar d, String n, Activity a) {
         super(d, n);
-        activity = a;
+        if (d.before(a.getEndTime()) || d.equals(a.getEndTime())){
+            activity = a;
+        }
     }
     
     @Override
