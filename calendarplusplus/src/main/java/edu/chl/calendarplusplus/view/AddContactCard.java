@@ -202,9 +202,9 @@ public class AddContactCard extends javax.swing.JPanel {
     }
 
     public Contact getAsContact() {
-        Contact c = new Contact(nameTextField.getText());
-        c.setEmail(emailTextField.getText());
-        c.setPhone(phoneTextField.getText());
+        Contact c = new Contact(nameTextField.getText(), emailTextField.getText(), phoneTextField.getText());
+        //c.setEmail(emailTextField.getText());
+        //c.setPhone(phoneTextField.getText());
         return c;
     }
 
