@@ -41,7 +41,9 @@ public class ProjectView extends javax.swing.JFrame {
     @Override
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         listeners.addPropertyChangeListener(listener);
+        addActivity.addListener(listeners);
         addContactGroup.addListener(listeners);
+        addContact.addListener(listeners);
     }
     
     /**
