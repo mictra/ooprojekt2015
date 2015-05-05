@@ -38,10 +38,10 @@ public class AddActivityCardController implements PropertyChangeListener {
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         String evtName = evt.getPropertyName();
-//        if (evtName.equalsIgnoreCase("AddContactGroup")) {
-//            cal.addContactGroup(cgc.getAsContactGroup());
-//            cgc.resetFields();
-//        }
+        if (evtName.equalsIgnoreCase("AddActivity")) {
+            cal.addActivity(ac.getAsActivity());
+            ac.resetFields();
+        }
     }
 
 

@@ -55,8 +55,8 @@ public class AddActivityCard extends javax.swing.JPanel {
         descriptionLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         descriptionTextArea = new javax.swing.JTextArea();
-        saveButton = new javax.swing.JButton();
-        cancelButton = new javax.swing.JButton();
+        saveButton = new javax.swing.JLabel();
+        cancelButton = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(600, 600));
 
@@ -99,9 +99,37 @@ public class AddActivityCard extends javax.swing.JPanel {
         descriptionTextArea.setRows(5);
         jScrollPane1.setViewportView(descriptionTextArea);
 
-        saveButton.setText("Save");
+        saveButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/saveButton.png"))); // NOI18N
+        saveButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                labelMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                labelMouseReleased(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                saveButtonMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                saveButtonMouseEntered(evt);
+            }
+        });
 
-        cancelButton.setText("Cancel");
+        cancelButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cancelButton.png"))); // NOI18N
+        cancelButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                labelMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                labelMouseReleased(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                cancelButtonMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                cancelButtonMouseEntered(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -144,8 +172,8 @@ public class AddActivityCard extends javax.swing.JPanel {
                                     .addComponent(sHourComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(sMinuteComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(nameTextfield, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
-                                .addComponent(locationTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE))
+                                .addComponent(nameTextfield)
+                                .addComponent(locationTextField))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
@@ -184,13 +212,46 @@ public class AddActivityCard extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(saveButton)
                     .addComponent(cancelButton))
-                .addContainerGap(284, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void saveButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_saveButtonMouseEntered
+        saveButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/saveButtonHover.png")));
+    }//GEN-LAST:event_saveButtonMouseEntered
+
+    private void saveButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_saveButtonMouseExited
+        saveButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/saveButton.png")));
+        buttonPressed = false;
+    }//GEN-LAST:event_saveButtonMouseExited
+
+    private void cancelButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelButtonMouseEntered
+        cancelButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cancelButtonHover.png")));
+    }//GEN-LAST:event_cancelButtonMouseEntered
+
+    private void cancelButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelButtonMouseExited
+        cancelButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cancelButton.png")));
+        buttonPressed = false;
+    }//GEN-LAST:event_cancelButtonMouseExited
+
+    private void labelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelMousePressed
+        buttonPressed = true;
+    }//GEN-LAST:event_labelMousePressed
+
+    private void labelMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelMouseReleased
+        if (buttonPressed) {
+            if (evt.getSource() == saveButton) {
+                pcs.firePropertyChange("AddActivity", null, null);
+            }
+            if (evt.getSource() == cancelButton) {
+                
+            }
+        }
+    }//GEN-LAST:event_labelMouseReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton cancelButton;
+    private javax.swing.JLabel cancelButton;
     private javax.swing.JLabel descriptionLabel;
     private javax.swing.JTextArea descriptionTextArea;
     private javax.swing.JComboBox eDayComboBox;
@@ -209,7 +270,7 @@ public class AddActivityCard extends javax.swing.JPanel {
     private javax.swing.JComboBox sMinuteComboBox;
     private javax.swing.JComboBox sMonthComboBox;
     private javax.swing.JComboBox sYearComboBox;
-    private javax.swing.JButton saveButton;
+    private javax.swing.JLabel saveButton;
     private javax.swing.JLabel startDateLabel;
     // End of variables declaration//GEN-END:variables
 
@@ -248,14 +309,7 @@ public class AddActivityCard extends javax.swing.JPanel {
     }
     */
     
-    public JButton getSaveButton(){
-        return saveButton;
-    }
-    
-    public JButton getCancelButton(){
-        return cancelButton;
-    }
-    
+   
     private void initComboBoxes() {
         // Set the days
         sDayComboBox.removeAllItems();
