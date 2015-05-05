@@ -63,7 +63,7 @@ public class ActivityManagerTest {
         Activity a3 = new Activity(time_1, time_3, "Third Activity", "", "", null);
         ActivityManager a = new ActivityManager();
         
-        activities.add(a1); activities.add(a2); activities.add(a3);
+        activities.add(a1); activities.add(a2); activities.add(a3);  //TODO: ARRAYLIST CONTROLS THIS!
         a.setContactActivities(c, activities);
         Assert.assertEquals("First Activity",
                 a.getContactActivities(c).get(1).getName());
