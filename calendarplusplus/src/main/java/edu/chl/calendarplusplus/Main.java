@@ -25,7 +25,7 @@ public final class Main {
                     //Still have to add the created views to the mainPanel though...
                     AddActivityCardController.create(cal, projectView.getActivityCard());
                     AddContactCardController.create(cal, projectView.getContactCard());
-                    AddContactGroupCardController.create(cal, projectView.getContactGroupCard());
+                    AddContactGroupCardController.create(cal, projectView, projectView.getContactGroupCard());
                     projectView.setVisible(true);
                 });
 	}

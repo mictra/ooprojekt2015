@@ -12,6 +12,8 @@ import edu.chl.calendarplusplus.model.ContactGroup;
 import edu.chl.calendarplusplus.model.Project;
 import java.awt.CardLayout;
 import java.awt.Dimension;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.List;
 import javax.swing.JLabel;
 
@@ -36,6 +38,12 @@ public class ProjectView extends javax.swing.JFrame {
         tweekingInitComponents();
     }
 
+    @Override
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        listeners.addPropertyChangeListener(listener);
+        addContactGroup.addListener(listeners);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -484,6 +492,7 @@ public class ProjectView extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     // Non-generated variables declaration
+    private final PropertyChangeSupport listeners = new PropertyChangeSupport(this);
     private CardLayout tabCards;
     private AddActivityCard addActivity = new AddActivityCard();
     private AddContactGroupCard addContactGroup = new AddContactGroupCard();

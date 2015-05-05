@@ -5,9 +5,8 @@
  */
 package edu.chl.calendarplusplus.view;
 
-import edu.chl.calendarplusplus.controller.ProjectViewController;
 import edu.chl.calendarplusplus.model.ContactGroup;
-import javax.swing.JButton;
+import java.beans.PropertyChangeSupport;
 
 /**
  *
@@ -33,15 +32,43 @@ public class AddContactGroupCard extends javax.swing.JPanel {
 
         nameLabel = new javax.swing.JLabel();
         nameTextField = new javax.swing.JTextField();
-        saveButton = new javax.swing.JButton();
-        cancelButton = new javax.swing.JButton();
+        saveButton = new javax.swing.JLabel();
+        cancelButton = new javax.swing.JLabel();
 
         nameLabel.setFont(new java.awt.Font("Source Sans Pro", 1, 14)); // NOI18N
         nameLabel.setText("Name*");
 
-        saveButton.setText("Save");
+        saveButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/saveButton.png"))); // NOI18N
+        saveButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                labelMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                labelMouseReleased(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                saveButtonMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                saveButtonMouseEntered(evt);
+            }
+        });
 
-        cancelButton.setText("Cancel");
+        cancelButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cancelButton.png"))); // NOI18N
+        cancelButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                labelMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                labelMouseReleased(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                cancelButtonMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                cancelButtonMouseEntered(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -68,35 +95,64 @@ public class AddContactGroupCard extends javax.swing.JPanel {
                     .addComponent(nameLabel)
                     .addComponent(nameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(saveButton)
                     .addComponent(cancelButton))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void saveButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_saveButtonMouseEntered
+        saveButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/saveButtonHover.png")));
+    }//GEN-LAST:event_saveButtonMouseEntered
+
+    private void saveButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_saveButtonMouseExited
+        saveButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/saveButton.png")));
+        buttonPressed = false;
+    }//GEN-LAST:event_saveButtonMouseExited
+
+    private void cancelButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelButtonMouseEntered
+        cancelButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cancelButtonHover.png")));
+    }//GEN-LAST:event_cancelButtonMouseEntered
+
+    private void cancelButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelButtonMouseExited
+        cancelButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cancelButton.png")));
+        buttonPressed = false;
+    }//GEN-LAST:event_cancelButtonMouseExited
+
+    private void labelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelMousePressed
+        buttonPressed = true;
+    }//GEN-LAST:event_labelMousePressed
+
+    private void labelMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelMouseReleased
+        if (buttonPressed) {
+            if (evt.getSource() == saveButton) {
+                System.out.println("TEST");
+                pcs.firePropertyChange("AddContactGroup", null, null);
+            }
+            if (evt.getSource() == cancelButton) {
+                
+            }
+        }
+    }//GEN-LAST:event_labelMouseReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton cancelButton;
+    private javax.swing.JLabel cancelButton;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JTextField nameTextField;
-    private javax.swing.JButton saveButton;
+    private javax.swing.JLabel saveButton;
     // End of variables declaration//GEN-END:variables
 
+    private PropertyChangeSupport pcs;
+    private boolean buttonPressed;
+    
     /*
     public void registerListener(ProjectViewController controller){
         saveButton.addActionListener(controller);
         cancelButton.addActionListener(controller);
     }
     */
-    
-    public JButton getSaveButton(){
-        return saveButton;
-    }
-    
-    public JButton getCancelButton(){
-        return cancelButton;
-    }
 
     public ContactGroup getAsContactGroup() {
         ContactGroup cg = new ContactGroup(nameTextField.getText());
@@ -105,6 +161,10 @@ public class AddContactGroupCard extends javax.swing.JPanel {
     
     public void resetFields() {
         nameTextField.setText("");
+    }
+    
+     public void addListener(PropertyChangeSupport pcs) {
+        this.pcs = pcs;
     }
 
 }

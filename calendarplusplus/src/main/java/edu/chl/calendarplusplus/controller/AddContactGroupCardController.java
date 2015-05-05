@@ -7,48 +7,36 @@ package edu.chl.calendarplusplus.controller;
 
 import edu.chl.calendarplusplus.model.CalendarPlus;
 import edu.chl.calendarplusplus.view.AddContactGroupCard;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.JButton;
+import edu.chl.calendarplusplus.view.ProjectView;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
 /**
  *
  * @author Michael
  */
-public class AddContactGroupCardController implements ActionListener {
+public class AddContactGroupCardController implements PropertyChangeListener {
+
+    public static AddContactGroupCardController create(CalendarPlus cal, ProjectView projectView, AddContactGroupCard contactGroupCard) {
+        return new AddContactGroupCardController(cal, projectView, contactGroupCard);
+    }
 
     private CalendarPlus cal;
+    private ProjectView projV;
     private AddContactGroupCard cgc;
-    private JButton contactGroupSave;
-    private JButton contactGroupCancel;
 
-    public static AddContactGroupCardController create(CalendarPlus cal, AddContactGroupCard cgc) {
-        return new AddContactGroupCardController(cal, cgc);
-    }
-
-    private AddContactGroupCardController(CalendarPlus cal, AddContactGroupCard cgc) {
+    private AddContactGroupCardController(CalendarPlus cal, ProjectView projectView, AddContactGroupCard cgc) {
         this.cal = cal;
+        this.projV = projectView;
         this.cgc = cgc;
-        initComponents();
-        addListeners();
+        projV.addPropertyChangeListener(this);
     }
-
-    private void initComponents() {
-        contactGroupSave = cgc.getSaveButton();
-        contactGroupCancel = cgc.getCancelButton();
-    }
-
-    private void addListeners() {
-        contactGroupSave.addActionListener(this);
-        contactGroupCancel.addActionListener(this);
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == contactGroupSave) {
+    
+    public void propertyChange(PropertyChangeEvent evt) {
+        String evtName = evt.getPropertyName();
+        if (evtName.equalsIgnoreCase("AddContactGroup")) {
             cal.addContactGroup(cgc.getAsContactGroup());
-        } else if (e.getSource() == contactGroupCancel) {
-            //TODO: Something...
+            cgc.resetFields();
         }
     }
 
