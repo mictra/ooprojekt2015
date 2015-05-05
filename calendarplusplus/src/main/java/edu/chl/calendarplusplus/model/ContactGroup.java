@@ -37,8 +37,20 @@ public class ContactGroup implements IContactGroup {
                 return;
             }
         }
+        // Check where the member-variable should be put based on its name.
+        for (int i = 0; i < members.size(); i++){
+            for (int j = 0; j < member.getName().length() || j < members.get(i).getName().length(); j++){
+                if ((int)member.getName().charAt(j) < (int)members.get(i).getName().charAt(j)){
+                    members.add(i, member);
+                    return;
+                } // If the chars are equal, check the next char.
+                if ((int)member.getName().charAt(j) != (int)members.get(i).getName().charAt(j)){
+                    break;
+                }
+            }
+        }
+        // Here we add the member to the last position.
         members.add(member);
-            
     }
     
     public ArrayList<Contact> getContacts(){

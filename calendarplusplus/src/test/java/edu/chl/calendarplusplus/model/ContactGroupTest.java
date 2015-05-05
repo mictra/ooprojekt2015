@@ -26,7 +26,7 @@ public class ContactGroupTest {
     // twice or more.
     @Test
     public void addTwiceToContactGroup(){
-        Contact c1 = new Contact("Daniel","", "");
+        Contact c1 = new Contact("Daniel", "", "");
         ContactGroup g = new ContactGroup("A Group");
         g.addContact(c1); g.addContact(c1);
         Assert.assertEquals(1, g.getContacts().size());
@@ -34,13 +34,15 @@ public class ContactGroupTest {
     
     // We might want to have our list sorted by name, therefore, the
     // contacts should be ordered as fast as it gets added to the list.
+    // The list should appear in this order: "{Adam, Adriana, Josh, Roger}"
     @Test
     public void sortedGroupList(){
         Contact c1 = new Contact("Roger", "", "");
         Contact c2 = new Contact("Adam", "", "");
         Contact c3 = new Contact("Josh", "", "");
+        Contact c4 = new Contact("Adriana", "", "");
         ContactGroup g = new ContactGroup("A Group");
-        g.addContact(c1); g.addContact(c2); g.addContact(c3);
-        Assert.assertEquals("Roger", g.getContacts().get(2).getName());
+        g.addContact(c1); g.addContact(c2); g.addContact(c3); g.addContact(c4);
+        Assert.assertEquals("Adriana", g.getContacts().get(1).getName());
     }
 }
