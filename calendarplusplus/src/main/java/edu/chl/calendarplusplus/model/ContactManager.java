@@ -59,4 +59,12 @@ public class ContactManager implements IContactManager{
         groups.remove(c);
     }
     
+    public List<Contact> getAllContacts(){
+        List<Contact> contacts = new ArrayList<>();
+        for(Contact c : groups.keySet()){
+            contacts.add(c);
+        }
+        return contacts;
+    }
+    
 }

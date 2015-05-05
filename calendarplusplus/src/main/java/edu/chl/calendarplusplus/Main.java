@@ -56,7 +56,7 @@ public final class Main {
             friends.addContact(patrick);
             List<ContactGroup> patrickGroups = new ArrayList<>();
             patrickGroups.add(friends);
-            cal.getContactManager().setContactGroups(erik, patrickGroups);
+            cal.getContactManager().setContactGroups(patrick, patrickGroups);
             
             colleagues.addContact(johan);
             List<ContactGroup> johanGroups = new ArrayList<>();
