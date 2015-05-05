@@ -18,7 +18,7 @@ public class NotificationTest {
     @Test
     public void addNotification(){
         Calendar time = Calendar.getInstance();
-        Activity a = new Activity(time, time, "An Activity");
+        Activity a = new Activity(time, time, "An Activity","", "", null);
         Notification n = new Notification(time, "A Notification", a);
         Assert.assertEquals(a, n.getActivity());
     }
@@ -30,7 +30,7 @@ public class NotificationTest {
         Calendar time = Calendar.getInstance();
         Calendar alarm = Calendar.getInstance();
         alarm.set(Calendar.HOUR_OF_DAY, 2);
-        Activity a = new Activity(time, time, "An Activity");
+        Activity a = new Activity(time, time, "An Activity", "", "", null);
         Notification n = new Notification(alarm, "A Notification", a);
         Assert.assertNull(n.getActivity());
     }
@@ -38,7 +38,7 @@ public class NotificationTest {
     @Test
     public void editNotificationName(){
         Calendar time = Calendar.getInstance();
-        Activity a = new Activity(time, time, "An Activity");
+        Activity a = new Activity(time, time, "An Activity","", "", null);
         Notification n = new Notification(time, "Old Notification", a);
         n.setAlarmName("New Notification");
         Assert.assertEquals("New Notification", n.getAlarmName());
@@ -47,7 +47,7 @@ public class NotificationTest {
     @Test
     public void addNotificationDesc(){
         Calendar time = Calendar.getInstance();
-        Activity a = new Activity(time, time, "An Activity");
+        Activity a = new Activity(time, time, "An Activity","", "", null);
         Notification n = new Notification(time, "Old Notification", a);
         n.setDescName("New Notification");
         Assert.assertEquals("New Notification", n.getDescName());

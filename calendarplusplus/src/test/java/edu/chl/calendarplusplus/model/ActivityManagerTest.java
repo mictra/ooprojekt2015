@@ -19,9 +19,9 @@ public class ActivityManagerTest {
     @Test
     public void checkActivities(){
         Calendar time = Calendar.getInstance();
-        Contact c = new Contact("Olof");
-        Activity a1 = new Activity(time, time, "First Activity");
-        Activity a2 = new Activity(time, time, "Second Activity");
+        Contact c = new Contact("Olof", "", "");
+        Activity a1 = new Activity(time, time, "First Activity", "", "", null);
+        Activity a2 = new Activity(time, time, "Second Activity","", "", null);
         ArrayList<Activity> activities = new ArrayList<>();
         ActivityManager a = new ActivityManager();
         
@@ -35,8 +35,8 @@ public class ActivityManagerTest {
     @Test
     public void addActivityTwice(){
         Calendar time = Calendar.getInstance();
-        Contact c = new Contact("Filip");
-        Activity a1 = new Activity(time, time, "An Activity");
+        Contact c = new Contact("Filip", "", "");
+        Activity a1 = new Activity(time, time, "An Activity", "", "", null);
         ArrayList<Activity> activities = new ArrayList<>();
         ActivityManager a = new ActivityManager();
         
@@ -50,7 +50,7 @@ public class ActivityManagerTest {
     // "activity" should be equal to {Third Activity, First Activity}
     @Test
     public void sortedActivityList(){
-        Contact c = new Contact("Cathryn");
+        Contact c = new Contact("Cathryn", "", "");
         ArrayList<Activity> activities = new ArrayList<>();
         Calendar time_1 = Calendar.getInstance();
         time_1.set(Calendar.MINUTE, -20);
@@ -58,9 +58,9 @@ public class ActivityManagerTest {
         time_2.set(Calendar.MINUTE, 40);
         Calendar time_3 = Calendar.getInstance();
         time_3.set(Calendar.HOUR_OF_DAY, 1);
-        Activity a1 = new Activity(time_2, time_3, "First Activity");
-        Activity a2 = new Activity(time_1, time_1, "Second Activity");
-        Activity a3 = new Activity(time_1, time_3, "Third Activity");
+        Activity a1 = new Activity(time_2, time_3, "First Activity", "", "", null);
+        Activity a2 = new Activity(time_1, time_1, "Second Activity", "", "", null);
+        Activity a3 = new Activity(time_1, time_3, "Third Activity", "", "", null);
         ActivityManager a = new ActivityManager();
         
         activities.add(a1); activities.add(a2); activities.add(a3);
@@ -72,7 +72,7 @@ public class ActivityManagerTest {
     
     @Test
     public void removedContact(){
-        Contact c = new Contact("Karl");
+        Contact c = new Contact("Karl", "", "");
         ArrayList<Activity> activities = new ArrayList<>();
         ActivityManager a = new ActivityManager();
         a.setContactActivities(c, activities);

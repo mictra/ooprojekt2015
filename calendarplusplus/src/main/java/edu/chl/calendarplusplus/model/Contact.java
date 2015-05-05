@@ -18,8 +18,18 @@ public class Contact implements IContact{
     private String email;
     
     
-    public Contact(String name){
+    public Contact(String name, String phone, String email){
         this.name = name;
+        if(phone == null){
+            this.phone = "";
+        }else{
+            this.phone = phone;
+        }
+        if(email == null){
+            this.email = "";
+        }else{
+            this.email = email;
+        }
     }
     
     public void setName(String n){

@@ -25,11 +25,28 @@ public class Activity implements IActivity {
     
     //public Notification eventNot;
     
-    public Activity(Calendar st, Calendar et, String name) {
+    public Activity(Calendar st, Calendar et, String name, 
+                    String desc, String loc, ArrayList<Contact> att) {
         this.startTime = st;
         this.endTime = et;
         this.name = name;
-        this.attendees = new ArrayList<>();
+            if(desc == null){
+                this.description = "";
+            }else{
+                this.description = desc;
+            }
+            if(loc == null){
+                this.location = "";
+            }else{
+                this.location = loc;
+            }
+        
+            if(att == null){
+                this.attendees = new ArrayList<>();
+            }else{
+                this.attendees = att;
+            }
+        
     }
     
     // Setters and getters
