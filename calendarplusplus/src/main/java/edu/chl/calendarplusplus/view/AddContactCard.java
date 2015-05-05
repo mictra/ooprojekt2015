@@ -8,6 +8,7 @@ package edu.chl.calendarplusplus.view;
 import edu.chl.calendarplusplus.model.CalendarPlus;
 import edu.chl.calendarplusplus.model.Contact;
 import edu.chl.calendarplusplus.model.ContactGroup;
+import java.beans.PropertyChangeSupport;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 
@@ -185,6 +186,9 @@ public class AddContactCard extends javax.swing.JPanel {
     private javax.swing.JButton saveButton;
     // End of variables declaration//GEN-END:variables
 
+    private PropertyChangeSupport pcs;
+    private boolean buttonPressed;
+    
     public JButton getSaveButton() {
         return saveButton;
     }
@@ -244,5 +248,9 @@ public class AddContactCard extends javax.swing.JPanel {
     public void removeMemberGroup() {
         nonMemberListModel.addElement(memberList.getSelectedValue());
         memberListModel.remove(memberList.getSelectedIndex());
+    }
+
+    public void addListener(PropertyChangeSupport pcs) {
+        this.pcs = pcs;
     }
 }

@@ -32,6 +32,7 @@ public class AddContactGroupCardController implements PropertyChangeListener {
         projV.addPropertyChangeListener(this);
     }
     
+    @Override
     public void propertyChange(PropertyChangeEvent evt) {
         String evtName = evt.getPropertyName();
         if (evtName.equalsIgnoreCase("AddContactGroup")) {

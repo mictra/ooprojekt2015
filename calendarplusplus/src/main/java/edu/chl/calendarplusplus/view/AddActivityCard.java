@@ -7,6 +7,7 @@ package edu.chl.calendarplusplus.view;
 
 import edu.chl.calendarplusplus.controller.ProjectViewController;
 import edu.chl.calendarplusplus.model.Activity;
+import java.beans.PropertyChangeSupport;
 import java.util.Calendar;
 import java.util.Date;
 import javax.swing.JButton;
@@ -212,6 +213,9 @@ public class AddActivityCard extends javax.swing.JPanel {
     private javax.swing.JLabel startDateLabel;
     // End of variables declaration//GEN-END:variables
 
+    private PropertyChangeSupport pcs;
+    private boolean buttonPressed;
+    
     public Activity getAsActivity(){
         //TODO: Handle errors when missing fields not in there... Maybe disable Save button?
         String name = nameTextfield.getText();
@@ -307,5 +311,9 @@ public class AddActivityCard extends javax.swing.JPanel {
         eMinuteComboBox.setSelectedItem(Integer.toString(c.get(c.MINUTE) - (c.get(c.MINUTE) % 5)));
         locationTextField.setText("");
         descriptionTextArea.setText("");
+    }
+
+    public void addListener(PropertyChangeSupport pcs) {
+        this.pcs = pcs;
     }
 }

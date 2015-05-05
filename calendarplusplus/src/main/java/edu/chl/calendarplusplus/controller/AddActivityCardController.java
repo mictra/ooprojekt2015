@@ -5,54 +5,55 @@
  */
 package edu.chl.calendarplusplus.controller;
 
-import edu.chl.calendarplusplus.model.Activity;
 import edu.chl.calendarplusplus.model.CalendarPlus;
 import edu.chl.calendarplusplus.view.AddActivityCard;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import edu.chl.calendarplusplus.view.ProjectView;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import javax.swing.JButton;
 
 /**
  *
  * @author Michael
  */
-public class AddActivityCardController implements ActionListener {
+public class AddActivityCardController implements PropertyChangeListener {
 
     private CalendarPlus cal;
+    private ProjectView projV;
     private AddActivityCard ac;
     private JButton activityCardSave;
     private JButton activityCardCancel;
 
-    public static AddActivityCardController create(CalendarPlus cal, AddActivityCard ac) {
-        return new AddActivityCardController(cal, ac);
+    public static AddActivityCardController create(CalendarPlus cal, ProjectView projV, AddActivityCard ac) {
+        return new AddActivityCardController(cal, projV, ac);
     }
 
-    private AddActivityCardController(CalendarPlus cal, AddActivityCard ac) {
+    private AddActivityCardController(CalendarPlus cal, ProjectView projV, AddActivityCard ac) {
         this.cal = cal;
+        this.projV = projV;
         this.ac = ac;
-        initComponents();
-        addListeners();
-    }
-
-    private void initComponents() {
-        activityCardSave = ac.getSaveButton();
-        activityCardCancel = ac.getCancelButton();
-    }
-
-    private void addListeners() {
-        activityCardSave.addActionListener(this);
-        activityCardCancel.addActionListener(this);
+        projV.addPropertyChangeListener(this);
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == activityCardSave) {
-            cal.addActivity(ac.getAsActivity());
-        } else if (e.getSource() == activityCardCancel) {
-            for (Activity a : cal.getActivityList()) {
-                System.out.println("Name: " + a.getName());
-            }
-        }
+    public void propertyChange(PropertyChangeEvent evt) {
+        String evtName = evt.getPropertyName();
+//        if (evtName.equalsIgnoreCase("AddContactGroup")) {
+//            cal.addContactGroup(cgc.getAsContactGroup());
+//            cgc.resetFields();
+//        }
     }
+
+
+//    @Override
+//    public void actionPerformed(ActionEvent e) {
+//        if (e.getSource() == activityCardSave) {
+//            cal.addActivity(ac.getAsActivity());
+//        } else if (e.getSource() == activityCardCancel) {
+//            for (Activity a : cal.getActivityList()) {
+//                System.out.println("Name: " + a.getName());
+//            }
+//        }
+//    }
 
 }

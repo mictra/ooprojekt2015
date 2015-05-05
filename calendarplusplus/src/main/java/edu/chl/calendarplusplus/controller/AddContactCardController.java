@@ -6,63 +6,55 @@
 package edu.chl.calendarplusplus.controller;
 
 import edu.chl.calendarplusplus.model.CalendarPlus;
-import edu.chl.calendarplusplus.model.Contact;
 import edu.chl.calendarplusplus.view.AddContactCard;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.JButton;
+import edu.chl.calendarplusplus.view.ProjectView;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
 /**
  *
  * @author Michael
  */
-public class AddContactCardController implements ActionListener {
+public class AddContactCardController implements PropertyChangeListener {
 
     private CalendarPlus cal;
+    private ProjectView projV;
     private AddContactCard cc;
-    private JButton contactSave;
-    private JButton contactCancel;
-    private JButton contactAddGroup;
-    private JButton contactRemoveGroup;
 
-    public static AddContactCardController create(CalendarPlus cal, AddContactCard cc) {
-        return new AddContactCardController(cal, cc);
+    public static AddContactCardController create(CalendarPlus cal, ProjectView projV, AddContactCard cc) {
+        return new AddContactCardController(cal, projV, cc);
     }
 
-    private AddContactCardController(CalendarPlus cal, AddContactCard cc) {
+    private AddContactCardController(CalendarPlus cal, ProjectView projV, AddContactCard cc) {
         this.cal = cal;
+        this.projV = projV;
         this.cc = cc;
-        initComponents();
-        addListeners();
+        projV.addPropertyChangeListener(this);
     }
-
-    private void initComponents() {
-        contactSave = cc.getSaveButton();
-        contactCancel = cc.getCancelButton();
-        contactAddGroup = cc.getAddGroupButton();
-        contactRemoveGroup = cc.getRemoveGroupButton();
-    }
-
-    private void addListeners() {
-        contactSave.addActionListener(this);
-        contactCancel.addActionListener(this);
-        contactAddGroup.addActionListener(this);
-        contactRemoveGroup.addActionListener(this);
-    }
-
+    
     @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == contactSave) {
-            Contact contact = cc.getAsContact();
-            cal.getContactGroupList().get(0).addContact(contact);
-        } else if (e.getSource() == contactCancel) {
-            //TODO: Something...
-        } else if (e.getSource() == contactAddGroup) {
-            cc.addMemberGroup();
-        }
-        if (e.getSource() == contactRemoveGroup) {
-            cc.removeMemberGroup();
-        }
+    public void propertyChange(PropertyChangeEvent evt) {
+        String evtName = evt.getPropertyName();
+//        if (evtName.equalsIgnoreCase("AddContactGroup")) {
+//            cal.addContactGroup(cgc.getAsContactGroup());
+//            cgc.resetFields();
+//        }
     }
+
+
+//    @Override
+//    public void actionPerformed(ActionEvent e) {
+//        if (e.getSource() == contactSave) {
+//            Contact contact = cc.getAsContact();
+//            cal.getContactGroupList().get(0).addContact(contact);
+//        } else if (e.getSource() == contactCancel) {
+//            //TODO: Something...
+//        } else if (e.getSource() == contactAddGroup) {
+//            cc.addMemberGroup();
+//        }
+//        if (e.getSource() == contactRemoveGroup) {
+//            cc.removeMemberGroup();
+//        }
+//    }
 
 }

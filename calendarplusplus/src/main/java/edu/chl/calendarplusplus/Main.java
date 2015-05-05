@@ -23,8 +23,8 @@ public final class Main {
                     ProjectViewController.create(cal, projectView);
                     //Maybe we should create own view objects here and use them instead of in the projectView?
                     //Still have to add the created views to the mainPanel though...
-                    AddActivityCardController.create(cal, projectView.getActivityCard());
-                    AddContactCardController.create(cal, projectView.getContactCard());
+                    AddActivityCardController.create(cal, projectView, projectView.getActivityCard());
+                    AddContactCardController.create(cal, projectView, projectView.getContactCard());
                     AddContactGroupCardController.create(cal, projectView, projectView.getContactGroupCard());
                     projectView.setVisible(true);
                 });
