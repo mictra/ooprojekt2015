@@ -57,4 +57,9 @@ public class ContactGroup implements IContactGroup {
         return members;
     }
     
+    @Override
+    public String toString() {
+        return name;
+    }
+    
 }
