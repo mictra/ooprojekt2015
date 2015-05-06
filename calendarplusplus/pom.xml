@@ -50,7 +50,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <!-- Will create executable jar -->
-                            <mainClass>edu.chalmers.projecttemplate.Main</mainClass>
+                            <mainClass>edu.chl.calendarplusplus.Main</mainClass>
                         </manifest>
             
                     </archive>
@@ -82,13 +82,8 @@
                     </execution>
                 </executions>
             </plugin>
+            <!-- 
             <plugin>
-                <!--
-                FindBugs looks for bugs in Java programs. It is based on 
-                the concept of bug patterns. A bug pattern is a code idiom 
-                that is often an error.
-                http://mojo.codehaus.org/findbugs-maven-plugin/
-                -->
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>findbugs-maven-plugin</artifactId>
                 <version>3.0.0</version>
@@ -126,16 +121,12 @@
                     </dependency>
                 </dependencies>
             </plugin>
+            -->
+            <!--
             <plugin>
-                <!--
-                The PMD Plugin allows you to automatically run the PMD code
-                analysis tool on your project's source code and generate a 
-                site report with its results.
-                http://maven.apache.org/plugins/maven-pmd-plugin/
-                -->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-pmd-plugin</artifactId>
-                <version>3.1</version>
+                <version>3.4</version>
                 <configuration>
                     <includeTests>true</includeTests>
                     <targetJdk>${maven.compiler.target}</targetJdk>
@@ -154,6 +145,7 @@
                     </execution>
                 </executions>
             </plugin>
+            -->
         </plugins>
     </build>
 </project>
