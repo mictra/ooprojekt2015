@@ -29,7 +29,7 @@ public class NotificationTest {
     public void invalidNotification(){
         Calendar time = Calendar.getInstance();
         Calendar alarm = Calendar.getInstance();
-        alarm.set(Calendar.HOUR_OF_DAY, 2);
+        alarm.add(Calendar.HOUR_OF_DAY, 2);
         Activity a = new Activity(time, time, "An Activity", "", "", null);
         Notification n = new Notification(alarm, "A Notification", a);
         Assert.assertNull(n.getActivity());
