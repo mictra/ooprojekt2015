@@ -5,11 +5,14 @@
  */
 package edu.chl.calendarplusplus.controller;
 
+import edu.chl.calendarplusplus.model.Activity;
 import edu.chl.calendarplusplus.model.CalendarPlus;
+import edu.chl.calendarplusplus.model.Notification;
 import edu.chl.calendarplusplus.view.AddActivityCard;
 import edu.chl.calendarplusplus.view.ProjectView;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.Calendar;
 import javax.swing.JButton;
 
 /**
@@ -39,7 +42,12 @@ public class AddActivityCardController implements PropertyChangeListener {
     public void propertyChange(PropertyChangeEvent evt) {
         String evtName = evt.getPropertyName();
         if (evtName.equalsIgnoreCase("AddActivity")) {
-            cal.addActivity(ac.getAsActivity());
+            Activity act = ac.getAsActivity();
+            cal.addActivity(act);
+            Notification not = ac.getAsNotification(act);
+            if (not != null) {
+                //Add notification to manager or update or remove
+            }
             ac.resetFields();
         }
     }

@@ -21,8 +21,7 @@ public class ListViewElement extends javax.swing.JPanel {
         initComponents();
         nameLabel.setText(a.getName());
         Calendar c = a.getStartTime();
-        System.out.println(c.toString());
-        String date = c.get(c.DAY_OF_MONTH) + "." + (c.get(c.MONTH)+1) + "." + c.get(c.YEAR) + " - kl. " + c.get(c.HOUR_OF_DAY) + ":" + c.get(c.MINUTE);
+        String date = c.get(c.DAY_OF_MONTH) + "." + (c.get(c.MONTH)+1) + "." + c.get(c.YEAR) + " - kl. " + c.get(c.HOUR_OF_DAY) + ":" + (c.get(c.MINUTE) <= 5 ? "0" + c.get(c.MINUTE) : c.get(c.MINUTE));
         dateLabel.setText(date);
         locationLabel.setText(a.getLocation());
     }
@@ -39,6 +38,7 @@ public class ListViewElement extends javax.swing.JPanel {
         nameLabel = new javax.swing.JLabel();
         dateLabel = new javax.swing.JLabel();
         locationLabel = new javax.swing.JLabel();
+        notificationLabel = new javax.swing.JLabel();
 
         setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
 
@@ -51,6 +51,9 @@ public class ListViewElement extends javax.swing.JPanel {
         locationLabel.setFont(new java.awt.Font("Source Sans Pro", 1, 18)); // NOI18N
         locationLabel.setText("#LOCATION");
 
+        notificationLabel.setFont(new java.awt.Font("Source Sans Pro", 1, 18)); // NOI18N
+        notificationLabel.setText("#NOTIFICATION");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -59,9 +62,12 @@ public class ListViewElement extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(nameLabel)
-                    .addComponent(dateLabel)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(dateLabel)
+                        .addGap(18, 18, 18)
+                        .addComponent(notificationLabel))
                     .addComponent(locationLabel))
-                .addContainerGap(536, Short.MAX_VALUE))
+                .addContainerGap(428, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -69,7 +75,9 @@ public class ListViewElement extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(nameLabel)
                 .addGap(18, 18, 18)
-                .addComponent(dateLabel)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(dateLabel)
+                    .addComponent(notificationLabel))
                 .addGap(18, 18, 18)
                 .addComponent(locationLabel)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -81,5 +89,6 @@ public class ListViewElement extends javax.swing.JPanel {
     private javax.swing.JLabel dateLabel;
     private javax.swing.JLabel locationLabel;
     private javax.swing.JLabel nameLabel;
+    private javax.swing.JLabel notificationLabel;
     // End of variables declaration//GEN-END:variables
 }
