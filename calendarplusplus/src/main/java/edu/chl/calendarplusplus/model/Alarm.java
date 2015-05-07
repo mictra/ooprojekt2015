@@ -24,6 +24,7 @@ public class Alarm {
     private String description;
     
     public Alarm(Calendar d, String n){
+        if (n.isEmpty()) { return; }
         if (d.after(Calendar.getInstance()) || d.equals(Calendar.getInstance())){
             this.alarmTime = d;
             this.name = n;

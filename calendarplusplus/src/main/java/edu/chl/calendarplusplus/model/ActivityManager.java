@@ -5,6 +5,7 @@
  */
 package edu.chl.calendarplusplus.model;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
@@ -18,6 +19,29 @@ public class ActivityManager implements IActivityManager {
     
     public ActivityManager(){
         activityManager = new HashMap<>();
+    }
+    
+    public void addActivityToList(List<Activity> activities, Activity a){
+        // Begin by checking if that one activity already is implemented.
+        for (Activity n : activities){
+            if (n.equals(a)){
+                return;
+            }
+        }
+        // Here we check if the time for activity already has passed.
+        if (a.getEndTime().before(Calendar.getInstance())
+                || a.getEndTime().equals(Calendar.getInstance())){
+            return;
+        }
+        // And lastly, we will add them depending on when they appear.
+        // The closer to the current time, the sooner they will be added.
+        for (int i = 0; i < activities.size(); i++){
+            if (a.getStartTime().before(activities.get(i).getStartTime())){
+                activities.add(i,a);
+                return;
+            }
+        }
+        activities.add(a);
     }
     
     public void setContactActivities(Contact c, List<Activity> activities){

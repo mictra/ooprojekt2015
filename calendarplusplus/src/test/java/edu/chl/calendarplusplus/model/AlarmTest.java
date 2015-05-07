@@ -14,7 +14,7 @@ import org.junit.Test;
  * @author Johan
  */
 public class AlarmTest {
- 
+    
     @Test
     public void createAlarm(){
         Calendar time = Calendar.getInstance();
@@ -26,18 +26,26 @@ public class AlarmTest {
     public void editAlarm(){
         Calendar time_1 = Calendar.getInstance();
         Calendar time_2 = Calendar.getInstance();
-        time_2.set(Calendar.HOUR_OF_DAY, -2);
+        time_2.add(Calendar.HOUR_OF_DAY, -2);
         Alarm a = new Alarm(time_1, "An Alarm");
         a.setAlarm(time_2);
         Assert.assertEquals(time_2, a.getAlarm());
         Assert.assertNotSame(time_1, a.getAlarm());
+    }
+ 
+    @Test
+    public void noAlarmName(){
+        Calendar time = Calendar.getInstance();
+        Alarm a = new Alarm(time, "");
+        Assert.assertNull(a.getAlarm());
+        Assert.assertNull(a.getAlarmName());
     }
     
     // The alarm should be invalid if the time/date has already passed.
     @Test
     public void invalidAlarm(){
         Calendar time = Calendar.getInstance();
-        time.set(Calendar.HOUR_OF_DAY, -12);
+        time.add(Calendar.HOUR_OF_DAY, -12);
         Alarm a = new Alarm(time, "An Alarm");
         Assert.assertNull(a.getAlarm());
         Assert.assertNull(a.getAlarmName());

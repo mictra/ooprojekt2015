@@ -34,13 +34,15 @@ public class ActivityManagerTest {
     // This should not be able to happen. So we just ignore duplicates.
     @Test
     public void addActivityTwice(){
-        Calendar time = Calendar.getInstance();
+        Calendar time_1 = Calendar.getInstance();
+        Calendar time_2 = Calendar.getInstance();
+        time_2.add(Calendar.MINUTE, 10);
         Contact c = new Contact("Filip", "", "");
-        Activity a1 = new Activity(time, time, "An Activity", "", "", null);
+        Activity a1 = new Activity(time_1, time_2, "An Activity", "", "", null);
         ArrayList<Activity> activities = new ArrayList<>();
         ActivityManager a = new ActivityManager();
         
-        activities.add(a1); activities.add(a1); //TODO: ARRAYLIST CONTROLS THIS!
+        a.addActivityToList(activities,a1); a.addActivityToList(activities,a1);
         a.setContactActivities(c, activities);
         Assert.assertEquals(1, a.getContactActivities(c).size());
     }
@@ -53,17 +55,19 @@ public class ActivityManagerTest {
         Contact c = new Contact("Cathryn", "", "");
         ArrayList<Activity> activities = new ArrayList<>();
         Calendar time_1 = Calendar.getInstance();
-        time_1.set(Calendar.MINUTE, -20);
+        time_1.add(Calendar.MINUTE, -20);
         Calendar time_2 = Calendar.getInstance();
-        time_2.set(Calendar.MINUTE, 40);
+        time_2.add(Calendar.MINUTE, 40);
         Calendar time_3 = Calendar.getInstance();
-        time_3.set(Calendar.HOUR_OF_DAY, 1);
+        time_3.add(Calendar.HOUR_OF_DAY, 1);
         Activity a1 = new Activity(time_2, time_3, "First Activity", "", "", null);
         Activity a2 = new Activity(time_1, time_1, "Second Activity", "", "", null);
         Activity a3 = new Activity(time_1, time_3, "Third Activity", "", "", null);
         ActivityManager a = new ActivityManager();
         
-        activities.add(a1); activities.add(a2); activities.add(a3);  //TODO: ARRAYLIST CONTROLS THIS!
+        a.addActivityToList(activities, a1); 
+        a.addActivityToList(activities, a2);
+        a.addActivityToList(activities, a3);
         a.setContactActivities(c, activities);
         Assert.assertEquals("First Activity",
                 a.getContactActivities(c).get(1).getName());

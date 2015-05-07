@@ -13,6 +13,7 @@ import java.util.List;
  */
 public interface IActivityManager {
     
+    public void addActivityToList(List<Activity> activities, Activity a);
     public void setContactActivities(Contact c, List<Activity> activities);
     public List<Activity> getContactActivities(Contact c);
     public void removeContact(Contact c);
