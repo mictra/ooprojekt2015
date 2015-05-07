@@ -19,9 +19,6 @@ import java.util.Calendar;
 */
 public class Notification extends Alarm {
     
-    private Calendar alarmTime;
-    private String name;
-    private String description;
     private Activity activity;
 
     public Notification(Calendar d, String n, Activity a) {
@@ -30,37 +27,7 @@ public class Notification extends Alarm {
             activity = a;
         }
     }
-    
-    @Override
-    public void setAlarm(Calendar time){
-        this.alarmTime = time;
-    }
-    
-    @Override
-    public Calendar getAlarm(){
-        return alarmTime;
-    }
-    
-    @Override
-    public void setAlarmName(String name){
-        this.name = name;
-    }
-    
-    @Override
-    public String getAlarmName(){
-        return name;
-    }
-    
-    @Override
-    public void setDescName(String desc){
-        this.description = desc;
-    }
-    
-    @Override
-    public String getDescName(){
-        return description;
-    }
-    
+      
     public Activity getActivity(){
         return activity;
     }
