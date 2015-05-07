@@ -48,6 +48,10 @@ public class Activity implements IActivity {
             }
         
     }
+
+    Activity(String act1, String string, String string0) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     // Setters and getters
     
@@ -97,6 +101,10 @@ public class Activity implements IActivity {
     
     public void removeAttendee(Contact contact){
         this.attendees.remove(contact);
+    }
+    
+    public ArrayList<Contact> getAttendees(){
+        return this.attendees;
     }
     
 }
