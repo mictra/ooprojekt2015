@@ -26,6 +26,7 @@ public class CalenderPlusTest {
     Contact c2;
     
     public CalenderPlusTest(){
+        cal = new CalendarPlus();
         
         t1.set(2015, 4, 25, 13, 0);
         t2.set(2015, 4, 25, 14, 0);
@@ -43,7 +44,7 @@ public class CalenderPlusTest {
     
     
     
-     @Test
+    @Test
     public void testAddActivity(){
         Assert.assertTrue(cal.getActivityList().isEmpty());
         cal.addActivity(a1);
