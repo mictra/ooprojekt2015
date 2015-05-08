@@ -24,6 +24,7 @@ public class CalenderPlusTest {
     Calendar t4 = Calendar.getInstance();
     Contact c1;
     Contact c2;
+    Alarm al1;
     
     public CalenderPlusTest(){
         cal = new CalendarPlus();
@@ -39,6 +40,7 @@ public class CalenderPlusTest {
         this.c1 = new Contact("Erik", "Phone1", "Mail1");
         this.c2 = new Contact("Jenny", "Phone2", "Mail2");
         
+        this.al1 = new Alarm(t1, "alarm1");
         
     }
     
@@ -63,5 +65,20 @@ public class CalenderPlusTest {
         cal.removeActivity(a2);
         Assert.assertTrue(cal.getActivityList().isEmpty());
     }
+    
+    @Test
+    public void testAddAlarm(){
+        cal.addAlarm(al1);
+        Assert.assertTrue(cal.getAlarmList().size() == 1);
+    }
+    
+    @Test
+    public void testRemoveAlarm(){
+        cal.addAlarm(al1);
+        Assert.assertTrue(cal.getAlarmList().size() == 1);
+        cal.removeAlarm(al1);
+        Assert.assertTrue(cal.getAlarmList().isEmpty());
+    }
+    
     
 }
