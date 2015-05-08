@@ -48,5 +48,9 @@ public class Contact implements IContact{
             return this.email;
         }
         
+        @Override
+        public String toString() {
+            return this.name;
+        }
         
 }
