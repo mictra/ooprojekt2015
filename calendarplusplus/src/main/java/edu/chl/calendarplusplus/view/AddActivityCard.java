@@ -5,13 +5,15 @@
  */
 package edu.chl.calendarplusplus.view;
 
-import edu.chl.calendarplusplus.controller.ProjectViewController;
 import edu.chl.calendarplusplus.model.Activity;
+import edu.chl.calendarplusplus.model.Contact;
+import edu.chl.calendarplusplus.model.ContactManager;
 import edu.chl.calendarplusplus.model.Notification;
 import java.beans.PropertyChangeSupport;
+import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
-import javax.swing.JButton;
+import java.util.List;
+import javax.swing.DefaultListModel;
 
 /**
  *
@@ -19,11 +21,17 @@ import javax.swing.JButton;
  */
 public class AddActivityCard extends javax.swing.JPanel {
 
+    DefaultListModel attendeeListModel, nonAttendeeListModel;
+    private final ContactManager conman;
+    
     /**
      * Creates new form AddActivityCard
      */
-    public AddActivityCard() {
+    public AddActivityCard(ContactManager conman) {
         initComponents();
+        this.conman = conman;
+        attendeeListModel = new DefaultListModel();
+        nonAttendeeListModel = new DefaultListModel();
         initComboBoxes();
         resetFields();
     }
@@ -60,6 +68,13 @@ public class AddActivityCard extends javax.swing.JPanel {
         cancelButton = new javax.swing.JLabel();
         notificationLabel = new javax.swing.JLabel();
         notificationComboBox = new javax.swing.JComboBox();
+        attendeeLabel = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        attendeeList = new javax.swing.JList();
+        addButton = new javax.swing.JLabel();
+        removeButton = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        nonAttendeeList = new javax.swing.JList();
 
         setPreferredSize(new java.awt.Dimension(600, 600));
 
@@ -139,6 +154,55 @@ public class AddActivityCard extends javax.swing.JPanel {
 
         notificationComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "When activity starts", "5 minutes before", "10 minutes before", "15 minutes before", "30 minutes before", "60 minutes before" }));
 
+        attendeeLabel.setFont(new java.awt.Font("Source Sans Pro", 1, 14)); // NOI18N
+        attendeeLabel.setText("Attendees");
+
+        attendeeList.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane2.setViewportView(attendeeList);
+
+        addButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arrowsLeft.png"))); // NOI18N
+        addButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                labelMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                labelMouseReleased(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                addButtonMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                addButtonMouseEntered(evt);
+            }
+        });
+
+        removeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arrowsRight.png"))); // NOI18N
+        removeButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                labelMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                labelMouseReleased(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                removeButtonMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                removeButtonMouseEntered(evt);
+            }
+        });
+
+        nonAttendeeList.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane3.setViewportView(nonAttendeeList);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -146,46 +210,54 @@ public class AddActivityCard extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(nameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(startDateLabel)
-                                .addComponent(endDateLabel)
-                                .addComponent(locationLabel)
-                                .addComponent(descriptionLabel))
-                            .addGap(18, 18, 18)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(eDayComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(eMonthComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(eYearComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(eHourComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(eMinuteComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(sDayComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(sMonthComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(sYearComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(sHourComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(sMinuteComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(nameTextfield)
-                                    .addComponent(locationTextField))
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(notificationComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(cancelButton)
-                            .addGap(18, 18, 18)
-                            .addComponent(saveButton)))
-                    .addComponent(notificationLabel))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(nameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(startDateLabel)
+                            .addComponent(endDateLabel)
+                            .addComponent(locationLabel)
+                            .addComponent(descriptionLabel))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(eDayComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(eMonthComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(eYearComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(eHourComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(eMinuteComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(sDayComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(sMonthComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(sYearComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(sHourComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(sMinuteComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(nameTextfield)
+                                .addComponent(locationTextField))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(notificationComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(addButton)
+                                    .addComponent(removeButton))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(cancelButton)
+                                .addGap(18, 18, 18)
+                                .addComponent(saveButton))))
+                    .addComponent(notificationLabel)
+                    .addComponent(attendeeLabel))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -221,13 +293,29 @@ public class AddActivityCard extends javax.swing.JPanel {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(notificationLabel)
-                    .addComponent(notificationComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 149, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(saveButton, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(cancelButton, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(106, 106, 106))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(notificationLabel)
+                            .addComponent(notificationComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(attendeeLabel)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
+                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(26, 26, 26)
+                                .addComponent(addButton)
+                                .addGap(28, 28, 28)
+                                .addComponent(removeButton)))
+                        .addGap(0, 61, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(cancelButton)
+                            .addComponent(saveButton))
+                        .addContainerGap())))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -261,11 +349,40 @@ public class AddActivityCard extends javax.swing.JPanel {
             if (evt.getSource() == cancelButton) {
                 
             }
+            if (evt.getSource() == addButton) {
+                if (nonAttendeeListModel.size() > 0 && !nonAttendeeList.isSelectionEmpty())
+                    pcs.firePropertyChange("AddAttendee", null, null);
+            }
+            if (evt.getSource() == removeButton) {
+                if (attendeeListModel.size() > 0 && !attendeeList.isSelectionEmpty())
+                    pcs.firePropertyChange("RemoveAttendee", null, null);
+            }
         }
     }//GEN-LAST:event_labelMouseReleased
 
+    private void addButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addButtonMouseEntered
+        addButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arrowsLeftHover.png")));
+    }//GEN-LAST:event_addButtonMouseEntered
+
+    private void addButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addButtonMouseExited
+        addButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arrowsLeft.png")));
+        buttonPressed = false;
+    }//GEN-LAST:event_addButtonMouseExited
+
+    private void removeButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_removeButtonMouseEntered
+        removeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arrowsRightHover.png")));
+    }//GEN-LAST:event_removeButtonMouseEntered
+
+    private void removeButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_removeButtonMouseExited
+        removeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arrowsRight.png")));
+        buttonPressed = false;
+    }//GEN-LAST:event_removeButtonMouseExited
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel addButton;
+    private javax.swing.JLabel attendeeLabel;
+    private javax.swing.JList attendeeList;
     private javax.swing.JLabel cancelButton;
     private javax.swing.JLabel descriptionLabel;
     private javax.swing.JTextArea descriptionTextArea;
@@ -276,12 +393,16 @@ public class AddActivityCard extends javax.swing.JPanel {
     private javax.swing.JComboBox eYearComboBox;
     private javax.swing.JLabel endDateLabel;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel locationLabel;
     private javax.swing.JTextField locationTextField;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JTextField nameTextfield;
+    private javax.swing.JList nonAttendeeList;
     private javax.swing.JComboBox notificationComboBox;
     private javax.swing.JLabel notificationLabel;
+    private javax.swing.JLabel removeButton;
     private javax.swing.JComboBox sDayComboBox;
     private javax.swing.JComboBox sHourComboBox;
     private javax.swing.JComboBox sMinuteComboBox;
@@ -338,6 +459,14 @@ public class AddActivityCard extends javax.swing.JPanel {
         }
         return new Notification(notDate, act.getName(), act);
     }
+            
+    public List<Contact> getAttendees() {
+        List<Contact> attendees = new ArrayList<>();
+        for (int i = 0; i < attendeeList.getModel().getSize(); i++) {
+            attendees.add((Contact) attendeeList.getModel().getElementAt(i));
+        }
+        return attendees;
+    }
     
     /*
     public void registerListener(ProjectViewController controller){
@@ -384,6 +513,7 @@ public class AddActivityCard extends javax.swing.JPanel {
 //            eMinuteComboBox.addItem(i);
 //        }
         
+        
         }
     
     public void resetFields() {
@@ -403,10 +533,38 @@ public class AddActivityCard extends javax.swing.JPanel {
         locationTextField.setText("");
         descriptionTextArea.setText("");
         notificationComboBox.setSelectedIndex(0);
+        
+        setLists();
     }
 
     public void addListener(PropertyChangeSupport pcs) {
         this.pcs = pcs;
+    }
+
+    public void addAttendee() {
+        attendeeListModel.addElement(nonAttendeeList.getSelectedValue());
+        nonAttendeeListModel.remove(nonAttendeeList.getSelectedIndex());
+    }
+
+    public void removeAttendee() {
+        nonAttendeeListModel.addElement(attendeeList.getSelectedValue());
+        attendeeListModel.remove(attendeeList.getSelectedIndex());
+    }
+    
+    private void setLists() {
+        //Set the available contacts
+        nonAttendeeList.removeAll();
+        nonAttendeeListModel.removeAllElements();
+        for (Contact c : conman.getAllContacts()) {
+            nonAttendeeListModel.addElement(c);
+            //System.out.println(c.getName());
+        }
+        nonAttendeeList.setModel(nonAttendeeListModel);
+        
+        //Set the chosen contacts
+        attendeeList.removeAll();
+        attendeeListModel.removeAllElements();
+        attendeeList.setModel(attendeeListModel);
     }
 
 }

@@ -7,6 +7,7 @@ package edu.chl.calendarplusplus.controller;
 
 import edu.chl.calendarplusplus.model.Activity;
 import edu.chl.calendarplusplus.model.CalendarPlus;
+import edu.chl.calendarplusplus.model.Contact;
 import edu.chl.calendarplusplus.model.Notification;
 import edu.chl.calendarplusplus.view.AddActivityCard;
 import edu.chl.calendarplusplus.view.ProjectView;
@@ -48,7 +49,15 @@ public class AddActivityCardController implements PropertyChangeListener {
             if (not != null) {
                 //Add notification to manager or update or remove
             }
+            // Add attendees to activity
+            for (Contact c: ac.getAttendees()) {
+                act.addAttendee(c);
+            }
             ac.resetFields();
+        } else if (evtName.equalsIgnoreCase("AddAttendee")) {
+            ac.addAttendee();
+        } else if (evtName.equalsIgnoreCase("RemoveAttendee")) {
+            ac.removeAttendee();
         }
     }
 

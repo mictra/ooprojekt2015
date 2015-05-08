@@ -496,7 +496,7 @@ public class ProjectView extends javax.swing.JFrame {
     // Non-generated variables declaration
     private final PropertyChangeSupport listeners = new PropertyChangeSupport(this);
     private CardLayout tabCards;
-    private AddActivityCard addActivity = new AddActivityCard();
+    private AddActivityCard addActivity;
     private AddContactGroupCard addContactGroup = new AddContactGroupCard();
     private AddContactCard addContact;
     private ListViewCard listView = new ListViewCard();
@@ -555,6 +555,7 @@ public class ProjectView extends javax.swing.JFrame {
 
     private void tweekingInitComponents() {
         addContact = new AddContactCard(cal);
+        addActivity = new AddActivityCard(cal.getContactManager());
         mainLayeredPane.setPreferredSize(new Dimension(1270, 750));
         mainLayeredPane.setSize(new Dimension(1270, 750));
 
