@@ -14,7 +14,7 @@ import java.util.Calendar;
  */
 public interface IActivity {
     
-    public void setStartTIime(Calendar st);
+    public void setStartTime(Calendar st);
     
     public Calendar getStartTime();
     
