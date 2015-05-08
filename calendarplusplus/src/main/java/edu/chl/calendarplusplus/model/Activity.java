@@ -1,8 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
+*/
 package edu.chl.calendarplusplus.model;
 
 import java.util.ArrayList;
@@ -25,38 +25,38 @@ public class Activity implements IActivity {
     
     //public Notification eventNot;
     
-    public Activity(Calendar st, Calendar et, String name, 
-                    String desc, String loc, ArrayList<Contact> att) {
-        this.startTime = st;
-        this.endTime = et;
-        this.name = name;
-            if(desc == null){
-                this.description = "";
-            }else{
-                this.description = desc;
-            }
-            if(loc == null){
-                this.location = "";
-            }else{
-                this.location = loc;
-            }
+    public Activity(Calendar st, Calendar et, String name,
+            String desc, String loc, ArrayList<Contact> att) {
         
-            if(att == null){
-                this.attendees = new ArrayList<>();
-            }else{
-                this.attendees = att;
-            }
+        if(st.getTimeInMillis() < et.getTimeInMillis()){
+            this.startTime = st;
+            this.endTime = et;
+        }else{
+            // TODO: How to handle illegal start and end times?
+        }
+        
+        this.name = name;
+        this.description = desc;
+        this.location = loc;
+        
+        if(att == null){
+            this.attendees = new ArrayList<>();
+        }else{
+            this.attendees = att;
+        }
         
     }
-
+    
     Activity(String act1, String string, String string0) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     // Setters and getters
     
-    public void setStartTIime(Calendar st){
-        this.startTime = st;
+    public void setStartTime(Calendar st){
+        if(st.getTimeInMillis() < this.getEndTime().getTimeInMillis()){
+            this.startTime = st;
+        }
     }
     
     public Calendar getStartTime(){
@@ -64,7 +64,9 @@ public class Activity implements IActivity {
     }
     
     public void setEndTime(Calendar et){
-        this.endTime = et;   
+        if(this.getStartTime().getTimeInMillis() < et.getTimeInMillis()){
+            this.endTime = et;
+        }
     }
     
     public Calendar getEndTime(){
@@ -72,7 +74,7 @@ public class Activity implements IActivity {
     }
     
     public void setName(String n){
-       this.name = n;
+        this.name = n;
     }
     
     public String getName(){
@@ -94,9 +96,9 @@ public class Activity implements IActivity {
     public String getLocation(){
         return this.location;
     }
-        
+    
     public void addAttendee(Contact contact){
-         this.attendees.add(contact);
+        this.attendees.add(contact);
     }
     
     public void removeAttendee(Contact contact){

@@ -27,7 +27,7 @@ public class ActivityTest {
     Contact c2;
     
     public ActivityTest() {
-       // cal = new CalendarPlus();
+        // cal = new CalendarPlus();
         t1.set(2015, 4, 25, 13, 0);
         t2.set(2015, 4, 25, 14, 0);
         t3.set(2015, 4, 28, 12, 30);
@@ -42,18 +42,22 @@ public class ActivityTest {
         
     }
     
-   
     
+//     test not very useful at the moment
+//
+//
+//     first assert: make sure null values are set to empty string in model
+//     second assert: make sure empty list of attendees are set with null parameter
+//
+//
     @Test
     public void testNullParameters(){
-        /*
-        first assert: make sure null values are set to empty string in model
-        second assert: make sure empty list of attendees are set with null parameter
-        */
-        Assert.assertTrue(a1.getDescription().equals(nullAct.getDescription()) &&
-                a1.getLocation().equals(nullAct.getLocation()));
+        
+//        Assert.assertTrue(a1.getDescription().equals(nullAct.getDescription()) &&
+//                a1.getLocation().equals(nullAct.getLocation()));
         Assert.assertTrue(a1.getAttendees().isEmpty());
     }
+    
     
     @Test
     public void testChangeParameters(){
@@ -74,5 +78,15 @@ public class ActivityTest {
         a1.removeAttendee(c1);
         a1.removeAttendee(c2);
         Assert.assertTrue(a1.getAttendees().isEmpty());
+    }
+    
+    @Test
+    public void failTest(){
+        a1.setEndTime(t1);
+        a1.setStartTime(t2);  
+        
+        //Illegal time changes. StartTime and EndTime should remain as they were.
+        Assert.assertTrue(a1.getStartTime().equals(t1));
+        Assert.assertTrue(a1.getEndTime().equals(t2));
     }
 }
