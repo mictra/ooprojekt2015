@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
 
 /**
  *
@@ -22,6 +23,7 @@ public class AddContactCard extends javax.swing.JPanel {
 
     private final CalendarPlus cal;
     DefaultListModel nonMemberListModel, memberListModel;
+    String lstring = "";
 
     /**
      * Creates new form AddContactCard
@@ -216,7 +218,7 @@ public class AddContactCard extends javax.swing.JPanel {
                         .addComponent(addButton)
                         .addGap(29, 29, 29)
                         .addComponent(removeButton)))
-                .addGap(26, 26, 26)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cancelButton)
                     .addComponent(saveButton))
@@ -331,8 +333,12 @@ public class AddContactCard extends javax.swing.JPanel {
             if (!cg.getGroupName().equals("Default")) {
                 nonMemberListModel.addElement(cg);
             }
+            if (lstring.length() < cg.getGroupName().length())
+                lstring = cg.getGroupName();
         }
         nonMemberList.setModel(nonMemberListModel);
+        nonMemberList.setPrototypeCellValue(lstring+ "     ");
+        nonMemberScrollPane.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
 
         //Set the member groups
         memberList.removeAll();
@@ -342,7 +348,9 @@ public class AddContactCard extends javax.swing.JPanel {
                 memberListModel.addElement(cg);
             }
         }
-        memberList.setModel(memberListModel);
+        memberList.setModel(memberListModel);        
+        memberList.setPrototypeCellValue(lstring+ "     ");
+        memberScrollPane.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
 
     }
 

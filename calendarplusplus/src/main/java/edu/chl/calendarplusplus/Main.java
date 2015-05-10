@@ -20,6 +20,18 @@ public final class Main {
 
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(() -> {
+                    
+                    try {
+                        for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                            if ("GTK+".equals(info.getName())) {
+                                javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                                break;
+                            }
+                        }
+                    } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+                        java.util.logging.Logger.getLogger(ProjectView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                    }
+                    
                     final Project project = new Project();
                     final CalendarPlus cal = new CalendarPlus();
                     final ProjectView projectView = new ProjectView(project, cal);

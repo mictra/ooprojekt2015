@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import javax.swing.DefaultListModel;
+import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
 
 /**
  *
@@ -23,6 +24,7 @@ public class AddActivityCard extends javax.swing.JPanel {
 
     DefaultListModel attendeeListModel, nonAttendeeListModel;
     private final ContactManager conman;
+    String lstring = "";
     
     /**
      * Creates new form AddActivityCard
@@ -62,18 +64,18 @@ public class AddActivityCard extends javax.swing.JPanel {
         locationLabel = new javax.swing.JLabel();
         locationTextField = new javax.swing.JTextField();
         descriptionLabel = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        descriptionScrollPane = new javax.swing.JScrollPane();
         descriptionTextArea = new javax.swing.JTextArea();
         saveButton = new javax.swing.JLabel();
         cancelButton = new javax.swing.JLabel();
         notificationLabel = new javax.swing.JLabel();
         notificationComboBox = new javax.swing.JComboBox();
         attendeeLabel = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
+        attendeeScrollPane = new javax.swing.JScrollPane();
         attendeeList = new javax.swing.JList();
         addButton = new javax.swing.JLabel();
         removeButton = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
+        nonAttendeeScrollPane = new javax.swing.JScrollPane();
         nonAttendeeList = new javax.swing.JList();
 
         setPreferredSize(new java.awt.Dimension(600, 600));
@@ -115,7 +117,7 @@ public class AddActivityCard extends javax.swing.JPanel {
 
         descriptionTextArea.setColumns(20);
         descriptionTextArea.setRows(5);
-        jScrollPane1.setViewportView(descriptionTextArea);
+        descriptionScrollPane.setViewportView(descriptionTextArea);
 
         saveButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/saveButton.png"))); // NOI18N
         saveButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -162,7 +164,7 @@ public class AddActivityCard extends javax.swing.JPanel {
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane2.setViewportView(attendeeList);
+        attendeeScrollPane.setViewportView(attendeeList);
 
         addButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arrowsLeft.png"))); // NOI18N
         addButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -201,7 +203,7 @@ public class AddActivityCard extends javax.swing.JPanel {
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane3.setViewportView(nonAttendeeList);
+        nonAttendeeScrollPane.setViewportView(nonAttendeeList);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -242,16 +244,16 @@ public class AddActivityCard extends javax.swing.JPanel {
                                     .addComponent(sMinuteComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addComponent(nameTextfield)
                                 .addComponent(locationTextField))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(descriptionScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(notificationComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(attendeeScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(addButton)
                                     .addComponent(removeButton))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(nonAttendeeScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(cancelButton)
                                 .addGap(18, 18, 18)
@@ -290,32 +292,28 @@ public class AddActivityCard extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(descriptionLabel)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(descriptionScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(notificationLabel)
+                    .addComponent(notificationComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(notificationLabel)
-                            .addComponent(notificationComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(attendeeLabel)
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
-                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(26, 26, 26)
-                                .addComponent(addButton)
-                                .addGap(28, 28, 28)
-                                .addComponent(removeButton)))
-                        .addGap(0, 61, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(cancelButton)
-                            .addComponent(saveButton))
-                        .addContainerGap())))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(attendeeLabel)
+                            .addComponent(attendeeScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
+                            .addComponent(nonAttendeeScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(addButton)
+                        .addGap(28, 28, 28)
+                        .addComponent(removeButton)))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(saveButton)
+                    .addComponent(cancelButton))
+                .addGap(0, 13, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -383,8 +381,10 @@ public class AddActivityCard extends javax.swing.JPanel {
     private javax.swing.JLabel addButton;
     private javax.swing.JLabel attendeeLabel;
     private javax.swing.JList attendeeList;
+    private javax.swing.JScrollPane attendeeScrollPane;
     private javax.swing.JLabel cancelButton;
     private javax.swing.JLabel descriptionLabel;
+    private javax.swing.JScrollPane descriptionScrollPane;
     private javax.swing.JTextArea descriptionTextArea;
     private javax.swing.JComboBox eDayComboBox;
     private javax.swing.JComboBox eHourComboBox;
@@ -392,14 +392,12 @@ public class AddActivityCard extends javax.swing.JPanel {
     private javax.swing.JComboBox eMonthComboBox;
     private javax.swing.JComboBox eYearComboBox;
     private javax.swing.JLabel endDateLabel;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel locationLabel;
     private javax.swing.JTextField locationTextField;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JTextField nameTextfield;
     private javax.swing.JList nonAttendeeList;
+    private javax.swing.JScrollPane nonAttendeeScrollPane;
     private javax.swing.JComboBox notificationComboBox;
     private javax.swing.JLabel notificationLabel;
     private javax.swing.JLabel removeButton;
@@ -557,14 +555,19 @@ public class AddActivityCard extends javax.swing.JPanel {
         nonAttendeeListModel.removeAllElements();
         for (Contact c : conman.getAllContacts()) {
             nonAttendeeListModel.addElement(c);
-            //System.out.println(c.getName());
+            if (lstring.length() < c.getName().length())
+                lstring = c.getName();
         }
         nonAttendeeList.setModel(nonAttendeeListModel);
+        nonAttendeeList.setPrototypeCellValue(lstring+ "     ");
+        nonAttendeeScrollPane.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
         
         //Set the chosen contacts
         attendeeList.removeAll();
         attendeeListModel.removeAllElements();
         attendeeList.setModel(attendeeListModel);
+        attendeeList.setPrototypeCellValue(lstring+ "     ");
+        attendeeScrollPane.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
     }
 
 }
