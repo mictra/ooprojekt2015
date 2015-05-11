@@ -14,23 +14,32 @@ import javax.swing.SwingUtilities;
   Application entry class (if using standard java and Swing)
 */
 public final class Main {
+
+    private static void setLookAndFeel() {
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                }
+            }
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("GTK+".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                }
+            }
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+                        java.util.logging.Logger.getLogger(ProjectView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+    }
+
 	private Main() {
 		/* No instances allowed! */
 	}
 
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(() -> {
-                    
-                    try {
-                        for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                            if ("GTK+".equals(info.getName())) {
-                                javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                                break;
-                            }
-                        }
-                    } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-                        java.util.logging.Logger.getLogger(ProjectView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-                    }
+                                       
+                    setLookAndFeel();
                     
                     final Project project = new Project();
                     final CalendarPlus cal = new CalendarPlus();
@@ -85,4 +94,5 @@ public final class Main {
             //Add activities
             
         }
+       
 }
