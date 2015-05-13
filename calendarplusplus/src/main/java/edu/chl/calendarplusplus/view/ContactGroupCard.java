@@ -5,9 +5,9 @@
  */
 package edu.chl.calendarplusplus.view;
 
-import edu.chl.calendarplusplus.model.ContactGroup;
 import edu.chl.calendarplusplus.model.IContactGroup;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.util.List;
 
 /**
@@ -21,16 +21,18 @@ public class ContactGroupCard extends javax.swing.JPanel {
      */
     public ContactGroupCard() {
         initComponents();
+        ((FlowLayout)elementList.getLayout()).setHgap(20);
+        ((FlowLayout)elementList.getLayout()).setVgap(20);
         contactGroupScrollPane.getVerticalScrollBar().setUnitIncrement(20);
     }
     
     public void updateContactGroups(List<IContactGroup> contactgroups) {
         elementList.removeAll();
-        elementList.setPreferredSize(new Dimension(684,500));
-        elementList.setSize(684, 500);
+//        elementList.setPreferredSize(new Dimension(684,500));
+//        elementList.setSize(684, 500);
         for (IContactGroup cg: contactgroups) {
             ContactGroupElement cge = new ContactGroupElement(cg);
-            cge.setPreferredSize(new Dimension(400,47));
+            cge.setPreferredSize(new Dimension(elementList.getPreferredSize().width/2-20,90));
             elementList.add(cge);
             revalidate();
             repaint();
@@ -50,19 +52,22 @@ public class ContactGroupCard extends javax.swing.JPanel {
         contactGroupScrollPane = new javax.swing.JScrollPane();
         elementList = new javax.swing.JPanel();
 
-        setPreferredSize(new java.awt.Dimension(850, 710));
+        setPreferredSize(new java.awt.Dimension(1008, 652));
 
+        contactGroupScrollPane.setPreferredSize(new java.awt.Dimension(1008, 652));
+
+        elementList.setPreferredSize(new java.awt.Dimension(1006, 650));
         contactGroupScrollPane.setViewportView(elementList);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(contactGroupScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 850, Short.MAX_VALUE)
+            .addComponent(contactGroupScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(contactGroupScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 710, Short.MAX_VALUE)
+            .addComponent(contactGroupScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 640, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 

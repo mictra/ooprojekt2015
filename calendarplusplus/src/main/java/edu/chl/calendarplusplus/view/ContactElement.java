@@ -37,13 +37,20 @@ public class ContactElement extends javax.swing.JPanel {
         emailLabel = new javax.swing.JLabel();
         phoneLabel = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(121, 134, 203));
+        setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        setForeground(java.awt.Color.white);
+
         nameLabel.setFont(new java.awt.Font("Source Sans Pro", 1, 18)); // NOI18N
+        nameLabel.setForeground(java.awt.Color.white);
         nameLabel.setText("#NAME");
 
         emailLabel.setFont(new java.awt.Font("Source Sans Pro", 1, 14)); // NOI18N
+        emailLabel.setForeground(java.awt.Color.white);
         emailLabel.setText("#EMAIL");
 
         phoneLabel.setFont(new java.awt.Font("Source Sans Pro", 1, 14)); // NOI18N
+        phoneLabel.setForeground(java.awt.Color.white);
         phoneLabel.setText("#PHONE");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -56,16 +63,16 @@ public class ContactElement extends javax.swing.JPanel {
                     .addComponent(nameLabel)
                     .addComponent(emailLabel)
                     .addComponent(phoneLabel))
-                .addContainerGap(330, Short.MAX_VALUE))
+                .addContainerGap(328, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(nameLabel)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(emailLabel)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(phoneLabel)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );

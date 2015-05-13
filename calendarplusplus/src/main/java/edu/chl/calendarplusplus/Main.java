@@ -4,6 +4,7 @@ import edu.chl.calendarplusplus.controller.*;
 import edu.chl.calendarplusplus.model.CalendarPlus;
 import edu.chl.calendarplusplus.model.Contact;
 import edu.chl.calendarplusplus.model.ContactGroup;
+import edu.chl.calendarplusplus.model.IContact;
 import edu.chl.calendarplusplus.model.IContactGroup;
 import edu.chl.calendarplusplus.model.Project;
 import edu.chl.calendarplusplus.view.ProjectView;
@@ -59,20 +60,23 @@ public final class Main {
         
         public static void initTest(CalendarPlus cal){
             //Adding contacts and contactgroups
-            ContactGroup family = new ContactGroup("Family");
-            ContactGroup friends = new ContactGroup("Friends");
-            ContactGroup colleagues = new ContactGroup("Colleagues");
-            Contact michael = new Contact("Michael", null, null);
-            Contact patrick = new Contact("Patrick", "1234567890", null);
-            Contact johan = new Contact("Johan", null, "Johan@mail.com");
-            Contact erik = new Contact("Erik", "0987654321", "Erik@mail.com");
+            IContactGroup family = new ContactGroup("Family");
+            IContactGroup friends = new ContactGroup("Friends");
+            IContactGroup colleagues = new ContactGroup("Colleagues");
+            IContact michael = new Contact("Michael", null, null);
+            IContact patrick = new Contact("Patrick", "1234567890", null);
+            IContact johan = new Contact("Johan", null, "Johan@mail.com");
+            IContact erik = new Contact("Erik", "0987654321", "Erik@mail.com");
+            
             cal.addContactGroup(family);
             cal.addContactGroup(friends);
             cal.addContactGroup(colleagues);
             
             family.addContact(michael);
+            friends.addContact(michael);
             List<IContactGroup> michaelGroups = new ArrayList<>();
             michaelGroups.add(family);
+            michaelGroups.add(friends);
             cal.getContactManager().setContactGroups(michael, michaelGroups);
             
             friends.addContact(patrick);
@@ -81,8 +85,10 @@ public final class Main {
             cal.getContactManager().setContactGroups(patrick, patrickGroups);
             
             colleagues.addContact(johan);
+            friends.addContact(johan);
             List<IContactGroup> johanGroups = new ArrayList<>();
             johanGroups.add(colleagues);
+            johanGroups.add(friends);
             cal.getContactManager().setContactGroups(johan, johanGroups);
             
             friends.addContact(erik);

@@ -5,21 +5,24 @@
  */
 package edu.chl.calendarplusplus.view;
 
-import edu.chl.calendarplusplus.model.ContactGroup;
+import edu.chl.calendarplusplus.model.IContact;
 import edu.chl.calendarplusplus.model.IContactGroup;
+import java.awt.Dimension;
+import java.util.ArrayList;
 
 /**
  *
  * @author cain
  */
 public class ContactGroupElement extends javax.swing.JPanel {
-
+    
     /**
      * Creates new form ContactGroupElement
      */
     public ContactGroupElement(IContactGroup cg) {
         initComponents();
         nameLabel.setText(cg.getGroupName());
+        setMembers(cg.getContacts());
     }
 
     /**
@@ -32,9 +35,23 @@ public class ContactGroupElement extends javax.swing.JPanel {
     private void initComponents() {
 
         nameLabel = new javax.swing.JLabel();
+        groupMemberList = new javax.swing.JPanel();
+        membersLabel = new javax.swing.JLabel();
+
+        setBackground(new java.awt.Color(121, 134, 203));
+        setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
         nameLabel.setFont(new java.awt.Font("Source Sans Pro", 1, 18)); // NOI18N
+        nameLabel.setForeground(java.awt.Color.white);
         nameLabel.setText("#NAME");
+
+        groupMemberList.setBackground(new java.awt.Color(121, 134, 203));
+        groupMemberList.setPreferredSize(new java.awt.Dimension(296, 35));
+        groupMemberList.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 0, 0));
+
+        membersLabel.setFont(new java.awt.Font("Source Sans Pro", 1, 14)); // NOI18N
+        membersLabel.setForeground(java.awt.Color.white);
+        membersLabel.setText("Members:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -42,20 +59,57 @@ public class ContactGroupElement extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(nameLabel)
-                .addContainerGap(330, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(nameLabel)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(membersLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(groupMemberList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(nameLabel)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(groupMemberList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(membersLabel)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel groupMemberList;
+    private javax.swing.JLabel membersLabel;
     private javax.swing.JLabel nameLabel;
     // End of variables declaration//GEN-END:variables
+
+    private void setMembers(ArrayList<IContact> contacts) {
+        groupMemberList.removeAll();
+        groupMemberList.setPreferredSize(new Dimension(334,18));
+        int counter = 0;
+        for (IContact c : contacts) {
+            ContactGroupElementLabel cgel = new ContactGroupElementLabel(c.getName());
+            cgel.setPreferredSize(new Dimension(groupMemberList.getPreferredSize().width/2-10,18));
+            groupMemberList.add(cgel);
+            revalidate();
+            repaint();
+            revalidate();
+            counter++;
+            if (counter >= 3 && contacts.size() > 4) {
+                    ContactGroupElementLabel cgel2 = new ContactGroupElementLabel("More...");
+                    cgel2.setPreferredSize(new Dimension(groupMemberList.getPreferredSize().width/2-10,18));
+                    groupMemberList.add(cgel2);
+                    break;
+            }
+                
+        }
+    }
 }

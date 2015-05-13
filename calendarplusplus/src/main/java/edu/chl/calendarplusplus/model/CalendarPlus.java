@@ -95,7 +95,8 @@ public class CalendarPlus implements ICalendarPlus{
         ArrayList<IContact> contacts = new ArrayList<>();
         for(IContactGroup cg : groups){
             for(IContact c : cg.getContacts()){
-                contacts.add(c);
+                if (!contacts.contains(c))
+                    contacts.add(c);
             }
         }
         return contacts;
