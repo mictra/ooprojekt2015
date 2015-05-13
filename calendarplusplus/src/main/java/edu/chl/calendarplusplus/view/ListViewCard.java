@@ -6,6 +6,7 @@
 package edu.chl.calendarplusplus.view;
 
 import edu.chl.calendarplusplus.model.Activity;
+import edu.chl.calendarplusplus.model.IActivity;
 import java.awt.Dimension;
 import java.util.List;
 
@@ -23,11 +24,11 @@ public class ListViewCard extends javax.swing.JPanel {
         listViewScrollPane.getVerticalScrollBar().setUnitIncrement(20);
     }
     
-    public void updateListView (List<Activity> actlist) {
+    public void updateListView (List<IActivity> actlist) {
         elementList.removeAll();
         elementList.setPreferredSize(new Dimension(684,500));
         elementList.setSize(684, 500);
-        for (Activity a: actlist) {
+        for (IActivity a: actlist) {
             ListViewElement lve = new ListViewElement(a);
             lve.setPreferredSize(new Dimension(650,141));
             elementList.add(lve);

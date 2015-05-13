@@ -9,6 +9,9 @@ import edu.chl.calendarplusplus.model.Activity;
 import edu.chl.calendarplusplus.model.CalendarPlus;
 import edu.chl.calendarplusplus.model.Contact;
 import edu.chl.calendarplusplus.model.ContactGroup;
+import edu.chl.calendarplusplus.model.IActivity;
+import edu.chl.calendarplusplus.model.IContact;
+import edu.chl.calendarplusplus.model.IContactGroup;
 import edu.chl.calendarplusplus.model.Project;
 import java.awt.CardLayout;
 import java.awt.Dimension;
@@ -595,15 +598,15 @@ public class ProjectView extends javax.swing.JFrame {
         tabCards.show(mainPanel, card);
     }
 
-    public void updateListView(List<Activity> activityList) {
+    public void updateListView(List<IActivity> activityList) {
         listView.updateListView(activityList);
     }
     
-    public void updateContactGroups(List<ContactGroup> contactgroups) {
+    public void updateContactGroups(List<IContactGroup> contactgroups) {
         contactGroups.updateContactGroups(contactgroups);
     }
     
-    public void updateContacts(List<Contact> contactlist) {
+    public void updateContacts(List<IContact> contactlist) {
         contacts.updateContacts(contactlist);
     }
 }

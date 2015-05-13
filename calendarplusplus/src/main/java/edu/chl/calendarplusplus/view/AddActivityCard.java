@@ -8,6 +8,10 @@ package edu.chl.calendarplusplus.view;
 import edu.chl.calendarplusplus.model.Activity;
 import edu.chl.calendarplusplus.model.Contact;
 import edu.chl.calendarplusplus.model.ContactManager;
+import edu.chl.calendarplusplus.model.IActivity;
+import edu.chl.calendarplusplus.model.IContact;
+import edu.chl.calendarplusplus.model.IContactManager;
+import edu.chl.calendarplusplus.model.INotification;
 import edu.chl.calendarplusplus.model.Notification;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
@@ -23,13 +27,13 @@ import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
 public class AddActivityCard extends javax.swing.JPanel {
 
     DefaultListModel attendeeListModel, nonAttendeeListModel;
-    private final ContactManager conman;
+    private final IContactManager conman;
     String lstring = "";
     
     /**
      * Creates new form AddActivityCard
      */
-    public AddActivityCard(ContactManager conman) {
+    public AddActivityCard(IContactManager conman) {
         initComponents();
         this.conman = conman;
         attendeeListModel = new DefaultListModel();
@@ -413,7 +417,7 @@ public class AddActivityCard extends javax.swing.JPanel {
     private PropertyChangeSupport pcs;
     private boolean buttonPressed;
     
-    public Activity getAsActivity(){
+    public IActivity getAsActivity(){
         //TODO: Handle errors when missing fields not in there... Maybe disable Save button?
         Calendar startDate = Calendar.getInstance();
         int sYear = (Integer) sYearComboBox.getSelectedItem();
@@ -429,11 +433,11 @@ public class AddActivityCard extends javax.swing.JPanel {
         int eHour = Integer.parseInt((String) eHourComboBox.getSelectedItem());
         int eMinute = Integer.parseInt((String) eMinuteComboBox.getSelectedItem());
         endDate.set(eYear, eMonth, eDay, eHour, eMinute);
-        Activity a = new Activity(startDate, endDate, nameTextField.getText(), locationTextField.getText(), descriptionTextArea.getText(), getAttendees());
+        IActivity a = new Activity(startDate, endDate, nameTextField.getText(), locationTextField.getText(), descriptionTextArea.getText(), getAttendees());
         return a;
     }
     
-    public Notification getAsNotification(Activity act) {
+    public INotification getAsNotification(IActivity act) {
         Calendar notDate = act.getStartTime();
         switch (notificationComboBox.getSelectedIndex()) {
             case 0: return null;
@@ -450,13 +454,14 @@ public class AddActivityCard extends javax.swing.JPanel {
             case 6: notDate.add(notDate.MINUTE, -60);
                 break;                
         }
-        return new Notification(notDate, act.getName(), act);
+        INotification inot = new Notification(notDate, act.getName(), act);
+        return inot;
     }
             
-    private ArrayList<Contact> getAttendees() {
-        ArrayList<Contact> attendees = new ArrayList<>();
+    private ArrayList<IContact> getAttendees() {
+        ArrayList<IContact> attendees = new ArrayList<>();
         for (int i = 0; i < attendeeList.getModel().getSize(); i++) {
-            attendees.add((Contact) attendeeList.getModel().getElementAt(i));
+            attendees.add((IContact) attendeeList.getModel().getElementAt(i));
         }
         return attendees;
     }
@@ -548,7 +553,7 @@ public class AddActivityCard extends javax.swing.JPanel {
         //Set the available contacts
         nonAttendeeList.removeAll();
         nonAttendeeListModel.removeAllElements();
-        for (Contact c : conman.getAllContacts()) {
+        for (IContact c : conman.getAllContacts()) {
             nonAttendeeListModel.addElement(c);
             if (lstring.length() < c.getName().length())
                 lstring = c.getName();

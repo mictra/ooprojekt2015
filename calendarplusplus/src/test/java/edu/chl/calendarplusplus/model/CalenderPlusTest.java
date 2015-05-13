@@ -52,9 +52,9 @@ public class CalenderPlusTest {
     @Test
     public void testAddActivity(){
         Assert.assertTrue(cal.getActivityList().isEmpty());
-        cal.addActivity((Activity) a1);
+        cal.addActivity(a1);
         Assert.assertTrue(cal.getActivityList().size() == 1);
-        cal.addActivity((Activity) a2);
+        cal.addActivity(a2);
         Assert.assertTrue(cal.getActivityList().size() == 2);
     }
     

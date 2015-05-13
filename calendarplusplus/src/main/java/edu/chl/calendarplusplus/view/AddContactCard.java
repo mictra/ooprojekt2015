@@ -8,6 +8,7 @@ package edu.chl.calendarplusplus.view;
 import edu.chl.calendarplusplus.model.CalendarPlus;
 import edu.chl.calendarplusplus.model.Contact;
 import edu.chl.calendarplusplus.model.ContactGroup;
+import edu.chl.calendarplusplus.model.IContactGroup;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.List;
@@ -312,10 +313,10 @@ public class AddContactCard extends javax.swing.JPanel {
         return c;
     }
     
-    public List<ContactGroup> getContactGroups(){
-        List<ContactGroup> contactGroups = new ArrayList<>();
+    public List<IContactGroup> getContactGroups(){
+        List<IContactGroup> contactGroups = new ArrayList<>();
         for(int i=0; i < memberList.getModel().getSize(); i++){
-            contactGroups.add((ContactGroup) memberList.getModel().getElementAt(i));
+            contactGroups.add((IContactGroup) memberList.getModel().getElementAt(i));
         }
         return contactGroups;
     }
@@ -329,7 +330,7 @@ public class AddContactCard extends javax.swing.JPanel {
         // TODO - do NOT add default group and filter out all non-member groups
         nonMemberList.removeAll();
         nonMemberListModel.removeAllElements();
-        for (ContactGroup cg : cal.getContactGroupList()) {
+        for (IContactGroup cg : cal.getContactGroupList()) {
             if (!cg.getGroupName().equals("Default")) {
                 nonMemberListModel.addElement(cg);
             }
@@ -343,7 +344,7 @@ public class AddContactCard extends javax.swing.JPanel {
         //Set the member groups
         memberList.removeAll();
         memberListModel.removeAllElements();
-        for (ContactGroup cg : cal.getContactGroupList()) {
+        for (IContactGroup cg : cal.getContactGroupList()) {
             if(cg.getGroupName().equals("Default")){
                 memberListModel.addElement(cg);
             }
@@ -355,12 +356,12 @@ public class AddContactCard extends javax.swing.JPanel {
     }
 
     public void addMemberGroup() {
-        memberListModel.addElement((ContactGroup) nonMemberList.getSelectedValue());
+        memberListModel.addElement((IContactGroup) nonMemberList.getSelectedValue());
         nonMemberListModel.remove(nonMemberList.getSelectedIndex());
     }
 
     public void removeMemberGroup() {
-        nonMemberListModel.addElement((ContactGroup) memberList.getSelectedValue());
+        nonMemberListModel.addElement((IContactGroup) memberList.getSelectedValue());
         memberListModel.remove(memberList.getSelectedIndex());
     }
 

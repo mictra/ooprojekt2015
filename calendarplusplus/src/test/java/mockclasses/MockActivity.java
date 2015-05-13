@@ -7,6 +7,7 @@ package mockclasses;
 
 import edu.chl.calendarplusplus.model.Contact;
 import edu.chl.calendarplusplus.model.IActivity;
+import edu.chl.calendarplusplus.model.IContact;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -73,15 +74,15 @@ public class MockActivity implements IActivity {
     }
 
     @Override
-    public void addAttendee(Contact contact) {
+    public void addAttendee(IContact contact) {
     }
 
     @Override
-    public void removeAttendee(Contact contact) {
+    public void removeAttendee(IContact contact) {
     }
 
     @Override
-    public ArrayList<Contact> getAttendees() {
-        return new ArrayList<Contact>();
+    public ArrayList<IContact> getAttendees() {
+        return new ArrayList<IContact>();
     }
 }

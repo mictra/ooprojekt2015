@@ -8,6 +8,9 @@ package edu.chl.calendarplusplus.controller;
 import edu.chl.calendarplusplus.model.Activity;
 import edu.chl.calendarplusplus.model.CalendarPlus;
 import edu.chl.calendarplusplus.model.Contact;
+import edu.chl.calendarplusplus.model.IActivity;
+import edu.chl.calendarplusplus.model.ICalendarPlus;
+import edu.chl.calendarplusplus.model.INotification;
 import edu.chl.calendarplusplus.model.Notification;
 import edu.chl.calendarplusplus.view.AddActivityCard;
 import edu.chl.calendarplusplus.view.ProjectView;
@@ -22,17 +25,17 @@ import javax.swing.JButton;
  */
 public class AddActivityCardController implements PropertyChangeListener {
 
-    private CalendarPlus cal;
+    private ICalendarPlus cal;
     private ProjectView projV;
     private AddActivityCard ac;
     private JButton activityCardSave;
     private JButton activityCardCancel;
 
-    public static AddActivityCardController create(CalendarPlus cal, ProjectView projV, AddActivityCard ac) {
+    public static AddActivityCardController create(ICalendarPlus cal, ProjectView projV, AddActivityCard ac) {
         return new AddActivityCardController(cal, projV, ac);
     }
 
-    private AddActivityCardController(CalendarPlus cal, ProjectView projV, AddActivityCard ac) {
+    private AddActivityCardController(ICalendarPlus cal, ProjectView projV, AddActivityCard ac) {
         this.cal = cal;
         this.projV = projV;
         this.ac = ac;
@@ -43,9 +46,9 @@ public class AddActivityCardController implements PropertyChangeListener {
     public void propertyChange(PropertyChangeEvent evt) {
         String evtName = evt.getPropertyName();
         if (evtName.equalsIgnoreCase("AddActivity")) {
-            Activity act = ac.getAsActivity();
+            IActivity act = ac.getAsActivity();
             cal.addActivity(act);
-            Notification not = ac.getAsNotification(act);
+            INotification not = ac.getAsNotification(act);
             if (not != null) {
                 //Add notification to manager or update or remove
             }

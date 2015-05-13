@@ -6,6 +6,7 @@
 package edu.chl.calendarplusplus.view;
 
 import edu.chl.calendarplusplus.model.ContactGroup;
+import edu.chl.calendarplusplus.model.IContactGroup;
 
 /**
  *
@@ -16,7 +17,7 @@ public class ContactGroupElement extends javax.swing.JPanel {
     /**
      * Creates new form ContactGroupElement
      */
-    public ContactGroupElement(ContactGroup cg) {
+    public ContactGroupElement(IContactGroup cg) {
         initComponents();
         nameLabel.setText(cg.getGroupName());
     }

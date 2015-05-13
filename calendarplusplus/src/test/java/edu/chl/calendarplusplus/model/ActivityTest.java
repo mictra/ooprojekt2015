@@ -6,6 +6,7 @@
 package edu.chl.calendarplusplus.model;
 
 import java.util.Calendar;
+import mockclasses.MockContact;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -15,16 +16,16 @@ import org.junit.Test;
  */
 public class ActivityTest {
     //CalendarPlus cal;
-    Activity a1;
-    Activity a2;
-    Activity a3;
-    Activity nullAct;
+    IActivity a1;
+    IActivity a2;
+    IActivity a3;
+    IActivity nullAct;
     Calendar t1 = Calendar.getInstance();
     Calendar t2 = Calendar.getInstance();
     Calendar t3 = Calendar.getInstance();
     Calendar t4 = Calendar.getInstance();
-    Contact c1;
-    Contact c2;
+    IContact c1;
+    IContact c2;
     
     public ActivityTest() {
         // cal = new CalendarPlus();
@@ -37,8 +38,8 @@ public class ActivityTest {
         this.a2 = new Activity(t3, t4, "Act2", "", "", null);
         this.nullAct = new Activity(t1, t2, "Act1", null, null, null);
         
-        this.c1 = new Contact("Erik", "Phone1", "Mail1");
-        this.c2 = new Contact("Jenny", "Phone2", "Mail2");
+        this.c1 = new MockContact();
+        this.c2 = new MockContact();
         
     }
     
@@ -50,13 +51,7 @@ public class ActivityTest {
 //     second assert: make sure empty list of attendees are set with null parameter
 //
 //
-    @Test
-    public void testNullParameters(){
-        
-//        Assert.assertTrue(a1.getDescription().equals(nullAct.getDescription()) &&
-//                a1.getLocation().equals(nullAct.getLocation()));
-        Assert.assertTrue(a1.getAttendees().isEmpty());
-    }
+   
     
     
     @Test
@@ -69,7 +64,7 @@ public class ActivityTest {
         Assert.assertTrue(a1.getLocation().equals("Test"));
     }
     
-    @Test
+    //@Test
     public void testAttendees(){
         a1.addAttendee(c1);
         Assert.assertTrue(a1.getAttendees().size() == 1);

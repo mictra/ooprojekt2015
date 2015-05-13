@@ -12,8 +12,11 @@ import edu.chl.calendarplusplus.model.IContact;
  * @author erikforsberg
  */
 public class MockContact implements IContact {
+
+    private String test;
     
     public MockContact(){
+        this.test = "teststring";
     }
 
     @Override

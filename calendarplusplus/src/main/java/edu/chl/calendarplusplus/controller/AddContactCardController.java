@@ -8,6 +8,9 @@ package edu.chl.calendarplusplus.controller;
 import edu.chl.calendarplusplus.model.CalendarPlus;
 import edu.chl.calendarplusplus.model.Contact;
 import edu.chl.calendarplusplus.model.ContactGroup;
+import edu.chl.calendarplusplus.model.ICalendarPlus;
+import edu.chl.calendarplusplus.model.IContact;
+import edu.chl.calendarplusplus.model.IContactGroup;
 import edu.chl.calendarplusplus.view.AddContactCard;
 import edu.chl.calendarplusplus.view.ProjectView;
 import java.beans.PropertyChangeEvent;
@@ -21,15 +24,15 @@ import java.util.List;
  */
 public class AddContactCardController implements PropertyChangeListener {
 
-    private CalendarPlus cal;
+    private ICalendarPlus cal;
     private ProjectView projV;
     private AddContactCard cc;
 
-    public static AddContactCardController create(CalendarPlus cal, ProjectView projV, AddContactCard cc) {
+    public static AddContactCardController create(ICalendarPlus cal, ProjectView projV, AddContactCard cc) {
         return new AddContactCardController(cal, projV, cc);
     }
 
-    private AddContactCardController(CalendarPlus cal, ProjectView projV, AddContactCard cc) {
+    private AddContactCardController(ICalendarPlus cal, ProjectView projV, AddContactCard cc) {
         this.cal = cal;
         this.projV = projV;
         this.cc = cc;
@@ -40,11 +43,11 @@ public class AddContactCardController implements PropertyChangeListener {
     public void propertyChange(PropertyChangeEvent evt) {
         String evtName = evt.getPropertyName();
         if (evtName.equalsIgnoreCase("AddContact")) {
-            Contact contact = cc.getAsContact();
+            IContact contact = cc.getAsContact();
             //List<String> stringGroups = cc.getContactGroups();
-            List<ContactGroup> contactGroups = new ArrayList<>();
+            List<IContactGroup> contactGroups = new ArrayList<>();
             contactGroups = cc.getContactGroups();
-            for(ContactGroup cg : contactGroups){
+            for(IContactGroup cg : contactGroups){
 //                if(stringGroups.contains(cg.getGroupName())){
 //                    contactGroups.add(cg);
                     cg.addContact(contact);

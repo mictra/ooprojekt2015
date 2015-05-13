@@ -6,6 +6,7 @@
 package edu.chl.calendarplusplus.view;
 
 import edu.chl.calendarplusplus.model.ContactGroup;
+import edu.chl.calendarplusplus.model.IContactGroup;
 import java.awt.Dimension;
 import java.util.List;
 
@@ -23,11 +24,11 @@ public class ContactGroupCard extends javax.swing.JPanel {
         contactGroupScrollPane.getVerticalScrollBar().setUnitIncrement(20);
     }
     
-    public void updateContactGroups(List<ContactGroup> contactgroups) {
+    public void updateContactGroups(List<IContactGroup> contactgroups) {
         elementList.removeAll();
         elementList.setPreferredSize(new Dimension(684,500));
         elementList.setSize(684, 500);
-        for (ContactGroup cg: contactgroups) {
+        for (IContactGroup cg: contactgroups) {
             ContactGroupElement cge = new ContactGroupElement(cg);
             cge.setPreferredSize(new Dimension(400,47));
             elementList.add(cge);

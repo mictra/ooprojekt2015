@@ -27,6 +27,6 @@ public interface INotification {
     
     public void setActivity(IActivity act);
     
-    public Activity getActivity();
+    public IActivity getActivity();
     
 }

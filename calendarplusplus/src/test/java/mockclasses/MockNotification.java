@@ -6,6 +6,7 @@
 package mockclasses;
 
 import edu.chl.calendarplusplus.model.Activity;
+import edu.chl.calendarplusplus.model.IActivity;
 import edu.chl.calendarplusplus.model.INotification;
 import java.util.Calendar;
 
@@ -17,11 +18,11 @@ public class MockNotification extends MockAlarm implements INotification {
 
     private Activity activity;
 
-    public MockNotification(Calendar d, String n, Activity a) {
+    public MockNotification(Calendar d, String n, IActivity a) {
     }
 
     @Override
-    public void setActivity(Activity act) {
+    public void setActivity(IActivity act) {
     }
 
     @Override

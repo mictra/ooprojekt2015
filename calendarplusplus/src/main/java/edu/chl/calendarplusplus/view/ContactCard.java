@@ -6,6 +6,7 @@
 package edu.chl.calendarplusplus.view;
 
 import edu.chl.calendarplusplus.model.Contact;
+import edu.chl.calendarplusplus.model.IContact;
 import java.awt.Dimension;
 import java.util.List;
 
@@ -23,11 +24,11 @@ public class ContactCard extends javax.swing.JPanel {
         contactScrollPane.getVerticalScrollBar().setUnitIncrement(20);
     }
     
-    public void updateContacts(List<Contact> contactlist){
+    public void updateContacts(List<IContact> contactlist){
         elementList.removeAll();
         elementList.setPreferredSize(new Dimension(684,500));
         elementList.setSize(684, 500);
-        for (Contact c: contactlist) {
+        for (IContact c: contactlist) {
             ContactElement ce = new ContactElement(c);
             ce.setPreferredSize(new Dimension(400,119));
             elementList.add(ce);

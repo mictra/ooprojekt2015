@@ -17,22 +17,24 @@ import java.util.Calendar;
 /* The notification class includes all of the methods from the Alarm
    class, since Alarm is an abstract class. But it also gives an activity.
 */
-public class Notification extends Alarm {
+public class Notification extends Alarm implements INotification {
     
-    private Activity activity;
+    private IActivity activity;
 
-    public Notification(Calendar d, String n, Activity a) {
+    public Notification(Calendar d, String n, IActivity a) {
         super(d, n);
+        
         if (d.before(a.getEndTime()) || d.equals(a.getEndTime())){
             activity = a;
         }
     }
+
       
-    public Activity getActivity(){
+    public IActivity getActivity(){
         return activity;
     }
     
-    public void setActivity(Activity act){
+    public void setActivity(IActivity act){
         this.activity = act;
     }
     

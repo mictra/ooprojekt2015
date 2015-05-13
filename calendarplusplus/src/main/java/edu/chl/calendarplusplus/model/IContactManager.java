@@ -23,6 +23,8 @@ public interface IContactManager{
     
     void clearGroups(IContact c);
     
+    List<IContact> getAllContacts();
+        
     void removeContact(IContact c);
     
 }

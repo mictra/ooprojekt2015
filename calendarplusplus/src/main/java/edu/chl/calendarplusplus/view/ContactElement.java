@@ -6,6 +6,7 @@
 package edu.chl.calendarplusplus.view;
 
 import edu.chl.calendarplusplus.model.Contact;
+import edu.chl.calendarplusplus.model.IContact;
 
 /**
  *
@@ -16,7 +17,7 @@ public class ContactElement extends javax.swing.JPanel {
     /**
      * Creates new form ContactElement
      */
-    public ContactElement(Contact c) {
+    public ContactElement(IContact c) {
         initComponents();
         nameLabel.setText(c.getName());
         emailLabel.setText(c.getEmail());

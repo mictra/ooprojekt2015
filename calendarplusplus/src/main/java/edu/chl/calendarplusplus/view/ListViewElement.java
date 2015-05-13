@@ -6,6 +6,7 @@
 package edu.chl.calendarplusplus.view;
 
 import edu.chl.calendarplusplus.model.Activity;
+import edu.chl.calendarplusplus.model.IActivity;
 import java.util.Calendar;
 
 /**
@@ -17,7 +18,7 @@ public class ListViewElement extends javax.swing.JPanel {
     /**
      * Creates new form ListViewElement
      */
-    public ListViewElement(Activity a) {
+    public ListViewElement(IActivity a) {
         initComponents();
         nameLabel.setText(a.getName());
         Calendar c = a.getStartTime();

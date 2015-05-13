@@ -1,6 +1,7 @@
 package edu.chl.calendarplusplus.controller;
 
 import edu.chl.calendarplusplus.model.CalendarPlus;
+import edu.chl.calendarplusplus.model.ICalendarPlus;
 import edu.chl.calendarplusplus.view.ProjectView;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -8,7 +9,7 @@ import javax.swing.JLabel;
 
 public class ProjectViewController implements MouseListener {
 
-    private final CalendarPlus cal;
+    private final ICalendarPlus cal;
     private final ProjectView projectView;
     private JLabel newActivityLabel;
     private JLabel listViewLabel;
@@ -17,11 +18,11 @@ public class ProjectViewController implements MouseListener {
     private JLabel allContactsLabel;
     private JLabel allContactGroupsLabel;
 
-    public static ProjectViewController create(CalendarPlus cal, ProjectView projectView) {
+    public static ProjectViewController create(ICalendarPlus cal, ProjectView projectView) {
         return new ProjectViewController(cal, projectView);
     }
 
-    private ProjectViewController(CalendarPlus cal, ProjectView projectView) {
+    private ProjectViewController(ICalendarPlus cal, ProjectView projectView) {
         this.cal = cal;
         this.projectView = projectView;
         initComponents();
