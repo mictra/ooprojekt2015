@@ -48,7 +48,7 @@ public class AddActivityCard extends javax.swing.JPanel {
     private void initComponents() {
 
         nameLabel = new javax.swing.JLabel();
-        nameTextfield = new javax.swing.JTextField();
+        nameTextField = new javax.swing.JTextField();
         startDateLabel = new javax.swing.JLabel();
         sDayComboBox = new javax.swing.JComboBox();
         sMonthComboBox = new javax.swing.JComboBox();
@@ -242,7 +242,7 @@ public class AddActivityCard extends javax.swing.JPanel {
                                     .addComponent(sHourComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(sMinuteComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(nameTextfield)
+                                .addComponent(nameTextField)
                                 .addComponent(locationTextField))
                             .addComponent(descriptionScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(notificationComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -268,7 +268,7 @@ public class AddActivityCard extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nameLabel)
-                    .addComponent(nameTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(nameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(sDayComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -395,7 +395,7 @@ public class AddActivityCard extends javax.swing.JPanel {
     private javax.swing.JLabel locationLabel;
     private javax.swing.JTextField locationTextField;
     private javax.swing.JLabel nameLabel;
-    private javax.swing.JTextField nameTextfield;
+    private javax.swing.JTextField nameTextField;
     private javax.swing.JList nonAttendeeList;
     private javax.swing.JScrollPane nonAttendeeScrollPane;
     private javax.swing.JComboBox notificationComboBox;
@@ -415,7 +415,6 @@ public class AddActivityCard extends javax.swing.JPanel {
     
     public Activity getAsActivity(){
         //TODO: Handle errors when missing fields not in there... Maybe disable Save button?
-        String name = nameTextfield.getText();
         Calendar startDate = Calendar.getInstance();
         int sYear = (Integer) sYearComboBox.getSelectedItem();
         int sMonth = sMonthComboBox.getSelectedIndex();
@@ -430,11 +429,7 @@ public class AddActivityCard extends javax.swing.JPanel {
         int eHour = Integer.parseInt((String) eHourComboBox.getSelectedItem());
         int eMinute = Integer.parseInt((String) eMinuteComboBox.getSelectedItem());
         endDate.set(eYear, eMonth, eDay, eHour, eMinute);
-        String location = locationTextField.getText();
-        String description = descriptionTextArea.getText();
-        Activity a = new Activity(startDate, endDate, name, "", "", null);
-        a.setLocation(location);
-        a.setDescription(description);
+        Activity a = new Activity(startDate, endDate, nameTextField.getText(), locationTextField.getText(), descriptionTextArea.getText(), getAttendees());
         return a;
     }
     
@@ -458,8 +453,8 @@ public class AddActivityCard extends javax.swing.JPanel {
         return new Notification(notDate, act.getName(), act);
     }
             
-    public List<Contact> getAttendees() {
-        List<Contact> attendees = new ArrayList<>();
+    private ArrayList<Contact> getAttendees() {
+        ArrayList<Contact> attendees = new ArrayList<>();
         for (int i = 0; i < attendeeList.getModel().getSize(); i++) {
             attendees.add((Contact) attendeeList.getModel().getElementAt(i));
         }
@@ -515,7 +510,7 @@ public class AddActivityCard extends javax.swing.JPanel {
         }
     
     public void resetFields() {
-        nameTextfield.setText("");
+        nameTextField.setText("");
         Calendar c = Calendar.getInstance();
         sDayComboBox.setSelectedIndex(c.get(c.DAY_OF_MONTH)-1);
         sMonthComboBox.setSelectedIndex(c.get(c.MONTH));

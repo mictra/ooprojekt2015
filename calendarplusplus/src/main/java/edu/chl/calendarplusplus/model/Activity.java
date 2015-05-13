@@ -39,11 +39,7 @@ public class Activity implements IActivity {
         this.description = desc;
         this.location = loc;
         
-        if(att == null){
-            this.attendees = new ArrayList<>();
-        }else{
-            this.attendees = att;
-        }
+        this.attendees = att;
         
     }
     

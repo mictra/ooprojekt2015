@@ -49,10 +49,6 @@ public class AddActivityCardController implements PropertyChangeListener {
             if (not != null) {
                 //Add notification to manager or update or remove
             }
-            // Add attendees to activity
-            for (Contact c: ac.getAttendees()) {
-                act.addAttendee(c);
-            }
             ac.resetFields();
         } else if (evtName.equalsIgnoreCase("AddAttendee")) {
             ac.addAttendee();
