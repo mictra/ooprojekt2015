@@ -51,7 +51,7 @@ public class ContactCard extends javax.swing.JPanel {
         contactScrollPane = new javax.swing.JScrollPane();
         elementList = new javax.swing.JPanel();
 
-        setPreferredSize(new java.awt.Dimension(710, 850));
+        setPreferredSize(new java.awt.Dimension(850, 710));
 
         contactScrollPane.setViewportView(elementList);
 
@@ -59,17 +59,11 @@ public class ContactCard extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(contactScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 826, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(contactScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 850, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(contactScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 674, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(contactScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 710, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
