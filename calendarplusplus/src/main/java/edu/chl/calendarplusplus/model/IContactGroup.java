@@ -17,8 +17,8 @@ public interface IContactGroup {
     
     public String getGroupName();
         
-    public void addContact(Contact member);
+    public void addContact(IContact member);
     
-    public ArrayList<Contact> getContacts();
+    public ArrayList<IContact> getContacts();
     
 }

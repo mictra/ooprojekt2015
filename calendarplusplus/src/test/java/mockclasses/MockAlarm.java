@@ -5,24 +5,47 @@
  */
 package mockclasses;
 
+import edu.chl.calendarplusplus.model.IAlarm;
 import java.util.Calendar;
 
 /**
  *
  * @author erikforsberg
  */
-public class MockAlarm {
+public class MockAlarm implements IAlarm {
     
     private Calendar alarmTime;
     private String name;
     private String description;
     
-    public MockAlarm(Calendar d, String n){
-        if (n.isEmpty()) { return; }
-        if (d.after(Calendar.getInstance()) || d.equals(Calendar.getInstance())){
-            this.alarmTime = d;
-            this.name = n;
-        }
+    public MockAlarm(){
+    }
+
+    @Override
+    public void setAlarm(Calendar time) {
+    }
+
+    @Override
+    public Calendar getAlarm() {
+        return Calendar.getInstance();
+    }
+
+    @Override
+    public void setAlarmName(String name) {
+    }
+
+    @Override
+    public String getAlarmName() {
+        return null;
+    }
+
+    @Override
+    public void setDescName(String desc) {
+    }
+
+    @Override
+    public String getDescName() {
+        return this.description;
     }
     
 }

@@ -34,10 +34,10 @@ public interface IActivity {
     
     public String getLocation();
         
-    public void addAttendee(Contact contact);
+    public void addAttendee(IContact contact);
     
-    public void removeAttendee(Contact contact);
+    public void removeAttendee(IContact contact);
     
-    public ArrayList<Contact> getAttendees();
+    public ArrayList<IContact> getAttendees();
     
 }

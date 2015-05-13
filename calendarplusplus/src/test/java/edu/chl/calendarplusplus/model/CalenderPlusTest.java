@@ -6,6 +6,9 @@
 package edu.chl.calendarplusplus.model;
 
 import java.util.Calendar;
+import mockclasses.MockActivity;
+import mockclasses.MockAlarm;
+import mockclasses.MockContact;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -16,15 +19,15 @@ import org.junit.Test;
 public class CalenderPlusTest {
     
     CalendarPlus cal;
-    Activity a1;
-    Activity a2;
+    IActivity a1;
+    IActivity a2;
     Calendar t1 = Calendar.getInstance();
     Calendar t2 = Calendar.getInstance();
     Calendar t3 = Calendar.getInstance();
     Calendar t4 = Calendar.getInstance();
-    Contact c1;
-    Contact c2;
-    Alarm al1;
+    IContact c1;
+    IContact c2;
+    IAlarm al1;
     
     public CalenderPlusTest(){
         cal = new CalendarPlus();
@@ -34,13 +37,13 @@ public class CalenderPlusTest {
         t3.set(2015, 4, 28, 12, 30);
         t4.set(2015, 4, 28, 15, 30);
         
-        this.a1 = new Activity(t1, t2, "Act1", "", "", null) ;
-        this.a2 = new Activity(t3, t4, "Act2", "", "", null);
+        this.a1 = new MockActivity() ;
+        this.a2 = new MockActivity();
         
-        this.c1 = new Contact("Erik", "Phone1", "Mail1");
-        this.c2 = new Contact("Jenny", "Phone2", "Mail2");
+        this.c1 = new MockContact();
+        this.c2 = new MockContact();
         
-        this.al1 = new Alarm(t1, "alarm1");
+        this.al1 = new MockAlarm();
         
     }
     
@@ -49,9 +52,9 @@ public class CalenderPlusTest {
     @Test
     public void testAddActivity(){
         Assert.assertTrue(cal.getActivityList().isEmpty());
-        cal.addActivity(a1);
+        cal.addActivity((Activity) a1);
         Assert.assertTrue(cal.getActivityList().size() == 1);
-        cal.addActivity(a2);
+        cal.addActivity((Activity) a2);
         Assert.assertTrue(cal.getActivityList().size() == 2);
     }
     

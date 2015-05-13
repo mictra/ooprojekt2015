@@ -6,6 +6,7 @@
 package mockclasses;
 
 import edu.chl.calendarplusplus.model.Contact;
+import edu.chl.calendarplusplus.model.IActivity;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -13,38 +14,74 @@ import java.util.Calendar;
  *
  * @author erikforsberg
  */
-public class MockActivity {
+public class MockActivity implements IActivity {
     
     private Calendar startTime;
     private Calendar endTime;
-    
-    private String name;
-    private String description;
-    private String location;
-    
-    private ArrayList<Contact> attendees;
-    
-    //public Notification eventNot;
-    
-    public MockActivity(Calendar st, Calendar et, String name,
-            String desc, String loc, ArrayList<Contact> att) {
         
-        if(st.getTimeInMillis() < et.getTimeInMillis()){
-            this.startTime = st;
-            this.endTime = et;
-        }else{
-            // TODO: How to handle illegal start and end times?
-        }
-        
-        this.name = name;
-        this.description = desc;
-        this.location = loc;
-        
-        if(att == null){
-            this.attendees = new ArrayList<>();
-        }else{
-            this.attendees = att;
-        }
-        
+    public MockActivity() {
+    }
+
+    @Override
+    public void setStartTime(Calendar st) {
+    }
+    
+
+    @Override
+    public Calendar getStartTime() {
+        startTime = Calendar.getInstance();
+        startTime.set(2015, 4, 31, 13, 0);
+        return this.startTime;
+    }
+
+    @Override
+    public void setEndTime(Calendar et) {
+    }
+
+    @Override
+    public Calendar getEndTime() {
+        endTime = Calendar.getInstance();
+        endTime.set(2015, 4, 31, 13, 0);
+        return this.endTime;
+    }
+
+    @Override
+    public void setName(String n) {
+    }
+
+    @Override
+    public String getName() {
+        return "act";
+    }
+
+    @Override
+    public void setDescription(String d) {
+    }
+
+    @Override
+    public String getDescription() {
+        return "desc";
+    }
+
+    @Override
+    public void setLocation(String l) {
+    }
+
+    @Override
+    public String getLocation() {
+        return "loc";
+    }
+
+    @Override
+    public void addAttendee(Contact contact) {
+    }
+
+    @Override
+    public void removeAttendee(Contact contact) {
+    }
+
+    @Override
+    public ArrayList<Contact> getAttendees() {
+        return new ArrayList<Contact>();
     }
 }

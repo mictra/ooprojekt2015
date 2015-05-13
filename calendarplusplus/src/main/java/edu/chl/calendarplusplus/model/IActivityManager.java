@@ -13,9 +13,9 @@ import java.util.List;
  */
 public interface IActivityManager {
     
-    public void addActivityToList(List<Activity> activities, Activity a);
-    public void setContactActivities(Contact c, List<Activity> activities);
-    public List<Activity> getContactActivities(Contact c);
-    public void removeContact(Contact c);
+    public void addActivityToList(List<IActivity> activities, IActivity a);
+    public void setContactActivities(IContact c, List<IActivity> activities);
+    public List<IActivity> getContactActivities(IContact c);
+    public void removeContact(IContact c);
     
 }

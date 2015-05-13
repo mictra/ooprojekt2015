@@ -5,21 +5,42 @@
  */
 package mockclasses;
 
+import edu.chl.calendarplusplus.model.IContact;
+
 /**
  *
  * @author erikforsberg
  */
-public class MockContact {
+public class MockContact implements IContact {
     
-    private String name;
-    private String phone;
-    private String email;
-    
-    
-    public MockContact(String name, String phone, String email){
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
+    public MockContact(){
+    }
+
+    @Override
+    public void setName(String n) {
+    }
+
+    @Override
+    public String getName() {
+        return "erik";
+    }
+
+    @Override
+    public void setPhone(String p) {
+    }
+
+    @Override
+    public String getPhone() {
+        return "123";
+    }
+
+    @Override
+    public void setEmail(String e) {
+    }
+
+    @Override
+    public String getEmail() {
+        return "mail";
     }
     
 }

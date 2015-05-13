@@ -4,6 +4,7 @@ import edu.chl.calendarplusplus.controller.*;
 import edu.chl.calendarplusplus.model.CalendarPlus;
 import edu.chl.calendarplusplus.model.Contact;
 import edu.chl.calendarplusplus.model.ContactGroup;
+import edu.chl.calendarplusplus.model.IContactGroup;
 import edu.chl.calendarplusplus.model.Project;
 import edu.chl.calendarplusplus.view.ProjectView;
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ public final class Main {
     private static void setLookAndFeel() {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Macintosh".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                 }
             }
@@ -70,23 +71,23 @@ public final class Main {
             cal.addContactGroup(colleagues);
             
             family.addContact(michael);
-            List<ContactGroup> michaelGroups = new ArrayList<>();
+            List<IContactGroup> michaelGroups = new ArrayList<>();
             michaelGroups.add(family);
             cal.getContactManager().setContactGroups(michael, michaelGroups);
             
             friends.addContact(patrick);
-            List<ContactGroup> patrickGroups = new ArrayList<>();
+            List<IContactGroup> patrickGroups = new ArrayList<>();
             patrickGroups.add(friends);
             cal.getContactManager().setContactGroups(patrick, patrickGroups);
             
             colleagues.addContact(johan);
-            List<ContactGroup> johanGroups = new ArrayList<>();
+            List<IContactGroup> johanGroups = new ArrayList<>();
             johanGroups.add(colleagues);
             cal.getContactManager().setContactGroups(johan, johanGroups);
             
             friends.addContact(erik);
             colleagues.addContact(erik);
-            List<ContactGroup> erikGroups = new ArrayList<>();
+            List<IContactGroup> erikGroups = new ArrayList<>();
             erikGroups.add(friends);
             erikGroups.add(colleagues);
             cal.getContactManager().setContactGroups(erik, erikGroups);

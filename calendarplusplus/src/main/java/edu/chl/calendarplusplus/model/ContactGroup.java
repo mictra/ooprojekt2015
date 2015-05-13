@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class ContactGroup implements IContactGroup {
     
     private String name;
-    private final ArrayList<Contact> members;
+    private final ArrayList<IContact> members;
     
     public ContactGroup(String name){
         this.name = name;
@@ -30,9 +30,9 @@ public class ContactGroup implements IContactGroup {
         return name;
     }
     
-    public void addContact(Contact member){
+    public void addContact(IContact member){
         // Check if the contact's name already exist in the group.
-        for(Contact c : members){
+        for(IContact c : members){
             if (member.getName().equals(c.getName())){
                 return;
             }
@@ -53,7 +53,7 @@ public class ContactGroup implements IContactGroup {
         members.add(member);
     }
     
-    public ArrayList<Contact> getContacts(){
+    public ArrayList<IContact> getContacts(){
         return members;
     }
     

@@ -21,12 +21,12 @@ public class Activity implements IActivity {
     private String description;
     private String location;
     
-    private ArrayList<Contact> attendees;
+    private ArrayList<IContact> attendees;
     
     //public Notification eventNot;
     
     public Activity(Calendar st, Calendar et, String name,
-            String desc, String loc, ArrayList<Contact> att) {
+            String desc, String loc, ArrayList<IContact> att) {
         
         if(st.getTimeInMillis() < et.getTimeInMillis()){
             this.startTime = st;
@@ -93,15 +93,15 @@ public class Activity implements IActivity {
         return this.location;
     }
     
-    public void addAttendee(Contact contact){
+    public void addAttendee(IContact contact){
         this.attendees.add(contact);
     }
     
-    public void removeAttendee(Contact contact){
+    public void removeAttendee(IContact contact){
         this.attendees.remove(contact);
     }
     
-    public ArrayList<Contact> getAttendees(){
+    public ArrayList<IContact> getAttendees(){
         return this.attendees;
     }
     

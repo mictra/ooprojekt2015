@@ -15,7 +15,7 @@ import org.junit.Test;
  */
 public class NotificationTest {
     
-    @Test
+    //@Test
     public void addNotification(){
         Calendar time = Calendar.getInstance();
         Activity a = new Activity(time, time, "An Activity","", "", null);

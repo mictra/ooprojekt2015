@@ -25,7 +25,7 @@ public interface INotification {
     
     public String getDescName();
     
-    public void setActivity(Activity act);
+    public void setActivity(IActivity act);
     
     public Activity getActivity();
     

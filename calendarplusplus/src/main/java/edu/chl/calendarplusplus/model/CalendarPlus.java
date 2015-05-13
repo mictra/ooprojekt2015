@@ -17,11 +17,11 @@ import java.util.List;
  */
 public class CalendarPlus implements ICalendarPlus{
     
-    private ArrayList<Activity> activities;
-    private ArrayList<ContactGroup> groups;
-    private ArrayList<Alarm> alarms;
-    private ContactManager contactManager;
-    private ActivityManager activityManager;
+    private ArrayList<IActivity> activities;
+    private ArrayList<IContactGroup> groups;
+    private ArrayList<IAlarm> alarms;
+    private IContactManager contactManager;
+    private IActivityManager activityManager;
     
     public CalendarPlus(){
         activities = new ArrayList<>();
@@ -33,27 +33,27 @@ public class CalendarPlus implements ICalendarPlus{
         activityManager = new ActivityManager();
     }
     
-    public void addActivity(Activity a){
+    public void addActivity(IActivity a){
         activities.add(a);
     }
     
-    public void addContactGroup(ContactGroup group){
+    public void addContactGroup(IContactGroup group){
         groups.add(group);
     }
     
-    public void addAlarm(Alarm a){
+    public void addAlarm(IAlarm a){
         alarms.add(a);
     }
     
-    public void removeActivity(Activity a){
+    public void removeActivity(IActivity a){
         activities.remove(a);
     }
     
-    public void removeContactGroup(ContactGroup g){
+    public void removeContactGroup(IContactGroup g){
         groups.remove(g);
     }
     
-    public void removeAlarm(Alarm a){
+    public void removeAlarm(IAlarm a){
         alarms.remove(a);
     }
     
@@ -69,16 +69,16 @@ public class CalendarPlus implements ICalendarPlus{
         alarms = l;
     }
     
-    public List<Activity> getActivityList(){
+    public List<IActivity> getActivityList(){
         return activities;
     }
     
-    public List<ContactGroup> getContactGroupList(){
+    public List<IContactGroup> getContactGroupList(){
         return groups;
     }
     
-    public ContactGroup getContactGroupByName(String name){
-        for(ContactGroup cg : groups){
+    public IContactGroup getContactGroupByName(String name){
+        for(IContactGroup cg : groups){
             if(cg.getGroupName().equals(name)){
                 return cg;
             }
@@ -86,28 +86,27 @@ public class CalendarPlus implements ICalendarPlus{
         return groups.get(0);
     }
     
-    public List<Alarm> getAlarmList(){
+    public List<IAlarm> getAlarmList(){
         return alarms;
     }
     
-    public List<Contact> getAllContacts(){
-        /*
-        ArrayList<Contact> contacts = new ArrayList<>();
-        for(ContactGroup cg : groups){
-            for(Contact c : cg.getContacts()){
+    public List<IContact> getAllContacts(){
+        
+        ArrayList<IContact> contacts = new ArrayList<>();
+        for(IContactGroup cg : groups){
+            for(IContact c : cg.getContacts()){
                 contacts.add(c);
             }
         }
         return contacts;
-                */
-        return contactManager.getAllContacts();
+                
     }
     
-    public ContactManager getContactManager(){
+    public IContactManager getContactManager(){
         return contactManager;
     }
     
-    public ActivityManager getActivityManager(){
+    public IActivityManager getActivityManager(){
         return activityManager;
     }
     

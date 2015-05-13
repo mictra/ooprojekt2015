@@ -14,17 +14,17 @@ import java.util.List;
  */
 public interface ICalendarPlus {
     
-    public void addActivity(Activity a);
+    public void addActivity(IActivity a);
     
-    public void addContactGroup(ContactGroup group);
+    public void addContactGroup(IContactGroup group);
     
-    public void addAlarm(Alarm a);
+    public void addAlarm(IAlarm a);
     
-    public void removeActivity(Activity a);
+    public void removeActivity(IActivity a);
     
-    public void removeContactGroup(ContactGroup g);
+    public void removeContactGroup(IContactGroup g);
     
-    public void removeAlarm(Alarm a);
+    public void removeAlarm(IAlarm a);
     
     public void setActivityList(ArrayList l);
     
@@ -32,12 +32,12 @@ public interface ICalendarPlus {
     
     public void setAlarmList(ArrayList l);
     
-    public List<Activity> getActivityList();
+    public List<IActivity> getActivityList();
     
-    public List<ContactGroup> getContactGroupList();
+    public List<IContactGroup> getContactGroupList();
     
-    public List<Alarm> getAlarmList();
+    public List<IAlarm> getAlarmList();
     
-    public List<Contact> getAllContacts();
+    public List<IContact> getAllContacts();
     
 }

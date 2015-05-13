@@ -22,46 +22,46 @@ public class ContactManager implements IContactManager{
     
     
     
-   private Map<Contact, List<ContactGroup>> groups;
+   private Map<IContact, List<IContactGroup>> groups;
     
     public ContactManager(){
-        groups = new HashMap<Contact, List<ContactGroup>>();
+        groups = new HashMap<>();
     }
     
-    public List<ContactGroup> getContactGroups(Contact c){
+    public List<IContactGroup> getContactGroups(IContact c){
         return groups.get(c);
     }
     
-    public void setContactGroups(Contact c, List<ContactGroup> groupList){
+    public void setContactGroups(IContact c, List<IContactGroup> groupList){
         groups.put(c, groupList);
         
     }
     
-    public void addNewGroup(Contact c, ContactGroup cg){
-        List<ContactGroup> temp = groups.get(c);
+    public void addNewGroup(IContact c, IContactGroup cg){
+        List<IContactGroup> temp = groups.get(c);
         temp.add(cg);
         groups.put(c, temp);
     }
     
-    public void removeGroup(Contact c, ContactGroup cg){
-        List<ContactGroup> temp = groups.get(c);
+    public void removeGroup(IContact c, IContactGroup cg){
+        List<IContactGroup> temp = groups.get(c);
         temp.remove(cg);
         groups.put(c, temp);
     }
     
-    public void clearGroups(Contact c){
-        List<ContactGroup> temp = groups.get(c);
+    public void clearGroups(IContact c){
+        List<IContactGroup> temp = groups.get(c);
         temp.clear();
         groups.put(c, temp);
     }
     
-    public void removeContact(Contact c){
+    public void removeContact(IContact c){
         groups.remove(c);
     }
     
-    public List<Contact> getAllContacts(){
-        List<Contact> contacts = new ArrayList<>();
-        for(Contact c : groups.keySet()){
+    public List<IContact> getAllContacts(){
+        List<IContact> contacts = new ArrayList<>();
+        for(IContact c : groups.keySet()){
             contacts.add(c);
         }
         return contacts;

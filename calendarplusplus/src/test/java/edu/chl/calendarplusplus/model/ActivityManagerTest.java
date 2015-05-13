@@ -19,11 +19,11 @@ public class ActivityManagerTest {
     @Test
     public void checkActivities(){
         Calendar time = Calendar.getInstance();
-        Contact c = new Contact("Olof", "", "");
-        Activity a1 = new Activity(time, time, "First Activity", "", "", null);
-        Activity a2 = new Activity(time, time, "Second Activity","", "", null);
-        ArrayList<Activity> activities = new ArrayList<>();
-        ActivityManager a = new ActivityManager();
+        IContact c = new Contact("Olof", "", "");
+        IActivity a1 = new Activity(time, time, "First Activity", "", "", null);
+        IActivity a2 = new Activity(time, time, "Second Activity","", "", null);
+        ArrayList<IActivity> activities = new ArrayList<>();
+        IActivityManager a = new ActivityManager();
         
         activities.add(a1); activities.add(a2);
         a.setContactActivities(c, activities);
@@ -37,9 +37,9 @@ public class ActivityManagerTest {
         Calendar time_1 = Calendar.getInstance();
         Calendar time_2 = Calendar.getInstance();
         time_2.add(Calendar.MINUTE, 10);
-        Contact c = new Contact("Filip", "", "");
-        Activity a1 = new Activity(time_1, time_2, "An Activity", "", "", null);
-        ArrayList<Activity> activities = new ArrayList<>();
+        IContact c = new Contact("Filip", "", "");
+        IActivity a1 = new Activity(time_1, time_2, "An Activity", "", "", null);
+        ArrayList<IActivity> activities = new ArrayList<>();
         ActivityManager a = new ActivityManager();
         
         a.addActivityToList(activities,a1); a.addActivityToList(activities,a1);
@@ -53,17 +53,17 @@ public class ActivityManagerTest {
     @Test
     public void sortedActivityList(){
         Contact c = new Contact("Cathryn", "", "");
-        ArrayList<Activity> activities = new ArrayList<>();
+        ArrayList<IActivity> activities = new ArrayList<>();
         Calendar time_1 = Calendar.getInstance();
         time_1.add(Calendar.MINUTE, -20);
         Calendar time_2 = Calendar.getInstance();
         time_2.add(Calendar.MINUTE, 40);
         Calendar time_3 = Calendar.getInstance();
         time_3.add(Calendar.HOUR_OF_DAY, 1);
-        Activity a1 = new Activity(time_2, time_3, "First Activity", "", "", null);
-        Activity a2 = new Activity(time_1, time_1, "Second Activity", "", "", null);
-        Activity a3 = new Activity(time_1, time_3, "Third Activity", "", "", null);
-        ActivityManager a = new ActivityManager();
+        IActivity a1 = new Activity(time_2, time_3, "First Activity", "", "", null);
+        IActivity a2 = new Activity(time_1, time_1, "Second Activity", "", "", null);
+        IActivity a3 = new Activity(time_1, time_3, "Third Activity", "", "", null);
+        IActivityManager a = new ActivityManager();
         
         a.addActivityToList(activities, a1); 
         a.addActivityToList(activities, a2);
@@ -77,8 +77,8 @@ public class ActivityManagerTest {
     @Test
     public void removedContact(){
         Contact c = new Contact("Karl", "", "");
-        ArrayList<Activity> activities = new ArrayList<>();
-        ActivityManager a = new ActivityManager();
+        ArrayList<IActivity> activities = new ArrayList<>();
+        IActivityManager a = new ActivityManager();
         a.setContactActivities(c, activities);
         a.removeContact(c);
         Assert.assertEquals(null, a.getContactActivities(c));

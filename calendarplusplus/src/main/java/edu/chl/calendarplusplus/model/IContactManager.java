@@ -13,16 +13,16 @@ import java.util.List;
  */
 public interface IContactManager{
 
-    List<ContactGroup> getContactGroups(Contact c);
+    List<IContactGroup> getContactGroups(IContact c);
     
-    void setContactGroups(Contact c, List<ContactGroup> groupList);
+    void setContactGroups(IContact c, List<IContactGroup> groupList);
     
-    void addNewGroup(Contact c, ContactGroup cg);
+    void addNewGroup(IContact c, IContactGroup cg);
     
-    void removeGroup(Contact c, ContactGroup cg);
+    void removeGroup(IContact c, IContactGroup cg);
     
-    void clearGroups(Contact c);
+    void clearGroups(IContact c);
     
-    void removeContact(Contact c);
+    void removeContact(IContact c);
     
 }

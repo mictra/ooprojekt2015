@@ -15,24 +15,24 @@ import java.util.List;
  */
 public class ActivityManager implements IActivityManager {
     
-    HashMap<Contact, List<Activity>> activityManager;
+    HashMap<IContact, List<IActivity>> activityManager;
     
     public ActivityManager(){
         activityManager = new HashMap<>();
     }
     
-    public void addActivityToList(List<Activity> activities, Activity a){
+    public void addActivityToList(List<IActivity> activities, IActivity a){
         // Begin by checking if that one activity already is implemented.
-        for (Activity n : activities){
+        for (IActivity n : activities){
             if (n.equals(a)){
                 return;
             }
         }
         // Here we check if the time for activity already has passed.
-        if (a.getEndTime().before(Calendar.getInstance())
-                || a.getEndTime().equals(Calendar.getInstance())){
-            return;
-        }
+//        if (a.getEndTime().before(Calendar.getInstance())
+//                || a.getEndTime().equals(Calendar.getInstance())){
+//            return;
+//        }
         // And lastly, we will add them depending on when they appear.
         // The closer to the current time, the sooner they will be added.
         for (int i = 0; i < activities.size(); i++){
@@ -44,18 +44,18 @@ public class ActivityManager implements IActivityManager {
         activities.add(a);
     }
     
-    public void setContactActivities(Contact c, List<Activity> activities){
-        for (Activity a : activities) {
+    public void setContactActivities(IContact c, List<IActivity> activities){
+        for (IActivity a : activities) {
             a.addAttendee(c);
         }
         activityManager.put(c, activities);
     }
     
-    public List<Activity> getContactActivities(Contact c){
+    public List<IActivity> getContactActivities(IContact c){
         return activityManager.get(c);
     }
     
-    public void removeContact(Contact c){
+    public void removeContact(IContact c){
         activityManager.remove(c);
     }
     
