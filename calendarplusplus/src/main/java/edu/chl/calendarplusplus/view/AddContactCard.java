@@ -315,8 +315,12 @@ public class AddContactCard extends javax.swing.JPanel {
     
     public List<IContactGroup> getContactGroups(){
         List<IContactGroup> contactGroups = new ArrayList<>();
-        for(int i=0; i < memberList.getModel().getSize(); i++){
-            contactGroups.add((IContactGroup) memberList.getModel().getElementAt(i));
+        if (memberList.getModel().getSize() == 0) {
+            contactGroups.add(cal.getContactGroupByName("Default"));
+        } else {
+            for(int i=0; i < memberList.getModel().getSize(); i++){
+                contactGroups.add((IContactGroup) memberList.getModel().getElementAt(i));
+            }
         }
         return contactGroups;
     }
@@ -327,7 +331,6 @@ public class AddContactCard extends javax.swing.JPanel {
         phoneTextField.setText("");
 
         // Set the non-member groups
-        // TODO - do NOT add default group and filter out all non-member groups
         nonMemberList.removeAll();
         nonMemberListModel.removeAllElements();
         for (IContactGroup cg : cal.getContactGroupList()) {
@@ -341,14 +344,9 @@ public class AddContactCard extends javax.swing.JPanel {
         nonMemberList.setPrototypeCellValue(lstring+ "     ");
         nonMemberScrollPane.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
 
-        //Set the member groups
+        //Set the member groups (empty list from start)
         memberList.removeAll();
         memberListModel.removeAllElements();
-        for (IContactGroup cg : cal.getContactGroupList()) {
-            if(cg.getGroupName().equals("Default")){
-                memberListModel.addElement(cg);
-            }
-        }
         memberList.setModel(memberListModel);        
         memberList.setPrototypeCellValue(lstring+ "     ");
         memberScrollPane.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
