@@ -5,10 +5,7 @@
  */
 package edu.chl.calendarplusplus.view;
 
-import edu.chl.calendarplusplus.model.Activity;
 import edu.chl.calendarplusplus.model.CalendarPlus;
-import edu.chl.calendarplusplus.model.Contact;
-import edu.chl.calendarplusplus.model.ContactGroup;
 import edu.chl.calendarplusplus.model.IActivity;
 import edu.chl.calendarplusplus.model.IContact;
 import edu.chl.calendarplusplus.model.IContactGroup;
@@ -505,6 +502,7 @@ public class ProjectView extends javax.swing.JFrame {
     private AddContactGroupCard addContactGroup = new AddContactGroupCard();
     private AddContactCard addContact;
     private ListViewCard listView = new ListViewCard();
+    private WeekViewCard weekView;
     private ContactGroupCard contactGroups = new ContactGroupCard();
     private ContactCard contacts = new ContactCard();
 
@@ -531,6 +529,10 @@ public class ProjectView extends javax.swing.JFrame {
     
     public JLabel getAllContactGroupsLabel() {
         return this.allContactGroupsLabel;
+    }
+    
+    public JLabel getWeekViewLabel() {
+        return this.weekViewLabel;
     }
 
     public AddActivityCard getActivityCard() {
@@ -561,6 +563,7 @@ public class ProjectView extends javax.swing.JFrame {
     private void tweekingInitComponents() {
         addContact = new AddContactCard(cal);
         addActivity = new AddActivityCard(cal.getContactManager());
+        weekView = new WeekViewCard(cal);
         mainLayeredPane.setPreferredSize(new Dimension(1270, 750));
         mainLayeredPane.setSize(new Dimension(1270, 750));
 
@@ -575,6 +578,7 @@ public class ProjectView extends javax.swing.JFrame {
         mainPanel.add(addContactGroup, "AddContactGroupCard");
         mainPanel.add(addContact, "AddContactCard");
         mainPanel.add(listView, "ListViewCard");
+        mainPanel.add(weekView, "WeekViewCard");
         mainPanel.add(contactGroups, "ContactGroupCard");
         mainPanel.add(contacts, "ContactCard");
         tabCards.show(mainPanel, "ListViewCard");
@@ -592,6 +596,8 @@ public class ProjectView extends javax.swing.JFrame {
             addContact.resetFields();
         } else if (card.equals("ListViewCard")) {
             headlineLabel.setText("Calendar // Listview");
+        } else if (card.equals("WeekViewCard")) {
+            headlineLabel.setText("Weekview");
         } else if (card.endsWith("ContactGroupCard")) {
             headlineLabel.setText("Contactgroups");
         } else if (card.endsWith("ContactCard")) {
@@ -602,6 +608,10 @@ public class ProjectView extends javax.swing.JFrame {
 
     public void updateListView(List<IActivity> activityList) {
         listView.updateListView(activityList);
+    }
+    
+    public void updateWeekView(List<IActivity> activitylist) {
+        weekView.updateWeekView(activitylist);
     }
     
     public void updateContactGroups(List<IContactGroup> contactgroups) {
