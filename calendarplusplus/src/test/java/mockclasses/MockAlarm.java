@@ -36,7 +36,7 @@ public class MockAlarm implements IAlarm {
 
     @Override
     public String getAlarmName() {
-        return null;
+        return null ;
     }
 
     @Override

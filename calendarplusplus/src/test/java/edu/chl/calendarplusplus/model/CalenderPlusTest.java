@@ -5,6 +5,7 @@
  */
 package edu.chl.calendarplusplus.model;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import mockclasses.MockActivity;
 import mockclasses.MockAlarm;
@@ -21,10 +22,14 @@ public class CalenderPlusTest {
     CalendarPlus cal;
     IActivity a1;
     IActivity a2;
+    IActivity a3;
+    IActivity a4;
     Calendar t1 = Calendar.getInstance();
     Calendar t2 = Calendar.getInstance();
     Calendar t3 = Calendar.getInstance();
     Calendar t4 = Calendar.getInstance();
+    Calendar start = Calendar.getInstance();
+    Calendar end = Calendar.getInstance();
     IContact c1;
     IContact c2;
     IAlarm al1;
@@ -36,9 +41,15 @@ public class CalenderPlusTest {
         t2.set(2015, 4, 25, 14, 0);
         t3.set(2015, 4, 28, 12, 30);
         t4.set(2015, 4, 28, 15, 30);
+        start.set(2015, 4, 25, 13, 30);
+        end.set(2015, 4, 25, 14, 30);
+        
         
         this.a1 = new MockActivity() ;
         this.a2 = new MockActivity();
+        
+        this.a3 = new Activity(t1, t2, "Act1", "", "", new ArrayList<>()) ;
+        this.a4 = new Activity(t3, t4, "Act2", "", "", null);
         
         this.c1 = new MockContact();
         this.c2 = new MockContact();
@@ -83,5 +94,16 @@ public class CalenderPlusTest {
         Assert.assertTrue(cal.getAlarmList().isEmpty());
     }
     
+    @Test
+    public void testGetActivitiesByHour(){
+        cal.addActivity(a3);
+        cal.addActivity(a4);
+        Assert.assertTrue(cal.getActivitiesByHour(start, end).size() == 1 );
+        Assert.assertTrue(cal.getActivitiesByHour(start, t4).size() == 2 );
+        Assert.assertTrue(cal.getActivitiesByHour(end, t4).size() == 1 );
+        Assert.assertTrue(cal.getActivitiesByHour(start, t3).size() == 1 );
+
+        System.out.println("LISTAN: " + cal.getActivitiesByHour(start, t4));
+    }
     
 }

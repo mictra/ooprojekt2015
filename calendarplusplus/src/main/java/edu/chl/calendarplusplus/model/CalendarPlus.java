@@ -1,19 +1,20 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
+*/
 package edu.chl.calendarplusplus.model;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
  *
  * @author erikforsberg
- * 
+ *
  * Class to represent a calendar object.
- * 
+ *
  */
 public class CalendarPlus implements ICalendarPlus{
     
@@ -100,7 +101,7 @@ public class CalendarPlus implements ICalendarPlus{
             }
         }
         return contacts;
-                
+        
     }
     
     public IContactManager getContactManager(){
@@ -109,6 +110,24 @@ public class CalendarPlus implements ICalendarPlus{
     
     public IActivityManager getActivityManager(){
         return activityManager;
+    }
+    
+    public List<IActivity> getActivitiesByHour(Calendar start, Calendar end){
+        List<IActivity> tempActList = new ArrayList<>();
+        for(IActivity act : activities)
+            if((act.getStartTime().getTimeInMillis() < start.getTimeInMillis() &&
+                    act.getEndTime().getTimeInMillis() > start.getTimeInMillis()) ||
+                    
+                    (act.getStartTime().getTimeInMillis() >= start.getTimeInMillis() &&
+                    act.getEndTime().getTimeInMillis() <= end.getTimeInMillis()) ||
+                    
+                    (act.getStartTime().getTimeInMillis() < end.getTimeInMillis() &&
+                    act.getEndTime().getTimeInMillis() >= end.getTimeInMillis())){
+                tempActList.add(act);
+            }
+        
+        
+        return tempActList;
     }
     
 }

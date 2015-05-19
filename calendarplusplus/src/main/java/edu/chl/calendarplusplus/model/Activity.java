@@ -32,14 +32,23 @@ public class Activity implements IActivity {
             this.startTime = st;
             this.endTime = et;
         }else{
-            // TODO: How to handle illegal start and end times?
+            System.out.println("Illegal times in activity!");
         }
         
-        this.name = name;
+        if(!name.equals("")){
+            this.name = name;
+        }else{
+            System.out.println("name of activty invalid!");
+        }
+        
         this.description = desc;
         this.location = loc;
         
-        this.attendees = att;
+        if(att == null){
+            this.attendees = new ArrayList<>();
+        }else{
+             this.attendees = att;
+        }
         
     }
     

@@ -5,6 +5,7 @@
 */
 package edu.chl.calendarplusplus.model;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import mockclasses.MockContact;
 import org.junit.Assert;
@@ -34,9 +35,8 @@ public class ActivityTest {
         t3.set(2015, 4, 28, 12, 30);
         t4.set(2015, 4, 28, 15, 30);
         
-        this.a1 = new Activity(t1, t2, "Act1", "", "", null) ;
+        this.a1 = new Activity(t1, t2, "Act1", "", "", new ArrayList<>()) ;
         this.a2 = new Activity(t3, t4, "Act2", "", "", null);
-        this.nullAct = new Activity(t1, t2, "Act1", null, null, null);
         
         this.c1 = new MockContact();
         this.c2 = new MockContact();
@@ -64,7 +64,7 @@ public class ActivityTest {
         Assert.assertTrue(a1.getLocation().equals("Test"));
     }
     
-    //@Test
+    @Test
     public void testAttendees(){
         a1.addAttendee(c1);
         Assert.assertTrue(a1.getAttendees().size() == 1);
