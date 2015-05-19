@@ -14,20 +14,22 @@ import org.junit.Test;
  * @author Johan
  */
 public class AlarmTest {
+    Calendar time_1 = Calendar.getInstance();
+    Calendar time_2 = Calendar.getInstance();
+    IAlarm a;
+    
+    public AlarmTest(){
+        a = new Alarm(time_1, "An Alarm");
+    }
     
     @Test
     public void createAlarm(){
-        Calendar time = Calendar.getInstance();
-        Alarm a = new Alarm(time, "An Alarm");
-        Assert.assertEquals(time, a.getAlarm());
+        Assert.assertEquals(time_1, a.getAlarm());
     }
     
     @Test
     public void editAlarm(){
-        Calendar time_1 = Calendar.getInstance();
-        Calendar time_2 = Calendar.getInstance();
         time_2.add(Calendar.HOUR_OF_DAY, -2);
-        Alarm a = new Alarm(time_1, "An Alarm");
         a.setAlarm(time_2);
         Assert.assertEquals(time_2, a.getAlarm());
         Assert.assertNotSame(time_1, a.getAlarm());
@@ -35,8 +37,7 @@ public class AlarmTest {
  
     @Test
     public void noAlarmName(){
-        Calendar time = Calendar.getInstance();
-        Alarm a = new Alarm(time, "");
+        a = new Alarm(time_1, "");
         Assert.assertNull(a.getAlarm());
         Assert.assertNull(a.getAlarmName());
     }
@@ -44,16 +45,14 @@ public class AlarmTest {
     // The alarm should be invalid if the time/date has already passed.
     @Test
     public void invalidAlarm(){
-        Calendar time = Calendar.getInstance();
-        time.add(Calendar.HOUR_OF_DAY, -12);
-        Alarm a = new Alarm(time, "An Alarm");
+        time_1.add(Calendar.HOUR_OF_DAY, -12);
+        a = new Alarm(time_1, "An Alarm");
         Assert.assertNull(a.getAlarm());
         Assert.assertNull(a.getAlarmName());
     }
     
     @Test
     public void editAlarmName(){
-        Alarm a = new Alarm(Calendar.getInstance(), "Old Alarm name");
         a.setAlarmName("New Alarm name");
         Assert.assertEquals("New Alarm name", a.getAlarmName());
         
@@ -61,7 +60,6 @@ public class AlarmTest {
     
     @Test
     public void addAlarmDesc(){
-        Alarm a = new Alarm(Calendar.getInstance(), "An Alarm");
         a.setDescName("This is a fun alarm!");
         Assert.assertEquals("This is a fun alarm!", a.getDescName());
     }

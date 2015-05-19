@@ -11,23 +11,26 @@ import java.util.HashMap;
  *
  * @author Johan
  */
-public class NotificationManager {
+public class NotificationManager implements INotificationManager{
 
-    HashMap<Activity, Notification> notificationManager;
+    HashMap<IActivity, INotification> notificationManager;
     
     public NotificationManager(){
         notificationManager = new HashMap<>();
     }
     
-    public void setNotification(Activity a, Notification n){
+    public void setNotification(IActivity a, INotification n){
+        if(getNotification(a) != null){
+            notificationManager.remove(n.getActivity());
+        }
         notificationManager.put(a, n);
     }
     
-    public Notification getNotification(Activity a){
+    public INotification getNotification(IActivity a){
         return notificationManager.get(a);
     }
     
-    public void removeNotification(Activity a){
+    public void removeNotification(IActivity a){
         notificationManager.remove(a);
     }
     

@@ -13,11 +13,19 @@ import org.junit.Test;
  * @author Johan
  */
 public class ContactGroupTest {
+    IContact c1, c2, c3, c4;
+    IContactGroup g;
+    
+    public ContactGroupTest(){
+        c1 = new Contact("Roger", "", "");
+        c2 = new Contact("Adam", "", "");
+        c3 = new Contact("Josh", "", "");
+        c4 = new Contact("Adriana", "", "");
+        g = new ContactGroup("A group");
+    }
     
     @Test
     public void addToContactGroup(){
-        Contact c1 = new Contact("Lisa", "", "");
-        ContactGroup g = new ContactGroup("A Group");
         g.addContact(c1);
         Assert.assertEquals(1, g.getContacts().size());
     }
@@ -26,8 +34,6 @@ public class ContactGroupTest {
     // twice or more.
     @Test
     public void addTwiceToContactGroup(){
-        Contact c1 = new Contact("Daniel", "", "");
-        ContactGroup g = new ContactGroup("A Group");
         g.addContact(c1); g.addContact(c1);
         Assert.assertEquals(1, g.getContacts().size());
     }
@@ -37,11 +43,6 @@ public class ContactGroupTest {
     // The list should appear in this order: "{Adam, Adriana, Josh, Roger}"
     @Test
     public void sortedGroupList(){
-        Contact c1 = new Contact("Roger", "", "");
-        Contact c2 = new Contact("Adam", "", "");
-        Contact c3 = new Contact("Josh", "", "");
-        Contact c4 = new Contact("Adriana", "", "");
-        ContactGroup g = new ContactGroup("A Group");
         g.addContact(c1); g.addContact(c2); g.addContact(c3); g.addContact(c4);
         Assert.assertEquals("Adriana", g.getContacts().get(1).getName());
     }

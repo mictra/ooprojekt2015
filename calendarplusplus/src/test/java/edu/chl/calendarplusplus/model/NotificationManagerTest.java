@@ -1,0 +1,53 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package edu.chl.calendarplusplus.model;
+
+import java.util.Calendar;
+import org.junit.Test;
+import org.junit.Assert;
+
+/**
+ *
+ * @author Johan
+ */
+public class NotificationManagerTest {
+    
+    Calendar time_1 = Calendar.getInstance();
+    Calendar time_2 = Calendar.getInstance();
+    IActivity a1;
+    INotification n1;
+    INotificationManager n;
+    
+    public NotificationManagerTest(){
+        n = new NotificationManager();
+        time_2.add(Calendar.MINUTE, 5);
+        time_2.add(Calendar.MINUTE, 10);
+    }
+    
+    @Test
+    public void getNotification(){
+        a1 = new Activity(time_1, time_2, "An Activity", "", "", null);
+        n1 = new Notification(time_1, "A Notification", a1);
+        n.setNotification(a1, n1);
+        
+        Assert.assertEquals(n1, n.getNotification(a1));
+    }
+    
+    @Test
+    public void editNotification(){
+        a1 = new Activity(time_1, time_2, "An Activity", "", "", null);
+        n1 = new Notification(time_1, "Old Notification", a1);
+        n.setNotification(a1, n1);
+        
+        Notification n2 = new Notification(time_1, "New Notification", a1);
+        n.setNotification(a1, n2);
+        
+        Assert.assertEquals(n2, n.getNotification(a1));
+        //Assert.assertNotSame(n1, n.getNotification(a1));
+        Assert.assertNotSame(a1, n1.getActivity()); //n1.getActivity() = a1!
+    }
+    
+}

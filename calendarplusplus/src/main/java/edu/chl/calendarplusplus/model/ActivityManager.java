@@ -45,9 +45,9 @@ public class ActivityManager implements IActivityManager {
     }
     
     public void setContactActivities(IContact c, List<IActivity> activities){
-        for (IActivity a : activities) {
-            a.addAttendee(c);
-        }
+        /*for (IActivity a : activities) {  We get NullPointerException by
+            a.addAttendee(c);               setting null in our Activity-
+        }                                   variables. */
         activityManager.put(c, activities);
     }
     

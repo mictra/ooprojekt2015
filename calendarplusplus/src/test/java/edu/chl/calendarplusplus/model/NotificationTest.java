@@ -14,12 +14,19 @@ import org.junit.Test;
  * @author Johan
  */
 public class NotificationTest {
+    Calendar time_1 = Calendar.getInstance();
+    Calendar time_2 = Calendar.getInstance();
+    IActivity a;
+    INotification n;
     
-    //@Test
+    public NotificationTest(){
+        time_2.add(Calendar.MINUTE, 30);
+        a = new Activity(time_1, time_2, "An Activity", "", "", null);
+        n = new Notification(time_1, "A Notification", a);
+    }
+    
+    @Test
     public void addNotification(){
-        Calendar time = Calendar.getInstance();
-        Activity a = new Activity(time, time, "An Activity","", "", null);
-        Notification n = new Notification(time, "A Notification", a);
         Assert.assertEquals(a, n.getActivity());
     }
     
@@ -27,28 +34,22 @@ public class NotificationTest {
     // this notification appears AFTER the activity's start.
     @Test
     public void invalidNotification(){
-        Calendar time = Calendar.getInstance();
         Calendar alarm = Calendar.getInstance();
         alarm.add(Calendar.HOUR_OF_DAY, 2);
-        Activity a = new Activity(time, time, "An Activity", "", "", null);
-        Notification n = new Notification(alarm, "A Notification", a);
+        n = new Notification(alarm, "A Notification", a);
         Assert.assertNull(n.getActivity());
     }
     
     @Test
     public void editNotificationName(){
-        Calendar time = Calendar.getInstance();
-        Activity a = new Activity(time, time, "An Activity","", "", null);
-        Notification n = new Notification(time, "Old Notification", a);
+        n = new Notification(time_1, "Old Notification", a);
         n.setAlarmName("New Notification");
         Assert.assertEquals("New Notification", n.getAlarmName());
     }
     
     @Test
     public void addNotificationDesc(){
-        Calendar time = Calendar.getInstance();
-        Activity a = new Activity(time, time, "An Activity","", "", null);
-        Notification n = new Notification(time, "Old Notification", a);
+        n = new Notification(time_1, "Old Notification", a);
         n.setDescName("New Notification");
         Assert.assertEquals("New Notification", n.getDescName());
     }

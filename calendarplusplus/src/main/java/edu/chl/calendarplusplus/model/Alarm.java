@@ -17,7 +17,7 @@ import java.util.Calendar;
    like to have a set- and a get-method for each one of them. So that we can
    both modify them and receive its data, since that is the purpose after all.
 */
-public class Alarm {
+public class Alarm implements IAlarm {
     
     private Calendar alarmTime;
     private String name;

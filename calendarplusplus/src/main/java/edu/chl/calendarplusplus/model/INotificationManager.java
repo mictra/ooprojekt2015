@@ -13,7 +13,7 @@ package edu.chl.calendarplusplus.model;
 public interface INotificationManager {
     
     public void setNotification(IActivity a, INotification n);
-    public Notification getNotification(IActivity a);
+    public INotification getNotification(IActivity a);
     public void removeNotification(IActivity a);
     
 }

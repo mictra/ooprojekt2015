@@ -15,35 +15,36 @@ import org.junit.Test;
  * @author Johan
  */
 public class ActivityManagerTest {
+    Calendar time_1 = Calendar.getInstance();
+    Calendar time_2 = Calendar.getInstance();
+    Calendar time_3 = Calendar.getInstance();
+    IActivity a1, a2, a3;
+    IContact c;
+    ArrayList<IActivity> activities;
+    IActivityManager a;
     
-   // @Test
+    public ActivityManagerTest(){
+        c = new Contact("Carl", "", "");
+        activities = new ArrayList<>();
+        a = new ActivityManager();
+        time_2.add(Calendar.MINUTE, 10);
+    }
+    
+    @Test
     public void checkActivities(){
-        Calendar time = Calendar.getInstance();
-        IContact c = new Contact("Olof", "", "");
-        IActivity a1 = new Activity(time, time, "First Activity", "", "", null);
-        IActivity a2 = new Activity(time, time, "Second Activity","", "", null);
-        ArrayList<IActivity> activities = new ArrayList<>();
-        IActivityManager a = new ActivityManager();
+        a1 = new Activity(time_1, time_2, "First Activity", "", "", null);
+        a2 = new Activity(time_1, time_2, "Second Activity","", "", null);
         
-        
-        activities.add(a1); activities.add(a2);
-
-        
+        a.addActivityToList(activities,a1); a.addActivityToList(activities,a2);
         a.setContactActivities(c, activities);
         Assert.assertEquals(2, a.getContactActivities(c).size());
     }
     
     // Here we try to see if we can add the exact same activity twice.
     // This should not be able to happen. So we just ignore duplicates.
-   // @Test
+    @Test
     public void addActivityTwice(){
-        Calendar time_1 = Calendar.getInstance();
-        Calendar time_2 = Calendar.getInstance();
-        time_2.add(Calendar.MINUTE, 10);
-        IContact c = new Contact("Filip", "", "");
-        IActivity a1 = new Activity(time_1, time_2, "An Activity", "", "", null);
-        ArrayList<IActivity> activities = new ArrayList<>();
-        ActivityManager a = new ActivityManager();
+        a1 = new Activity(time_1, time_2, "An Activity", "", "", null);
         
         a.addActivityToList(activities,a1); a.addActivityToList(activities,a1);
         a.setContactActivities(c, activities);
@@ -52,39 +53,29 @@ public class ActivityManagerTest {
     
     // The Activity-list should be sorted based on the which time is closest
     // to the current time, as long as the activity has not passed.
-    // "activity" should be equal to {Third Activity, First Activity}
-   // @Test
+    // "activity" should be equal to {Second Activity, Third Activity, First Activity}
+    @Test
     public void sortedActivityList(){
-        Contact c = new Contact("Cathryn", "", "");
-        ArrayList<IActivity> activities = new ArrayList<>();
-        Calendar time_1 = Calendar.getInstance();
         time_1.add(Calendar.MINUTE, -20);
-        Calendar time_2 = Calendar.getInstance();
         time_2.add(Calendar.MINUTE, 40);
-        Calendar time_3 = Calendar.getInstance();
         time_3.add(Calendar.HOUR_OF_DAY, 1);
-        IActivity a1 = new Activity(time_2, time_3, "First Activity", "", "", null);
-        IActivity a2 = new Activity(time_1, time_1, "Second Activity", "", "", null);
-        IActivity a3 = new Activity(time_1, time_3, "Third Activity", "", "", null);
-        IActivityManager a = new ActivityManager();
+        a1 = new Activity(time_2, time_3, "First Activity", "", "", null);
+        a2 = new Activity(time_1, time_2, "Second Activity", "", "", null);
+        a3 = new Activity(time_1, time_3, "Third Activity", "", "", null);
         
-        a.addActivityToList(activities, a1); 
+        a.addActivityToList(activities, a1);
         a.addActivityToList(activities, a2);
         a.addActivityToList(activities, a3);
         a.setContactActivities(c, activities);
-        Assert.assertEquals("First Activity",
+        Assert.assertEquals("Third Activity",
                 a.getContactActivities(c).get(1).getName());
-        Assert.assertEquals(2, a.getContactActivities(c).size());
+        Assert.assertEquals(3, a.getContactActivities(c).size());
     }
     
-  //  @Test
+    @Test
     public void removedContact(){
-        Contact c = new Contact("Karl", "", "");
-        ArrayList<IActivity> activities = new ArrayList<>();
-        IActivityManager a = new ActivityManager();
         a.setContactActivities(c, activities);
         a.removeContact(c);
         Assert.assertEquals(null, a.getContactActivities(c));
-        
     }
 }
