@@ -7,6 +7,7 @@ import edu.chl.calendarplusplus.model.ContactGroup;
 import edu.chl.calendarplusplus.model.IContact;
 import edu.chl.calendarplusplus.model.IContactGroup;
 import edu.chl.calendarplusplus.model.Project;
+import edu.chl.calendarplusplus.persistence.ContactGroupDAO;
 import edu.chl.calendarplusplus.view.ProjectView;
 import java.util.ArrayList;
 import java.util.List;
@@ -60,13 +61,24 @@ public final class Main {
         
         public static void initTest(CalendarPlus cal){
             //Adding contacts and contactgroups
-            IContactGroup family = new ContactGroup("Family");
-            IContactGroup friends = new ContactGroup("Friends");
-            IContactGroup colleagues = new ContactGroup("Colleagues");
-            IContact michael = new Contact("Michael", null, null);
-            IContact patrick = new Contact("Patrick", "1234567890", null);
-            IContact johan = new Contact("Johan", null, "Johan@mail.com");
-            IContact erik = new Contact("Erik", "0987654321", "Erik@mail.com");
+            ContactGroup family = new ContactGroup("Family");
+            ContactGroup friends = new ContactGroup("Friends");
+            ContactGroup colleagues = new ContactGroup("Colleagues");
+            Contact michael = new Contact("Michael", null, null);
+            Contact patrick = new Contact("Patrick", "1234567890", null);
+            Contact johan = new Contact("Johan", null, "Johan@mail.com");
+            Contact erik = new Contact("Erik", "0987654321", "Erik@mail.com");
+            
+            ContactGroupDAO cgDAO = new ContactGroupDAO();
+            //cgDAO.create(colleagues);
+            //ContactGroupDAO cgDAO1 = new ContactGroupDAO();
+            /*
+            for(ContactGroup cg : cgDAO.findAll()){
+                System.out.println(cg.getGroupName());
+            }
+                    */
+            ContactGroup cg = cgDAO.find("Colleagues");
+            System.out.println(cg.getGroupName());
             
             cal.addContactGroup(family);
             cal.addContactGroup(friends);
@@ -74,26 +86,26 @@ public final class Main {
             
             family.addContact(michael);
             friends.addContact(michael);
-            List<IContactGroup> michaelGroups = new ArrayList<>();
+            List<ContactGroup> michaelGroups = new ArrayList<>();
             michaelGroups.add(family);
             michaelGroups.add(friends);
             cal.getContactManager().setContactGroups(michael, michaelGroups);
             
             friends.addContact(patrick);
-            List<IContactGroup> patrickGroups = new ArrayList<>();
+            List<ContactGroup> patrickGroups = new ArrayList<>();
             patrickGroups.add(friends);
             cal.getContactManager().setContactGroups(patrick, patrickGroups);
             
             colleagues.addContact(johan);
             friends.addContact(johan);
-            List<IContactGroup> johanGroups = new ArrayList<>();
+            List<ContactGroup> johanGroups = new ArrayList<>();
             johanGroups.add(colleagues);
             johanGroups.add(friends);
             cal.getContactManager().setContactGroups(johan, johanGroups);
             
             friends.addContact(erik);
             colleagues.addContact(erik);
-            List<IContactGroup> erikGroups = new ArrayList<>();
+            List<ContactGroup> erikGroups = new ArrayList<>();
             erikGroups.add(friends);
             erikGroups.add(colleagues);
             cal.getContactManager().setContactGroups(erik, erikGroups);

@@ -32,6 +32,21 @@
             <artifactId>annotations</artifactId>
             <version>2.0.3</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.derby</groupId>
+            <artifactId>derby</artifactId>
+            <version>10.11.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>eclipselink</artifactId>
+            <version>2.6.0-M3</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.thiagolocatelli</groupId>
+            <artifactId>parse4j</artifactId>
+            <version>1.4</version>
+        </dependency>
     </dependencies>
 
     <build>

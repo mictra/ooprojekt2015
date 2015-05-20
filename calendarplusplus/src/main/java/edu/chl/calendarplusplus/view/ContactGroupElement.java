@@ -5,10 +5,12 @@
  */
 package edu.chl.calendarplusplus.view;
 
+import edu.chl.calendarplusplus.model.Contact;
+import edu.chl.calendarplusplus.model.ContactGroup;
 import edu.chl.calendarplusplus.model.IContact;
 import edu.chl.calendarplusplus.model.IContactGroup;
 import java.awt.Dimension;
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -19,7 +21,7 @@ public class ContactGroupElement extends javax.swing.JPanel {
     /**
      * Creates new form ContactGroupElement
      */
-    public ContactGroupElement(IContactGroup cg) {
+    public ContactGroupElement(ContactGroup cg) {
         initComponents();
         nameLabel.setText(cg.getGroupName());
         setMembers(cg.getContacts());
@@ -91,7 +93,7 @@ public class ContactGroupElement extends javax.swing.JPanel {
     private javax.swing.JLabel nameLabel;
     // End of variables declaration//GEN-END:variables
 
-    private void setMembers(ArrayList<IContact> contacts) {
+    private void setMembers(List<Contact> contacts) {
         groupMemberList.removeAll();
         groupMemberList.setPreferredSize(new Dimension(334,18));
         int counter = 0;

@@ -23,5 +23,6 @@ public interface IContact {
     
     String getEmail();
     
+    int getId();
     
 }

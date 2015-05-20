@@ -43,11 +43,11 @@ public class AddContactCardController implements PropertyChangeListener {
     public void propertyChange(PropertyChangeEvent evt) {
         String evtName = evt.getPropertyName();
         if (evtName.equalsIgnoreCase("AddContact")) {
-            IContact contact = cc.getAsContact();
+            Contact contact = cc.getAsContact();
             //List<String> stringGroups = cc.getContactGroups();
-            List<IContactGroup> contactGroups = new ArrayList<>();
+            List<ContactGroup> contactGroups = new ArrayList<>();
             contactGroups = cc.getContactGroups();
-            for(IContactGroup cg : contactGroups){
+            for(ContactGroup cg : contactGroups){
 //                if(stringGroups.contains(cg.getGroupName())){
 //                    contactGroups.add(cg);
                     cg.addContact(contact);

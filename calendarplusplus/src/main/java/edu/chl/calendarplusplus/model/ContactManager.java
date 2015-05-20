@@ -22,35 +22,35 @@ public class ContactManager implements IContactManager{
     
     
     
-   private Map<IContact, List<IContactGroup>> groups;
+   private Map<IContact, List<ContactGroup>> groups;
     
     public ContactManager(){
         groups = new HashMap<>();
     }
     
-    public List<IContactGroup> getContactGroups(IContact c){
+    public List<ContactGroup> getContactGroups(IContact c){
         return groups.get(c);
     }
     
-    public void setContactGroups(IContact c, List<IContactGroup> groupList){
+    public void setContactGroups(IContact c, List<ContactGroup> groupList){
         groups.put(c, groupList);
         
     }
     
-    public void addNewGroup(IContact c, IContactGroup cg){
-        List<IContactGroup> temp = groups.get(c);
+    public void addNewGroup(IContact c, ContactGroup cg){
+        List<ContactGroup> temp = groups.get(c);
         temp.add(cg);
         groups.put(c, temp);
     }
     
-    public void removeGroup(IContact c, IContactGroup cg){
-        List<IContactGroup> temp = groups.get(c);
+    public void removeGroup(IContact c, ContactGroup cg){
+        List<ContactGroup> temp = groups.get(c);
         temp.remove(cg);
         groups.put(c, temp);
     }
     
     public void clearGroups(IContact c){
-        List<IContactGroup> temp = groups.get(c);
+        List<ContactGroup> temp = groups.get(c);
         temp.clear();
         groups.put(c, temp);
     }

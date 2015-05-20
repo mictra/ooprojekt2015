@@ -5,7 +5,7 @@
  */
 package edu.chl.calendarplusplus.model;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -17,8 +17,8 @@ public interface IContactGroup {
     
     public String getGroupName();
         
-    public void addContact(IContact member);
+    public void addContact(Contact member);
     
-    public ArrayList<IContact> getContacts();
+    public List<Contact> getContacts();
     
 }

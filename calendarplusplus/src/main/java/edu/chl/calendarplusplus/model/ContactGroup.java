@@ -5,17 +5,30 @@
  */
 
 package edu.chl.calendarplusplus.model;
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 
 /**
  *
  * @author johan
  */
-public class ContactGroup implements IContactGroup {
+@Entity
+public class ContactGroup implements IContactGroup, Serializable {
     
+    @Id
     private String name;
-    private final ArrayList<IContact> members;
+    @OneToMany
+    private final List<Contact> members;
+
+    public ContactGroup() {
+        this.name = null;
+        this.members = new ArrayList<>();
+    }
     
     public ContactGroup(String name){
         this.name = name;
@@ -30,9 +43,9 @@ public class ContactGroup implements IContactGroup {
         return name;
     }
     
-    public void addContact(IContact member){
+    public void addContact(Contact member){
         // Check if the contact's name already exist in the group.
-        for(IContact c : members){
+        for(Contact c : members){
             if (member.getName().equals(c.getName())){
                 return;
             }
@@ -53,7 +66,7 @@ public class ContactGroup implements IContactGroup {
         members.add(member);
     }
     
-    public ArrayList<IContact> getContacts(){
+    public List<Contact> getContacts(){
         return members;
     }
     

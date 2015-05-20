@@ -45,5 +45,10 @@ public class MockContact implements IContact {
     public String getEmail() {
         return "mail";
     }
+
+    @Override
+    public int getId() {
+        return 1; //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

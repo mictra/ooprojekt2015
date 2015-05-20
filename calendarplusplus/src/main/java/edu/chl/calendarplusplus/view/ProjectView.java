@@ -6,6 +6,7 @@
 package edu.chl.calendarplusplus.view;
 
 import edu.chl.calendarplusplus.model.CalendarPlus;
+import edu.chl.calendarplusplus.model.ContactGroup;
 import edu.chl.calendarplusplus.model.IActivity;
 import edu.chl.calendarplusplus.model.IContact;
 import edu.chl.calendarplusplus.model.IContactGroup;
@@ -614,7 +615,7 @@ public class ProjectView extends javax.swing.JFrame {
         weekView.updateWeekView(activitylist);
     }
     
-    public void updateContactGroups(List<IContactGroup> contactgroups) {
+    public void updateContactGroups(List<ContactGroup> contactgroups) {
         contactGroups.updateContactGroups(contactgroups);
     }
     
