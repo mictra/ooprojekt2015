@@ -7,7 +7,11 @@ package edu.chl.calendarplusplus.view;
 
 import edu.chl.calendarplusplus.model.CalendarPlus;
 import edu.chl.calendarplusplus.model.IActivity;
+import java.awt.Dimension;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
+import javax.swing.JPanel;
 
 /**
  *
@@ -16,6 +20,8 @@ import java.util.List;
 public class WeekViewCard extends javax.swing.JPanel {
 
     private final CalendarPlus cal;
+    private final Calendar c;
+    private boolean buttonPressed;
     
     /**
      * Creates new form WeekViewCard
@@ -23,6 +29,12 @@ public class WeekViewCard extends javax.swing.JPanel {
     WeekViewCard(CalendarPlus cal) {
         initComponents();
         this.cal = cal;
+        c = Calendar.getInstance();
+        weekLabel.setText("Week " + c.get(c.WEEK_OF_YEAR) + ", " + c.get(c.YEAR));
+        updateDaysStatic(c);
+        setHours();
+        setDays();
+        //System.out.println(c.getDisplayName(c.DAY_OF_WEEK, c.SHORT, Locale.ENGLISH));
     }
 
     /**
@@ -34,23 +46,230 @@ public class WeekViewCard extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        weekLabel = new javax.swing.JLabel();
+        nextWeekButton = new javax.swing.JLabel();
+        previousWeekButton = new javax.swing.JLabel();
+        staticPanel = new javax.swing.JPanel();
+        monthLabel = new javax.swing.JLabel();
+        scrollPane = new javax.swing.JScrollPane();
+        dayContainer = new javax.swing.JPanel();
+        timePanel = new javax.swing.JPanel();
+        mondayPanel = new javax.swing.JPanel();
+        tuesdayPanel = new javax.swing.JPanel();
+
+        setBackground(new java.awt.Color(180, 225, 225));
+        setPreferredSize(new java.awt.Dimension(1008, 640));
+
+        weekLabel.setFont(new java.awt.Font("Source Sans Pro", 1, 24)); // NOI18N
+        weekLabel.setText("Week #");
+
+        nextWeekButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arrowsRight.png"))); // NOI18N
+        nextWeekButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                labelMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                labelMouseReleased(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                nextWeekButtonExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                nextWeekButtonEntered(evt);
+            }
+        });
+
+        previousWeekButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arrowsLeft.png"))); // NOI18N
+        previousWeekButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                labelMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                labelMouseReleased(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                previousWeekButtonExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                previousWeekButtonEntered(evt);
+            }
+        });
+
+        monthLabel.setFont(new java.awt.Font("Source Sans Pro", 1, 18)); // NOI18N
+        monthLabel.setText("jLabel1");
+
+        scrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
+        timePanel.setBackground(new java.awt.Color(177, 237, 237));
+
+        mondayPanel.setBackground(new java.awt.Color(55, 255, 255));
+
+        tuesdayPanel.setBackground(new java.awt.Color(55, 255, 255));
+
+        javax.swing.GroupLayout dayContainerLayout = new javax.swing.GroupLayout(dayContainer);
+        dayContainer.setLayout(dayContainerLayout);
+        dayContainerLayout.setHorizontalGroup(
+            dayContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dayContainerLayout.createSequentialGroup()
+                .addComponent(timePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(mondayPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(tuesdayPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 890, Short.MAX_VALUE))
+        );
+        dayContainerLayout.setVerticalGroup(
+            dayContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(timePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 574, Short.MAX_VALUE)
+            .addComponent(mondayPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(tuesdayPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        scrollPane.setViewportView(dayContainer);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(197, 197, 197)
+                .addComponent(previousWeekButton)
+                .addGap(18, 18, 18)
+                .addComponent(weekLabel)
+                .addGap(18, 18, 18)
+                .addComponent(nextWeekButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(monthLabel))
+            .addComponent(staticPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(scrollPane)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(weekLabel)
+                            .addComponent(nextWeekButton)
+                            .addComponent(previousWeekButton))
+                        .addGap(15, 15, 15))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(monthLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                .addComponent(staticPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(scrollPane))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void nextWeekButtonEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nextWeekButtonEntered
+        nextWeekButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arrowsRightHover.png")));
+    }//GEN-LAST:event_nextWeekButtonEntered
+
+    private void nextWeekButtonExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nextWeekButtonExited
+        nextWeekButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arrowsRight.png")));
+        buttonPressed = false;
+    }//GEN-LAST:event_nextWeekButtonExited
+
+    private void labelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelMousePressed
+        buttonPressed = true;
+    }//GEN-LAST:event_labelMousePressed
+
+    private void labelMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelMouseReleased
+        if (buttonPressed) {
+            if (evt.getSource() == nextWeekButton) {
+                c.add(c.WEEK_OF_YEAR, 1);
+                weekLabel.setText("Week " + c.get(c.WEEK_OF_YEAR) + ", " + c.get(c.YEAR));
+                updateDaysStatic(c);
+            }
+            if (evt.getSource() == previousWeekButton) {
+                c.add(c.WEEK_OF_YEAR, -1);
+                weekLabel.setText("Week " + c.get(c.WEEK_OF_YEAR) + ", " + c.get(c.YEAR));
+                updateDaysStatic(c);
+            }
+        }
+    }//GEN-LAST:event_labelMouseReleased
+
+    private void previousWeekButtonEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_previousWeekButtonEntered
+        previousWeekButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arrowsLeftHover.png")));
+    }//GEN-LAST:event_previousWeekButtonEntered
+
+    private void previousWeekButtonExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_previousWeekButtonExited
+        previousWeekButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arrowsLeft.png")));
+        buttonPressed = false;
+    }//GEN-LAST:event_previousWeekButtonExited
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel dayContainer;
+    private javax.swing.JPanel mondayPanel;
+    private javax.swing.JLabel monthLabel;
+    private javax.swing.JLabel nextWeekButton;
+    private javax.swing.JLabel previousWeekButton;
+    private javax.swing.JScrollPane scrollPane;
+    private javax.swing.JPanel staticPanel;
+    private javax.swing.JPanel timePanel;
+    private javax.swing.JPanel tuesdayPanel;
+    private javax.swing.JLabel weekLabel;
     // End of variables declaration//GEN-END:variables
 
     void updateWeekView(List<IActivity> activitylist) {
-        ;
+
+    }
+
+    private void updateDaysStatic(Calendar c) {
+        staticPanel.removeAll();
+        for (int i = 0; i < 7; i++) {
+            c.set(c.DAY_OF_WEEK, 2 + i);
+            WeekViewDayStatic wvds = new WeekViewDayStatic(c);
+            wvds.setPreferredSize(new Dimension(100,18));
+            //System.out.println(c.getDisplayName(c.DAY_OF_WEEK, c.SHORT, Locale.ENGLISH) + " " + c.get(c.DAY_OF_MONTH));
+            staticPanel.add(wvds);
+            revalidate();
+            repaint();
+            revalidate();
+        }
+        c.set(c.DAY_OF_WEEK, 2);
+        monthLabel.setText(c.getDisplayName(c.MONTH, c.LONG, Locale.ENGLISH));
+        c.set(c.DAY_OF_WEEK,8);
+        if (!c.getDisplayName(c.MONTH, c.LONG, Locale.ENGLISH).equals(monthLabel.getText())) {
+            monthLabel.setText(monthLabel.getText() + "/" + c.getDisplayName(c.MONTH, c.LONG, Locale.ENGLISH));
+        }
+    }
+
+    private void setHours() {
+        timePanel.setPreferredSize(new Dimension(60,24*50+24*5));
+        timePanel.setSize(new Dimension(60,24*50+24*5));
+        timePanel.removeAll();
+        String hour = "";
+        for (int i = 0; i < 24; i++) {
+            hour = (i < 10 ? "0" + Integer.toString(i) : Integer.toString(i)) + ":00";
+            WeekViewTimeElement wvte = new WeekViewTimeElement(hour);
+            wvte.setPreferredSize(new Dimension(60,50));
+            timePanel.add(wvte);
+            revalidate();
+            repaint();
+            revalidate();
+        }
+    }
+
+    private void setDays() {
+        mondayPanel.setPreferredSize(new Dimension(100,24*50+24*5));
+        tuesdayPanel.setPreferredSize(new Dimension(100,24*50+24*5));
+        mondayPanel.removeAll();
+        String hour = "";
+        for (int i = 0; i < 24; i++) {
+            hour = "Mon " + (i < 10 ? "0" + Integer.toString(i) : Integer.toString(i)) + ":00";
+            WeekViewTimeElement wvte = new WeekViewTimeElement(hour);
+            wvte.setPreferredSize(new Dimension(100,50));
+            mondayPanel.add(wvte);
+            hour = "Tue " + (i < 10 ? "0" + Integer.toString(i) : Integer.toString(i)) + ":00";
+            wvte = new WeekViewTimeElement(hour);
+            wvte.setPreferredSize(new Dimension(100,50));
+            tuesdayPanel.add(wvte);
+            revalidate();
+            repaint();
+            revalidate();
+        }
     }
 }
