@@ -5,8 +5,8 @@
  */
 package edu.chl.calendarplusplus.model;
 
-import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 /**
  *
@@ -38,6 +38,6 @@ public interface IActivity {
     
     public void removeAttendee(IContact contact);
     
-    public ArrayList<IContact> getAttendees();
+    public List<IContact> getAttendees();
     
 }
