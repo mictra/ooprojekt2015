@@ -16,13 +16,13 @@ public interface ICalendarPlus {
     
     public void addActivity(IActivity a);
     
-    public void addContactGroup(ContactGroup group);
+    public void addContactGroup(IContactGroup group);
     
     public void addAlarm(IAlarm a);
     
     public void removeActivity(IActivity a);
     
-    public void removeContactGroup(ContactGroup g);
+    public void removeContactGroup(IContactGroup g);
     
     public void removeAlarm(IAlarm a);
     
@@ -34,7 +34,7 @@ public interface ICalendarPlus {
     
     public List<IActivity> getActivityList();
     
-    public List<ContactGroup> getContactGroupList();
+    public List<IContactGroup> getContactGroupList();
     
     List<IAlarm> getAlarmList();
     

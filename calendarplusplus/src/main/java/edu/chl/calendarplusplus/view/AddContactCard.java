@@ -313,13 +313,13 @@ public class AddContactCard extends javax.swing.JPanel {
         return c;
     }
     
-    public List<ContactGroup> getContactGroups(){
-        List<ContactGroup> contactGroups = new ArrayList<>();
+    public List<IContactGroup> getContactGroups(){
+        List<IContactGroup> contactGroups = new ArrayList<>();
         if (memberList.getModel().getSize() == 0) {
             contactGroups.add(cal.getContactGroupByName("Default"));
         } else {
             for(int i=0; i < memberList.getModel().getSize(); i++){
-                contactGroups.add((ContactGroup) memberList.getModel().getElementAt(i));
+                contactGroups.add((IContactGroup) memberList.getModel().getElementAt(i));
             }
         }
         return contactGroups;

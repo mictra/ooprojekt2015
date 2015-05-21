@@ -1,10 +1,10 @@
 ----------------------------------------------------------------
-Thu May 21 01:35:42 CEST 2015:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.1 - (1616546): instance a816c00e-014d-73ae-c324-000004dcf890 
+Thu May 21 12:34:42 CEST 2015:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.1 - (1616546): instance a816c00e-014d-760a-181b-0000030f1e80 
 on database directory C:\Users\Michael\Documents\GitHub\ooprojekt2015\calendarplusplus\calendarDB with class loader sun.misc.Launcher$AppClassLoader@73d16e93 
 Loaded from file:/C:/Users/Michael/.m2/repository/org/apache/derby/derby/10.11.1.1/derby-10.11.1.1.jar
 java.vendor=Oracle Corporation
-java.runtime.version=1.8.0_20-b26
+java.runtime.version=1.8.0_31-b13
 user.dir=C:\Users\Michael\Documents\GitHub\ooprojekt2015\calendarplusplus
 os.name=Windows 8.1
 os.arch=amd64

@@ -22,7 +22,7 @@ public class ContactManagerTest {
     IContact c2;
     IContactGroup cg1;
     IContactGroup cg2;
-    ContactManager cm;
+    IContactManager cm;
     
     public ContactManagerTest(){
         this.c1 = new MockContact();

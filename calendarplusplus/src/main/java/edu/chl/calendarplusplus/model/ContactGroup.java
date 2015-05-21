@@ -22,8 +22,8 @@ public class ContactGroup implements IContactGroup, Serializable {
     
     @Id
     private String name;
-    @OneToMany
-    private final List<Contact> members;
+    @OneToMany(targetEntity = Contact.class)
+    private final List<IContact> members;
 
     public ContactGroup() {
         this.name = null;
@@ -43,9 +43,9 @@ public class ContactGroup implements IContactGroup, Serializable {
         return name;
     }
     
-    public void addContact(Contact member){
+    public void addContact(IContact member){
         // Check if the contact's name already exist in the group.
-        for(Contact c : members){
+        for(IContact c : members){
             if (member.getName().equals(c.getName())){
                 return;
             }
@@ -66,7 +66,7 @@ public class ContactGroup implements IContactGroup, Serializable {
         members.add(member);
     }
     
-    public List<Contact> getContacts(){
+    public List<IContact> getContacts(){
         return members;
     }
     

@@ -19,7 +19,7 @@ import java.util.List;
 public class CalendarPlus implements ICalendarPlus{
     
     private ArrayList<IActivity> activities;
-    private ArrayList<ContactGroup> groups;
+    private ArrayList<IContactGroup> groups;
     private ArrayList<IAlarm> alarms;
     private IContactManager contactManager;
     private IActivityManager activityManager;
@@ -28,7 +28,7 @@ public class CalendarPlus implements ICalendarPlus{
         activities = new ArrayList<>();
         groups = new ArrayList<>();
         alarms = new ArrayList<>();
-        ContactGroup defaultGroup = new ContactGroup("Default");
+        IContactGroup defaultGroup = new ContactGroup("Default");
         groups.add(defaultGroup);
         contactManager = new ContactManager();
         activityManager = new ActivityManager();
@@ -38,7 +38,7 @@ public class CalendarPlus implements ICalendarPlus{
         activities.add(a);
     }
     
-    public void addContactGroup(ContactGroup group){
+    public void addContactGroup(IContactGroup group){
         groups.add(group);
     }
     
@@ -50,7 +50,7 @@ public class CalendarPlus implements ICalendarPlus{
         activities.remove(a);
     }
     
-    public void removeContactGroup(ContactGroup g){
+    public void removeContactGroup(IContactGroup g){
         groups.remove(g);
     }
     
@@ -74,12 +74,12 @@ public class CalendarPlus implements ICalendarPlus{
         return activities;
     }
     
-    public List<ContactGroup> getContactGroupList(){
+    public List<IContactGroup> getContactGroupList(){
         return groups;
     }
     
-    public ContactGroup getContactGroupByName(String name){
-        for(ContactGroup cg : groups){
+    public IContactGroup getContactGroupByName(String name){
+        for(IContactGroup cg : groups){
             if(cg.getGroupName().equals(name)){
                 return cg;
             }

@@ -27,11 +27,11 @@ public class ContactGroupCard extends javax.swing.JPanel {
         contactGroupScrollPane.getVerticalScrollBar().setUnitIncrement(20);
     }
     
-    public void updateContactGroups(List<ContactGroup> contactgroups) {
+    public void updateContactGroups(List<IContactGroup> contactgroups) {
         elementList.removeAll();
 //        elementList.setPreferredSize(new Dimension(684,500));
 //        elementList.setSize(684, 500);
-        for (ContactGroup cg: contactgroups) {
+        for (IContactGroup cg: contactgroups) {
             ContactGroupElement cge = new ContactGroupElement(cg);
             cge.setPreferredSize(new Dimension(elementList.getPreferredSize().width/2-20,90));
             elementList.add(cge);

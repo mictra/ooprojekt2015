@@ -21,7 +21,7 @@ public class ContactGroupElement extends javax.swing.JPanel {
     /**
      * Creates new form ContactGroupElement
      */
-    public ContactGroupElement(ContactGroup cg) {
+    public ContactGroupElement(IContactGroup cg) {
         initComponents();
         nameLabel.setText(cg.getGroupName());
         setMembers(cg.getContacts());
@@ -93,7 +93,7 @@ public class ContactGroupElement extends javax.swing.JPanel {
     private javax.swing.JLabel nameLabel;
     // End of variables declaration//GEN-END:variables
 
-    private void setMembers(List<Contact> contacts) {
+    private void setMembers(List<IContact> contacts) {
         groupMemberList.removeAll();
         groupMemberList.setPreferredSize(new Dimension(334,18));
         int counter = 0;

@@ -615,7 +615,7 @@ public class ProjectView extends javax.swing.JFrame {
         weekView.updateWeekView(activitylist);
     }
     
-    public void updateContactGroups(List<ContactGroup> contactgroups) {
+    public void updateContactGroups(List<IContactGroup> contactgroups) {
         contactGroups.updateContactGroups(contactgroups);
     }
     

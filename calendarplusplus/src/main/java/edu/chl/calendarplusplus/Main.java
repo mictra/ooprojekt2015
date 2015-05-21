@@ -64,13 +64,13 @@ public final class Main {
             ContactGroup family = new ContactGroup("Family");
             ContactGroup friends = new ContactGroup("Friends");
             ContactGroup colleagues = new ContactGroup("Colleagues");
-            Contact michael = new Contact("Michael", null, null);
-            Contact patrick = new Contact("Patrick", "1234567890", null);
-            Contact johan = new Contact("Johan", null, "Johan@mail.com");
-            Contact erik = new Contact("Erik", "0987654321", "Erik@mail.com");
+            IContact michael = new Contact("Michael", null, null);
+            IContact patrick = new Contact("Patrick", "1234567890", null);
+            IContact johan = new Contact("Johan", null, "Johan@mail.com");
+            IContact erik = new Contact("Erik", "0987654321", "Erik@mail.com");
             
             ContactGroupDAO cgDAO = new ContactGroupDAO();
-            //cgDAO.create(colleagues);
+            cgDAO.create(colleagues);
             //ContactGroupDAO cgDAO1 = new ContactGroupDAO();
             /*
             for(ContactGroup cg : cgDAO.findAll()){
@@ -86,26 +86,26 @@ public final class Main {
             
             family.addContact(michael);
             friends.addContact(michael);
-            List<ContactGroup> michaelGroups = new ArrayList<>();
+            List<IContactGroup> michaelGroups = new ArrayList<>();
             michaelGroups.add(family);
             michaelGroups.add(friends);
             cal.getContactManager().setContactGroups(michael, michaelGroups);
             
             friends.addContact(patrick);
-            List<ContactGroup> patrickGroups = new ArrayList<>();
+            List<IContactGroup> patrickGroups = new ArrayList<>();
             patrickGroups.add(friends);
             cal.getContactManager().setContactGroups(patrick, patrickGroups);
             
             colleagues.addContact(johan);
             friends.addContact(johan);
-            List<ContactGroup> johanGroups = new ArrayList<>();
+            List<IContactGroup> johanGroups = new ArrayList<>();
             johanGroups.add(colleagues);
             johanGroups.add(friends);
             cal.getContactManager().setContactGroups(johan, johanGroups);
             
             friends.addContact(erik);
             colleagues.addContact(erik);
-            List<ContactGroup> erikGroups = new ArrayList<>();
+            List<IContactGroup> erikGroups = new ArrayList<>();
             erikGroups.add(friends);
             erikGroups.add(colleagues);
             cal.getContactManager().setContactGroups(erik, erikGroups);
