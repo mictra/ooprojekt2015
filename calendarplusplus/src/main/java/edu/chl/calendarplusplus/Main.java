@@ -72,17 +72,25 @@ public final class Main {
             ContactGroupDAO cgDAO = new ContactGroupDAO();
             //cgDAO.create(colleagues);
             //ContactGroupDAO cgDAO1 = new ContactGroupDAO();
-            /*
+            //cgDAO1.create(friends);
+            
             for(ContactGroup cg : cgDAO.findAll()){
                 System.out.println(cg.getGroupName());
             }
-                    */
+            
             //ContactGroup cg = cgDAO.find("Colleagues");
             //System.out.println(cg.getGroupName());
+            
+            /*
+            for(ContactGroup cg : cgDAO.findAll()){
+                cal.addContactGroup(cg);
+            }
+            */
             
             cal.addContactGroup(family);
             cal.addContactGroup(friends);
             cal.addContactGroup(colleagues);
+            
             
             family.addContact(michael);
             friends.addContact(michael);

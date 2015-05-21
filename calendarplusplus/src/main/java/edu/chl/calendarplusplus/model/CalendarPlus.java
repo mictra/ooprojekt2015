@@ -92,7 +92,8 @@ public class CalendarPlus implements ICalendarPlus{
     }
     
     public List<IContact> getAllContacts(){
-        
+        return contactManager.getAllContacts();
+        /*
         ArrayList<IContact> contacts = new ArrayList<>();
         for(IContactGroup cg : groups){
             for(IContact c : cg.getContacts()){
@@ -101,7 +102,7 @@ public class CalendarPlus implements ICalendarPlus{
             }
         }
         return contacts;
-        
+        */
     }
     
     public IContactManager getContactManager(){
