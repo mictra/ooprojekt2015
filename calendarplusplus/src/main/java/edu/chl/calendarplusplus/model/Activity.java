@@ -5,14 +5,25 @@
 */
 package edu.chl.calendarplusplus.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  *
  * @author erikforsberg
  */
-public class Activity implements IActivity {
+@Entity
+public class Activity implements IActivity, Serializable {
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.TABLE)
+    private int id;
     
     private Calendar startTime;
     private Calendar endTime;
@@ -20,8 +31,11 @@ public class Activity implements IActivity {
     private String name;
     private String description;
     private String location;
-    
+    @OneToMany(targetEntity = Contact.class)
     private ArrayList<IContact> attendees;
+
+    public Activity() {
+    }
     
     //public Notification eventNot;
     
@@ -57,6 +71,10 @@ public class Activity implements IActivity {
     }
     
     // Setters and getters
+    
+    public int getId(){
+        return id;
+    }
     
     public void setStartTime(Calendar st){
         if(st.getTimeInMillis() < this.getEndTime().getTimeInMillis()){

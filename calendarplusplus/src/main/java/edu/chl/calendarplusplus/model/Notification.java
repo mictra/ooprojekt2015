@@ -5,7 +5,12 @@
  */
 
 package edu.chl.calendarplusplus.model;
+import java.io.Serializable;
 import java.util.Calendar;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 
 /**
@@ -17,9 +22,17 @@ import java.util.Calendar;
 /* The notification class includes all of the methods from the Alarm
    class, since Alarm is an abstract class. But it also gives an activity.
 */
-public class Notification extends Alarm implements INotification {
+@Entity
+public class Notification extends Alarm implements INotification, Serializable {
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.TABLE)
+    private int id;
     
     private IActivity activity;
+
+    public Notification() {
+    }
 
     public Notification(Calendar d, String n, IActivity a) {
         super(d, n);
@@ -28,7 +41,10 @@ public class Notification extends Alarm implements INotification {
             activity = a;
         }
     }
-
+    
+    public int getId(){
+        return id;
+    }
       
     public IActivity getActivity(){
         return activity;

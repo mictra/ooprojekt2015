@@ -21,6 +21,7 @@ public class Contact implements IContact, Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private int id;
+    
     private String name;
     private String phone;
     private String email;

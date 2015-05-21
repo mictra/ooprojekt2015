@@ -5,7 +5,12 @@
  */
 
 package edu.chl.calendarplusplus.model;
+import java.io.Serializable;
 import java.util.Calendar;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
  *
@@ -17,11 +22,19 @@ import java.util.Calendar;
    like to have a set- and a get-method for each one of them. So that we can
    both modify them and receive its data, since that is the purpose after all.
 */
-public class Alarm implements IAlarm {
+@Entity
+public class Alarm implements IAlarm, Serializable {
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.TABLE)
+    private int id;
     
     private Calendar alarmTime;
     private String name;
     private String description;
+
+    public Alarm() {
+    }
     
     public Alarm(Calendar d, String n){
         if (n.isEmpty()) { return; }
@@ -29,6 +42,10 @@ public class Alarm implements IAlarm {
             this.alarmTime = d;
             this.name = n;
         }
+    }
+    
+    public int getId(){
+        return id;
     }
     
     public void setAlarm(Calendar time){
