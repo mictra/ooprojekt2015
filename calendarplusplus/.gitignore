@@ -19,3 +19,6 @@ target/
 
 # Java class-files
 *.class
+
+# Local database
+/calendarDB
