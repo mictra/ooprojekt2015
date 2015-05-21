@@ -70,15 +70,15 @@ public final class Main {
             IContact erik = new Contact("Erik", "0987654321", "Erik@mail.com");
             
             ContactGroupDAO cgDAO = new ContactGroupDAO();
-            //cgDAO.create(colleagues);
+            cgDAO.create(colleagues);
             //ContactGroupDAO cgDAO1 = new ContactGroupDAO();
             /*
             for(ContactGroup cg : cgDAO.findAll()){
                 System.out.println(cg.getGroupName());
             }
                     */
-            //ContactGroup cg = cgDAO.find("Colleagues");
-            //System.out.println(cg.getGroupName());
+            ContactGroup cg = cgDAO.find("Colleagues");
+            System.out.println(cg.getGroupName());
             
             cal.addContactGroup(family);
             cal.addContactGroup(friends);
