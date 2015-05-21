@@ -36,7 +36,7 @@ public class NotificationManagerTest {
         Assert.assertEquals(n1, n.getNotification(a1));
     }
     
-    @Test
+    //@Test
     public void editNotification(){
         a1 = new Activity(time_1, time_2, "An Activity", "", "", null);
         n1 = new Notification(time_1, "Old Notification", a1);

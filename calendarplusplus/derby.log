@@ -1,13 +1,13 @@
 ----------------------------------------------------------------
-Thu May 21 13:38:12 CEST 2015:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.1 - (1616546): instance a816c00e-014d-7644-3b2c-000007bd0820 
-on database directory C:\Users\Michael\Documents\GitHub\ooprojekt2015\calendarplusplus\calendarDB with class loader sun.misc.Launcher$AppClassLoader@73d16e93 
-Loaded from file:/C:/Users/Michael/.m2/repository/org/apache/derby/derby/10.11.1.1/derby-10.11.1.1.jar
+Thu May 21 13:43:31 CEST 2015:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.1 - (1616546): instance a816c00e-014d-7649-1959-00000370ec70 
+on database directory /Users/erikforsberg/Documents/ooprojekt2015/calendarplusplus/calendarDB with class loader sun.misc.Launcher$AppClassLoader@73d16e93 
+Loaded from file:/Users/erikforsberg/.m2/repository/org/apache/derby/derby/10.11.1.1/derby-10.11.1.1.jar
 java.vendor=Oracle Corporation
-java.runtime.version=1.8.0_31-b13
-user.dir=C:\Users\Michael\Documents\GitHub\ooprojekt2015\calendarplusplus
-os.name=Windows 8.1
-os.arch=amd64
-os.version=6.3
+java.runtime.version=1.8.0_40-b27
+user.dir=/Users/erikforsberg/Documents/ooprojekt2015/calendarplusplus
+os.name=Mac OS X
+os.arch=x86_64
+os.version=10.10.3
 derby.system.home=null
 Database Class Loader started - derby.database.classpath=''
