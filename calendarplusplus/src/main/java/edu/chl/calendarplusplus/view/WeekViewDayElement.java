@@ -5,17 +5,48 @@
  */
 package edu.chl.calendarplusplus.view;
 
+import edu.chl.calendarplusplus.model.CalendarPlus;
+import edu.chl.calendarplusplus.model.IActivity;
+import java.awt.Dimension;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
+import javax.swing.JLabel;
+
 /**
  *
  * @author cain
  */
 public class WeekViewDayElement extends javax.swing.JPanel {
 
+    private final Calendar start, end;
+    private List<IActivity> activitylist;
+    private final List<JLabel> labellist;
+    
     /**
      * Creates new form WeekViewDayElement
      */
-    public WeekViewDayElement() {
+    WeekViewDayElement(CalendarPlus cal, Calendar c) {
         initComponents();
+        start = Calendar.getInstance(TimeZone.getTimeZone("Europe/Stockholm"), Locale.ENGLISH);
+        start.setTimeInMillis(c.getTimeInMillis());        
+        end = Calendar.getInstance(TimeZone.getTimeZone("Europe/Stockholm"), Locale.ENGLISH);
+        end.setTimeInMillis(start.getTimeInMillis());
+        end.add(end.HOUR_OF_DAY, 1);
+        activitylist = new ArrayList<>();
+        activitylist = cal.getActivitiesByHour(start, end);
+        labellist = new ArrayList<>();
+        for (IActivity act: activitylist) {
+            //acttime = act.getStartTime();
+            JLabel label = new JLabel(act.getStartTime().get(act.getStartTime().HOUR_OF_DAY)+":"+act.getStartTime().get(act.getStartTime().MINUTE)+" "+act.getName());
+            label.setPreferredSize(new Dimension(127,15));
+            labellist.add(label);
+        }
+        for (JLabel label: labellist) {
+            containerPanel.add(label);
+        }
     }
 
     /**
@@ -27,19 +58,26 @@ public class WeekViewDayElement extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        containerPanel = new javax.swing.JPanel();
+
+        setPreferredSize(new java.awt.Dimension(127, 50));
+
+        containerPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEADING));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(containerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(containerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel containerPanel;
     // End of variables declaration//GEN-END:variables
 }

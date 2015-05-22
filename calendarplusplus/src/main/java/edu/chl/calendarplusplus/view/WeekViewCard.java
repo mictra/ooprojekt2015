@@ -8,9 +8,11 @@ package edu.chl.calendarplusplus.view;
 import edu.chl.calendarplusplus.model.CalendarPlus;
 import edu.chl.calendarplusplus.model.IActivity;
 import java.awt.Dimension;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
@@ -22,6 +24,8 @@ public class WeekViewCard extends javax.swing.JPanel {
     private final CalendarPlus cal;
     private final Calendar c;
     private boolean buttonPressed;
+    private final List<JPanel> daylist;
+    private final int daywidth = 127, dayheight = 50;
     
     /**
      * Creates new form WeekViewCard
@@ -29,11 +33,13 @@ public class WeekViewCard extends javax.swing.JPanel {
     WeekViewCard(CalendarPlus cal) {
         initComponents();
         this.cal = cal;
+        daylist = getDayList();
         c = Calendar.getInstance();
         weekLabel.setText("Week " + c.get(c.WEEK_OF_YEAR) + ", " + c.get(c.YEAR));
         updateDaysStatic(c);
+        
         setHours();
-        setDays();
+        setDays(c);
         //System.out.println(c.getDisplayName(c.DAY_OF_WEEK, c.SHORT, Locale.ENGLISH));
     }
 
@@ -56,6 +62,11 @@ public class WeekViewCard extends javax.swing.JPanel {
         timePanel = new javax.swing.JPanel();
         mondayPanel = new javax.swing.JPanel();
         tuesdayPanel = new javax.swing.JPanel();
+        wednesdayPanel = new javax.swing.JPanel();
+        thursdayPanel = new javax.swing.JPanel();
+        fridayPanel = new javax.swing.JPanel();
+        saturdayPanel = new javax.swing.JPanel();
+        sundayPanel = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(180, 225, 225));
         setPreferredSize(new java.awt.Dimension(1008, 640));
@@ -95,6 +106,8 @@ public class WeekViewCard extends javax.swing.JPanel {
             }
         });
 
+        staticPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEADING));
+
         monthLabel.setFont(new java.awt.Font("Source Sans Pro", 1, 18)); // NOI18N
         monthLabel.setText("jLabel1");
 
@@ -106,23 +119,48 @@ public class WeekViewCard extends javax.swing.JPanel {
 
         tuesdayPanel.setBackground(new java.awt.Color(55, 255, 255));
 
+        wednesdayPanel.setBackground(new java.awt.Color(55, 255, 255));
+
+        thursdayPanel.setBackground(new java.awt.Color(55, 255, 255));
+
+        fridayPanel.setBackground(new java.awt.Color(55, 255, 255));
+
+        saturdayPanel.setBackground(new java.awt.Color(55, 255, 255));
+
+        sundayPanel.setBackground(new java.awt.Color(55, 255, 255));
+
         javax.swing.GroupLayout dayContainerLayout = new javax.swing.GroupLayout(dayContainer);
         dayContainer.setLayout(dayContainerLayout);
         dayContainerLayout.setHorizontalGroup(
             dayContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dayContainerLayout.createSequentialGroup()
                 .addComponent(timePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(mondayPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tuesdayPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 890, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(wednesdayPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(thursdayPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(fridayPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(saturdayPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(sundayPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 834, Short.MAX_VALUE))
         );
         dayContainerLayout.setVerticalGroup(
             dayContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(timePanel, javax.swing.GroupLayout.DEFAULT_SIZE, 574, Short.MAX_VALUE)
             .addComponent(mondayPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(tuesdayPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(wednesdayPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(thursdayPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(fridayPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(saturdayPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(sundayPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         scrollPane.setViewportView(dayContainer);
@@ -181,11 +219,13 @@ public class WeekViewCard extends javax.swing.JPanel {
                 c.add(c.WEEK_OF_YEAR, 1);
                 weekLabel.setText("Week " + c.get(c.WEEK_OF_YEAR) + ", " + c.get(c.YEAR));
                 updateDaysStatic(c);
+                setDays(c);
             }
             if (evt.getSource() == previousWeekButton) {
                 c.add(c.WEEK_OF_YEAR, -1);
                 weekLabel.setText("Week " + c.get(c.WEEK_OF_YEAR) + ", " + c.get(c.YEAR));
                 updateDaysStatic(c);
+                setDays(c);
             }
         }
     }//GEN-LAST:event_labelMouseReleased
@@ -202,27 +242,36 @@ public class WeekViewCard extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel dayContainer;
+    private javax.swing.JPanel fridayPanel;
     private javax.swing.JPanel mondayPanel;
     private javax.swing.JLabel monthLabel;
     private javax.swing.JLabel nextWeekButton;
     private javax.swing.JLabel previousWeekButton;
+    private javax.swing.JPanel saturdayPanel;
     private javax.swing.JScrollPane scrollPane;
     private javax.swing.JPanel staticPanel;
+    private javax.swing.JPanel sundayPanel;
+    private javax.swing.JPanel thursdayPanel;
     private javax.swing.JPanel timePanel;
     private javax.swing.JPanel tuesdayPanel;
+    private javax.swing.JPanel wednesdayPanel;
     private javax.swing.JLabel weekLabel;
     // End of variables declaration//GEN-END:variables
 
-    void updateWeekView(List<IActivity> activitylist) {
-
+    void updateWeekView() {
+        updateDaysStatic(c);
+        setDays(c);
     }
 
     private void updateDaysStatic(Calendar c) {
         staticPanel.removeAll();
+        JLabel emptyLabel = new JLabel("");
+        emptyLabel.setPreferredSize(new Dimension(55,18));
+        staticPanel.add(emptyLabel);
         for (int i = 0; i < 7; i++) {
             c.set(c.DAY_OF_WEEK, 2 + i);
             WeekViewDayStatic wvds = new WeekViewDayStatic(c);
-            wvds.setPreferredSize(new Dimension(100,18));
+            wvds.setPreferredSize(new Dimension(daywidth,18));
             //System.out.println(c.getDisplayName(c.DAY_OF_WEEK, c.SHORT, Locale.ENGLISH) + " " + c.get(c.DAY_OF_MONTH));
             staticPanel.add(wvds);
             revalidate();
@@ -238,14 +287,14 @@ public class WeekViewCard extends javax.swing.JPanel {
     }
 
     private void setHours() {
-        timePanel.setPreferredSize(new Dimension(60,24*50+24*5));
-        timePanel.setSize(new Dimension(60,24*50+24*5));
+        timePanel.setPreferredSize(new Dimension(60,24*(dayheight+5)));
+        timePanel.setSize(new Dimension(60,24*(dayheight+5)));
         timePanel.removeAll();
         String hour = "";
         for (int i = 0; i < 24; i++) {
             hour = (i < 10 ? "0" + Integer.toString(i) : Integer.toString(i)) + ":00";
             WeekViewTimeElement wvte = new WeekViewTimeElement(hour);
-            wvte.setPreferredSize(new Dimension(60,50));
+            wvte.setPreferredSize(new Dimension(60,dayheight));
             timePanel.add(wvte);
             revalidate();
             repaint();
@@ -253,23 +302,41 @@ public class WeekViewCard extends javax.swing.JPanel {
         }
     }
 
-    private void setDays() {
-        mondayPanel.setPreferredSize(new Dimension(100,24*50+24*5));
-        tuesdayPanel.setPreferredSize(new Dimension(100,24*50+24*5));
-        mondayPanel.removeAll();
-        String hour = "";
-        for (int i = 0; i < 24; i++) {
-            hour = "Mon " + (i < 10 ? "0" + Integer.toString(i) : Integer.toString(i)) + ":00";
-            WeekViewTimeElement wvte = new WeekViewTimeElement(hour);
-            wvte.setPreferredSize(new Dimension(100,50));
-            mondayPanel.add(wvte);
-            hour = "Tue " + (i < 10 ? "0" + Integer.toString(i) : Integer.toString(i)) + ":00";
-            wvte = new WeekViewTimeElement(hour);
-            wvte.setPreferredSize(new Dimension(100,50));
-            tuesdayPanel.add(wvte);
-            revalidate();
-            repaint();
-            revalidate();
+    private void setDays(Calendar c) {
+        c.set(c.DAY_OF_WEEK, 2);
+        for (JPanel panel: daylist) {
+            panel.setPreferredSize(new Dimension(daywidth,24*(dayheight+5)));
+            panel.removeAll();
+            
+            c.set(c.HOUR_OF_DAY, 0);    
+            c.set(c.MINUTE, 0);
+            c.set(c.SECOND, 0);
+            for (int i = 0; i < 24; i++) {
+                WeekViewDayElement wvde = new WeekViewDayElement(cal, c);
+                wvde.setPreferredSize(new Dimension(daywidth, dayheight));
+                panel.add(wvde);               
+                revalidate();
+                repaint();
+                revalidate();
+                if (c.get(c.HOUR_OF_DAY) < 23)
+                    c.add(c.HOUR_OF_DAY, 1);
+            }
+            c.set(c.DAY_OF_WEEK, (c.get(c.DAY_OF_WEEK)+1) % 7 );
+            
         }
+
+
+    }
+
+    private List<JPanel> getDayList() {
+        List <JPanel> list = new ArrayList<>();
+        list.add(mondayPanel);
+        list.add(tuesdayPanel);
+        list.add(wednesdayPanel);
+        list.add(thursdayPanel);
+        list.add(fridayPanel);
+        list.add(saturdayPanel);
+        list.add(sundayPanel);
+        return list;
     }
 }

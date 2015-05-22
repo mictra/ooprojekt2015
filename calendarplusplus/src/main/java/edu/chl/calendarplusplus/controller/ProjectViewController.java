@@ -59,7 +59,7 @@ public class ProjectViewController implements MouseListener {
             projectView.updateListView(cal.getActivityList());
         } else if (e.getSource() == weekViewLabel) {
             projectView.changeCard("WeekViewCard");
-            
+            projectView.updateWeekView();
         } else if (e.getSource() == addContactGroupLabel) {
             projectView.changeCard("AddContactGroupCard");
         } else if (e.getSource() == addContactLabel) {

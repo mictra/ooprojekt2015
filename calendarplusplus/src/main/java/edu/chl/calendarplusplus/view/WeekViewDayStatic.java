@@ -38,7 +38,6 @@ public class WeekViewDayStatic extends javax.swing.JPanel {
         dayLabel = new javax.swing.JLabel();
 
         dayLabel.setFont(new java.awt.Font("Source Sans Pro", 1, 14)); // NOI18N
-        dayLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         dayLabel.setText("jLabel1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

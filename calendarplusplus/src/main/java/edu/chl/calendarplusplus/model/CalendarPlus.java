@@ -123,7 +123,7 @@ public class CalendarPlus implements ICalendarPlus{
                     act.getEndTime().getTimeInMillis() <= end.getTimeInMillis()) ||
                     
                     (act.getStartTime().getTimeInMillis() < end.getTimeInMillis() &&
-                    act.getEndTime().getTimeInMillis() >= end.getTimeInMillis())){
+                    act.getEndTime().getTimeInMillis() > end.getTimeInMillis())){
                 tempActList.add(act);
             }
         
