@@ -1,6 +1,7 @@
 package edu.chl.calendarplusplus.persistence;
 
 import java.util.List;
+import javax.persistence.EntityManager;
 
 /**
  *
@@ -10,9 +11,11 @@ import java.util.List;
  * Basic CRUD interface implemented by all DAO (Facade) classes
  *
  * @param <T> Type
- * @param <K> Primary key (username)
+ * @param <K> Primary key
  */
 public interface IDAO<T, K> {
+    
+    public EntityManager getEntityManager();
 
     public void create(T t);
 

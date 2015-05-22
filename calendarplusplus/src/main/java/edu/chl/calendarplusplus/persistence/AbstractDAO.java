@@ -34,6 +34,10 @@ public abstract class AbstractDAO<T, K> implements IDAO<T, K> {
     protected AbstractDAO(Class<T> clazz) {
         this.clazz = clazz;
     }
+    
+    public EntityManager getEntityManager(){
+        return em;
+    }
 
     @Override
     public void create(T t) {
@@ -46,7 +50,6 @@ public abstract class AbstractDAO<T, K> implements IDAO<T, K> {
             throw e;
         }
         em.getTransaction().commit();
-        //em.close();
     }
 
     @Override

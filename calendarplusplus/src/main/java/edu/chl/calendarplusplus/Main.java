@@ -7,10 +7,12 @@ import edu.chl.calendarplusplus.model.ContactGroup;
 import edu.chl.calendarplusplus.model.IContact;
 import edu.chl.calendarplusplus.model.IContactGroup;
 import edu.chl.calendarplusplus.model.Project;
+import edu.chl.calendarplusplus.persistence.ContactDAO;
 import edu.chl.calendarplusplus.persistence.ContactGroupDAO;
 import edu.chl.calendarplusplus.view.ProjectView;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.EntityManager;
 import javax.swing.SwingUtilities;
 
 /*
@@ -61,9 +63,9 @@ public final class Main {
         
         public static void initTest(CalendarPlus cal){
             //Adding contacts and contactgroups
-            ContactGroup family = new ContactGroup("Family");
-            ContactGroup friends = new ContactGroup("Friends");
-            ContactGroup colleagues = new ContactGroup("Colleagues");
+            IContactGroup family = new ContactGroup("Family");
+            IContactGroup friends = new ContactGroup("Friends");
+            IContactGroup colleagues = new ContactGroup("Colleagues");
             IContact michael = new Contact("Michael", null, null);
             IContact patrick = new Contact("Patrick", "1234567890", null);
             IContact johan = new Contact("Johan", null, "Johan@mail.com");
@@ -71,15 +73,36 @@ public final class Main {
             
             ContactGroupDAO cgDAO = new ContactGroupDAO();
             //cgDAO.create(colleagues);
+            //cgDAO.deleteAll();
+            
+            ContactDAO cDAO = new ContactDAO();
+            //cDAO.deleteAll();
+            
+            //cDAO.create(michael);
+            
             //ContactGroupDAO cgDAO1 = new ContactGroupDAO();
             //cgDAO1.create(friends);
             
-            for(ContactGroup cg : cgDAO.findAll()){
+            //IContactGroup cgroup = cgDAO.find("Colleagues");
+            //cgroup.addContact(erik);
+            //cDAO.create(erik);
+            
+            System.out.println("All Group names:");
+            for(IContactGroup cg : cgDAO.findAll()){
                 System.out.println(cg.getGroupName());
             }
+           
+            System.out.println("All contact names:");
+            for(IContact c : cDAO.findAll()){
+                System.out.println(c.getName());
+            }
             
-            //ContactGroup cg = cgDAO.find("Colleagues");
-            //System.out.println(cg.getGroupName());
+            /*
+            System.out.println("All contacts in Group:");
+            for(IContact c : cgroup.getContacts()){
+                System.out.println(c.getName());
+            }
+            */
             
             /*
             for(ContactGroup cg : cgDAO.findAll()){
