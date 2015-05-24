@@ -19,6 +19,8 @@ public interface IContactGroup {
         
     public void addContact(IContact member);
     
+    public boolean hasContact(IContact contact);
+    
     public List<IContact> getContacts();
     
 }

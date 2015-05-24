@@ -6,6 +6,7 @@
 package edu.chl.calendarplusplus.view;
 
 import edu.chl.calendarplusplus.model.ContactGroup;
+import edu.chl.calendarplusplus.model.IContactGroup;
 import java.beans.PropertyChangeSupport;
 
 /**
@@ -154,9 +155,8 @@ public class AddContactGroupCard extends javax.swing.JPanel {
     }
     */
 
-    public ContactGroup getAsContactGroup() {
-        ContactGroup cg = new ContactGroup(nameTextField.getText());
-        return cg;
+    public IContactGroup getAsContactGroup() {
+        return new ContactGroup(nameTextField.getText());
     }
     
     public void resetFields() {

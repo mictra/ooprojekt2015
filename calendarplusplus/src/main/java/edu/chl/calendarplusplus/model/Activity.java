@@ -41,7 +41,7 @@ public class Activity implements IActivity, Serializable {
     //public Notification eventNot;
     
     public Activity(Calendar st, Calendar et, String name,
-            String desc, String loc, ArrayList<IContact> att) {
+            String desc, String loc, List<IContact> att) {
         
         if(st.getTimeInMillis() < et.getTimeInMillis()){
             this.startTime = st;
@@ -131,6 +131,16 @@ public class Activity implements IActivity, Serializable {
     
     public List<IContact> getAttendees(){
         return this.attendees;
+    }
+    
+    //Using this method instead of contains method, because we wan't the values comparisson
+    public boolean hasContact(IContact contact){
+        for(IContact c : attendees){
+            if(contact.getId() == c.getId() && contact.getName().equals(c.getName())){
+                return true;
+            }
+        }
+        return false;
     }
     
 }

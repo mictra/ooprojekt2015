@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 
 /**
@@ -29,6 +30,7 @@ public class Notification extends Alarm implements INotification, Serializable {
     @GeneratedValue(strategy = GenerationType.TABLE)
     private int id;
     
+    @OneToOne(targetEntity = Activity.class)
     private IActivity activity;
 
     public Notification() {
@@ -42,14 +44,17 @@ public class Notification extends Alarm implements INotification, Serializable {
         }
     }
     
+    @Override
     public int getId(){
         return id;
     }
       
+    @Override
     public IActivity getActivity(){
         return activity;
     }
     
+    @Override
     public void setActivity(IActivity act){
         this.activity = act;
     }

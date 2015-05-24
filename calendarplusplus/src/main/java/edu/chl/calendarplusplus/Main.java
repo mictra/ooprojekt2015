@@ -62,6 +62,16 @@ public final class Main {
 	}
         
         public static void initTest(CalendarPlus cal){
+            
+            /*
+            ContactGroupDAO cgDAO = new ContactGroupDAO();
+            cgDAO.deleteAll();
+            
+            ContactDAO cDAO = new ContactDAO();
+            cDAO.deleteAll();
+            */
+            
+            /*
             //Adding contacts and contactgroups
             IContactGroup family = new ContactGroup("Family");
             IContactGroup friends = new ContactGroup("Friends");
@@ -80,12 +90,10 @@ public final class Main {
             
             //cDAO.create(michael);
             
-            //ContactGroupDAO cgDAO1 = new ContactGroupDAO();
-            //cgDAO1.create(friends);
-            
-            //IContactGroup cgroup = cgDAO.find("Colleagues");
-            //cgroup.addContact(erik);
+            IContactGroup cgroup = cgDAO.find("Colleagues");
+            //cgroup.addContact(johan);
             //cDAO.create(erik);
+            //cgDAO.update(cgroup);
             
             System.out.println("All Group names:");
             for(IContactGroup cg : cgDAO.findAll()){
@@ -97,18 +105,11 @@ public final class Main {
                 System.out.println(c.getName());
             }
             
-            /*
+            
             System.out.println("All contacts in Group:");
             for(IContact c : cgroup.getContacts()){
                 System.out.println(c.getName());
             }
-            */
-            
-            /*
-            for(ContactGroup cg : cgDAO.findAll()){
-                cal.addContactGroup(cg);
-            }
-            */
             
             cal.addContactGroup(family);
             cal.addContactGroup(friends);
@@ -142,7 +143,7 @@ public final class Main {
             cal.getContactManager().setContactGroups(erik, erikGroups);
             
             //Add activities
-            
+            */
         }
        
 }

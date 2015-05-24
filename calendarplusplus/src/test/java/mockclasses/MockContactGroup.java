@@ -42,6 +42,11 @@ public class MockContactGroup implements IContactGroup {
     public String toString() {
         return name;
     }
+
+    @Override
+    public boolean hasContact(IContact contact) {
+        return false; //Temporary
+    }
     
 }
     

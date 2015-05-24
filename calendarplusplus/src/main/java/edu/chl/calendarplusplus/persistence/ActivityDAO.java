@@ -5,16 +5,28 @@
  */
 package edu.chl.calendarplusplus.persistence;
 
-import edu.chl.calendarplusplus.model.Activity;
+import edu.chl.calendarplusplus.model.IActivity;
+import java.util.List;
 
 /**
  *
  * @author Michael
  */
-public class ActivityDAO extends AbstractDAO<Activity, Integer> {
+public class ActivityDAO extends AbstractDAO<IActivity, Integer> {
 
-    public ActivityDAO(Class<Activity> clazz) {
-        super(clazz);
+    public ActivityDAO() {
+        super(IActivity.class);
+    }
+    
+    @Override
+    public List<IActivity> findAll(){
+        return em.createQuery("select a from Activity a", IActivity.class).getResultList();
+    }
+    
+    public void deleteAll(){
+        em.getTransaction().begin();
+        em.createQuery("DELETE FROM Activity a").executeUpdate();
+        em.getTransaction().commit();
     }
     
 }

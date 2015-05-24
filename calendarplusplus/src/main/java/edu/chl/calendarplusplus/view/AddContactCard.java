@@ -8,6 +8,7 @@ package edu.chl.calendarplusplus.view;
 import edu.chl.calendarplusplus.model.CalendarPlus;
 import edu.chl.calendarplusplus.model.Contact;
 import edu.chl.calendarplusplus.model.ContactGroup;
+import edu.chl.calendarplusplus.model.IContact;
 import edu.chl.calendarplusplus.model.IContactGroup;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
@@ -235,7 +236,7 @@ public class AddContactCard extends javax.swing.JPanel {
         saveButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/saveButton.png")));
         buttonPressed = false;
     }//GEN-LAST:event_saveButtonMouseExited
-    
+
     private void labelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelMousePressed
         buttonPressed = true;
     }//GEN-LAST:event_labelMousePressed
@@ -246,7 +247,7 @@ public class AddContactCard extends javax.swing.JPanel {
                 pcs.firePropertyChange("AddContact", null, null);
             }
             if (evt.getSource() == cancelButton) {
-                
+
             }
             if (evt.getSource() == addButton) {
                 pcs.firePropertyChange("AddGroup", null, null);
@@ -306,19 +307,18 @@ public class AddContactCard extends javax.swing.JPanel {
     private PropertyChangeSupport pcs;
     private boolean buttonPressed;
 
-    public Contact getAsContact() {
-        Contact c = new Contact(nameTextField.getText(), emailTextField.getText(), phoneTextField.getText());
+    public IContact getAsContact() {
         //c.setEmail(emailTextField.getText());
         //c.setPhone(phoneTextField.getText());
-        return c;
+        return new Contact(nameTextField.getText(), emailTextField.getText(), phoneTextField.getText());
     }
-    
-    public List<IContactGroup> getContactGroups(){
+
+    public List<IContactGroup> getContactGroups() {
         List<IContactGroup> contactGroups = new ArrayList<>();
         if (memberList.getModel().getSize() == 0) {
             contactGroups.add(cal.getContactGroupByName("Default"));
         } else {
-            for(int i=0; i < memberList.getModel().getSize(); i++){
+            for (int i = 0; i < memberList.getModel().getSize(); i++) {
                 contactGroups.add((IContactGroup) memberList.getModel().getElementAt(i));
             }
         }
@@ -337,30 +337,36 @@ public class AddContactCard extends javax.swing.JPanel {
             if (!cg.getGroupName().equals("Default")) {
                 nonMemberListModel.addElement(cg);
             }
-            if (lstring.length() < cg.getGroupName().length())
+            if (lstring.length() < cg.getGroupName().length()) {
                 lstring = cg.getGroupName();
+            }
         }
         nonMemberList.setModel(nonMemberListModel);
-        nonMemberList.setPrototypeCellValue(lstring+ "     ");
+        nonMemberList.setPrototypeCellValue(lstring + "     ");
         nonMemberScrollPane.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
 
         //Set the member groups (empty list from start)
         memberList.removeAll();
         memberListModel.removeAllElements();
-        memberList.setModel(memberListModel);        
-        memberList.setPrototypeCellValue(lstring+ "     ");
+        memberList.setModel(memberListModel);
+        memberList.setPrototypeCellValue(lstring + "     ");
         memberScrollPane.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
 
     }
 
     public void addMemberGroup() {
-        memberListModel.addElement((IContactGroup) nonMemberList.getSelectedValue());
-        nonMemberListModel.remove(nonMemberList.getSelectedIndex());
+        //Check if an item in the list is actually selected, otherwise error
+        if (nonMemberList.getSelectedIndex() >= 0) {
+            memberListModel.addElement((IContactGroup) nonMemberList.getSelectedValue());
+            nonMemberListModel.remove(nonMemberList.getSelectedIndex());
+        }
     }
 
     public void removeMemberGroup() {
-        nonMemberListModel.addElement((IContactGroup) memberList.getSelectedValue());
-        memberListModel.remove(memberList.getSelectedIndex());
+        if (memberList.getSelectedIndex() >= 0) {
+            nonMemberListModel.addElement((IContactGroup) memberList.getSelectedValue());
+            memberListModel.remove(memberList.getSelectedIndex());
+        }
     }
 
     public void addListener(PropertyChangeSupport pcs) {

@@ -39,6 +39,9 @@ public class ContactManager implements IContactManager{
     
     public void addNewGroup(IContact c, IContactGroup cg){
         List<IContactGroup> temp = groups.get(c);
+        if(temp == null){
+            temp = new ArrayList<>();
+        }
         temp.add(cg);
         groups.put(c, temp);
     }

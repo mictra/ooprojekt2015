@@ -40,4 +40,6 @@ public interface IActivity {
     
     public List<IContact> getAttendees();
     
+    public boolean hasContact(IContact contact);
+    
 }

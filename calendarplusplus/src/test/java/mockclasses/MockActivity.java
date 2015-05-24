@@ -85,4 +85,9 @@ public class MockActivity implements IActivity {
     public ArrayList<IContact> getAttendees() {
         return new ArrayList<IContact>();
     }
+
+    @Override
+    public boolean hasContact(IContact contact) {
+        return false; //Temporary
+    }
 }

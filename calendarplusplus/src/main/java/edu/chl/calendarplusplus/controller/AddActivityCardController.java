@@ -47,7 +47,7 @@ public class AddActivityCardController implements PropertyChangeListener {
         String evtName = evt.getPropertyName();
         if (evtName.equalsIgnoreCase("AddActivity")) {
             IActivity act = ac.getAsActivity();
-            cal.addActivity(act);
+            cal.addActivity(act, ac.getAttendees());
             INotification not = ac.getAsNotification(act);
             if (not != null) {
                 //Add notification to manager or update or remove

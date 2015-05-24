@@ -70,6 +70,16 @@ public class ContactGroup implements IContactGroup, Serializable {
         return members;
     }
     
+    //Using this method instead of contains method, because we wan't the values comparisson
+    public boolean hasContact(IContact contact){
+        for(IContact c : members){
+            if(contact.getId() == c.getId() && contact.getName().equals(c.getName())){
+                return true;
+            }
+        }
+        return false;
+    }
+    
     @Override
     public String toString() {
         return name;

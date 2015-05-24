@@ -5,7 +5,7 @@
  */
 package edu.chl.calendarplusplus.model;
 
-import java.util.Calendar;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -53,6 +53,15 @@ public class ActivityManager implements IActivityManager {
     
     public List<IActivity> getContactActivities(IContact c){
         return activityManager.get(c);
+    }
+    
+    public void addNewGroup(IContact c, IActivity a){
+        List<IActivity> temp = activityManager.get(c);
+        if(temp == null){
+            temp = new ArrayList<>();
+        }
+        temp.add(a);
+        activityManager.put(c, temp);
     }
     
     public void removeContact(IContact c){

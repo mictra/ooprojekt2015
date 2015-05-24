@@ -43,18 +43,9 @@ public class AddContactCardController implements PropertyChangeListener {
     public void propertyChange(PropertyChangeEvent evt) {
         String evtName = evt.getPropertyName();
         if (evtName.equalsIgnoreCase("AddContact")) {
-            Contact contact = cc.getAsContact();
-            //List<String> stringGroups = cc.getContactGroups();
-            List<IContactGroup> contactGroups = new ArrayList<>();
-            contactGroups = cc.getContactGroups();
-            for(IContactGroup cg : contactGroups){
-//                if(stringGroups.contains(cg.getGroupName())){
-//                    contactGroups.add(cg);
-                    cg.addContact(contact);
-//                }
-            }
-            cal.getContactManager().setContactGroups(contact, contactGroups);
-            //cal.getContactGroupList().get(0).addContact(contact);
+            IContact contact = cc.getAsContact();
+            List<IContactGroup> contactGroups = cc.getContactGroups();
+            cal.addContact(contact, contactGroups);
             cc.resetFields();
         } else if (evtName.equalsIgnoreCase("AddGroup")) {
             cc.addMemberGroup();

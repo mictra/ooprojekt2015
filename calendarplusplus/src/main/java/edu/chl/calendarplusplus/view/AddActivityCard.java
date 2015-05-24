@@ -458,8 +458,8 @@ public class AddActivityCard extends javax.swing.JPanel {
         return inot;
     }
             
-    private ArrayList<IContact> getAttendees() {
-        ArrayList<IContact> attendees = new ArrayList<>();
+    public List<IContact> getAttendees() {
+        List<IContact> attendees = new ArrayList<>();
         for (int i = 0; i < attendeeList.getModel().getSize(); i++) {
             attendees.add((IContact) attendeeList.getModel().getElementAt(i));
         }

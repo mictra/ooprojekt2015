@@ -14,7 +14,9 @@ import java.util.List;
  */
 public interface ICalendarPlus {
     
-    public void addActivity(IActivity a);
+    public void addActivity(IActivity a, List<IContact> attendees);
+    
+    public void addContact(IContact contact, List<IContactGroup> contactGroups);
     
     public void addContactGroup(IContactGroup group);
     
