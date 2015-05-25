@@ -30,7 +30,7 @@ public class WeekViewTimeElement extends javax.swing.JPanel {
 
         hourLabel = new javax.swing.JLabel();
 
-        hourLabel.setFont(new java.awt.Font("Source Sans Pro", 1, 14)); // NOI18N
+        hourLabel.setFont(new java.awt.Font("Source Sans Pro", 1, 16)); // NOI18N
         hourLabel.setText("jLabel1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

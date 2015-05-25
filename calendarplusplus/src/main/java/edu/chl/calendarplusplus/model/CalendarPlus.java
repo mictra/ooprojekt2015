@@ -162,11 +162,11 @@ public class CalendarPlus implements ICalendarPlus {
     public List<IActivity> getActivitiesByHour(Calendar start, Calendar end) {
         List<IActivity> tempActList = new ArrayList<>();
         for (IActivity act : activities) {
-            if ((act.getStartTime().getTimeInMillis() < start.getTimeInMillis()
-                    && act.getEndTime().getTimeInMillis() > start.getTimeInMillis())
-                    || (act.getStartTime().getTimeInMillis() >= start.getTimeInMillis()
-                    && act.getEndTime().getTimeInMillis() <= end.getTimeInMillis())
-                    || (act.getStartTime().getTimeInMillis() < end.getTimeInMillis()
+            if ((act.getStartTime().getTimeInMillis() >= start.getTimeInMillis()
+                    && act.getStartTime().getTimeInMillis() < end.getTimeInMillis())                    
+                    || (act.getEndTime().getTimeInMillis() > start.getTimeInMillis()
+                    && act.getEndTime().getTimeInMillis() < end.getTimeInMillis())
+                    || (act.getStartTime().getTimeInMillis() < start.getTimeInMillis()
                     && act.getEndTime().getTimeInMillis() > end.getTimeInMillis())) {
                 tempActList.add(act);
             }

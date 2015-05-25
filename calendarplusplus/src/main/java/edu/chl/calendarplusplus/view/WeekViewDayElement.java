@@ -7,6 +7,7 @@ package edu.chl.calendarplusplus.view;
 
 import edu.chl.calendarplusplus.model.CalendarPlus;
 import edu.chl.calendarplusplus.model.IActivity;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -24,6 +25,7 @@ public class WeekViewDayElement extends javax.swing.JPanel {
     private final Calendar start, end;
     private List<IActivity> activitylist;
     private final List<JLabel> labellist;
+    private String minute = "";
     
     /**
      * Creates new form WeekViewDayElement
@@ -39,9 +41,11 @@ public class WeekViewDayElement extends javax.swing.JPanel {
         activitylist = cal.getActivitiesByHour(start, end);
         labellist = new ArrayList<>();
         for (IActivity act: activitylist) {
-            //acttime = act.getStartTime();
-            JLabel label = new JLabel(act.getStartTime().get(act.getStartTime().HOUR_OF_DAY)+":"+act.getStartTime().get(act.getStartTime().MINUTE)+" "+act.getName());
-            label.setPreferredSize(new Dimension(127,15));
+            minute = act.getStartTime().get(act.getStartTime().MINUTE) <= 5 ? "0"+Integer.toString(act.getStartTime().get(act.getStartTime().MINUTE)) : Integer.toString(act.getStartTime().get(act.getStartTime().MINUTE));
+            JLabel label = new JLabel(act.getStartTime().get(act.getStartTime().HOUR_OF_DAY)+":"+minute+" "+act.getName());
+            label.setPreferredSize(new Dimension(120,15));
+            label.setOpaque(true);
+            label.setBackground(Color.green);
             labellist.add(label);
         }
         for (JLabel label: labellist) {
@@ -60,7 +64,8 @@ public class WeekViewDayElement extends javax.swing.JPanel {
 
         containerPanel = new javax.swing.JPanel();
 
-        setPreferredSize(new java.awt.Dimension(127, 50));
+        setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        setPreferredSize(new java.awt.Dimension(132, 50));
 
         containerPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEADING));
 

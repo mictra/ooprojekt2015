@@ -6,8 +6,6 @@
 package edu.chl.calendarplusplus.view;
 
 import edu.chl.calendarplusplus.model.Activity;
-import edu.chl.calendarplusplus.model.Contact;
-import edu.chl.calendarplusplus.model.ContactManager;
 import edu.chl.calendarplusplus.model.IActivity;
 import edu.chl.calendarplusplus.model.IContact;
 import edu.chl.calendarplusplus.model.IContactManager;
@@ -425,14 +423,16 @@ public class AddActivityCard extends javax.swing.JPanel {
         int sDay = sDayComboBox.getSelectedIndex()+1;
         int sHour = Integer.parseInt((String) sHourComboBox.getSelectedItem());
         int sMinute = Integer.parseInt((String) sMinuteComboBox.getSelectedItem());
-        startDate.set(sYear, sMonth, sDay, sHour, sMinute);
+        startDate.set(sYear, sMonth, sDay, sHour, sMinute, 0);
+        startDate.set(startDate.MILLISECOND, 0);
         Calendar endDate = Calendar.getInstance();
         int eYear = (Integer) eYearComboBox.getSelectedItem();
         int eMonth = eMonthComboBox.getSelectedIndex();
         int eDay = eDayComboBox.getSelectedIndex()+1;
         int eHour = Integer.parseInt((String) eHourComboBox.getSelectedItem());
         int eMinute = Integer.parseInt((String) eMinuteComboBox.getSelectedItem());
-        endDate.set(eYear, eMonth, eDay, eHour, eMinute);
+        endDate.set(eYear, eMonth, eDay, eHour, eMinute, 0);
+        endDate.set(endDate.MILLISECOND, 0);
         IActivity a = new Activity(startDate, endDate, nameTextField.getText(), locationTextField.getText(), descriptionTextArea.getText(), getAttendees());
         return a;
     }
@@ -482,37 +482,14 @@ public class AddActivityCard extends javax.swing.JPanel {
             sDayComboBox.addItem(i);
             eDayComboBox.addItem(i);
         }
-        // Set the months
-//        String[] months = { "January", "February", "March", "April", "May", "June",
-//            "July", "August", "September", "October", "November", "December" };
-//        sMonthComboBox.removeAllItems();
-//        eMonthComboBox.removeAllItems();
-//        sMonthComboBox.addItem(months);
-//        eMonthComboBox.addItem(months);
         // Set the years
         sYearComboBox.removeAllItems();
         eYearComboBox.removeAllItems();
         for (int i = 2015; i <= 2020; i++) {
             sYearComboBox.addItem(i);
             eYearComboBox.addItem(i);
-        }
-        // Set the hours
-//        sHourComboBox.removeAllItems();
-//        eHourComboBox.removeAllItems();
-//        for (int i = 0; i <= 23; i++) {
-//            sHourComboBox.addItem(i);
-//            eHourComboBox.addItem(i);
-//        }
-        // Set the minutes
-        //sMinuteComboBox.removeAllItems();
-        //eMinuteComboBox.removeAllItems();
-//        for (int i = 10; i <= 55; i = i+5) {
-//            sMinuteComboBox.addItem(i);
-//            eMinuteComboBox.addItem(i);
-//        }
-        
-        
-        }
+        }      
+    }
     
     public void resetFields() {
         nameTextField.setText("");
@@ -531,7 +508,6 @@ public class AddActivityCard extends javax.swing.JPanel {
         locationTextField.setText("");
         descriptionTextArea.setText("");
         notificationComboBox.setSelectedIndex(0);
-        
         setLists();
     }
 
