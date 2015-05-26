@@ -6,6 +6,7 @@
 package edu.chl.calendarplusplus.model;
 
 import edu.chl.calendarplusplus.persistence.ActivityDAO;
+import edu.chl.calendarplusplus.persistence.AlarmDAO;
 import edu.chl.calendarplusplus.persistence.ContactDAO;
 import edu.chl.calendarplusplus.persistence.ContactGroupDAO;
 import java.util.ArrayList;
@@ -29,11 +30,13 @@ public class CalendarPlus implements ICalendarPlus {
     private ContactGroupDAO cgDAO;
     private ContactDAO cDAO;
     private ActivityDAO aDAO;
+    private AlarmDAO alarmDAO;
 
     public CalendarPlus() {
         cgDAO = new ContactGroupDAO();
         cDAO = new ContactDAO();
         aDAO = new ActivityDAO();
+        alarmDAO = new AlarmDAO();
         activities = aDAO.findAll();
         if(activities.isEmpty()){
             activities = new ArrayList<>();
@@ -43,7 +46,10 @@ public class CalendarPlus implements ICalendarPlus {
             cgDAO.create(new ContactGroup("Default"));
             groups = cgDAO.findAll();
         }
-        alarms = new ArrayList<>();
+        alarms = alarmDAO.findAll();
+        if(alarms.isEmpty()){
+            alarms = new ArrayList<>();
+        }
         contactManager = new ContactManager();
         activityManager = new ActivityManager();
         /*
@@ -98,7 +104,9 @@ public class CalendarPlus implements ICalendarPlus {
     }
 
     public void addAlarm(IAlarm a) {
-        alarms.add(a);
+        alarmDAO.create(a);
+        alarms = alarmDAO.findAll();
+        //alarms.add(a);
     }
 
     public void removeActivity(IActivity a) {
