@@ -14,6 +14,7 @@ public class ProjectViewController implements MouseListener {
     private JLabel newActivityLabel;
     private JLabel listViewLabel;
     private JLabel weekViewLabel;
+    private JLabel monthViewLabel;
     private JLabel addContactLabel;
     private JLabel addContactGroupLabel;
     private JLabel allContactsLabel;
@@ -34,6 +35,7 @@ public class ProjectViewController implements MouseListener {
         newActivityLabel = projectView.getNewActivityLabel();
         listViewLabel = projectView.getListViewLabel();
         weekViewLabel = projectView.getWeekViewLabel();
+        monthViewLabel = projectView.getMonthViewLabel();
         addContactLabel = projectView.getAddContactLabel();
         addContactGroupLabel = projectView.getAddContactGroupLabel();
         allContactsLabel = projectView.getAllContactsLabel();
@@ -44,6 +46,7 @@ public class ProjectViewController implements MouseListener {
         newActivityLabel.addMouseListener(this);
         listViewLabel.addMouseListener(this);
         weekViewLabel.addMouseListener(this);
+        monthViewLabel.addMouseListener(this);
         addContactLabel.addMouseListener(this);
         addContactGroupLabel.addMouseListener(this);
         allContactsLabel.addMouseListener(this);
@@ -70,6 +73,9 @@ public class ProjectViewController implements MouseListener {
         } else if (e.getSource() == allContactGroupsLabel) {
             projectView.changeCard("ContactGroupCard");
             projectView.updateContactGroups(cal.getContactGroupList());
+        } else if (e.getSource() == monthViewLabel) {
+            projectView.changeCard("MonthViewCard");
+            projectView.updateMonthView();
         }
 
     }

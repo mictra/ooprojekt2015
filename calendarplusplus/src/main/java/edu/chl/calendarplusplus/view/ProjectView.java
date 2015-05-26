@@ -506,6 +506,7 @@ public class ProjectView extends javax.swing.JFrame {
     private WeekViewCard weekView;
     private ContactGroupCard contactGroups = new ContactGroupCard();
     private ContactCard contacts = new ContactCard();
+    private MonthViewCard monthView = new MonthViewCard();
 
     // Non-generated variables end
     public JLabel getNewActivityLabel() {
@@ -534,6 +535,10 @@ public class ProjectView extends javax.swing.JFrame {
     
     public JLabel getWeekViewLabel() {
         return this.weekViewLabel;
+    }
+    
+    public JLabel getMonthViewLabel(){
+        return this.monthViewLabel;
     }
 
     public AddActivityCard getActivityCard() {
@@ -579,6 +584,7 @@ public class ProjectView extends javax.swing.JFrame {
         mainPanel.add(addContactGroup, "AddContactGroupCard");
         mainPanel.add(addContact, "AddContactCard");
         mainPanel.add(listView, "ListViewCard");
+        mainPanel.add(monthView, "MonthViewCard");
         mainPanel.add(weekView, "WeekViewCard");
         mainPanel.add(contactGroups, "ContactGroupCard");
         mainPanel.add(contacts, "ContactCard");
@@ -603,7 +609,10 @@ public class ProjectView extends javax.swing.JFrame {
             headlineLabel.setText("Contactgroups");
         } else if (card.endsWith("ContactCard")) {
             headlineLabel.setText("Contacts");
+        } else if (card.equals("MonthView")){
+            headlineLabel.setText("Month View");
         }
+            
         tabCards.show(mainPanel, card);
     }
 
@@ -615,6 +624,10 @@ public class ProjectView extends javax.swing.JFrame {
         weekView.updateWeekView();
     }
     
+    public void updateMonthView() {
+        monthView.updateMonthView();
+    }
+    
     public void updateContactGroups(List<IContactGroup> contactgroups) {
         contactGroups.updateContactGroups(contactgroups);
     }
@@ -622,4 +635,5 @@ public class ProjectView extends javax.swing.JFrame {
     public void updateContacts(List<IContact> contactlist) {
         contacts.updateContacts(contactlist);
     }
+
 }

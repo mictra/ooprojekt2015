@@ -14,8 +14,14 @@ public class MonthViewElementCard extends javax.swing.JPanel {
     /**
      * Creates new form MonthViewCard
      */
-    public MonthViewElementCard() {
+    public MonthViewElementCard(Integer date, Boolean existingAct) {
         initComponents();
+        dateField.setText(date.toString());
+        if (existingAct){
+            extistingActLabel.setText("A");
+        }else{
+            extistingActLabel.setText("");
+        }
     }
 
     /**
@@ -28,32 +34,42 @@ public class MonthViewElementCard extends javax.swing.JPanel {
     private void initComponents() {
 
         dateField = new javax.swing.JLabel();
+        extistingActLabel = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
+        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        dateField.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        dateField.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
         dateField.setText("#D");
+
+        extistingActLabel.setFont(new java.awt.Font("Lucida Grande", 0, 10)); // NOI18N
+        extistingActLabel.setText("#Act");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(dateField)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(extistingActLabel)
+                    .addComponent(dateField, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(82, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addComponent(dateField)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(extistingActLabel)
+                .addContainerGap(15, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel dateField;
+    private javax.swing.JLabel extistingActLabel;
     // End of variables declaration//GEN-END:variables
 }
