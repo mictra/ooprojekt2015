@@ -7,6 +7,7 @@ import edu.chl.calendarplusplus.model.ContactGroup;
 import edu.chl.calendarplusplus.model.IContact;
 import edu.chl.calendarplusplus.model.IContactGroup;
 import edu.chl.calendarplusplus.model.Project;
+import edu.chl.calendarplusplus.persistence.ActivityDAO;
 import edu.chl.calendarplusplus.persistence.ContactDAO;
 import edu.chl.calendarplusplus.persistence.ContactGroupDAO;
 import edu.chl.calendarplusplus.view.ProjectView;
@@ -67,6 +68,9 @@ public final class Main {
             /*
             ContactGroupDAO cgDAO = new ContactGroupDAO();
             cgDAO.deleteAll();
+            
+            ActivityDAO aDAO = new ActivityDAO();
+            aDAO.deleteAll();
             
             ContactDAO cDAO = new ContactDAO();
             cDAO.deleteAll();
