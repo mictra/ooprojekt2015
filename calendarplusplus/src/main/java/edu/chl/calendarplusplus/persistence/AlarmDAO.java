@@ -5,16 +5,28 @@
  */
 package edu.chl.calendarplusplus.persistence;
 
-import edu.chl.calendarplusplus.model.Alarm;
+import edu.chl.calendarplusplus.model.IAlarm;
+import java.util.List;
 
 /**
  *
  * @author Michael
  */
-public class AlarmDAO extends AbstractDAO<Alarm, Integer> {
+public class AlarmDAO extends AbstractDAO<IAlarm, Integer> {
 
-    public AlarmDAO(Class<Alarm> clazz) {
-        super(clazz);
+    public AlarmDAO() {
+        super(IAlarm.class);
+    }
+    
+    @Override
+    public List<IAlarm> findAll(){
+        return em.createQuery("select a from Alarm a", IAlarm.class).getResultList();
+    }
+    
+    public void deleteAll(){
+        em.getTransaction().begin();
+        em.createQuery("DELETE FROM Alarm a").executeUpdate();
+        em.getTransaction().commit();
     }
     
 }

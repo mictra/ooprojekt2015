@@ -8,6 +8,10 @@ import edu.chl.calendarplusplus.model.IContact;
 import edu.chl.calendarplusplus.model.IContactGroup;
 import edu.chl.calendarplusplus.model.Project;
 import edu.chl.calendarplusplus.persistence.ActivityDAO;
+<<<<<<< HEAD
+=======
+import edu.chl.calendarplusplus.persistence.AlarmDAO;
+>>>>>>> origin/master
 import edu.chl.calendarplusplus.persistence.ContactDAO;
 import edu.chl.calendarplusplus.persistence.ContactGroupDAO;
 import edu.chl.calendarplusplus.view.ProjectView;
@@ -57,6 +61,7 @@ public final class Main {
                     AddActivityCardController.create(cal, projectView, projectView.getActivityCard());
                     AddContactCardController.create(cal, projectView, projectView.getContactCard());
                     AddContactGroupCardController.create(cal, projectView, projectView.getContactGroupCard());
+                    AddAlarmCardController.create(cal, projectView, projectView.getAlarmCard());
                     projectView.setVisible(true);
                     initTest(cal);
                 });
@@ -65,6 +70,9 @@ public final class Main {
         public static void initTest(CalendarPlus cal){
             
             /*
+            AlarmDAO alarmDAO = new AlarmDAO();
+            alarmDAO.deleteAll();
+            
             ContactGroupDAO cgDAO = new ContactGroupDAO();
             cgDAO.deleteAll();
             
