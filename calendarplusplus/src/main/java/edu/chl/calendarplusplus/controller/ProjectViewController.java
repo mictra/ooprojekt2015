@@ -81,15 +81,12 @@ public class ProjectViewController implements MouseListener {
         } else if (e.getSource() == allContactGroupsLabel) {
             projectView.changeCard("ContactGroupCard");
             projectView.updateContactGroups(cal.getContactGroupList());
-<<<<<<< HEAD
         } else if (e.getSource() == monthViewLabel) {
             projectView.changeCard("MonthViewCard");
             projectView.updateMonthView();
-=======
         } else if (e.getSource() == allAlarmsLabel) {
             projectView.changeCard("AlarmCard");
             projectView.updateAlarms(cal.getAlarmList());
->>>>>>> origin/master
         }
           
 

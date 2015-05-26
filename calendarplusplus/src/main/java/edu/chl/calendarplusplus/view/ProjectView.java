@@ -509,11 +509,8 @@ public class ProjectView extends javax.swing.JFrame {
     private WeekViewCard weekView;
     private ContactGroupCard contactGroups = new ContactGroupCard();
     private ContactCard contacts = new ContactCard();
-<<<<<<< HEAD
     private MonthViewCard monthView = new MonthViewCard();
-=======
     private AlarmCard alarms = new AlarmCard();
->>>>>>> origin/master
 
     // Non-generated variables end
     public JLabel getNewActivityLabel() {
@@ -548,13 +545,11 @@ public class ProjectView extends javax.swing.JFrame {
         return this.weekViewLabel;
     }
     
-<<<<<<< HEAD
     public JLabel getMonthViewLabel(){
         return this.monthViewLabel;
-=======
+    }
     public JLabel getAllAlarmsLabel() {
         return this.allAlarmsLabel;
->>>>>>> origin/master
     }
 
     public AddActivityCard getActivityCard() {
@@ -634,13 +629,10 @@ public class ProjectView extends javax.swing.JFrame {
             headlineLabel.setText("Contactgroups");
         } else if (card.endsWith("ContactCard")) {
             headlineLabel.setText("Contacts");
-<<<<<<< HEAD
         } else if (card.equals("MonthView")){
             headlineLabel.setText("Month View");
-=======
         } else if (card.endsWith("AlarmCard")) {
             headlineLabel.setText("Alarms");
->>>>>>> origin/master
         }
             
         tabCards.show(mainPanel, card);
@@ -665,12 +657,9 @@ public class ProjectView extends javax.swing.JFrame {
     public void updateContacts(List<IContact> contactlist) {
         contacts.updateContacts(contactlist);
     }
-<<<<<<< HEAD
 
-=======
     
     public void updateAlarms(List<IAlarm> alarmlist) {
         alarms.updateAlarms(alarmlist);
     }
->>>>>>> origin/master
 }
