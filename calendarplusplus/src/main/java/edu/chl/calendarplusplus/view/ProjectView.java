@@ -10,6 +10,7 @@ import edu.chl.calendarplusplus.model.ContactGroup;
 import edu.chl.calendarplusplus.model.IActivity;
 import edu.chl.calendarplusplus.model.IContact;
 import edu.chl.calendarplusplus.model.IContactGroup;
+import edu.chl.calendarplusplus.model.IAlarm;
 import edu.chl.calendarplusplus.model.Project;
 import java.awt.CardLayout;
 import java.awt.Dimension;
@@ -45,6 +46,7 @@ public class ProjectView extends javax.swing.JFrame {
         addActivity.addListener(listeners);
         addContactGroup.addListener(listeners);
         addContact.addListener(listeners);
+        addAlarm.addListener(listeners);
     }
     
     /**
@@ -502,10 +504,12 @@ public class ProjectView extends javax.swing.JFrame {
     private AddActivityCard addActivity;
     private AddContactGroupCard addContactGroup = new AddContactGroupCard();
     private AddContactCard addContact;
+    private AddAlarmCard addAlarm = new AddAlarmCard();
     private ListViewCard listView = new ListViewCard();
     private WeekViewCard weekView;
     private ContactGroupCard contactGroups = new ContactGroupCard();
     private ContactCard contacts = new ContactCard();
+    private AlarmCard alarms = new AlarmCard();
 
     // Non-generated variables end
     public JLabel getNewActivityLabel() {
@@ -524,6 +528,10 @@ public class ProjectView extends javax.swing.JFrame {
         return this.addContactLabel;
     }
     
+    public JLabel getAddAlarmLabel() {
+        return this.addAlarmLabel;
+    }
+    
     public JLabel getAllContactsLabel() {
         return this.allContactsLabel;
     }
@@ -534,6 +542,10 @@ public class ProjectView extends javax.swing.JFrame {
     
     public JLabel getWeekViewLabel() {
         return this.weekViewLabel;
+    }
+    
+    public JLabel getAllAlarmsLabel() {
+        return this.allAlarmsLabel;
     }
 
     public AddActivityCard getActivityCard() {
@@ -546,6 +558,10 @@ public class ProjectView extends javax.swing.JFrame {
 
     public AddContactCard getContactCard() {
         return addContact;
+    }
+    
+    public AddAlarmCard getAlarmCard() {
+        return addAlarm;
     }
 
     /* Maybe use this to add listener?
@@ -578,10 +594,12 @@ public class ProjectView extends javax.swing.JFrame {
         mainPanel.add(addActivity, "AddActivityCard");
         mainPanel.add(addContactGroup, "AddContactGroupCard");
         mainPanel.add(addContact, "AddContactCard");
+        mainPanel.add(addAlarm, "AddAlarmCard");
         mainPanel.add(listView, "ListViewCard");
         mainPanel.add(weekView, "WeekViewCard");
         mainPanel.add(contactGroups, "ContactGroupCard");
         mainPanel.add(contacts, "ContactCard");
+        mainPanel.add(alarms, "AlarmCard");
         tabCards.show(mainPanel, "ListViewCard");
     }
 
@@ -595,6 +613,9 @@ public class ProjectView extends javax.swing.JFrame {
         } else if (card.equals("AddContactCard")) {
             headlineLabel.setText("Add a contact");
             addContact.resetFields();
+        } else if (card.equals("AddAlarmCard")) {
+            headlineLabel.setText("Add an alarm");
+            addAlarm.resetFields();
         } else if (card.equals("ListViewCard")) {
             headlineLabel.setText("Calendar // Listview");
         } else if (card.equals("WeekViewCard")) {
@@ -603,6 +624,8 @@ public class ProjectView extends javax.swing.JFrame {
             headlineLabel.setText("Contactgroups");
         } else if (card.endsWith("ContactCard")) {
             headlineLabel.setText("Contacts");
+        } else if (card.endsWith("AlarmCard")) {
+            headlineLabel.setText("Alarms");
         }
         tabCards.show(mainPanel, card);
     }
@@ -621,5 +644,9 @@ public class ProjectView extends javax.swing.JFrame {
     
     public void updateContacts(List<IContact> contactlist) {
         contacts.updateContacts(contactlist);
+    }
+    
+    public void updateAlarms(List<IAlarm> alarmlist) {
+        alarms.updateAlarms(alarmlist);
     }
 }

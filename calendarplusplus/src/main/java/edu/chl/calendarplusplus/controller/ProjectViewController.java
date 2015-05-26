@@ -16,8 +16,10 @@ public class ProjectViewController implements MouseListener {
     private JLabel weekViewLabel;
     private JLabel addContactLabel;
     private JLabel addContactGroupLabel;
+    private JLabel addAlarmLabel;
     private JLabel allContactsLabel;
-    private JLabel allContactGroupsLabel;
+    private JLabel allContactGroupsLabel; 
+    private JLabel allAlarmsLabel;
 
     public static ProjectViewController create(ICalendarPlus cal, ProjectView projectView) {
         return new ProjectViewController(cal, projectView);
@@ -36,8 +38,10 @@ public class ProjectViewController implements MouseListener {
         weekViewLabel = projectView.getWeekViewLabel();
         addContactLabel = projectView.getAddContactLabel();
         addContactGroupLabel = projectView.getAddContactGroupLabel();
+        addAlarmLabel = projectView.getAddAlarmLabel();
         allContactsLabel = projectView.getAllContactsLabel();
         allContactGroupsLabel = projectView.getAllContactGroupsLabel();
+        allAlarmsLabel = projectView.getAllAlarmsLabel();
     }
 
     private void addListeners() {
@@ -46,8 +50,10 @@ public class ProjectViewController implements MouseListener {
         weekViewLabel.addMouseListener(this);
         addContactLabel.addMouseListener(this);
         addContactGroupLabel.addMouseListener(this);
+        addAlarmLabel.addMouseListener(this);
         allContactsLabel.addMouseListener(this);
         allContactGroupsLabel.addMouseListener(this);
+        allAlarmsLabel.addMouseListener(this);
     }
 
     @Override
@@ -64,13 +70,19 @@ public class ProjectViewController implements MouseListener {
             projectView.changeCard("AddContactGroupCard");
         } else if (e.getSource() == addContactLabel) {
             projectView.changeCard("AddContactCard");
-        } else if (e.getSource() == allContactsLabel) {
+        } else if (e.getSource() == addAlarmLabel) {
+            projectView.changeCard("AddAlarmCard");
+        }else if (e.getSource() == allContactsLabel) {
             projectView.changeCard("ContactCard");
             projectView.updateContacts(cal.getAllContacts());
         } else if (e.getSource() == allContactGroupsLabel) {
             projectView.changeCard("ContactGroupCard");
             projectView.updateContactGroups(cal.getContactGroupList());
+        } else if (e.getSource() == allAlarmsLabel) {
+            projectView.changeCard("AlarmCard");
+            projectView.updateAlarms(cal.getAlarmList());
         }
+          
 
     }
 

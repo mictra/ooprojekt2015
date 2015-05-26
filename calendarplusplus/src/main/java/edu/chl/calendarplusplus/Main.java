@@ -56,6 +56,7 @@ public final class Main {
                     AddActivityCardController.create(cal, projectView, projectView.getActivityCard());
                     AddContactCardController.create(cal, projectView, projectView.getContactCard());
                     AddContactGroupCardController.create(cal, projectView, projectView.getContactGroupCard());
+                    AddAlarmCardController.create(cal, projectView, projectView.getAlarmCard());
                     projectView.setVisible(true);
                     initTest(cal);
                 });
