@@ -31,15 +31,15 @@ public class MonthViewCard extends javax.swing.JPanel {
     }
     
     public void updateMonthStatic(Calendar c){
-        
-        for(int i = 0; i <= 41; i++){
+        dayPanel.removeAll();
+  //      dayPanel.setSize(710, 850);
+        for(int i = 0; i <= 13; i++){
             System.out.println("HEJ HÄR ÄR JAG");
             MonthViewElementCard mvec = new MonthViewElementCard(i, Boolean.TRUE);
-            mvec.setPreferredSize(new Dimension(150, 100));
+           // mvec.setPreferredSize(new Dimension(150, 100));
             dayPanel.add(mvec);
             revalidate();
             repaint();
-            revalidate();
         }
         
     }
@@ -59,7 +59,7 @@ public class MonthViewCard extends javax.swing.JPanel {
         previousMonthLabel = new javax.swing.JLabel();
         dayPanel = new javax.swing.JPanel();
 
-        setPreferredSize(new java.awt.Dimension(710, 850));
+        setPreferredSize(new java.awt.Dimension(1008, 640));
 
         jLabel1.setFont(new java.awt.Font("PT Sans", 0, 24)); // NOI18N
         jLabel1.setText("#Month");
@@ -73,35 +73,26 @@ public class MonthViewCard extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(333, 333, 333)
+                .addGap(324, 324, 324)
                 .addComponent(previousMonthLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(nextMonthLabel)
-                .addContainerGap(339, Short.MAX_VALUE))
+                .addContainerGap(215, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(nextMonthLabel)
-                    .addComponent(previousMonthLabel))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(nextMonthLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(previousMonthLabel)
+                    .addComponent(jLabel1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout dayPanelLayout = new javax.swing.GroupLayout(dayPanel);
-        dayPanel.setLayout(dayPanelLayout);
-        dayPanelLayout.setHorizontalGroup(
-            dayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        dayPanelLayout.setVerticalGroup(
-            dayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 605, Short.MAX_VALUE)
-        );
+        dayPanel.setPreferredSize(new java.awt.Dimension(1006, 600));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -110,18 +101,17 @@ public class MonthViewCard extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(dayPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(dayPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(dayPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(170, Short.MAX_VALUE))
+                .addComponent(dayPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
