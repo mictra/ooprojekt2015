@@ -6,7 +6,6 @@
 package edu.chl.calendarplusplus.view;
 
 import edu.chl.calendarplusplus.model.CalendarPlus;
-import edu.chl.calendarplusplus.model.ContactGroup;
 import edu.chl.calendarplusplus.model.IActivity;
 import edu.chl.calendarplusplus.model.IContact;
 import edu.chl.calendarplusplus.model.IContactGroup;
@@ -47,6 +46,7 @@ public class ProjectView extends javax.swing.JFrame {
         addContactGroup.addListener(listeners);
         addContact.addListener(listeners);
         addAlarm.addListener(listeners);
+        weekView.addListener(listeners);
     }
     
     /**
@@ -510,6 +510,7 @@ public class ProjectView extends javax.swing.JFrame {
     private ContactGroupCard contactGroups = new ContactGroupCard();
     private ContactCard contacts = new ContactCard();
     private AlarmCard alarms = new AlarmCard();
+    private ActivitySingleCard actsingle = new ActivitySingleCard();
 
     // Non-generated variables end
     public JLabel getNewActivityLabel() {
@@ -563,6 +564,10 @@ public class ProjectView extends javax.swing.JFrame {
     public AddAlarmCard getAlarmCard() {
         return addAlarm;
     }
+    
+    public WeekViewCard getWeekViewCard() {
+        return weekView;
+    }
 
     /* Maybe use this to add listener?
     public void registerListener(ProjectController controller) {
@@ -600,6 +605,7 @@ public class ProjectView extends javax.swing.JFrame {
         mainPanel.add(contactGroups, "ContactGroupCard");
         mainPanel.add(contacts, "ContactCard");
         mainPanel.add(alarms, "AlarmCard");
+        mainPanel.add(actsingle, "ActivitySingle");
         tabCards.show(mainPanel, "ListViewCard");
     }
 
@@ -649,4 +655,11 @@ public class ProjectView extends javax.swing.JFrame {
     public void updateAlarms(List<IAlarm> alarmlist) {
         alarms.updateAlarms(alarmlist);
     }
+    
+    public void showActivitySingle(IActivity act) {
+        actsingle.setFields(act);
+        tabCards.show(mainPanel, "ActivitySingle");
+        headlineLabel.setText("Activity");
+    }
+
 }
