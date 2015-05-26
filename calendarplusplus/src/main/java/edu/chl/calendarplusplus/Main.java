@@ -59,6 +59,7 @@ public final class Main {
                     AddContactCardController.create(cal, projectView, projectView.getContactCard());
                     AddContactGroupCardController.create(cal, projectView, projectView.getContactGroupCard());
                     AddAlarmCardController.create(cal, projectView, projectView.getAlarmCard());
+                    WeekViewController.create(cal, projectView, projectView.getWeekViewCard());
                     projectView.setVisible(true);
                     initTest(cal);
                 });

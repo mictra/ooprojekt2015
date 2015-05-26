@@ -9,8 +9,10 @@ import edu.chl.calendarplusplus.model.CalendarPlus;
 import edu.chl.calendarplusplus.model.IActivity;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import javax.swing.JLabel;
@@ -27,6 +29,7 @@ public class WeekViewCard extends javax.swing.JPanel {
     private boolean buttonPressed;
     private final List<JPanel> daylist;
     private final int daywidth = 132, dayheight = 50;
+    private PropertyChangeSupport pcs;
     
     /**
      * Creates new form WeekViewCard
@@ -294,6 +297,7 @@ public class WeekViewCard extends javax.swing.JPanel {
             for (int i = 0; i < 24; i++) {
                 WeekViewDayElement wvde = new WeekViewDayElement(cal, c);
                 wvde.setPreferredSize(new Dimension(daywidth, dayheight));
+                wvde.addListener(pcs);              
                 panel.add(wvde);               
                 revalidate();
                 repaint();
@@ -319,4 +323,9 @@ public class WeekViewCard extends javax.swing.JPanel {
         list.add(sundayPanel);
         return list;
     }
+    
+    public void addListener(PropertyChangeSupport pcs) {
+        this.pcs = pcs;
+    }
+    
 }

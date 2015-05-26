@@ -1,10 +1,13 @@
 package edu.chl.calendarplusplus.controller;
 
-import edu.chl.calendarplusplus.model.CalendarPlus;
+import edu.chl.calendarplusplus.model.IActivity;
 import edu.chl.calendarplusplus.model.ICalendarPlus;
 import edu.chl.calendarplusplus.view.ProjectView;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import javax.swing.JLabel;
 
 public class ProjectViewController implements MouseListener {
@@ -60,7 +63,7 @@ public class ProjectViewController implements MouseListener {
     }
 
     @Override
-    public void mouseClicked(MouseEvent e) {
+    public void mouseClicked(MouseEvent e) {        
         if (e.getSource() == newActivityLabel) {
             projectView.changeCard("AddActivityCard");
         } else if (e.getSource() == listViewLabel) {
@@ -68,7 +71,7 @@ public class ProjectViewController implements MouseListener {
             projectView.updateListView(cal.getActivityList());
         } else if (e.getSource() == weekViewLabel) {
             projectView.changeCard("WeekViewCard");
-            projectView.updateWeekView();
+            projectView.updateWeekView();           
         } else if (e.getSource() == addContactGroupLabel) {
             projectView.changeCard("AddContactGroupCard");
         } else if (e.getSource() == addContactLabel) {
@@ -88,8 +91,7 @@ public class ProjectViewController implements MouseListener {
             projectView.changeCard("AlarmCard");
             projectView.updateAlarms(cal.getAlarmList());
         }
-          
-
+        
     }
 
     @Override
