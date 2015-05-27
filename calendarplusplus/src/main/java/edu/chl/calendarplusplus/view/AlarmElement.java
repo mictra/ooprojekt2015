@@ -64,21 +64,27 @@ public class AlarmElement extends javax.swing.JPanel {
 
         editButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/editButton.png"))); // NOI18N
         editButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                labelMouseExited(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                editButtonMousePressed(evt);
+                labelMousePressed(evt);
             }
             public void mouseReleased(java.awt.event.MouseEvent evt) {
-                editButtonMouseReleased(evt);
+                labelMouseReleased(evt);
             }
         });
 
         removeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/removeButton.png"))); // NOI18N
         removeButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                labelMouseExited(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                removeButtonMousePressed(evt);
+                labelMousePressed(evt);
             }
             public void mouseReleased(java.awt.event.MouseEvent evt) {
-                removeButtonMouseReleased(evt);
+                labelMouseReleased(evt);
             }
         });
 
@@ -118,21 +124,25 @@ public class AlarmElement extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void editButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editButtonMousePressed
+    private void labelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelMousePressed
         buttonPressed = true;
-    }//GEN-LAST:event_editButtonMousePressed
+    }//GEN-LAST:event_labelMousePressed
 
-    private void editButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editButtonMouseReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_editButtonMouseReleased
+    private void labelMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelMouseReleased
+        if(buttonPressed) {
+            if (evt.getSource() == editButton) {
+                //System.out.println(labelMap.get(label).getName());
+                pcs.firePropertyChange("EditAlarmClicked", null, null);
+            } else if (evt.getSource() == removeButton) {
+                //System.out.println(labelMap.get(label).getName());
+                pcs.firePropertyChange("RemoveAlarmClicked", null, null);
+            }
+        }
+    }//GEN-LAST:event_labelMouseReleased
 
-    private void removeButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_removeButtonMousePressed
-        buttonPressed = true;
-    }//GEN-LAST:event_removeButtonMousePressed
-
-    private void removeButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_removeButtonMouseReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_removeButtonMouseReleased
+    private void labelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelMouseExited
+        buttonPressed = false;
+    }//GEN-LAST:event_labelMouseExited
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -142,4 +152,8 @@ public class AlarmElement extends javax.swing.JPanel {
     private javax.swing.JLabel nameLabel;
     private javax.swing.JLabel removeButton;
     // End of variables declaration//GEN-END:variables
+
+    public void addListener (PropertyChangeSupport pcs) {
+        this.pcs = pcs;
+    }
 }

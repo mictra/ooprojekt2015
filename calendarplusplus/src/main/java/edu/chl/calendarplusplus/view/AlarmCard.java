@@ -7,6 +7,7 @@ package edu.chl.calendarplusplus.view;
 
 import edu.chl.calendarplusplus.model.IAlarm;
 import java.awt.Dimension;
+import java.beans.PropertyChangeSupport;
 import java.util.List;
 
 /**
@@ -15,6 +16,8 @@ import java.util.List;
  */
 public class AlarmCard extends javax.swing.JPanel {
 
+    private PropertyChangeSupport pcs;
+    
     /**
      * Creates new form ListViewCard
      */
@@ -30,6 +33,7 @@ public class AlarmCard extends javax.swing.JPanel {
         for (IAlarm a : actlist) {
             AlarmElement ale = new AlarmElement(a);
             ale.setPreferredSize(new Dimension(650,141));
+            ale.addListener(pcs);
             elementList.add(ale);
             revalidate();
             repaint();
@@ -70,4 +74,8 @@ public class AlarmCard extends javax.swing.JPanel {
     private javax.swing.JPanel elementList;
     private javax.swing.JScrollPane listViewScrollPane;
     // End of variables declaration//GEN-END:variables
+
+    public void addListener(PropertyChangeSupport pcs) {
+        this.pcs = pcs;
+    }
 }
