@@ -8,6 +8,7 @@ package edu.chl.calendarplusplus.view;
 import edu.chl.calendarplusplus.model.IActivity;
 import edu.chl.calendarplusplus.model.IContact;
 import java.awt.Dimension;
+import java.beans.PropertyChangeSupport;
 import java.util.Calendar;
 import javax.swing.JLabel;
 
@@ -19,6 +20,8 @@ public class ActivitySingleCard extends javax.swing.JPanel {
 
     String start, end;
     Calendar startdate, enddate;
+    private PropertyChangeSupport pcs;
+    private boolean buttonPressed;
     
     /**
      * Creates new form ActivitySingleCard
@@ -67,6 +70,8 @@ public class ActivitySingleCard extends javax.swing.JPanel {
         locationLabel = new javax.swing.JLabel();
         attendeeScrollPane = new javax.swing.JScrollPane();
         attendeesPanel = new javax.swing.JPanel();
+        editButton = new javax.swing.JLabel();
+        removeButton = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(1008, 640));
 
@@ -105,6 +110,32 @@ public class ActivitySingleCard extends javax.swing.JPanel {
 
         attendeeScrollPane.setViewportView(attendeesPanel);
 
+        editButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/editButton.png"))); // NOI18N
+        editButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                labelMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                labelMouseReleased(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                labelMouseExited(evt);
+            }
+        });
+
+        removeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/removeButton.png"))); // NOI18N
+        removeButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                labelMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                labelMouseReleased(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                labelMouseExited(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -112,7 +143,13 @@ public class ActivitySingleCard extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(nameLabel)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(nameLabel)
+                        .addGap(18, 18, 18)
+                        .addComponent(editButton)
+                        .addGap(18, 18, 18)
+                        .addComponent(removeButton)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(staticNotificationLabel)
@@ -136,7 +173,11 @@ public class ActivitySingleCard extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(nameLabel)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(nameLabel)
+                        .addComponent(editButton))
+                    .addComponent(removeButton, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(staticDateLabel)
@@ -157,9 +198,28 @@ public class ActivitySingleCard extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(staticAttendeesLabel)
                     .addComponent(attendeeScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void labelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelMouseExited
+        buttonPressed = false;
+    }//GEN-LAST:event_labelMouseExited
+
+    private void labelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelMousePressed
+        buttonPressed = true;
+    }//GEN-LAST:event_labelMousePressed
+
+    private void labelMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelMouseReleased
+        if (buttonPressed) {
+            if (evt.getSource() == editButton) {
+                pcs.firePropertyChange("EditButtonClicked", null, null);
+            }
+            if (evt.getSource() == removeButton) {
+                pcs.firePropertyChange("RemoveButtonClicked", null, null);
+            }
+        }
+    }//GEN-LAST:event_labelMouseReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -168,13 +228,21 @@ public class ActivitySingleCard extends javax.swing.JPanel {
     private javax.swing.JLabel dateLabel;
     private javax.swing.JScrollPane descriptionScrollPane;
     private javax.swing.JTextArea descriptionTextArea;
+    private javax.swing.JLabel editButton;
     private javax.swing.JLabel locationLabel;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JLabel notificationLabel;
+    private javax.swing.JLabel removeButton;
     private javax.swing.JLabel staticAttendeesLabel;
     private javax.swing.JLabel staticDateLabel;
     private javax.swing.JLabel staticDescriptionLabel;
     private javax.swing.JLabel staticLocationLabel;
     private javax.swing.JLabel staticNotificationLabel;
     // End of variables declaration//GEN-END:variables
+    
+    
+    public void addListener(PropertyChangeSupport pcs) {
+        this.pcs = pcs;
+    }
+
 }
