@@ -47,6 +47,8 @@ public class ProjectView extends javax.swing.JFrame {
         addContact.addListener(listeners);
         addAlarm.addListener(listeners);
         weekView.addListener(listeners);
+        actsingle.addListener(listeners);
+        alarms.addListener(listeners);
     }
     
     /**
@@ -551,24 +553,32 @@ public class ProjectView extends javax.swing.JFrame {
         return this.allAlarmsLabel;
     }
 
-    public AddActivityCard getActivityCard() {
+    public AddActivityCard getAddActivityCard() {
         return addActivity;
     }
 
-    public AddContactGroupCard getContactGroupCard() {
+    public AddContactGroupCard getAddContactGroupCard() {
         return addContactGroup;
     }
 
-    public AddContactCard getContactCard() {
+    public AddContactCard getAddContactCard() {
         return addContact;
     }
     
-    public AddAlarmCard getAlarmCard() {
+    public AddAlarmCard getAddAlarmCard() {
         return addAlarm;
     }
     
     public WeekViewCard getWeekViewCard() {
         return weekView;
+    }
+    
+    public ActivitySingleCard getActivitySingleCard() {
+        return actsingle;
+    }
+    
+    public AlarmCard getAlarmSingleCard() {
+        return alarms;
     }
 
     /* Maybe use this to add listener?

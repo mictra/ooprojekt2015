@@ -55,11 +55,13 @@ public final class Main {
                     ProjectViewController.create(cal, projectView);
                     //Maybe we should create own view objects here and use them instead of in the projectView?
                     //Still have to add the created views to the mainPanel though...
-                    AddActivityCardController.create(cal, projectView, projectView.getActivityCard());
-                    AddContactCardController.create(cal, projectView, projectView.getContactCard());
-                    AddContactGroupCardController.create(cal, projectView, projectView.getContactGroupCard());
-                    AddAlarmCardController.create(cal, projectView, projectView.getAlarmCard());
+                    AddActivityCardController.create(cal, projectView, projectView.getAddActivityCard());
+                    AddContactCardController.create(cal, projectView, projectView.getAddContactCard());
+                    AddContactGroupCardController.create(cal, projectView, projectView.getAddContactGroupCard());
+                    AddAlarmCardController.create(cal, projectView, projectView.getAddAlarmCard());
                     WeekViewController.create(cal, projectView, projectView.getWeekViewCard());
+                    ActivitySingleController.create(cal, projectView, projectView.getActivitySingleCard());
+                    AlarmSingleController.create(cal, projectView, projectView.getAlarmSingleCard());
                     projectView.setVisible(true);
                     initTest(cal);
                 });
