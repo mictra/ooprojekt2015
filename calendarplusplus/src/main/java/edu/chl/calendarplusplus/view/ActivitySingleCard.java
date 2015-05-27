@@ -37,6 +37,7 @@ public class ActivitySingleCard extends javax.swing.JPanel {
         dateLabel.setText(start + " ---" + end);
         locationLabel.setText(act.getLocation());
         descriptionTextArea.setText(act.getDescription());
+        descriptionTextArea.setEditable(false);
         for (IContact c : act.getAttendees()) {
             JLabel label = new JLabel(c.getName());
             label.setPreferredSize(new Dimension(500,20));
@@ -88,6 +89,8 @@ public class ActivitySingleCard extends javax.swing.JPanel {
         staticAttendeesLabel.setText("Attendees:");
 
         descriptionTextArea.setColumns(20);
+        descriptionTextArea.setFont(new java.awt.Font("Source Sans Pro", 0, 14)); // NOI18N
+        descriptionTextArea.setLineWrap(true);
         descriptionTextArea.setRows(5);
         descriptionScrollPane.setViewportView(descriptionTextArea);
 
@@ -154,7 +157,7 @@ public class ActivitySingleCard extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(staticAttendeesLabel)
                     .addComponent(attendeeScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(56, Short.MAX_VALUE))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

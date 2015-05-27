@@ -41,7 +41,7 @@ public class Activity implements IActivity, Serializable {
     //public Notification eventNot;
     
     public Activity(Calendar st, Calendar et, String name,
-            String desc, String loc, List<IContact> att) {
+            String loc, String desc, List<IContact> att) {
         
         if(st.getTimeInMillis() < et.getTimeInMillis()){
             this.startTime = st;
