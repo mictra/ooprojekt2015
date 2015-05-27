@@ -6,6 +6,7 @@
 package edu.chl.calendarplusplus.view;
 
 import edu.chl.calendarplusplus.model.IAlarm;
+import java.beans.PropertyChangeSupport;
 import java.util.Calendar;
 
 /**
@@ -14,6 +15,9 @@ import java.util.Calendar;
  */
 public class AlarmElement extends javax.swing.JPanel {
 
+    private PropertyChangeSupport pcs;
+    private boolean buttonPressed;
+    
     /**
      * Creates new form ListViewElement
      */
@@ -58,9 +62,25 @@ public class AlarmElement extends javax.swing.JPanel {
         descriptionLabel.setForeground(new java.awt.Color(255, 255, 255));
         descriptionLabel.setText("#DESCRIPTION");
 
-        editButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\Johan\\Documents\\NetBeansProjects\\ooprojekt2015\\calendarplusplus\\src\\main\\resources\\editButton.png")); // NOI18N
+        editButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/editButton.png"))); // NOI18N
+        editButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                editButtonMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                editButtonMouseReleased(evt);
+            }
+        });
 
-        removeButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\Johan\\Documents\\NetBeansProjects\\ooprojekt2015\\calendarplusplus\\src\\main\\resources\\removeButton.png")); // NOI18N
+        removeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/removeButton.png"))); // NOI18N
+        removeButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                removeButtonMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                removeButtonMouseReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -97,6 +117,22 @@ public class AlarmElement extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void editButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editButtonMousePressed
+        buttonPressed = true;
+    }//GEN-LAST:event_editButtonMousePressed
+
+    private void editButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editButtonMouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editButtonMouseReleased
+
+    private void removeButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_removeButtonMousePressed
+        buttonPressed = true;
+    }//GEN-LAST:event_removeButtonMousePressed
+
+    private void removeButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_removeButtonMouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_removeButtonMouseReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

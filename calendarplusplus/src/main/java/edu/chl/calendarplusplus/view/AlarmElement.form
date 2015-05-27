@@ -109,16 +109,24 @@
     <Component class="javax.swing.JLabel" name="editButton">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\Johan\Documents\NetBeansProjects\ooprojekt2015\calendarplusplus\src\main\resources\editButton.png"/>
+          <Image iconType="3" name="/editButton.png"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="editButtonMousePressed"/>
+        <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="editButtonMouseReleased"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="removeButton">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\Johan\Documents\NetBeansProjects\ooprojekt2015\calendarplusplus\src\main\resources\removeButton.png"/>
+          <Image iconType="3" name="/removeButton.png"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="removeButtonMousePressed"/>
+        <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="removeButtonMouseReleased"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
