@@ -25,7 +25,7 @@ public class AlarmElement extends javax.swing.JPanel {
         dateLabel.setText(date);
         descriptionLabel.setText(a.getDescName());
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -38,9 +38,12 @@ public class AlarmElement extends javax.swing.JPanel {
         nameLabel = new javax.swing.JLabel();
         dateLabel = new javax.swing.JLabel();
         descriptionLabel = new javax.swing.JLabel();
+        editButton = new javax.swing.JLabel();
+        removeButton = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(121, 134, 203));
         setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        setPreferredSize(new java.awt.Dimension(661, 138));
 
         nameLabel.setFont(new java.awt.Font("Source Sans Pro", 1, 24)); // NOI18N
         nameLabel.setForeground(new java.awt.Color(255, 255, 255));
@@ -55,6 +58,10 @@ public class AlarmElement extends javax.swing.JPanel {
         descriptionLabel.setForeground(new java.awt.Color(255, 255, 255));
         descriptionLabel.setText("#DESCRIPTION");
 
+        editButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\Johan\\Documents\\NetBeansProjects\\ooprojekt2015\\calendarplusplus\\src\\main\\resources\\editButton.png")); // NOI18N
+
+        removeButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\Johan\\Documents\\NetBeansProjects\\ooprojekt2015\\calendarplusplus\\src\\main\\resources\\removeButton.png")); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -62,19 +69,30 @@ public class AlarmElement extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(nameLabel)
-                    .addComponent(dateLabel)
-                    .addComponent(descriptionLabel))
-                .addContainerGap(541, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(nameLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 477, Short.MAX_VALUE)
+                        .addComponent(editButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(removeButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(dateLabel)
+                            .addComponent(descriptionLabel))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(nameLabel)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(nameLabel)
+                    .addComponent(editButton)
+                    .addComponent(removeButton))
                 .addGap(18, 18, 18)
                 .addComponent(dateLabel)
-                .addGap(18, 18, 18)
+                .addGap(27, 27, 27)
                 .addComponent(descriptionLabel)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -84,6 +102,8 @@ public class AlarmElement extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel dateLabel;
     private javax.swing.JLabel descriptionLabel;
+    private javax.swing.JLabel editButton;
     private javax.swing.JLabel nameLabel;
+    private javax.swing.JLabel removeButton;
     // End of variables declaration//GEN-END:variables
 }

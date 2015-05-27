@@ -227,7 +227,7 @@ public class AddAlarmCard extends javax.swing.JPanel {
         int sMinute = Integer.parseInt((String) minuteComboBox.getSelectedItem());
         timeDate.set(sYear, sMonth, sDay, sHour, sMinute);
         IAlarm a = new Alarm(timeDate, nameTextField.getText()); //descriptionTextArea.getText()
-        if (a.getAlarmName() == null || a.getAlarm().before(Calendar.getInstance())) {
+        if (a.getAlarmName() == null || a.getAlarm().before(timeDate)) {
             JOptionPane.showMessageDialog(null, "The alarm is invalid!");
         }
         return a;
@@ -281,6 +281,18 @@ public class AddAlarmCard extends javax.swing.JPanel {
         minuteComboBox.setSelectedItem(Integer.toString(c.get(c.MINUTE) - (c.get(c.MINUTE) % 5)));
         c.add(c.HOUR, 1);
         descriptionTextArea.setText("");
+    }
+    
+    public void restoreFields(IAlarm al) {
+        nameTextField.setText(al.getAlarmName());
+        Calendar c = al.getAlarm();
+        dayComboBox.setSelectedIndex(c.get(c.DAY_OF_MONTH)-1);
+        monthComboBox.setSelectedIndex(c.get(c.MONTH));
+        yearComboBox.setSelectedItem(c.get(c.YEAR));
+        hourComboBox.setSelectedIndex(c.get(c.HOUR_OF_DAY));
+        minuteComboBox.setSelectedItem(Integer.toString(c.get(c.MINUTE) - (c.get(c.MINUTE) % 5)));
+        c.add(c.HOUR, 1);
+        descriptionTextArea.setText(al.getDescName());
     }
 
     public void addListener(PropertyChangeSupport pcs) {
