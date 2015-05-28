@@ -683,4 +683,9 @@ public class ProjectView extends javax.swing.JFrame {
         headlineLabel.setText("Activity");
     }
 
+    public void editAlarm(IAlarm al) {
+        addAlarm.restoreFields(al);
+        tabCards.show(mainPanel, "AddAlarmCard");
+        headlineLabel.setText("Edit an alarm");
+    }
 }

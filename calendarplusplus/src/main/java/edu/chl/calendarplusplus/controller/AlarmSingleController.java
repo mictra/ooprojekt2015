@@ -5,7 +5,7 @@
  */
 package edu.chl.calendarplusplus.controller;
 
-import edu.chl.calendarplusplus.model.IActivity;
+import edu.chl.calendarplusplus.model.IAlarm;
 import edu.chl.calendarplusplus.model.ICalendarPlus;
 import edu.chl.calendarplusplus.view.AlarmCard;
 import edu.chl.calendarplusplus.view.ProjectView;
@@ -38,10 +38,12 @@ public class AlarmSingleController implements PropertyChangeListener {
         String evtName = evt.getPropertyName();
         if (evtName.equalsIgnoreCase("EditAlarmClicked")) {
             System.out.println("Edit Alarm Clicked.");
-//            IAlarm act = (IActivity) evt.getNewValue();
-//            projV.showActivitySingle(act);
+            IAlarm alarm = (IAlarm) evt.getNewValue();
+            projV.editAlarm(alarm);
         } else if(evtName.equalsIgnoreCase("RemoveAlarmClicked")) {
             System.out.println("Remove Alarm Clicked.");
+            //IAlarm alarm = (IAlarm) evt.getNewValue();
+            //projV.removeAlarm(alarm);
         }
     }
     
