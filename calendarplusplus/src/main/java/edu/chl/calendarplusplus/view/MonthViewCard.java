@@ -5,6 +5,7 @@
  */
 package edu.chl.calendarplusplus.view;
 
+import java.awt.Color;
 import static java.time.temporal.ChronoField.MONTH_OF_YEAR;
 import java.util.Calendar;
 
@@ -19,10 +20,10 @@ public class MonthViewCard extends javax.swing.JPanel {
      */
     private Calendar currentDate;
     private Boolean previousButtonPressed;
+    private Boolean nextButtonPressed;
     
     public MonthViewCard() {
         initComponents();
-        
         currentDate = Calendar.getInstance();
         updateMonthView();
     }
@@ -30,27 +31,51 @@ public class MonthViewCard extends javax.swing.JPanel {
     public void updateMonthView(){
         updateMonthStatic(currentDate);
         setMonthName();
-        
     }
     
     public void setMonthName(){
     String[] monthNames = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
     int month = currentDate.get(Calendar.MONTH);
-    monthLabel.setText(monthNames[month]);
+    monthLabel.setText(monthNames[month]+ " " + currentDate.get(Calendar.YEAR));
 
     }
     
+    /*
+    Updates the monthview and sets all attributes. Including colors, week
+    number, day number etc.
+    */
+    
     public void updateMonthStatic(Calendar c){
+        
         dayPanel.removeAll();
+        boolean setWeek = false;
+        Calendar today = Calendar.getInstance();
         Calendar tempDate = Calendar.getInstance();
-        //tempDate.setTimeInMillis(c.getTimeInMillis());
+        
         tempDate.set(c.get(Calendar.YEAR), c.get(Calendar.MONTH), 0);
-       // tempDate.setFirstDayOfWeek(tempDate);
+        int diff = 1 - tempDate.get(Calendar.DAY_OF_WEEK);
+        tempDate.add(Calendar.DATE, diff);
+        
         for(int i = 0; i <= 41; i++){
-
+            if(i%7 == 0){
+                setWeek = true;
+            }else{
+                setWeek = false;
+            }
             tempDate.add(Calendar.DATE, 1);
-            MonthViewElementCard mvec = new MonthViewElementCard((tempDate.get(Calendar.DATE)), Boolean.TRUE);
-           // mvec.setPreferredSize(new Dimension(150, 100));
+            
+            MonthViewElementCard mvec = 
+                    new MonthViewElementCard(tempDate.get(Calendar.DATE),
+                    tempDate.get(Calendar.WEEK_OF_YEAR),
+                    tempDate.get(Calendar.DAY_OF_YEAR), setWeek);
+            
+            if(!(tempDate.get(Calendar.MONTH) == currentDate.get(Calendar.MONTH))){
+                mvec.setBackground(Color.LIGHT_GRAY);
+            }else if((tempDate.get(Calendar.DATE) == today.get(Calendar.DATE))
+                        && (tempDate.get(Calendar.MONTH) == today.get(Calendar.MONTH))
+                        && (tempDate.get(Calendar.YEAR) == today.get(Calendar.YEAR))){
+                mvec.setBackground(new Color(255, 140, 140));
+            }
             dayPanel.add(mvec);
             revalidate();
             repaint();
@@ -69,8 +94,8 @@ public class MonthViewCard extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         monthLabel = new javax.swing.JLabel();
-        nextMonthLabel = new javax.swing.JLabel();
-        previousMonthLabel = new javax.swing.JLabel();
+        nextMonthButton = new javax.swing.JLabel();
+        previousMonthButton = new javax.swing.JLabel();
         dayPanel = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -84,17 +109,38 @@ public class MonthViewCard extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(1008, 640));
 
         monthLabel.setFont(new java.awt.Font("PT Sans", 0, 24)); // NOI18N
+        monthLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         monthLabel.setText("#Month");
 
-        nextMonthLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arrowsRight.png"))); // NOI18N
-
-        previousMonthLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arrowsLeft.png"))); // NOI18N
-        previousMonthLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+        nextMonthButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arrowsRight.png"))); // NOI18N
+        nextMonthButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                previousMonthLabelMousePressed(evt);
+                nextMonthButtonMousePressed(evt);
             }
             public void mouseReleased(java.awt.event.MouseEvent evt) {
-                previousMonthLabelMouseReleased(evt);
+                nextMonthButtonMouseReleased(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                nextMonthButtonMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                nextMonthButtonMouseEntered(evt);
+            }
+        });
+
+        previousMonthButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arrowsLeft.png"))); // NOI18N
+        previousMonthButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                previousMonthButtonMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                previousMonthButtonMouseReleased(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                previousMonthButtonMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                previousMonthButtonMouseEntered(evt);
             }
         });
 
@@ -103,21 +149,21 @@ public class MonthViewCard extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(324, 324, 324)
-                .addComponent(previousMonthLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(monthLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(nextMonthLabel)
+                .addGap(338, 338, 338)
+                .addComponent(previousMonthButton)
+                .addGap(18, 18, 18)
+                .addComponent(monthLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(nextMonthButton)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(7, 7, 7)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(nextMonthLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(previousMonthLabel)
+                    .addComponent(previousMonthButton)
+                    .addComponent(nextMonthButton)
                     .addComponent(monthLabel))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -214,16 +260,45 @@ public class MonthViewCard extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void previousMonthLabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_previousMonthLabelMousePressed
+    private void previousMonthButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_previousMonthButtonMousePressed
        previousButtonPressed = true;
-    }//GEN-LAST:event_previousMonthLabelMousePressed
+    }//GEN-LAST:event_previousMonthButtonMousePressed
 
-    private void previousMonthLabelMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_previousMonthLabelMouseReleased
+    private void previousMonthButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_previousMonthButtonMouseReleased
         if(previousButtonPressed){
             currentDate.add(Calendar.MONTH, -1);
+            updateMonthStatic(currentDate);
             setMonthName();
         }
-    }//GEN-LAST:event_previousMonthLabelMouseReleased
+    }//GEN-LAST:event_previousMonthButtonMouseReleased
+
+    private void nextMonthButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nextMonthButtonMousePressed
+        nextButtonPressed = true;
+    }//GEN-LAST:event_nextMonthButtonMousePressed
+
+    private void nextMonthButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nextMonthButtonMouseReleased
+        if(nextButtonPressed){
+            currentDate.add(Calendar.MONTH, 1);
+            updateMonthStatic(currentDate);
+            setMonthName();
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_nextMonthButtonMouseReleased
+
+    private void previousMonthButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_previousMonthButtonMouseEntered
+        previousMonthButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arrowsLeftHover.png")));
+    }//GEN-LAST:event_previousMonthButtonMouseEntered
+
+    private void previousMonthButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_previousMonthButtonMouseExited
+        previousMonthButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arrowsLeft.png")));
+    }//GEN-LAST:event_previousMonthButtonMouseExited
+
+    private void nextMonthButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nextMonthButtonMouseEntered
+        nextMonthButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arrowsRightHover.png")));
+    }//GEN-LAST:event_nextMonthButtonMouseEntered
+
+    private void nextMonthButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nextMonthButtonMouseExited
+        nextMonthButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arrowsRight.png")));
+    }//GEN-LAST:event_nextMonthButtonMouseExited
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -238,7 +313,7 @@ public class MonthViewCard extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel monthLabel;
-    private javax.swing.JLabel nextMonthLabel;
-    private javax.swing.JLabel previousMonthLabel;
+    private javax.swing.JLabel nextMonthButton;
+    private javax.swing.JLabel previousMonthButton;
     // End of variables declaration//GEN-END:variables
 }

@@ -13,15 +13,19 @@ public class MonthViewElementCard extends javax.swing.JPanel {
 
     /**
      * Creates new form MonthViewCard
+     * @param date
+     * @param dayOfYear
      */
-    public MonthViewElementCard(Integer date, Boolean existingAct) {
+    public MonthViewElementCard(Integer date, Integer week, int dayOfYear, Boolean setWeek) {
         initComponents();
         dateField.setText(date.toString());
-        if (existingAct){
-            extistingActLabel.setText("A");
+        dayOfYearLabel.setText(Integer.toString(dayOfYear));
+        if(setWeek){
+            weekLabel.setText("Week " + Integer.toString(week));
         }else{
-            extistingActLabel.setText("");
+            weekLabel.setText("");
         }
+        
     }
 
     /**
@@ -34,7 +38,8 @@ public class MonthViewElementCard extends javax.swing.JPanel {
     private void initComponents() {
 
         dateField = new javax.swing.JLabel();
-        extistingActLabel = new javax.swing.JLabel();
+        dayOfYearLabel = new javax.swing.JLabel();
+        weekLabel = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -43,29 +48,37 @@ public class MonthViewElementCard extends javax.swing.JPanel {
         dateField.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
         dateField.setText("#D");
 
-        extistingActLabel.setFont(new java.awt.Font("Lucida Grande", 0, 10)); // NOI18N
-        extistingActLabel.setText("#Act");
+        dayOfYearLabel.setFont(new java.awt.Font("Lucida Grande", 0, 8)); // NOI18N
+        dayOfYearLabel.setText("#Act");
+
+        weekLabel.setFont(new java.awt.Font("Lucida Grande", 0, 10)); // NOI18N
+        weekLabel.setText("jLabel1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(109, Short.MAX_VALUE)
-                .addComponent(extistingActLabel)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(dateField, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(weekLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
+                        .addComponent(dayOfYearLabel))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(dateField, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(dateField)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
-                .addComponent(extistingActLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(dayOfYearLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(weekLabel, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -73,6 +86,7 @@ public class MonthViewElementCard extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel dateField;
-    private javax.swing.JLabel extistingActLabel;
+    private javax.swing.JLabel dayOfYearLabel;
+    private javax.swing.JLabel weekLabel;
     // End of variables declaration//GEN-END:variables
 }
