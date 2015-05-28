@@ -42,8 +42,8 @@ public class AlarmSingleController implements PropertyChangeListener {
             projV.editAlarm(alarm);
         } else if(evtName.equalsIgnoreCase("RemoveAlarmClicked")) {
             System.out.println("Remove Alarm Clicked.");
-            //IAlarm alarm = (IAlarm) evt.getNewValue();
-            //projV.removeAlarm(alarm);
+//            IAlarm alarm = (IAlarm) evt.getNewValue();
+//            projV.removeAlarm(alarm);
         }
     }
     

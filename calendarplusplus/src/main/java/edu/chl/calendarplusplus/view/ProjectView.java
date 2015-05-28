@@ -6,10 +6,11 @@
 package edu.chl.calendarplusplus.view;
 
 import edu.chl.calendarplusplus.model.CalendarPlus;
+import edu.chl.calendarplusplus.model.ContactGroup;
 import edu.chl.calendarplusplus.model.IActivity;
+import edu.chl.calendarplusplus.model.IAlarm;
 import edu.chl.calendarplusplus.model.IContact;
 import edu.chl.calendarplusplus.model.IContactGroup;
-import edu.chl.calendarplusplus.model.IAlarm;
 import edu.chl.calendarplusplus.model.Project;
 import java.awt.CardLayout;
 import java.awt.Dimension;
@@ -264,7 +265,7 @@ public class ProjectView extends javax.swing.JFrame {
                     .addGroup(menuPanelLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(logoLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
+                            .addComponent(logoLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(logoSeparator, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuPanelLayout.createSequentialGroup()
                                 .addGap(12, 12, 12)
@@ -316,9 +317,9 @@ public class ProjectView extends javax.swing.JFrame {
                 .addComponent(menuAlarmPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(menuSettingsLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
                 .addComponent(searchTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34))
+                .addContainerGap())
         );
 
         mainPanel.setBackground(new java.awt.Color(187, 222, 251));
@@ -359,8 +360,10 @@ public class ProjectView extends javax.swing.JFrame {
             .addGroup(mainLayeredPaneLayout.createSequentialGroup()
                 .addComponent(topPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 658, Short.MAX_VALUE))
-            .addComponent(menuPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 710, Short.MAX_VALUE)
+                .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(mainLayeredPaneLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 710, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         mainLayeredPane.setLayer(menuPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
         mainLayeredPane.setLayer(mainPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -505,7 +508,7 @@ public class ProjectView extends javax.swing.JFrame {
     private AddContactGroupCard addContactGroup = new AddContactGroupCard();
     private AddContactCard addContact;
     private AddAlarmCard addAlarm = new AddAlarmCard();
-    private ListViewCard listView = new ListViewCard();
+    private ListViewCard listView = new ListViewCard();    
     private WeekViewCard weekView;
     private ContactGroupCard contactGroups = new ContactGroupCard();
     private ContactCard contacts = new ContactCard();
@@ -530,10 +533,6 @@ public class ProjectView extends javax.swing.JFrame {
         return this.addContactLabel;
     }
     
-    public JLabel getAddAlarmLabel() {
-        return this.addAlarmLabel;
-    }
-    
     public JLabel getAllContactsLabel() {
         return this.allContactsLabel;
     }
@@ -544,13 +543,6 @@ public class ProjectView extends javax.swing.JFrame {
     
     public JLabel getWeekViewLabel() {
         return this.weekViewLabel;
-    }
-    
-    public JLabel getMonthViewLabel(){
-        return this.monthViewLabel;
-    }
-    public JLabel getAllAlarmsLabel() {
-        return this.allAlarmsLabel;
     }
 
     public AddActivityCard getAddActivityCard() {
@@ -565,20 +557,32 @@ public class ProjectView extends javax.swing.JFrame {
         return addContact;
     }
     
+    public JLabel getMonthViewLabel() {
+        return this.monthViewLabel;
+    }
+
+    public JLabel getAddAlarmLabel() {
+        return this.addAlarmLabel;
+    }
+
+    public JLabel getAllAlarmsLabel() {
+        return this.allAlarmsLabel;
+    }
+    
     public AddAlarmCard getAddAlarmCard() {
-        return addAlarm;
+        return this.addAlarm;
     }
-    
+
     public WeekViewCard getWeekViewCard() {
-        return weekView;
+        return this.weekView;
     }
-    
+
     public ActivitySingleCard getActivitySingleCard() {
-        return actsingle;
+        return this.actsingle;
     }
-    
+
     public AlarmCard getAlarmSingleCard() {
-        return alarms;
+        return this.alarms;
     }
 
     /* Maybe use this to add listener?
@@ -613,12 +617,12 @@ public class ProjectView extends javax.swing.JFrame {
         mainPanel.add(addContact, "AddContactCard");
         mainPanel.add(addAlarm, "AddAlarmCard");
         mainPanel.add(listView, "ListViewCard");
-        mainPanel.add(monthView, "MonthViewCard");
         mainPanel.add(weekView, "WeekViewCard");
+        mainPanel.add(monthView, "MonthViewCard");
         mainPanel.add(contactGroups, "ContactGroupCard");
         mainPanel.add(contacts, "ContactCard");
         mainPanel.add(alarms, "AlarmCard");
-        mainPanel.add(actsingle, "ActivitySingle");
+        mainPanel.add(actsingle, "ActivitySingleCard");
         tabCards.show(mainPanel, "ListViewCard");
     }
 
@@ -636,7 +640,7 @@ public class ProjectView extends javax.swing.JFrame {
             headlineLabel.setText("Add an alarm");
             addAlarm.resetFields();
         } else if (card.equals("ListViewCard")) {
-            headlineLabel.setText("Calendar // Listview");
+            headlineLabel.setText("Listview");
         } else if (card.equals("WeekViewCard")) {
             headlineLabel.setText("Weekview");
         } else if (card.endsWith("ContactGroupCard")) {
@@ -644,11 +648,10 @@ public class ProjectView extends javax.swing.JFrame {
         } else if (card.endsWith("ContactCard")) {
             headlineLabel.setText("Contacts");
         } else if (card.equals("MonthView")){
-            headlineLabel.setText("Month View");
+            headlineLabel.setText("Monthview");
         } else if (card.endsWith("AlarmCard")) {
             headlineLabel.setText("Alarms");
         }
-            
         tabCards.show(mainPanel, card);
     }
 
@@ -663,7 +666,7 @@ public class ProjectView extends javax.swing.JFrame {
     public void updateMonthView() {
         monthView.updateMonthView();
     }
-    
+
     public void updateContactGroups(List<IContactGroup> contactgroups) {
         contactGroups.updateContactGroups(contactgroups);
     }
@@ -672,14 +675,13 @@ public class ProjectView extends javax.swing.JFrame {
         contacts.updateContacts(contactlist);
     }
 
-    
     public void updateAlarms(List<IAlarm> alarmlist) {
         alarms.updateAlarms(alarmlist);
     }
     
     public void showActivitySingle(IActivity act) {
         actsingle.setFields(act);
-        tabCards.show(mainPanel, "ActivitySingle");
+        tabCards.show(mainPanel, "ActivitySingleCard");
         headlineLabel.setText("Activity");
     }
 
@@ -688,4 +690,5 @@ public class ProjectView extends javax.swing.JFrame {
         tabCards.show(mainPanel, "AddAlarmCard");
         headlineLabel.setText("Edit an alarm");
     }
+
 }

@@ -1,13 +1,9 @@
 package edu.chl.calendarplusplus.controller;
 
-import edu.chl.calendarplusplus.model.IActivity;
 import edu.chl.calendarplusplus.model.ICalendarPlus;
 import edu.chl.calendarplusplus.view.ProjectView;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import javax.swing.JLabel;
 
 public class ProjectViewController implements MouseListener {
