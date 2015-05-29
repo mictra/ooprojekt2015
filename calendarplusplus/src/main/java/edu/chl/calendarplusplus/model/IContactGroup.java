@@ -13,6 +13,10 @@ import java.util.List;
  */
 public interface IContactGroup {
     
+    public void setId(int id);
+    
+    public int getId();
+    
     public void setGroupName(String name);
     
     public String getGroupName();

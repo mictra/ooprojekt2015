@@ -9,6 +9,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
@@ -22,6 +24,9 @@ public class ContactGroup implements IContactGroup, Serializable {
     
     
     @Id
+    @GeneratedValue(strategy = GenerationType.TABLE)
+    private int id;
+    
     private String name;
     @OneToMany(targetEntity = Contact.class)
     private final List<IContact> members;
@@ -34,6 +39,14 @@ public class ContactGroup implements IContactGroup, Serializable {
     public ContactGroup(String name){
         this.name = name;
         members = new ArrayList<>();
+    }
+    
+    public void setId(int id){
+        this.id = id;
+    }
+    
+    public int getId(){
+        return id;
     }
     
     public void setGroupName(String name){

@@ -23,7 +23,7 @@ public class AddContactGroupCard extends javax.swing.JPanel {
     DefaultListModel memberListModel, nonMemberListModel;
     private CalendarPlus cal;
     String lstring = "";
-    private boolean updateMode;
+    private boolean updateMode = false;
     private IContactGroup cg;
     
     /**
@@ -228,7 +228,6 @@ public class AddContactGroupCard extends javax.swing.JPanel {
                         cg.addContact((IContact) memberList.getModel().getElementAt(i));
                     }
                     pcs.firePropertyChange("EditContactGroup", evt, cg);
-                    updateMode = false;
                 } else {
                     pcs.firePropertyChange("AddContactGroup", null, null);
                 }
@@ -300,6 +299,7 @@ public class AddContactGroupCard extends javax.swing.JPanel {
     }
     
     public void resetFields() {
+        updateMode = false;
         nameTextField.setText("");
         setLists();
     }

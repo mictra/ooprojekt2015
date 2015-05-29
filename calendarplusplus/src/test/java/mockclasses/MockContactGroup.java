@@ -52,6 +52,16 @@ public class MockContactGroup implements IContactGroup {
     public void removeAllContacts() {
         members.clear();
     }
+
+    @Override
+    public void setId(int id) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int getId() {
+        return 0;
+    }
     
 }
     

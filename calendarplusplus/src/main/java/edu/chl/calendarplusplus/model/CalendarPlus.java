@@ -27,6 +27,7 @@ public class CalendarPlus implements ICalendarPlus {
     private List<IAlarm> alarms;
     private IContactManager contactManager;
     private IActivityManager activityManager;
+    private INotificationManager notificationManager;
     private ContactGroupDAO cgDAO;
     private ContactDAO cDAO;
     private ActivityDAO aDAO;
@@ -52,6 +53,7 @@ public class CalendarPlus implements ICalendarPlus {
         }
         contactManager = new ContactManager();
         activityManager = new ActivityManager();
+        notificationManager = new NotificationManager();
         /*
         * Go through all contacts and see which groups and activities they're in. 
         * Add them as a key-value pair into the ContactManager and ActivityManager.
@@ -175,6 +177,10 @@ public class CalendarPlus implements ICalendarPlus {
 
     public IActivityManager getActivityManager() {
         return activityManager;
+    }
+    
+    public INotificationManager getNotificationManager(){
+        return notificationManager;
     }
 
     public List<IActivity> getActivitiesByHour(Calendar start, Calendar end) {
