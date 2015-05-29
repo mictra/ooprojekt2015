@@ -13,6 +13,8 @@ import java.util.Calendar;
  */
 public interface IAlarm {
     
+    int getId();
+    
     void setAlarm(Calendar time);
     
     Calendar getAlarm();

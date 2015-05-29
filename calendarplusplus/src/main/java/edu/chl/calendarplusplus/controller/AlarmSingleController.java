@@ -37,10 +37,11 @@ public class AlarmSingleController implements PropertyChangeListener {
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         String evtName = evt.getPropertyName();
-        IAlarm alarm = (IAlarm) evt.getNewValue();
         if (evtName.equalsIgnoreCase("EditAlarmClicked")) {
+            IAlarm alarm = (IAlarm) evt.getNewValue();
             projV.editAlarm(alarm);
         } else if(evtName.equalsIgnoreCase("RemoveAlarmClicked")) {
+            IAlarm alarm = (IAlarm) evt.getNewValue();
             int op = JOptionPane.showConfirmDialog
                     (projV, 
                     "Are you sure you want to delete this alarm?",
