@@ -5,11 +5,8 @@
  */
 package edu.chl.calendarplusplus.controller;
 
-import edu.chl.calendarplusplus.model.ContactGroup;
-import edu.chl.calendarplusplus.model.IAlarm;
 import edu.chl.calendarplusplus.model.ICalendarPlus;
 import edu.chl.calendarplusplus.model.IContactGroup;
-import edu.chl.calendarplusplus.view.AlarmCard;
 import edu.chl.calendarplusplus.view.ContactGroupCard;
 import edu.chl.calendarplusplus.view.ProjectView;
 import java.beans.PropertyChangeEvent;
@@ -21,9 +18,9 @@ import java.beans.PropertyChangeListener;
  */
 public class ContactGroupSingleController implements PropertyChangeListener {
     
-    private ICalendarPlus cal;
-    private ProjectView projV;
-    private ContactGroupCard cgc;
+    private final ICalendarPlus cal;
+    private final ProjectView projV;
+    private final ContactGroupCard cgc;
 
     public static ContactGroupSingleController create(ICalendarPlus cal, ProjectView projV, ContactGroupCard cgc) {
         return new ContactGroupSingleController(cal, projV, cgc);
@@ -39,13 +36,13 @@ public class ContactGroupSingleController implements PropertyChangeListener {
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         String evtName = evt.getPropertyName();
-        if (evtName.equalsIgnoreCase("EditContractGroupClicked")) {
+        if (evtName.equalsIgnoreCase("EditContactGroupClicked")) {
             IContactGroup cg = (IContactGroup) evt.getNewValue();
-            System.out.println("Edit ContactGroup Clicked.");
+            System.out.println(cg.getGroupName() + " Edit ContactGroup Clicked.");
         } 
         if(evtName.equalsIgnoreCase("RemoveContactGroupClicked")) {
             IContactGroup cg = (IContactGroup) evt.getNewValue();
-            System.out.println("Remove ContractGroup Clicked.");
+            System.out.println(cg.getGroupName() + " Remove ContactGroup Clicked.");
         }
     }
     

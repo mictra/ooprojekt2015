@@ -138,7 +138,7 @@ public class ContactGroupElement extends javax.swing.JPanel {
                 pcs.firePropertyChange("EditContactGroupClicked", evt, cg);
             }
             if (evt.getSource() == removeButton) {
-                pcs.firePropertyChange("RemovesContactGroupClicked", evt, cg);
+                pcs.firePropertyChange("RemoveContactGroupClicked", evt, cg);
             }
         }
     }//GEN-LAST:event_labelMouseReleased
