@@ -39,11 +39,16 @@ public class Alarm implements IAlarm, Serializable {
     public Alarm() {
     }
     
-    public Alarm(Calendar d, String n){
+    public Alarm(Calendar d, String n, String desc){
         if (n.isEmpty()) { return; }
         if (d.after(Calendar.getInstance()) || d.equals(Calendar.getInstance())){
             this.alarmTime = d;
             this.name = n;
+            if (desc == null) {
+                this.description = "";
+            } else {
+                this.description = desc;
+            }
         }
     }
     

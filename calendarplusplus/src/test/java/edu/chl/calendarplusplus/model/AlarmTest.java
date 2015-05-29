@@ -19,7 +19,7 @@ public class AlarmTest {
     IAlarm a;
     
     public AlarmTest(){
-        a = new Alarm(time_1, "An Alarm");
+        a = new Alarm(time_1, "An Alarm", null);
     }
     
     @Test
@@ -37,7 +37,7 @@ public class AlarmTest {
  
     @Test
     public void noAlarmName(){
-        a = new Alarm(time_1, "");
+        a = new Alarm(time_1, "", null);
         Assert.assertNull(a.getAlarm());
         Assert.assertNull(a.getAlarmName());
     }
@@ -46,7 +46,7 @@ public class AlarmTest {
     @Test
     public void invalidAlarm(){
         time_1.add(Calendar.HOUR_OF_DAY, -12);
-        a = new Alarm(time_1, "An Alarm");
+        a = new Alarm(time_1, "An Alarm", null);
         Assert.assertNull(a.getAlarm());
         Assert.assertNull(a.getAlarmName());
     }
