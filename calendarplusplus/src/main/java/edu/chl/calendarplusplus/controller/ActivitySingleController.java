@@ -36,13 +36,14 @@ public class ActivitySingleController implements PropertyChangeListener {
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         String evtName = evt.getPropertyName();
-        IActivity act = (IActivity) evt.getNewValue();
         if (evtName.equalsIgnoreCase("EditActivityClicked")) {
 //            IActivity act = (IActivity) evt.getNewValue();
 //            projV.showActivitySingle(act);
+            IActivity act = (IActivity) evt.getNewValue();
             System.out.println(act.getName() + " Edit button clicked");
         }
         if (evtName.equalsIgnoreCase("RemoveActivityClicked")) {
+            IActivity act = (IActivity) evt.getNewValue();
             System.out.println(act.getName() + " Remove button clicked");
         }
     }
