@@ -114,27 +114,27 @@ public class ActivitySingleCard extends javax.swing.JPanel {
 
         editButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/editButton.png"))); // NOI18N
         editButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                labelMouseExited(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 labelMousePressed(evt);
             }
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 labelMouseReleased(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                labelMouseExited(evt);
             }
         });
 
         removeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/removeButton.png"))); // NOI18N
         removeButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                labelMouseExited(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 labelMousePressed(evt);
             }
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 labelMouseReleased(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                labelMouseExited(evt);
             }
         });
 
