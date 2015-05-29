@@ -29,6 +29,10 @@ public class ContactGroupElement extends javax.swing.JPanel {
         this.cg = cg;
         nameLabel.setText(cg.getGroupName());
         setMembers(cg.getContacts());
+        if (cg.getGroupName().equals("Default")) {
+            editButton.setVisible(false);
+            removeButton.setVisible(false);
+        }
     }
 
     /**
@@ -135,10 +139,10 @@ public class ContactGroupElement extends javax.swing.JPanel {
     private void labelMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelMouseReleased
         if (buttonPressed) {
             if (evt.getSource() == editButton) {
-                pcs.firePropertyChange("EditContactGroupClicked", evt, cg);
+                pcs.firePropertyChange("EditContactGroupButtonClicked", evt, cg);
             }
             if (evt.getSource() == removeButton) {
-                pcs.firePropertyChange("RemoveContactGroupClicked", evt, cg);
+                pcs.firePropertyChange("RemoveContactGroupButtonClicked", evt, cg);
             }
         }
     }//GEN-LAST:event_labelMouseReleased

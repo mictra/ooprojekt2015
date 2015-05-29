@@ -36,13 +36,15 @@ public class ContactSingleController implements PropertyChangeListener {
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         String evtName = evt.getPropertyName();
-        if (evtName.equalsIgnoreCase("EditContactClicked")) {
+        if (evtName.equalsIgnoreCase("EditContactButtonClicked")) {
             IContact c = (IContact) evt.getNewValue();
-            System.out.println(c.getName() + " Edit Contact Clicked.");
+            //System.out.println(c.getName() + " Edit Contact Clicked.");
+            projV.editContact(c);
         } 
-        if (evtName.equalsIgnoreCase("RemoveContactClicked")) {
+        if (evtName.equalsIgnoreCase("RemoveContactButtonClicked")) {
             IContact c = (IContact) evt.getNewValue();
             System.out.println(c.getName() + " Remove Contact Clicked.");
+            // ToDo remove contact fromlists and database
         }
     }
     

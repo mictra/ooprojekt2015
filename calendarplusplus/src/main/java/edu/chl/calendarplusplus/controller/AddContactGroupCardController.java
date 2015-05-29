@@ -6,6 +6,7 @@
 package edu.chl.calendarplusplus.controller;
 
 import edu.chl.calendarplusplus.model.CalendarPlus;
+import edu.chl.calendarplusplus.model.IContactGroup;
 import edu.chl.calendarplusplus.view.AddContactGroupCard;
 import edu.chl.calendarplusplus.view.ProjectView;
 import java.beans.PropertyChangeEvent;
@@ -38,10 +39,20 @@ public class AddContactGroupCardController implements PropertyChangeListener {
         if (evtName.equalsIgnoreCase("AddContactGroup")) {
             cal.addContactGroup(acgc.getAsContactGroup());
             acgc.resetFields();
-        } else if (evtName.equalsIgnoreCase("AddMember")) {
+        } else if (evtName.equalsIgnoreCase("BackToContactGroups")) {
+             projV.changeCard("ContactGroupCard");
+        } else if (evtName.equalsIgnoreCase("AddContactGroupCardAddMember")) {
             acgc.addMember();
-        } else if (evtName.equalsIgnoreCase("RemoveMember")) {
+        } else if (evtName.equalsIgnoreCase("AddContactGroupCardRemoveMember")) {
             acgc.removeMember();
+        } else if (evtName.equalsIgnoreCase("EditContactGroup")) {
+            IContactGroup cg = (IContactGroup) evt.getNewValue();
+            System.out.println(cg.getGroupName()+ " shall be updated now");
+            // ToDo Update lists and database for this group
+        } else if (evtName.equalsIgnoreCase("RemoveContactGroup")) {
+            IContactGroup cg = (IContactGroup) evt.getNewValue();
+            System.out.println(cg.getGroupName()+ " shall be removed now");
+            // ToDo remove group
         }
     }
 

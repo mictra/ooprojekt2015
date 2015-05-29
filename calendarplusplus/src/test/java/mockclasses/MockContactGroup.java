@@ -47,6 +47,11 @@ public class MockContactGroup implements IContactGroup {
     public boolean hasContact(IContact contact) {
         return false; //Temporary
     }
+
+    @Override
+    public void removeAllContacts() {
+        members.clear();
+    }
     
 }
     

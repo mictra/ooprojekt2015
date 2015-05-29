@@ -22,8 +22,10 @@ import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
 public class AddContactCard extends javax.swing.JPanel {
 
     private final CalendarPlus cal;
+    private boolean updateMode;
     DefaultListModel nonMemberListModel, memberListModel;
     String lstring = "";
+    private IContact c;
 
     /**
      * Creates new form AddContactCard
@@ -242,18 +244,27 @@ public class AddContactCard extends javax.swing.JPanel {
     private void labelMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelMouseReleased
         if (buttonPressed) {
             if (evt.getSource() == saveButton) {
-                pcs.firePropertyChange("AddContact", null, null);
+                if (updateMode) {
+                    c.setName(nameTextField.getText());
+                    c.setEmail(emailTextField.getText());
+                    c.setPhone(phoneTextField.getText());
+                    pcs.firePropertyChange("EditContact", evt, c);
+                    updateMode = false;
+                } else {
+                    pcs.firePropertyChange("AddContact", null, null);
+                }
+                
             }
             if (evt.getSource() == cancelButton) {
-
+                pcs.firePropertyChange("BackToContacts", null, null);
             }
             if (evt.getSource() == addButton) {
                 if (nonMemberListModel.size() > 0 && !nonMemberList.isSelectionEmpty())
-                    pcs.firePropertyChange("AddGroup", null, null);
+                    pcs.firePropertyChange("AddContactCardAddGroup", null, null);
             }
             if (evt.getSource() == removeButton) {
                 if (memberListModel.size() > 0 && !memberList.isSelectionEmpty())
-                    pcs.firePropertyChange("RemoveGroup", null, null);
+                    pcs.firePropertyChange("AddContactCardRemoveGroup", null, null);
             }
         }
     }//GEN-LAST:event_labelMouseReleased
@@ -370,4 +381,39 @@ public class AddContactCard extends javax.swing.JPanel {
     public void addListener(PropertyChangeSupport pcs) {
         this.pcs = pcs;
     }
+
+    void editContact(IContact c) {
+        this.c = c;
+        updateMode = true;
+        nameTextField.setText(c.getName());
+        emailTextField.setText(c.getEmail());
+        phoneTextField.setText(c.getPhone());
+        
+       
+        //Set the groups
+        memberList.removeAll();
+        memberListModel.removeAllElements();
+        nonMemberList.removeAll();
+        nonMemberListModel.removeAllElements();
+        
+        for (IContactGroup cg : cal.getContactGroupList()) {
+            if (cg.hasContact(c)) {
+                if (!cg.getGroupName().equals("Default"))
+                    memberListModel.addElement(cg);
+            } else {
+                nonMemberListModel.addElement(cg);
+            }
+            if (lstring.length() < cg.getGroupName().length()) {
+                lstring = cg.getGroupName();
+            }
+        }
+        
+        memberList.setModel(memberListModel);
+        memberList.setPrototypeCellValue(lstring + "     ");
+        memberScrollPane.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
+        nonMemberList.setModel(nonMemberListModel);
+        nonMemberList.setPrototypeCellValue(lstring + "     ");
+        nonMemberScrollPane.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
+    }
+
 }

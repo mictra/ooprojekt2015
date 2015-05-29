@@ -5,6 +5,7 @@
  */
 package edu.chl.calendarplusplus.view;
 
+import edu.chl.calendarplusplus.model.CalendarPlus;
 import edu.chl.calendarplusplus.model.ContactGroup;
 import edu.chl.calendarplusplus.model.IContact;
 import edu.chl.calendarplusplus.model.IContactGroup;
@@ -20,15 +21,17 @@ import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
 public class AddContactGroupCard extends javax.swing.JPanel {
 
     DefaultListModel memberListModel, nonMemberListModel;
-    private final IContactManager conman;
+    private CalendarPlus cal;
     String lstring = "";
+    private boolean updateMode;
+    private IContactGroup cg;
     
     /**
      * Creates new form AddContactGroupCard
      */
-    public AddContactGroupCard(IContactManager conman) {
+    public AddContactGroupCard(CalendarPlus cal) {
         initComponents();
-        this.conman = conman;
+        this.cal = cal;
         memberListModel = new DefaultListModel();
         nonMemberListModel = new DefaultListModel();
         resetFields();
@@ -218,18 +221,29 @@ public class AddContactGroupCard extends javax.swing.JPanel {
     private void labelMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelMouseReleased
         if (buttonPressed) {
             if (evt.getSource() == saveButton) {
-                pcs.firePropertyChange("AddContactGroup", null, null);
+                if (updateMode) {
+                    cg.setGroupName(nameTextField.getText());
+                    cg.removeAllContacts();
+                    for (int i = 0; i < memberList.getModel().getSize(); i++) {
+                        cg.addContact((IContact) memberList.getModel().getElementAt(i));
+                    }
+                    pcs.firePropertyChange("EditContactGroup", evt, cg);
+                    updateMode = false;
+                } else {
+                    pcs.firePropertyChange("AddContactGroup", null, null);
+                }
             }
             if (evt.getSource() == cancelButton) {
+                pcs.firePropertyChange("BackToContactGroups", evt, cg);
                 
             }
             if (evt.getSource() == addButton) {
                 if (nonMemberListModel.size() > 0 && !nonMemberList.isSelectionEmpty())
-                    pcs.firePropertyChange("AddMember", null, null);
+                    pcs.firePropertyChange("AddContactGroupCardAddMember", null, null);
             }
             if (evt.getSource() == removeButton) {
                 if (memberListModel.size() > 0 && !memberList.isSelectionEmpty())
-                    pcs.firePropertyChange("RemoveMember", null, null);
+                    pcs.firePropertyChange("AddContactGroupCardRemoveMember", null, null);
             }
         }
     }//GEN-LAST:event_labelMouseReleased
@@ -298,7 +312,7 @@ public class AddContactGroupCard extends javax.swing.JPanel {
         //Set the available contacts
         nonMemberList.removeAll();
         nonMemberListModel.removeAllElements();
-        for (IContact c : conman.getAllContacts()) {
+        for (IContact c : cal.getContactManager().getAllContacts()) {
             nonMemberListModel.addElement(c);
             if (lstring.length() < c.getName().length())
                 lstring = c.getName();
@@ -323,6 +337,34 @@ public class AddContactGroupCard extends javax.swing.JPanel {
     public void removeMember() {
         nonMemberListModel.addElement(memberList.getSelectedValue());
         memberListModel.remove(memberList.getSelectedIndex());
+    }
+
+    void editContactGroup(IContactGroup cg) {
+        updateMode = true;
+        this.cg = cg;
+        nameTextField.setText(cg.getGroupName());
+        
+        
+        //Set the chosen contacts
+        memberList.removeAll();
+        memberListModel.removeAllElements();
+        nonMemberList.removeAll();
+        nonMemberListModel.removeAllElements();
+        
+        for (IContact c: cal.getContactManager().getAllContacts()) {
+            if (cg.hasContact(c)) {
+                memberListModel.addElement(c);
+            } else {
+                nonMemberListModel.addElement(c);
+            }
+        }
+        
+        memberList.setModel(memberListModel);
+        memberList.setPrototypeCellValue(lstring+ "     ");
+        memberScrollPane.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
+        nonMemberList.setModel(nonMemberListModel);
+        nonMemberList.setPrototypeCellValue(lstring+ "     ");
+        nonMemberScrollPane.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
     }
 
 }
