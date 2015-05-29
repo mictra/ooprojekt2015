@@ -46,6 +46,8 @@ public class AddAlarmCardController implements PropertyChangeListener {
             if (al.getAlarm() != null && al.getAlarmName() != null){
                 cal.updateAlarm(al);
             }
+        } else if (evtName.equalsIgnoreCase("BackToAlarm")) {
+            projV.changeCard("AlarmCard");
         }
         ac.resetFields();
     }

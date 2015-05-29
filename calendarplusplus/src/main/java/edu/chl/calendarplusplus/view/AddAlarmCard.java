@@ -193,7 +193,7 @@ public class AddAlarmCard extends javax.swing.JPanel {
             } else if (evt.getSource() == saveButton && isEdit) {
                 pcs.firePropertyChange("EditAlarm", null, null);
             } else if (evt.getSource() == cancelButton) {
-
+                pcs.firePropertyChange("BackToAlarm", null, null);
             }
         }
     }//GEN-LAST:event_labelMouseReleased

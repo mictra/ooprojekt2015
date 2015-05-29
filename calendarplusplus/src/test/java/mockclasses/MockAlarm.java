@@ -21,11 +21,6 @@ public class MockAlarm implements IAlarm {
     
     public MockAlarm(){
     }
-
-    @Override
-    public int getId() {
-        return id;
-    }
     
     @Override
     public void setAlarm(Calendar time) {
