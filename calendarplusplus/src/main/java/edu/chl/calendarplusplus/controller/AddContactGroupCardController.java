@@ -23,12 +23,12 @@ public class AddContactGroupCardController implements PropertyChangeListener {
 
     private CalendarPlus cal;
     private ProjectView projV;
-    private AddContactGroupCard cgc;
+    private AddContactGroupCard acgc;
 
-    private AddContactGroupCardController(CalendarPlus cal, ProjectView projectView, AddContactGroupCard cgc) {
+    private AddContactGroupCardController(CalendarPlus cal, ProjectView projectView, AddContactGroupCard acgc) {
         this.cal = cal;
         this.projV = projectView;
-        this.cgc = cgc;
+        this.acgc = acgc;
         projV.addPropertyChangeListener(this);
     }
     
@@ -36,8 +36,12 @@ public class AddContactGroupCardController implements PropertyChangeListener {
     public void propertyChange(PropertyChangeEvent evt) {
         String evtName = evt.getPropertyName();
         if (evtName.equalsIgnoreCase("AddContactGroup")) {
-            cal.addContactGroup(cgc.getAsContactGroup());
-            cgc.resetFields();
+            cal.addContactGroup(acgc.getAsContactGroup());
+            acgc.resetFields();
+        } else if (evtName.equalsIgnoreCase("AddMember")) {
+            acgc.addMember();
+        } else if (evtName.equalsIgnoreCase("RemoveMember")) {
+            acgc.removeMember();
         }
     }
 

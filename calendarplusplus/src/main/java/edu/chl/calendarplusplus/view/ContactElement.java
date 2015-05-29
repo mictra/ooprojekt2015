@@ -5,8 +5,8 @@
  */
 package edu.chl.calendarplusplus.view;
 
-import edu.chl.calendarplusplus.model.Contact;
 import edu.chl.calendarplusplus.model.IContact;
+import java.beans.PropertyChangeSupport;
 
 /**
  *
@@ -14,11 +14,16 @@ import edu.chl.calendarplusplus.model.IContact;
  */
 public class ContactElement extends javax.swing.JPanel {
 
+    private boolean buttonPressed;
+    private PropertyChangeSupport pcs;
+    private final IContact c;
+    
     /**
      * Creates new form ContactElement
      */
     public ContactElement(IContact c) {
         initComponents();
+        this.c = c;
         nameLabel.setText(c.getName());
         emailLabel.setText(c.getEmail());
         phoneLabel.setText(c.getPhone());
@@ -36,6 +41,8 @@ public class ContactElement extends javax.swing.JPanel {
         nameLabel = new javax.swing.JLabel();
         emailLabel = new javax.swing.JLabel();
         phoneLabel = new javax.swing.JLabel();
+        removeButton = new javax.swing.JLabel();
+        editButton = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(121, 134, 203));
         setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
@@ -53,6 +60,32 @@ public class ContactElement extends javax.swing.JPanel {
         phoneLabel.setForeground(java.awt.Color.white);
         phoneLabel.setText("#PHONE");
 
+        removeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/removeButton.png"))); // NOI18N
+        removeButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                labelMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                labelMouseReleased(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                labelMouseExited(evt);
+            }
+        });
+
+        editButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/editButton.png"))); // NOI18N
+        editButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                labelMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                labelMouseReleased(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                labelMouseExited(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -60,16 +93,27 @@ public class ContactElement extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(nameLabel)
-                    .addComponent(emailLabel)
-                    .addComponent(phoneLabel))
-                .addContainerGap(328, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(nameLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 281, Short.MAX_VALUE)
+                        .addComponent(editButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(removeButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(emailLabel)
+                            .addComponent(phoneLabel))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(nameLabel)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nameLabel)
+                    .addComponent(removeButton)
+                    .addComponent(editButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(emailLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -78,10 +122,35 @@ public class ContactElement extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void labelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelMouseExited
+        buttonPressed = false;
+    }//GEN-LAST:event_labelMouseExited
+
+    private void labelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelMousePressed
+        buttonPressed = true;
+    }//GEN-LAST:event_labelMousePressed
+
+    private void labelMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelMouseReleased
+        if (buttonPressed) {
+            if (evt.getSource() == editButton) {
+                pcs.firePropertyChange("EditContactClicked", evt, c);
+            }
+            if (evt.getSource() == removeButton) {
+                pcs.firePropertyChange("RemoveContactClicked", evt, c);
+            }
+        }
+    }//GEN-LAST:event_labelMouseReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel editButton;
     private javax.swing.JLabel emailLabel;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JLabel phoneLabel;
+    private javax.swing.JLabel removeButton;
     // End of variables declaration//GEN-END:variables
+
+    public void addListener (PropertyChangeSupport pcs) {
+        this.pcs = pcs;
+    }
 }

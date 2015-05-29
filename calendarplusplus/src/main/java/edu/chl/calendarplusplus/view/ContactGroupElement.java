@@ -5,11 +5,10 @@
  */
 package edu.chl.calendarplusplus.view;
 
-import edu.chl.calendarplusplus.model.Contact;
-import edu.chl.calendarplusplus.model.ContactGroup;
 import edu.chl.calendarplusplus.model.IContact;
 import edu.chl.calendarplusplus.model.IContactGroup;
 import java.awt.Dimension;
+import java.beans.PropertyChangeSupport;
 import java.util.List;
 
 /**
@@ -18,11 +17,16 @@ import java.util.List;
  */
 public class ContactGroupElement extends javax.swing.JPanel {
     
+    private boolean buttonPressed;
+    private PropertyChangeSupport pcs;
+    private final IContactGroup cg;
+    
     /**
      * Creates new form ContactGroupElement
      */
     public ContactGroupElement(IContactGroup cg) {
         initComponents();
+        this.cg = cg;
         nameLabel.setText(cg.getGroupName());
         setMembers(cg.getContacts());
     }
@@ -39,6 +43,8 @@ public class ContactGroupElement extends javax.swing.JPanel {
         nameLabel = new javax.swing.JLabel();
         groupMemberList = new javax.swing.JPanel();
         membersLabel = new javax.swing.JLabel();
+        removeButton = new javax.swing.JLabel();
+        editButton = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(121, 134, 203));
         setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
@@ -55,6 +61,32 @@ public class ContactGroupElement extends javax.swing.JPanel {
         membersLabel.setForeground(java.awt.Color.white);
         membersLabel.setText("Members:");
 
+        removeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/removeButton.png"))); // NOI18N
+        removeButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                labelMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                labelMouseReleased(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                labelMouseExited(evt);
+            }
+        });
+
+        editButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/editButton.png"))); // NOI18N
+        editButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                labelMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                labelMouseReleased(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                labelMouseExited(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -64,7 +96,10 @@ public class ContactGroupElement extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(nameLabel)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(editButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(removeButton))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(membersLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -75,7 +110,10 @@ public class ContactGroupElement extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(nameLabel)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nameLabel)
+                    .addComponent(removeButton)
+                    .addComponent(editButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(groupMemberList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -86,13 +124,38 @@ public class ContactGroupElement extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void labelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelMouseExited
+        buttonPressed = false;
+    }//GEN-LAST:event_labelMouseExited
+
+    private void labelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelMousePressed
+        buttonPressed = true;
+    }//GEN-LAST:event_labelMousePressed
+
+    private void labelMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelMouseReleased
+        if (buttonPressed) {
+            if (evt.getSource() == editButton) {
+                pcs.firePropertyChange("EditContactGroupClicked", evt, cg);
+            }
+            if (evt.getSource() == removeButton) {
+                pcs.firePropertyChange("RemovesContactGroupClicked", evt, cg);
+            }
+        }
+    }//GEN-LAST:event_labelMouseReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel editButton;
     private javax.swing.JPanel groupMemberList;
     private javax.swing.JLabel membersLabel;
     private javax.swing.JLabel nameLabel;
+    private javax.swing.JLabel removeButton;
     // End of variables declaration//GEN-END:variables
 
+    public void addListener (PropertyChangeSupport pcs) {
+        this.pcs = pcs;
+    }
+    
     private void setMembers(List<IContact> contacts) {
         groupMemberList.removeAll();
         groupMemberList.setPreferredSize(new Dimension(334,18));

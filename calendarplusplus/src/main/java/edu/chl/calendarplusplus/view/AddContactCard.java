@@ -7,14 +7,12 @@ package edu.chl.calendarplusplus.view;
 
 import edu.chl.calendarplusplus.model.CalendarPlus;
 import edu.chl.calendarplusplus.model.Contact;
-import edu.chl.calendarplusplus.model.ContactGroup;
 import edu.chl.calendarplusplus.model.IContact;
 import edu.chl.calendarplusplus.model.IContactGroup;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
-import javax.swing.JButton;
 import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
 
 /**
@@ -125,7 +123,7 @@ public class AddContactCard extends javax.swing.JPanel {
             }
         });
 
-        addButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arrowsRight.png"))); // NOI18N
+        addButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arrowsLeft.png"))); // NOI18N
         addButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 labelMousePressed(evt);
@@ -141,7 +139,7 @@ public class AddContactCard extends javax.swing.JPanel {
             }
         });
 
-        removeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arrowsLeft.png"))); // NOI18N
+        removeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arrowsRight.png"))); // NOI18N
         removeButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 labelMousePressed(evt);
@@ -180,17 +178,17 @@ public class AddContactCard extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(phoneTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(nonMemberScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(memberScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(removeButton)
                                     .addComponent(addButton))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(memberScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(cancelButton)
-                        .addGap(18, 18, 18)
-                        .addComponent(saveButton)))
+                                .addComponent(nonMemberScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(cancelButton)
+                                .addGap(18, 18, 18)
+                                .addComponent(saveButton)))))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -250,10 +248,12 @@ public class AddContactCard extends javax.swing.JPanel {
 
             }
             if (evt.getSource() == addButton) {
-                pcs.firePropertyChange("AddGroup", null, null);
+                if (nonMemberListModel.size() > 0 && !nonMemberList.isSelectionEmpty())
+                    pcs.firePropertyChange("AddGroup", null, null);
             }
             if (evt.getSource() == removeButton) {
-                pcs.firePropertyChange("RemoveGroup", null, null);
+                if (memberListModel.size() > 0 && !memberList.isSelectionEmpty())
+                    pcs.firePropertyChange("RemoveGroup", null, null);
             }
         }
     }//GEN-LAST:event_labelMouseReleased
@@ -268,20 +268,20 @@ public class AddContactCard extends javax.swing.JPanel {
     }//GEN-LAST:event_cancelButtonMouseExited
 
     private void addButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addButtonMouseEntered
-        addButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arrowsRightHover.png")));
+        addButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arrowsLeftHover.png")));
     }//GEN-LAST:event_addButtonMouseEntered
 
     private void addButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addButtonMouseExited
-        addButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arrowsRight.png")));
+        addButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arrowsLeft.png")));
         buttonPressed = false;
     }//GEN-LAST:event_addButtonMouseExited
 
     private void removeButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_removeButtonMouseEntered
-        removeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arrowsLeftHover.png")));
+        removeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arrowsRightHover.png")));
     }//GEN-LAST:event_removeButtonMouseEntered
 
     private void removeButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_removeButtonMouseExited
-        removeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arrowsLeft.png")));
+        removeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arrowsRight.png")));
         buttonPressed = false;
     }//GEN-LAST:event_removeButtonMouseExited
 
@@ -308,9 +308,7 @@ public class AddContactCard extends javax.swing.JPanel {
     private boolean buttonPressed;
 
     public IContact getAsContact() {
-        //c.setEmail(emailTextField.getText());
-        //c.setPhone(phoneTextField.getText());
-        return new Contact(nameTextField.getText(), emailTextField.getText(), phoneTextField.getText());
+        return new Contact(nameTextField.getText(), phoneTextField.getText(), emailTextField.getText());
     }
 
     public List<IContactGroup> getContactGroups() {

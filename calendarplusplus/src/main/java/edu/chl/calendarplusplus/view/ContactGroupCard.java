@@ -5,10 +5,9 @@
  */
 package edu.chl.calendarplusplus.view;
 
-import edu.chl.calendarplusplus.model.ContactGroup;
 import edu.chl.calendarplusplus.model.IContactGroup;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
+import java.beans.PropertyChangeSupport;
 import java.util.List;
 
 /**
@@ -16,24 +15,26 @@ import java.util.List;
  * @author cain
  */
 public class ContactGroupCard extends javax.swing.JPanel {
-
+    
+    int elementheight = 100;
+    private PropertyChangeSupport pcs;
+    
     /**
      * Creates new form ContactGroupCard
      */
     public ContactGroupCard() {
         initComponents();
-        ((FlowLayout)elementList.getLayout()).setHgap(20);
-        ((FlowLayout)elementList.getLayout()).setVgap(20);
         contactGroupScrollPane.getVerticalScrollBar().setUnitIncrement(20);
     }
     
     public void updateContactGroups(List<IContactGroup> contactgroups) {
+        int height = contactgroups.size() % 2 == 0 ? (1+contactgroups.size()/2)*15 + contactgroups.size()/2*elementheight : (1+contactgroups.size()/2)*15 + (contactgroups.size()/2+1)*elementheight;
         elementList.removeAll();
-//        elementList.setPreferredSize(new Dimension(684,500));
-//        elementList.setSize(684, 500);
+        elementList.setPreferredSize(new Dimension(1008,height));
         for (IContactGroup cg: contactgroups) {
             ContactGroupElement cge = new ContactGroupElement(cg);
-            cge.setPreferredSize(new Dimension(elementList.getPreferredSize().width/2-20,90));
+            cge.setPreferredSize(new Dimension((elementList.getPreferredSize().width-60)/2,elementheight));
+            cge.addListener(pcs);
             elementList.add(cge);
             revalidate();
             repaint();
@@ -53,11 +54,13 @@ public class ContactGroupCard extends javax.swing.JPanel {
         contactGroupScrollPane = new javax.swing.JScrollPane();
         elementList = new javax.swing.JPanel();
 
-        setPreferredSize(new java.awt.Dimension(1008, 652));
+        setPreferredSize(new java.awt.Dimension(1008, 640));
 
-        contactGroupScrollPane.setPreferredSize(new java.awt.Dimension(1008, 652));
+        contactGroupScrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        contactGroupScrollPane.setPreferredSize(new java.awt.Dimension(1008, 640));
 
-        elementList.setPreferredSize(new java.awt.Dimension(1006, 650));
+        elementList.setPreferredSize(new java.awt.Dimension(1006, 638));
+        elementList.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEADING, 15, 15));
         contactGroupScrollPane.setViewportView(elementList);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -68,7 +71,7 @@ public class ContactGroupCard extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(contactGroupScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 640, Short.MAX_VALUE)
+            .addComponent(contactGroupScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -77,4 +80,8 @@ public class ContactGroupCard extends javax.swing.JPanel {
     private javax.swing.JScrollPane contactGroupScrollPane;
     private javax.swing.JPanel elementList;
     // End of variables declaration//GEN-END:variables
+
+    public void addListener(PropertyChangeSupport pcs) {
+        this.pcs = pcs;
+    }
 }

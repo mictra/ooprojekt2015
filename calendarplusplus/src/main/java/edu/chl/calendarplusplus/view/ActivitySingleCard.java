@@ -22,6 +22,7 @@ public class ActivitySingleCard extends javax.swing.JPanel {
     Calendar startdate, enddate;
     private PropertyChangeSupport pcs;
     private boolean buttonPressed;
+    private IActivity act;
     
     /**
      * Creates new form ActivitySingleCard
@@ -32,6 +33,7 @@ public class ActivitySingleCard extends javax.swing.JPanel {
     }
     
     public void setFields(IActivity act) {
+        this.act = act;
         nameLabel.setText(act.getName());
         startdate = act.getStartTime();
         enddate = act.getEndTime();
@@ -213,10 +215,10 @@ public class ActivitySingleCard extends javax.swing.JPanel {
     private void labelMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelMouseReleased
         if (buttonPressed) {
             if (evt.getSource() == editButton) {
-                pcs.firePropertyChange("EditButtonClicked", null, null);
+                pcs.firePropertyChange("EditActivityClicked", evt, act);
             }
             if (evt.getSource() == removeButton) {
-                pcs.firePropertyChange("RemoveButtonClicked", null, null);
+                pcs.firePropertyChange("RemoveActivityClicked", evt, act);
             }
         }
     }//GEN-LAST:event_labelMouseReleased

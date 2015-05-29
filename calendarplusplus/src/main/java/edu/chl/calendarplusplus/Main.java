@@ -62,6 +62,8 @@ public final class Main {
                     WeekViewController.create(cal, projectView, projectView.getWeekViewCard());
                     ActivitySingleController.create(cal, projectView, projectView.getActivitySingleCard());
                     AlarmSingleController.create(cal, projectView, projectView.getAlarmSingleCard());
+                    ContactSingleController.create(cal, projectView, projectView.getContactSingleCard());
+                    ContactGroupSingleController.create(cal, projectView, projectView.getContactGroupSingleCard());
                     projectView.setVisible(true);
                     initTest(cal);
                 });

@@ -5,6 +5,7 @@
  */
 package edu.chl.calendarplusplus.controller;
 
+import edu.chl.calendarplusplus.model.IActivity;
 import edu.chl.calendarplusplus.model.ICalendarPlus;
 import edu.chl.calendarplusplus.view.ActivitySingleCard;
 import edu.chl.calendarplusplus.view.ProjectView;
@@ -35,13 +36,14 @@ public class ActivitySingleController implements PropertyChangeListener {
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         String evtName = evt.getPropertyName();
-        if (evtName.equalsIgnoreCase("EditButtonClicked")) {
+        IActivity act = (IActivity) evt.getNewValue();
+        if (evtName.equalsIgnoreCase("EditActivityClicked")) {
 //            IActivity act = (IActivity) evt.getNewValue();
 //            projV.showActivitySingle(act);
-            System.out.println("Edit button clicked");
+            System.out.println(act.getName() + " Edit button clicked");
         }
-        if (evtName.equalsIgnoreCase("RemoveButtonClicked")) {
-            System.out.println("Remove button clicked");
+        if (evtName.equalsIgnoreCase("RemoveActivityClicked")) {
+            System.out.println(act.getName() + " Remove button clicked");
         }
     }
     

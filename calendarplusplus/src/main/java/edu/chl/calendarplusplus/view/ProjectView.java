@@ -6,7 +6,6 @@
 package edu.chl.calendarplusplus.view;
 
 import edu.chl.calendarplusplus.model.CalendarPlus;
-import edu.chl.calendarplusplus.model.ContactGroup;
 import edu.chl.calendarplusplus.model.IActivity;
 import edu.chl.calendarplusplus.model.IAlarm;
 import edu.chl.calendarplusplus.model.IContact;
@@ -50,6 +49,8 @@ public class ProjectView extends javax.swing.JFrame {
         weekView.addListener(listeners);
         actsingle.addListener(listeners);
         alarms.addListener(listeners);
+        contacts.addListener(listeners);
+        contactGroups.addListener(listeners);
     }
     
     /**
@@ -505,7 +506,7 @@ public class ProjectView extends javax.swing.JFrame {
     private final PropertyChangeSupport listeners = new PropertyChangeSupport(this);
     private CardLayout tabCards;
     private AddActivityCard addActivity;
-    private AddContactGroupCard addContactGroup = new AddContactGroupCard();
+    private AddContactGroupCard addContactGroup;
     private AddContactCard addContact;
     private AddAlarmCard addAlarm = new AddAlarmCard();
     private ListViewCard listView = new ListViewCard();    
@@ -574,7 +575,7 @@ public class ProjectView extends javax.swing.JFrame {
     }
 
     public WeekViewCard getWeekViewCard() {
-        return this.weekView;
+        return weekView;
     }
 
     public ActivitySingleCard getActivitySingleCard() {
@@ -583,6 +584,14 @@ public class ProjectView extends javax.swing.JFrame {
 
     public AlarmCard getAlarmSingleCard() {
         return this.alarms;
+    }
+    
+    public ContactCard getContactSingleCard() {
+        return this.contacts;
+    }
+    
+    public ContactGroupCard getContactGroupSingleCard() {
+        return this.contactGroups;
     }
 
     /* Maybe use this to add listener?
@@ -601,9 +610,11 @@ public class ProjectView extends javax.swing.JFrame {
     private void tweekingInitComponents() {
         addContact = new AddContactCard(cal);
         addActivity = new AddActivityCard(cal.getContactManager());
+        addContactGroup = new AddContactGroupCard(cal.getContactManager());
         weekView = new WeekViewCard(cal);
         mainLayeredPane.setPreferredSize(new Dimension(1270, 750));
         mainLayeredPane.setSize(new Dimension(1270, 750));
+        searchTextField.setVisible(false);
 
         menuContactsPanel.setVisible(false);
         menuContactsLabel.setIcon((new javax.swing.ImageIcon(getClass().getResource("/arrow_right.png"))));

@@ -8,6 +8,7 @@ package edu.chl.calendarplusplus.view;
 import edu.chl.calendarplusplus.model.IContact;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.beans.PropertyChangeSupport;
 import java.util.List;
 
 /**
@@ -16,24 +17,25 @@ import java.util.List;
  */
 public class ContactCard extends javax.swing.JPanel {
 
+    int elementheight = 107;
+    private PropertyChangeSupport pcs;
+    
     /**
      * Creates new form ContactCard
      */
     public ContactCard() {
         initComponents();
-        ((FlowLayout)elementList.getLayout()).setHgap(20);
-        ((FlowLayout)elementList.getLayout()).setVgap(20);
         contactScrollPane.getVerticalScrollBar().setUnitIncrement(20);
     }
     
     public void updateContacts(List<IContact> contactlist){
+        int height = contactlist.size() % 2 == 0 ? (1+contactlist.size()/2)*15 + contactlist.size()/2*elementheight : (1+contactlist.size()/2)*15 + (contactlist.size()/2+1)*elementheight;
         elementList.removeAll();
-        //elementList.setPreferredSize(new Dimension(850,690));
-        //elementList.setSize(684, 500);
+        elementList.setPreferredSize(new Dimension(1008,height));
         for (IContact c: contactlist) {
             ContactElement ce = new ContactElement(c);
-            //System.out.println(elementList.getPreferredSize().width/2);
-            ce.setPreferredSize(new Dimension(elementList.getPreferredSize().width/2-20,97));
+            ce.setPreferredSize(new Dimension((elementList.getPreferredSize().width-60)/2,elementheight));
+            ce.addListener(pcs);
             elementList.add(ce);
             revalidate();
             repaint();
@@ -60,6 +62,7 @@ public class ContactCard extends javax.swing.JPanel {
         contactScrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
         elementList.setPreferredSize(new java.awt.Dimension(1006, 638));
+        elementList.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEADING, 15, 15));
         contactScrollPane.setViewportView(elementList);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -79,4 +82,9 @@ public class ContactCard extends javax.swing.JPanel {
     private javax.swing.JScrollPane contactScrollPane;
     private javax.swing.JPanel elementList;
     // End of variables declaration//GEN-END:variables
+    
+    public void addListener(PropertyChangeSupport pcs) {
+        this.pcs = pcs;
+    }
+
 }

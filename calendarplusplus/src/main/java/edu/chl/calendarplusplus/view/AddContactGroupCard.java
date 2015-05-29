@@ -6,8 +6,12 @@
 package edu.chl.calendarplusplus.view;
 
 import edu.chl.calendarplusplus.model.ContactGroup;
+import edu.chl.calendarplusplus.model.IContact;
 import edu.chl.calendarplusplus.model.IContactGroup;
+import edu.chl.calendarplusplus.model.IContactManager;
 import java.beans.PropertyChangeSupport;
+import javax.swing.DefaultListModel;
+import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
 
 /**
  *
@@ -15,11 +19,19 @@ import java.beans.PropertyChangeSupport;
  */
 public class AddContactGroupCard extends javax.swing.JPanel {
 
+    DefaultListModel memberListModel, nonMemberListModel;
+    private final IContactManager conman;
+    String lstring = "";
+    
     /**
      * Creates new form AddContactGroupCard
      */
-    public AddContactGroupCard() {
+    public AddContactGroupCard(IContactManager conman) {
         initComponents();
+        this.conman = conman;
+        memberListModel = new DefaultListModel();
+        nonMemberListModel = new DefaultListModel();
+        resetFields();
     }
 
     /**
@@ -35,6 +47,13 @@ public class AddContactGroupCard extends javax.swing.JPanel {
         nameTextField = new javax.swing.JTextField();
         saveButton = new javax.swing.JLabel();
         cancelButton = new javax.swing.JLabel();
+        membersLabel = new javax.swing.JLabel();
+        memberScrollPane = new javax.swing.JScrollPane();
+        memberList = new javax.swing.JList();
+        addButton = new javax.swing.JLabel();
+        removeButton = new javax.swing.JLabel();
+        nonMemberScrollPane = new javax.swing.JScrollPane();
+        nonMemberList = new javax.swing.JList();
 
         nameLabel.setFont(new java.awt.Font("Source Sans Pro", 1, 14)); // NOI18N
         nameLabel.setText("Name*");
@@ -71,22 +90,81 @@ public class AddContactGroupCard extends javax.swing.JPanel {
             }
         });
 
+        membersLabel.setFont(new java.awt.Font("Source Sans Pro", 1, 14)); // NOI18N
+        membersLabel.setText("Groupmembers");
+
+        memberList.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        memberScrollPane.setViewportView(memberList);
+
+        addButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arrowsLeft.png"))); // NOI18N
+        addButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                labelMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                labelMouseReleased(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                addButtonMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                addButtonMouseEntered(evt);
+            }
+        });
+
+        removeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arrowsRight.png"))); // NOI18N
+        removeButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                labelMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                labelMouseReleased(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                removeButtonMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                removeButtonMouseEntered(evt);
+            }
+        });
+
+        nonMemberList.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        nonMemberScrollPane.setViewportView(nonMemberList);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(cancelButton)
-                        .addGap(18, 18, 18)
-                        .addComponent(saveButton))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(membersLabel)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(nameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(nameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(20, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(nameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(memberScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(addButton)
+                                    .addComponent(removeButton))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(nonMemberScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(cancelButton)
+                                .addGap(18, 18, 18)
+                                .addComponent(saveButton)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -95,11 +173,23 @@ public class AddContactGroupCard extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nameLabel)
                     .addComponent(nameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(membersLabel)
+                            .addComponent(memberScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
+                            .addComponent(nonMemberScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(addButton)
+                        .addGap(28, 28, 28)
+                        .addComponent(removeButton)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(saveButton)
                     .addComponent(cancelButton))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -128,20 +218,52 @@ public class AddContactGroupCard extends javax.swing.JPanel {
     private void labelMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelMouseReleased
         if (buttonPressed) {
             if (evt.getSource() == saveButton) {
-                System.out.println("TEST");
                 pcs.firePropertyChange("AddContactGroup", null, null);
             }
             if (evt.getSource() == cancelButton) {
                 
             }
+            if (evt.getSource() == addButton) {
+                if (nonMemberListModel.size() > 0 && !nonMemberList.isSelectionEmpty())
+                    pcs.firePropertyChange("AddMember", null, null);
+            }
+            if (evt.getSource() == removeButton) {
+                if (memberListModel.size() > 0 && !memberList.isSelectionEmpty())
+                    pcs.firePropertyChange("RemoveMember", null, null);
+            }
         }
     }//GEN-LAST:event_labelMouseReleased
 
+    private void addButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addButtonMouseEntered
+        addButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arrowsLeftHover.png")));
+    }//GEN-LAST:event_addButtonMouseEntered
+
+    private void addButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addButtonMouseExited
+        addButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arrowsLeft.png")));
+        buttonPressed = false;
+    }//GEN-LAST:event_addButtonMouseExited
+
+    private void removeButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_removeButtonMouseEntered
+        removeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arrowsRightHover.png")));
+    }//GEN-LAST:event_removeButtonMouseEntered
+
+    private void removeButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_removeButtonMouseExited
+        removeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arrowsRight.png")));
+        buttonPressed = false;
+    }//GEN-LAST:event_removeButtonMouseExited
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel addButton;
     private javax.swing.JLabel cancelButton;
+    private javax.swing.JList memberList;
+    private javax.swing.JScrollPane memberScrollPane;
+    private javax.swing.JLabel membersLabel;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JTextField nameTextField;
+    private javax.swing.JList nonMemberList;
+    private javax.swing.JScrollPane nonMemberScrollPane;
+    private javax.swing.JLabel removeButton;
     private javax.swing.JLabel saveButton;
     // End of variables declaration//GEN-END:variables
 
@@ -156,15 +278,51 @@ public class AddContactGroupCard extends javax.swing.JPanel {
     */
 
     public IContactGroup getAsContactGroup() {
-        return new ContactGroup(nameTextField.getText());
+        ContactGroup cg = new ContactGroup(nameTextField.getText());
+        for (int i = 0; i < memberList.getModel().getSize(); i++) {
+            cg.addContact((IContact) memberList.getModel().getElementAt(i));
+        }
+        return cg;
     }
     
     public void resetFields() {
         nameTextField.setText("");
+        setLists();
     }
     
-     public void addListener(PropertyChangeSupport pcs) {
+    public void addListener(PropertyChangeSupport pcs) {
         this.pcs = pcs;
+    }
+
+    private void setLists() {
+        //Set the available contacts
+        nonMemberList.removeAll();
+        nonMemberListModel.removeAllElements();
+        for (IContact c : conman.getAllContacts()) {
+            nonMemberListModel.addElement(c);
+            if (lstring.length() < c.getName().length())
+                lstring = c.getName();
+        }
+        nonMemberList.setModel(nonMemberListModel);
+        nonMemberList.setPrototypeCellValue(lstring+ "     ");
+        nonMemberScrollPane.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
+        
+        //Set the chosen contacts
+        memberList.removeAll();
+        memberListModel.removeAllElements();
+        memberList.setModel(memberListModel);
+        memberList.setPrototypeCellValue(lstring+ "     ");
+        memberScrollPane.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
+    }
+
+    public void addMember() {
+        memberListModel.addElement(nonMemberList.getSelectedValue());
+        nonMemberListModel.remove(nonMemberList.getSelectedIndex());
+    }
+
+    public void removeMember() {
+        nonMemberListModel.addElement(memberList.getSelectedValue());
+        memberListModel.remove(memberList.getSelectedIndex());
     }
 
 }

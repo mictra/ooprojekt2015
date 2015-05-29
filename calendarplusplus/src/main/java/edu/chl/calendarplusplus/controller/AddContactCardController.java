@@ -5,9 +5,6 @@
  */
 package edu.chl.calendarplusplus.controller;
 
-import edu.chl.calendarplusplus.model.CalendarPlus;
-import edu.chl.calendarplusplus.model.Contact;
-import edu.chl.calendarplusplus.model.ContactGroup;
 import edu.chl.calendarplusplus.model.ICalendarPlus;
 import edu.chl.calendarplusplus.model.IContact;
 import edu.chl.calendarplusplus.model.IContactGroup;
@@ -15,7 +12,6 @@ import edu.chl.calendarplusplus.view.AddContactCard;
 import edu.chl.calendarplusplus.view.ProjectView;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.ArrayList;
 import java.util.List;
 
 /**

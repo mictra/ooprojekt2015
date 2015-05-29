@@ -256,7 +256,7 @@ public class AddActivityCard extends javax.swing.JPanel {
                                     .addComponent(removeButton))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(nonAttendeeScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(cancelButton)
                                 .addGap(18, 18, 18)
                                 .addComponent(saveButton))))
@@ -315,7 +315,7 @@ public class AddActivityCard extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(saveButton)
                     .addComponent(cancelButton))
-                .addGap(0, 13, Short.MAX_VALUE))
+                .addGap(0, 19, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
