@@ -1,33 +1,81 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
+*/
 package edu.chl.calendarplusplus.view;
+
+import java.beans.PropertyChangeSupport;
+import java.util.Calendar;
 
 /**
  *
  * @author erikforsberg
  */
-public class MonthViewElementCard extends javax.swing.JPanel {
-
+public class MonthViewElement extends javax.swing.JPanel {
+    
+    private PropertyChangeSupport pcs;
+    private Boolean dayPressed;
+    
     /**
      * Creates new form MonthViewCard
      * @param date
      * @param dayOfYear
      */
-    public MonthViewElementCard(Integer date, Integer week, int dayOfYear, Boolean setWeek) {
+    
+    /**
+     * Creates new form MonthViewCard
+     * @param date
+     * @param week
+     * @param dayOfYear
+     */
+    
+    /**
+     * Creates new form MonthViewCard
+     * @param date
+     * @param week
+     * @param dayOfYear
+     * @param setWeek
+     */
+    public MonthViewElement(Integer date, Integer week, int dayOfYear, Boolean setWeek) {
         initComponents();
-        dateField.setText(date.toString());
+        dateLabel.setText(date.toString());
         dayOfYearLabel.setText(Integer.toString(dayOfYear));
         if(setWeek){
             weekLabel.setText("Week " + Integer.toString(week));
         }else{
             weekLabel.setText("");
         }
-        
-    }
+        dateLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            
+            @Override
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                dayPressed = false;
+            }
+            @Override
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                dayPressed = true;
+            }
+            @Override
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                if(dayPressed){
+                    if(evt.getSource() == dateLabel){
+                        System.out.println(week);
+                           pcs.firePropertyChange("MonthViewDayPressed", null, week);
+                           
 
+                    }
+                    
+                }
+            }
+        });
+                
+                }
+    
+    public void addListener(PropertyChangeSupport pcs) {
+        this.pcs = pcs;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -37,7 +85,7 @@ public class MonthViewElementCard extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        dateField = new javax.swing.JLabel();
+        dateLabel = new javax.swing.JLabel();
         dayOfYearLabel = new javax.swing.JLabel();
         weekLabel = new javax.swing.JLabel();
 
@@ -45,8 +93,16 @@ public class MonthViewElementCard extends javax.swing.JPanel {
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setPreferredSize(new java.awt.Dimension(136, 65));
 
-        dateField.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
-        dateField.setText("#D");
+        dateLabel.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
+        dateLabel.setText("#D");
+        dateLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                dateLabelMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                dateLabelMouseReleased(evt);
+            }
+        });
 
         dayOfYearLabel.setFont(new java.awt.Font("Lucida Grande", 0, 8)); // NOI18N
         dayOfYearLabel.setText("#Act");
@@ -66,7 +122,7 @@ public class MonthViewElementCard extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
                         .addComponent(dayOfYearLabel))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(dateField, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(dateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -74,7 +130,7 @@ public class MonthViewElementCard extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(dateField)
+                .addComponent(dateLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(dayOfYearLabel, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -82,10 +138,18 @@ public class MonthViewElementCard extends javax.swing.JPanel {
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
-
-
+    
+    private void dateLabelMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dateLabelMouseReleased
+      //deprecated
+    }//GEN-LAST:event_dateLabelMouseReleased
+    
+    private void dateLabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dateLabelMousePressed
+        dayPressed = true;
+    }//GEN-LAST:event_dateLabelMousePressed
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel dateField;
+    private javax.swing.JLabel dateLabel;
     private javax.swing.JLabel dayOfYearLabel;
     private javax.swing.JLabel weekLabel;
     // End of variables declaration//GEN-END:variables

@@ -20,6 +20,7 @@ import javax.persistence.OneToMany;
 @Entity
 public class ContactGroup implements IContactGroup, Serializable {
     
+    
     @Id
     private String name;
     @OneToMany(targetEntity = Contact.class)

@@ -5,6 +5,7 @@
 */
 package edu.chl.calendarplusplus.model;
 
+import edu.chl.calendarplusplus.view.AddActivityCard;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -51,13 +52,13 @@ public class Activity implements IActivity, Serializable {
             this.startTime = st;
             this.endTime = et;
         }else{
-            System.out.println("Illegal times in activity!");
+            AddActivityCard.invalidParameters();
         }
         
         if(!name.equals("")){
             this.name = name;
         }else{
-            System.out.println("name of activty invalid!");
+            AddActivityCard.invalidParameters();
         }
         
         this.description = desc;

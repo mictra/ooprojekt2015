@@ -5,6 +5,7 @@
  */
 package edu.chl.calendarplusplus.model;
 
+import edu.chl.calendarplusplus.view.AddContactCard;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -33,7 +34,10 @@ public class Contact implements IContact, Serializable {
     }
 
     public Contact(String name, String phone, String email) {
-        this.name = name;
+        if(name == ""){
+            AddContactCard.invalidParameters();
+        }
+        
         this.phone = phone;
         this.email = email;
     }

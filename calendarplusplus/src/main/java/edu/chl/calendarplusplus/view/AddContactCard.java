@@ -13,6 +13,7 @@ import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
 
 /**
@@ -20,6 +21,10 @@ import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
  * @author cain
  */
 public class AddContactCard extends javax.swing.JPanel {
+
+    public static void invalidParameters() {
+                JOptionPane.showMessageDialog(null, "Invalid parameters (name)");
+    }
 
     private final CalendarPlus cal;
     private boolean updateMode;

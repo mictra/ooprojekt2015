@@ -15,6 +15,7 @@ import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.util.Calendar;
 import java.util.List;
 import javax.swing.JLabel;
 
@@ -51,6 +52,7 @@ public class ProjectView extends javax.swing.JFrame {
         alarms.addListener(listeners);
         contacts.addListener(listeners);
         contactGroups.addListener(listeners);
+        monthView.addListener(listeners);
     }
     
     /**
@@ -702,6 +704,16 @@ public class ProjectView extends javax.swing.JFrame {
         addAlarm.restoreFields(al);
         tabCards.show(mainPanel, "AddAlarmCard");
         headlineLabel.setText("Edit an alarm");
+    }
+    
+    public void monthToWeek(int week){
+        System.out.println("hit kommer jag");
+        weekView.updateWeekViewFromMonth(week);
+        
+        tabCards.show(mainPanel, "WeekViewCard");
+        headlineLabel.setText("Weekview");
+
+
     }
 
     public void editContact(IContact c) {

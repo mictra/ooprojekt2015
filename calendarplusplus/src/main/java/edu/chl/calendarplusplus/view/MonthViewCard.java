@@ -6,6 +6,7 @@
 package edu.chl.calendarplusplus.view;
 
 import java.awt.Color;
+import java.beans.PropertyChangeSupport;
 import static java.time.temporal.ChronoField.MONTH_OF_YEAR;
 import java.util.Calendar;
 
@@ -21,6 +22,8 @@ public class MonthViewCard extends javax.swing.JPanel {
     private Calendar currentDate;
     private Boolean previousButtonPressed;
     private Boolean nextButtonPressed;
+    private PropertyChangeSupport pcs;
+
     
     public MonthViewCard() {
         initComponents();
@@ -35,7 +38,7 @@ public class MonthViewCard extends javax.swing.JPanel {
     
     public void setMonthName(){
     String[] monthNames = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
-    int month = currentDate.get(Calendar.MONTH);
+    int month = currentDate.get(currentDate.MONTH);
     monthLabel.setText(monthNames[month]+ " " + currentDate.get(Calendar.YEAR));
 
     }
@@ -52,9 +55,9 @@ public class MonthViewCard extends javax.swing.JPanel {
         Calendar today = Calendar.getInstance();
         Calendar tempDate = Calendar.getInstance();
         
-        tempDate.set(c.get(Calendar.YEAR), c.get(Calendar.MONTH), 0);
-        int diff = 1 - tempDate.get(Calendar.DAY_OF_WEEK);
-        tempDate.add(Calendar.DATE, diff);
+        tempDate.set(c.get(c.YEAR), c.get(c.MONTH), 0);
+        int diff = 1 - tempDate.get(c.DAY_OF_WEEK);
+        tempDate.add(c.DATE, diff);
         
         for(int i = 0; i <= 41; i++){
             if(i%7 == 0){
@@ -64,24 +67,30 @@ public class MonthViewCard extends javax.swing.JPanel {
             }
             tempDate.add(Calendar.DATE, 1);
             
-            MonthViewElementCard mvec = 
-                    new MonthViewElementCard(tempDate.get(Calendar.DATE),
-                    tempDate.get(Calendar.WEEK_OF_YEAR),
-                    tempDate.get(Calendar.DAY_OF_YEAR), setWeek);
+            MonthViewElement mvec = 
+                    new MonthViewElement(tempDate.get(c.DATE),
+                    tempDate.get(c.WEEK_OF_YEAR),
+                    tempDate.get(c.DAY_OF_YEAR), setWeek);
             
-            if(!(tempDate.get(Calendar.MONTH) == currentDate.get(Calendar.MONTH))){
+            if(!(tempDate.get(c.MONTH) == currentDate.get(c.MONTH))){
                 mvec.setBackground(Color.LIGHT_GRAY);
-            }else if((tempDate.get(Calendar.DATE) == today.get(Calendar.DATE))
-                        && (tempDate.get(Calendar.MONTH) == today.get(Calendar.MONTH))
-                        && (tempDate.get(Calendar.YEAR) == today.get(Calendar.YEAR))){
+            }else if((tempDate.get(c.DATE) == today.get(c.DATE))
+                        && (tempDate.get(c.MONTH) == today.get(c.MONTH))
+                        && (tempDate.get(c.YEAR) == today.get(c.YEAR))){
                 mvec.setBackground(new Color(255, 140, 140));
             }
+            mvec.addListener(pcs);
             dayPanel.add(mvec);
             revalidate();
             repaint();
         }
         
     }
+    
+    public void addListener(PropertyChangeSupport pcs) {
+        this.pcs = pcs;
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.

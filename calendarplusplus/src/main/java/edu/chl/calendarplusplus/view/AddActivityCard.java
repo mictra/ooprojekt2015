@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
 
 /**
@@ -23,6 +24,10 @@ import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
  * @author cain
  */
 public class AddActivityCard extends javax.swing.JPanel {
+
+    public static void invalidParameters() {
+        JOptionPane.showMessageDialog(null, "Invalid parameters (time and/or name)");
+    }
 
     DefaultListModel attendeeListModel, nonAttendeeListModel;
     private final IContactManager conman;
