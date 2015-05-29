@@ -229,7 +229,7 @@ public class AddAlarmCard extends javax.swing.JPanel {
         int sHour = Integer.parseInt((String) hourComboBox.getSelectedItem());
         int sMinute = Integer.parseInt((String) minuteComboBox.getSelectedItem());
         timeDate.set(sYear, sMonth, sDay, sHour, sMinute);
-        IAlarm a = new Alarm(timeDate, nameTextField.getText()); //descriptionTextArea.getText()
+        IAlarm a = new Alarm(timeDate, nameTextField.getText(), descriptionTextArea.getText());
         if(isEdit){
             a.setId(alarmId);
         }
