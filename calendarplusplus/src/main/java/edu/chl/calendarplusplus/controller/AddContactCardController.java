@@ -40,6 +40,7 @@ public class AddContactCardController implements PropertyChangeListener {
         String evtName = evt.getPropertyName();
         if (evtName.equalsIgnoreCase("AddContact")) {
             IContact contact = cc.getAsContact();
+            System.out.println("CONTACT NAME: " + contact.getName());
             List<IContactGroup> contactGroups = cc.getContactGroups();
             cal.addContact(contact, contactGroups);
             cc.resetFields();

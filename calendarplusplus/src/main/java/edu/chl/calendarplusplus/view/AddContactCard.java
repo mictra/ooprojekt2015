@@ -27,7 +27,7 @@ public class AddContactCard extends javax.swing.JPanel {
     }
 
     private final CalendarPlus cal;
-    private boolean updateMode;
+    private boolean updateMode = false;
     DefaultListModel nonMemberListModel, memberListModel;
     String lstring = "";
     private IContact c;
@@ -340,6 +340,7 @@ public class AddContactCard extends javax.swing.JPanel {
     }
 
     public void resetFields() {
+        updateMode = false;
         nameTextField.setText("");
         emailTextField.setText("");
         phoneTextField.setText("");

@@ -94,6 +94,17 @@ public class ContactGroup implements IContactGroup, Serializable {
         return false;
     }
     
+    //Own implementation of remove, since the List remove won't work on objects created by JPA
+    public boolean remove(IContact contact){
+        for(IContact c : members){
+            if(contact.getId() == c.getId() && contact.getName().equals(c.getName())){
+                members.remove(c);
+                return true;
+            }
+        }
+        return false;
+    }
+    
     public void removeAllContacts() {
         members.clear();
     }

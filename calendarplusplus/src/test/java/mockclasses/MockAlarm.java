@@ -53,5 +53,10 @@ public class MockAlarm implements IAlarm {
     public void setId(int id) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public int getId() {
+        return 0;
+    }
     
 }

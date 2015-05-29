@@ -26,6 +26,8 @@ public interface IContactGroup {
     public boolean hasContact(IContact contact);
     
     public List<IContact> getContacts();
+    
+    public boolean remove(IContact contact);
 
     public void removeAllContacts();
     

@@ -10,17 +10,18 @@ import edu.chl.calendarplusplus.model.IContactGroup;
 import java.awt.Dimension;
 import java.beans.PropertyChangeSupport;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author cain
  */
 public class ContactGroupElement extends javax.swing.JPanel {
-    
+
     private boolean buttonPressed;
     private PropertyChangeSupport pcs;
     private final IContactGroup cg;
-    
+
     /**
      * Creates new form ContactGroupElement
      */
@@ -142,7 +143,13 @@ public class ContactGroupElement extends javax.swing.JPanel {
                 pcs.firePropertyChange("EditContactGroupButtonClicked", evt, cg);
             }
             if (evt.getSource() == removeButton) {
-                pcs.firePropertyChange("RemoveContactGroupButtonClicked", evt, cg);
+                int op = JOptionPane.showConfirmDialog(this,
+                        "Are you sure you want to delete this group?",
+                        "Remove the Group?",
+                        JOptionPane.YES_NO_OPTION);
+                if (op == JOptionPane.YES_OPTION) {
+                    pcs.firePropertyChange("RemoveContactGroupButtonClicked", evt, cg);
+                }
             }
         }
     }//GEN-LAST:event_labelMouseReleased
@@ -156,29 +163,29 @@ public class ContactGroupElement extends javax.swing.JPanel {
     private javax.swing.JLabel removeButton;
     // End of variables declaration//GEN-END:variables
 
-    public void addListener (PropertyChangeSupport pcs) {
+    public void addListener(PropertyChangeSupport pcs) {
         this.pcs = pcs;
     }
-    
+
     private void setMembers(List<IContact> contacts) {
         groupMemberList.removeAll();
-        groupMemberList.setPreferredSize(new Dimension(334,18));
+        groupMemberList.setPreferredSize(new Dimension(334, 18));
         int counter = 0;
         for (IContact c : contacts) {
             ContactGroupElementLabel cgel = new ContactGroupElementLabel(c.getName());
-            cgel.setPreferredSize(new Dimension(groupMemberList.getPreferredSize().width/2-10,18));
+            cgel.setPreferredSize(new Dimension(groupMemberList.getPreferredSize().width / 2 - 10, 18));
             groupMemberList.add(cgel);
             revalidate();
             repaint();
             revalidate();
             counter++;
             if (counter >= 3 && contacts.size() > 4) {
-                    ContactGroupElementLabel cgel2 = new ContactGroupElementLabel("More...");
-                    cgel2.setPreferredSize(new Dimension(groupMemberList.getPreferredSize().width/2-10,18));
-                    groupMemberList.add(cgel2);
-                    break;
+                ContactGroupElementLabel cgel2 = new ContactGroupElementLabel("More...");
+                cgel2.setPreferredSize(new Dimension(groupMemberList.getPreferredSize().width / 2 - 10, 18));
+                groupMemberList.add(cgel2);
+                break;
             }
-                
+
         }
     }
 }

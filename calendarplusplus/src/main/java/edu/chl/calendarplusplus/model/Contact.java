@@ -36,6 +36,8 @@ public class Contact implements IContact, Serializable {
     public Contact(String name, String phone, String email) {
         if(name == ""){
             AddContactCard.invalidParameters();
+        } else{
+            this.name = name;
         }
         
         this.phone = phone;
