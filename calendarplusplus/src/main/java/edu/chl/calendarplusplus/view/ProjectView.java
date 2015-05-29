@@ -610,7 +610,7 @@ public class ProjectView extends javax.swing.JFrame {
     private void tweekingInitComponents() {
         addContact = new AddContactCard(cal);
         addActivity = new AddActivityCard(cal.getContactManager());
-        addContactGroup = new AddContactGroupCard(cal.getContactManager());
+        addContactGroup = new AddContactGroupCard(cal);
         weekView = new WeekViewCard(cal);
         mainLayeredPane.setPreferredSize(new Dimension(1270, 750));
         mainLayeredPane.setSize(new Dimension(1270, 750));
@@ -656,8 +656,10 @@ public class ProjectView extends javax.swing.JFrame {
             headlineLabel.setText("Weekview");
         } else if (card.endsWith("ContactGroupCard")) {
             headlineLabel.setText("Contactgroups");
+            contactGroups.updateContactGroups(cal.getContactGroupList());
         } else if (card.endsWith("ContactCard")) {
             headlineLabel.setText("Contacts");
+            contacts.updateContacts(cal.getAllContacts());
         } else if (card.equals("MonthView")){
             headlineLabel.setText("Monthview");
         } else if (card.endsWith("AlarmCard")) {
@@ -700,6 +702,18 @@ public class ProjectView extends javax.swing.JFrame {
         addAlarm.restoreFields(al);
         tabCards.show(mainPanel, "AddAlarmCard");
         headlineLabel.setText("Edit an alarm");
+    }
+
+    public void editContact(IContact c) {
+        addContact.editContact(c);
+        tabCards.show(mainPanel, "AddContactCard");
+        headlineLabel.setText("Edit contact");
+    }
+
+    public void editContactGroup(IContactGroup cg) {
+        addContactGroup.editContactGroup(cg);
+        tabCards.show(mainPanel, "AddContactGroupCard");
+        headlineLabel.setText("Edit contactgroup");
     }
 
 }

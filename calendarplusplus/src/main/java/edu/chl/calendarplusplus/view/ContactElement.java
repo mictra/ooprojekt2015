@@ -133,10 +133,10 @@ public class ContactElement extends javax.swing.JPanel {
     private void labelMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelMouseReleased
         if (buttonPressed) {
             if (evt.getSource() == editButton) {
-                pcs.firePropertyChange("EditContactClicked", evt, c);
+                pcs.firePropertyChange("EditContactButtonClicked", evt, c);
             }
             if (evt.getSource() == removeButton) {
-                pcs.firePropertyChange("RemoveContactClicked", evt, c);
+                pcs.firePropertyChange("RemoveContactButtonClicked", evt, c);
             }
         }
     }//GEN-LAST:event_labelMouseReleased

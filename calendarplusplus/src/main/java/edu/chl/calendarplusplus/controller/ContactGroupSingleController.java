@@ -36,13 +36,15 @@ public class ContactGroupSingleController implements PropertyChangeListener {
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         String evtName = evt.getPropertyName();
-        if (evtName.equalsIgnoreCase("EditContactGroupClicked")) {
+        if (evtName.equalsIgnoreCase("EditContactGroupButtonClicked")) {
             IContactGroup cg = (IContactGroup) evt.getNewValue();
-            System.out.println(cg.getGroupName() + " Edit ContactGroup Clicked.");
+            projV.editContactGroup(cg);
+            //System.out.println(cg.getGroupName() + " Edit ContactGroup Clicked.");
         } 
-        if(evtName.equalsIgnoreCase("RemoveContactGroupClicked")) {
+        if(evtName.equalsIgnoreCase("RemoveContactGroupButtonClicked")) {
             IContactGroup cg = (IContactGroup) evt.getNewValue();
             System.out.println(cg.getGroupName() + " Remove ContactGroup Clicked.");
+            //ToDo remove group from lists and database
         }
     }
     

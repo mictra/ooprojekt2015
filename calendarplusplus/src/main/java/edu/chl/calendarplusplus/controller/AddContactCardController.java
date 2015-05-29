@@ -43,10 +43,17 @@ public class AddContactCardController implements PropertyChangeListener {
             List<IContactGroup> contactGroups = cc.getContactGroups();
             cal.addContact(contact, contactGroups);
             cc.resetFields();
-        } else if (evtName.equalsIgnoreCase("AddGroup")) {
+        } else if (evtName.equalsIgnoreCase("BackToContacts")) {
+            projV.changeCard("ContactCard");
+        } else if (evtName.equalsIgnoreCase("AddContactCardAddGroup")) {
             cc.addMemberGroup();
-        } else if (evtName.equalsIgnoreCase("RemoveGroup")) {
+        } else if (evtName.equalsIgnoreCase("AddContactCardRemoveGroup")) {
             cc.removeMemberGroup();
+        } else if (evtName.equalsIgnoreCase("EditContact")) {
+            IContact c = (IContact) evt.getNewValue();
+            System.out.println(c.getName() + " shall be updated now.");
+            List<IContactGroup> contactGroups = cc.getContactGroups();
+            // ToDo -- update in lists and database
         }
     }
 

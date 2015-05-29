@@ -22,5 +22,7 @@ public interface IContactGroup {
     public boolean hasContact(IContact contact);
     
     public List<IContact> getContacts();
+
+    public void removeAllContacts();
     
 }

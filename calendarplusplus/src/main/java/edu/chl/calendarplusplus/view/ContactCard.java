@@ -7,7 +7,6 @@ package edu.chl.calendarplusplus.view;
 
 import edu.chl.calendarplusplus.model.IContact;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.beans.PropertyChangeSupport;
 import java.util.List;
 

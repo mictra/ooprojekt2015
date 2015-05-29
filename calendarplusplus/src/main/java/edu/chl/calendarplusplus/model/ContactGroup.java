@@ -80,6 +80,10 @@ public class ContactGroup implements IContactGroup, Serializable {
         return false;
     }
     
+    public void removeAllContacts() {
+        members.clear();
+    }
+    
     @Override
     public String toString() {
         return name;
