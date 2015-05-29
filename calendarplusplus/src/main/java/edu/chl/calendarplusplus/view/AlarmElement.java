@@ -17,7 +17,7 @@ import javax.swing.JLabel;
  */
 public class AlarmElement extends javax.swing.JPanel {
 
-    private HashMap<JLabel,IAlarm> labelMap;
+    private IAlarm al;
     private PropertyChangeSupport pcs;
     private boolean buttonPressed;
     
@@ -31,9 +31,7 @@ public class AlarmElement extends javax.swing.JPanel {
         String date = c.get(c.DAY_OF_MONTH) + "." + (c.get(c.MONTH)+1) + "." + c.get(c.YEAR) + " - kl. " + c.get(c.HOUR_OF_DAY) + ":" + (c.get(c.MINUTE) <= 5 ? "0" + c.get(c.MINUTE) : c.get(c.MINUTE));
         dateLabel.setText(date);
         descriptionLabel.setText(a.getDescName());
-        labelMap = new HashMap<>();
-        labelMap.put(editButton, a);
-        labelMap.put(removeButton, a);
+        this.al = a;
     }
     
     /**
@@ -137,11 +135,9 @@ public class AlarmElement extends javax.swing.JPanel {
     private void labelMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelMouseReleased
         if(buttonPressed) {
             if (evt.getSource() == editButton) {
-                //System.out.println(labelMap.get(label).getName());
-                pcs.firePropertyChange("EditAlarmClicked", evt, labelMap.get(editButton));
+                pcs.firePropertyChange("EditAlarmClicked", evt, al);
             } else if (evt.getSource() == removeButton) {
-                //System.out.println(labelMap.get(label).getName());
-                pcs.firePropertyChange("RemoveAlarmClicked", evt, labelMap.get(removeButton));
+                pcs.firePropertyChange("RemoveAlarmClicked", evt, al);
             }
         }
     }//GEN-LAST:event_labelMouseReleased

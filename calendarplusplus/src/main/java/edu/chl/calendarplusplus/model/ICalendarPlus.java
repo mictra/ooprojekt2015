@@ -22,6 +22,8 @@ public interface ICalendarPlus {
     
     public void addAlarm(IAlarm a);
     
+    public void updateAlarm(IAlarm a);
+    
     public void removeActivity(IActivity a);
     
     public void removeContactGroup(IContactGroup g);

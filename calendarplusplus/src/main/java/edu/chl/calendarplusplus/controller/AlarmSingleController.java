@@ -11,6 +11,7 @@ import edu.chl.calendarplusplus.view.AlarmCard;
 import edu.chl.calendarplusplus.view.ProjectView;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -36,14 +37,19 @@ public class AlarmSingleController implements PropertyChangeListener {
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         String evtName = evt.getPropertyName();
+        IAlarm alarm = (IAlarm) evt.getNewValue();
         if (evtName.equalsIgnoreCase("EditAlarmClicked")) {
-            System.out.println("Edit Alarm Clicked.");
-            IAlarm alarm = (IAlarm) evt.getNewValue();
             projV.editAlarm(alarm);
         } else if(evtName.equalsIgnoreCase("RemoveAlarmClicked")) {
-            System.out.println("Remove Alarm Clicked.");
-//            IAlarm alarm = (IAlarm) evt.getNewValue();
-//            projV.removeAlarm(alarm);
+            int op = JOptionPane.showConfirmDialog
+                    (projV, 
+                    "Are you sure you want to delete this alarm?",
+                    "Remove the Alarm?",
+                    JOptionPane.YES_NO_OPTION);
+            if(op == JOptionPane.YES_OPTION){
+                cal.removeAlarm(alarm);
+                projV.updateAlarms(cal.getAlarmList());
+            }
         }
     }
     

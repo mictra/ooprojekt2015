@@ -108,6 +108,10 @@ public class CalendarPlus implements ICalendarPlus {
         alarms = alarmDAO.findAll();
         //alarms.add(a);
     }
+    
+    public void updateAlarm(IAlarm a) {
+        alarmDAO.update(a);
+    }
 
     public void removeActivity(IActivity a) {
         activities.remove(a);
