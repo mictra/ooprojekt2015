@@ -37,7 +37,7 @@ public class Notification extends Alarm implements INotification, Serializable {
     }
 
     public Notification(Calendar d, String n, IActivity a) {
-        super(d, n);
+        super(d, n, null);
         
         if (d.before(a.getEndTime()) || d.equals(a.getEndTime())){
             activity = a;

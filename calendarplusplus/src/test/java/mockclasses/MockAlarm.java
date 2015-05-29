@@ -14,6 +14,7 @@ import java.util.Calendar;
  */
 public class MockAlarm implements IAlarm {
     
+    private int id;
     private Calendar alarmTime;
     private String name;
     private String description;
@@ -21,6 +22,11 @@ public class MockAlarm implements IAlarm {
     public MockAlarm(){
     }
 
+    @Override
+    public int getId() {
+        return id;
+    }
+    
     @Override
     public void setAlarm(Calendar time) {
     }
