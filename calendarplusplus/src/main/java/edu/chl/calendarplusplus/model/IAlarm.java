@@ -15,6 +15,8 @@ public interface IAlarm {
     
     int getId();
     
+    void setId(int id);
+    
     void setAlarm(Calendar time);
     
     Calendar getAlarm();

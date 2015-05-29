@@ -31,6 +31,7 @@ public class AlarmCard extends javax.swing.JPanel {
         elementList.setPreferredSize(new Dimension(684,500));
         elementList.setSize(684, 500);
         for (IAlarm a : actlist) {
+            System.out.println("ALARM ID: " + a.getId());
             AlarmElement ale = new AlarmElement(a);
             ale.setPreferredSize(new Dimension(650,141));
             ale.addListener(pcs);

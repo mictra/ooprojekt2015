@@ -47,6 +47,10 @@ public class Alarm implements IAlarm, Serializable {
         }
     }
     
+    public void setId(int id){
+        this.id = id;
+    }
+    
     public int getId(){
         return id;
     }

@@ -189,10 +189,8 @@ public class AddAlarmCard extends javax.swing.JPanel {
     private void labelMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelMouseReleased
         if (buttonPressed) {
             if (evt.getSource() == saveButton && !isEdit) {
-                System.out.println("ADDALARM FIRED");
                 pcs.firePropertyChange("AddAlarm", null, null);
             } else if (evt.getSource() == saveButton && isEdit) {
-                System.out.println("EDITALARM FIRED");
                 pcs.firePropertyChange("EditAlarm", null, null);
             } else if (evt.getSource() == cancelButton) {
 
@@ -220,6 +218,7 @@ public class AddAlarmCard extends javax.swing.JPanel {
     private PropertyChangeSupport pcs;
     private boolean buttonPressed;
     private boolean isEdit = false;
+    private int alarmId;
 
     public IAlarm getAsAlarm() {
         //TODO: Handle errors when missing fields not in there... Maybe disable Save button?
@@ -231,6 +230,9 @@ public class AddAlarmCard extends javax.swing.JPanel {
         int sMinute = Integer.parseInt((String) minuteComboBox.getSelectedItem());
         timeDate.set(sYear, sMonth, sDay, sHour, sMinute);
         IAlarm a = new Alarm(timeDate, nameTextField.getText()); //descriptionTextArea.getText()
+        if(isEdit){
+            a.setId(alarmId);
+        }
         if (a.getAlarmName() == null || a.getAlarm().before(timeDate)) {
             JOptionPane.showMessageDialog(null, "The alarm is invalid!");
         }
@@ -273,6 +275,7 @@ public class AddAlarmCard extends javax.swing.JPanel {
     }
 
     public void resetFields() {
+        isEdit = false;
         nameTextField.setText("");
         Calendar c = Calendar.getInstance();
         dayComboBox.setSelectedIndex(c.get(c.DAY_OF_MONTH) - 1);
@@ -286,6 +289,7 @@ public class AddAlarmCard extends javax.swing.JPanel {
 
     public void restoreFields(IAlarm al) {
         isEdit = true;
+        alarmId = al.getId();
         nameTextField.setText(al.getAlarmName());
         Calendar c = al.getAlarm();
         dayComboBox.setSelectedIndex(c.get(c.DAY_OF_MONTH) - 1);
@@ -293,7 +297,7 @@ public class AddAlarmCard extends javax.swing.JPanel {
         yearComboBox.setSelectedItem(c.get(c.YEAR));
         hourComboBox.setSelectedIndex(c.get(c.HOUR_OF_DAY));
         minuteComboBox.setSelectedItem(Integer.toString(c.get(c.MINUTE) - (c.get(c.MINUTE) % 5)));
-        c.add(c.HOUR, 1);
+        //c.add(c.HOUR, 1);
         descriptionTextArea.setText(al.getDescName());
     }
 

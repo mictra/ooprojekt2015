@@ -47,5 +47,15 @@ public class MockAlarm implements IAlarm {
     public String getDescName() {
         return this.description;
     }
+
+    @Override
+    public int getId() {
+        return 0;
+    }
+
+    @Override
+    public void setId(int id) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

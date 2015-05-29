@@ -104,12 +104,15 @@ public class CalendarPlus implements ICalendarPlus {
     }
 
     public void addAlarm(IAlarm a) {
+        System.out.println("ADD ALARM IS CALLED");
         alarmDAO.create(a);
         alarms = alarmDAO.findAll();
         //alarms.add(a);
     }
     
     public void updateAlarm(IAlarm a) {
+        System.out.println("UPDATE ALARM IS CALLED");
+        System.out.println("ALARM ID OF UPDATED ALARM: " + a.getId());
         alarmDAO.update(a);
         //update the list
         alarms = alarmDAO.findAll();
@@ -124,7 +127,8 @@ public class CalendarPlus implements ICalendarPlus {
     }
 
     public void removeAlarm(IAlarm a) {
-        alarms.remove(a);
+        alarmDAO.delete(a.getId());
+        alarms = alarmDAO.findAll();
     }
 
     public void setActivityList(ArrayList l) {
