@@ -90,4 +90,9 @@ public class MockActivity implements IActivity {
     public boolean hasContact(IContact contact) {
         return false; //Temporary
     }
+
+    @Override
+    public void removeAllAttendees() {
+        
+    }
 }

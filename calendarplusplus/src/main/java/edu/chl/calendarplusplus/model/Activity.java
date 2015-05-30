@@ -124,6 +124,10 @@ public class Activity implements IActivity, Serializable {
         this.attendees.remove(contact);
     }
     
+    public void removeAllAttendees() {
+        this.attendees.clear();
+    }
+    
     public List<IContact> getAttendees(){
         return this.attendees;
     }

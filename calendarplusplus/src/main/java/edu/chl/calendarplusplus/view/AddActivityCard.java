@@ -32,6 +32,8 @@ public class AddActivityCard extends javax.swing.JPanel {
     DefaultListModel attendeeListModel, nonAttendeeListModel;
     private final IContactManager conman;
     String lstring = "";
+    private IActivity act;
+    private boolean updateMode;
     
     /**
      * Creates new form AddActivityCard
@@ -349,7 +351,38 @@ public class AddActivityCard extends javax.swing.JPanel {
     private void labelMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelMouseReleased
         if (buttonPressed) {
             if (evt.getSource() == saveButton) {
-                pcs.firePropertyChange("AddActivity", null, null);
+                if (updateMode) {
+                    act.setName(nameTextField.getText());
+                    act.setLocation(locationTextField.getText());
+                    act.setDescription(descriptionTextArea.getText());
+                    Calendar startDate = Calendar.getInstance();     
+                    int sYear = (Integer) sYearComboBox.getSelectedItem();
+                    int sMonth = sMonthComboBox.getSelectedIndex();
+                    int sDay = sDayComboBox.getSelectedIndex()+1;
+                    int sHour = Integer.parseInt((String) sHourComboBox.getSelectedItem());
+                    int sMinute = Integer.parseInt((String) sMinuteComboBox.getSelectedItem());
+                    startDate.set(sYear, sMonth, sDay, sHour, sMinute, 0);
+                    startDate.set(startDate.MILLISECOND, 0);
+                    act.setStartTime(startDate);
+                    Calendar endDate = Calendar.getInstance();
+                    int eYear = (Integer) eYearComboBox.getSelectedItem();
+                    int eMonth = eMonthComboBox.getSelectedIndex();
+                    int eDay = eDayComboBox.getSelectedIndex()+1;
+                    int eHour = Integer.parseInt((String) eHourComboBox.getSelectedItem());
+                    int eMinute = Integer.parseInt((String) eMinuteComboBox.getSelectedItem());
+                    endDate.set(eYear, eMonth, eDay, eHour, eMinute, 0);
+                    endDate.set(endDate.MILLISECOND, 0);
+                    act.setEndTime(endDate);
+                    act.removeAllAttendees();
+                    for (int i = 0; i < attendeeList.getModel().getSize(); i++) {
+                        act.addAttendee((IContact) attendeeList.getModel().getElementAt(i));
+                    }                   
+                    pcs.firePropertyChange("EditActivity", evt, act);
+                    updateMode = false;
+                    
+                } else {
+                    pcs.firePropertyChange("AddActivity", null, null);
+                }
             }
             if (evt.getSource() == cancelButton) {
                 
@@ -499,6 +532,7 @@ public class AddActivityCard extends javax.swing.JPanel {
     }
     
     public void resetFields() {
+        updateMode = false;
         nameTextField.setText("");
         Calendar c = Calendar.getInstance();
         c.add(c.MINUTE, 5 - (c.get(c.MINUTE) % 5));
@@ -554,6 +588,55 @@ public class AddActivityCard extends javax.swing.JPanel {
         attendeeList.setModel(attendeeListModel);
         attendeeList.setPrototypeCellValue(lstring+ "        ");
         attendeeScrollPane.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
+    }
+
+    void editActivity(IActivity act) {
+        this.act = act;
+        updateMode = true;
+        
+        nameTextField.setText(act.getName());
+        locationTextField.setText(act.getLocation());
+        descriptionTextArea.setText(act.getDescription());
+        
+        Calendar c = Calendar.getInstance();
+        c.setTimeInMillis(act.getStartTime().getTimeInMillis());
+        sDayComboBox.setSelectedIndex(c.get(c.DAY_OF_MONTH)-1);
+        sMonthComboBox.setSelectedIndex(c.get(c.MONTH));
+        sYearComboBox.setSelectedItem(c.get(c.YEAR));
+        sHourComboBox.setSelectedIndex(c.get(c.HOUR_OF_DAY));
+        sMinuteComboBox.setSelectedIndex(c.get(c.MINUTE) / 5);
+        c.setTimeInMillis(act.getEndTime().getTimeInMillis());
+        eDayComboBox.setSelectedIndex(c.get(c.DAY_OF_MONTH)-1);
+        eMonthComboBox.setSelectedIndex(c.get(c.MONTH));
+        eYearComboBox.setSelectedItem(c.get(c.YEAR));
+        eHourComboBox.setSelectedIndex(c.get(c.HOUR_OF_DAY));
+        eMinuteComboBox.setSelectedIndex(c.get(c.MINUTE) / 5);
+        
+
+        attendeeList.removeAll();
+        attendeeListModel.removeAllElements();
+        nonAttendeeList.removeAll();
+        nonAttendeeListModel.removeAllElements();
+        
+        lstring = "";
+        
+        for (IContact cont: conman.getAllContacts()) {
+            if (act.hasContact(cont)) {
+                attendeeListModel.addElement(cont);
+            } else {
+                nonAttendeeListModel.addElement(cont);
+            }
+            if (lstring.length() < cont.getName().length())
+                lstring = cont.getName();
+        }
+        
+        attendeeList.setModel(attendeeListModel);
+        attendeeList.setPrototypeCellValue(lstring+ "        ");
+        attendeeScrollPane.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
+        nonAttendeeList.setModel(nonAttendeeListModel);
+        nonAttendeeList.setPrototypeCellValue(lstring+ "        ");
+        nonAttendeeScrollPane.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
+        
     }
 
 }

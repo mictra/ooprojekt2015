@@ -38,6 +38,8 @@ public interface IActivity {
     
     public void removeAttendee(IContact contact);
     
+    public void removeAllAttendees();
+    
     public List<IContact> getAttendees();
     
     public boolean hasContact(IContact contact);

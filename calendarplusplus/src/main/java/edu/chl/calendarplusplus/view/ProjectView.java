@@ -733,6 +733,12 @@ public class ProjectView extends javax.swing.JFrame {
         headlineLabel.setText("Edit contactgroup");
     }
 
+    public void editActivity(IActivity act) {
+        addActivity.editActivity(act);
+        tabCards.show(mainPanel, "AddActivityCard");
+        headlineLabel.setText("Edit activity");
+    }
+
    
 
 }
