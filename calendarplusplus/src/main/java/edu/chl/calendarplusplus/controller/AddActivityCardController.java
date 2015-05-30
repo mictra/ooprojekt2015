@@ -51,6 +51,7 @@ public class AddActivityCardController implements PropertyChangeListener {
             INotification not = ac.getAsNotification(act);
             if (not != null) {
                 //Add notification to manager or update or remove
+                cal.getNotificationManager().setNotification(act, not);
             }
             ac.resetFields();
         } else if (evtName.equalsIgnoreCase("AddAttendee")) {

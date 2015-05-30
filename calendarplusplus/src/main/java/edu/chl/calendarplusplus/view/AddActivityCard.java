@@ -443,12 +443,14 @@ public class AddActivityCard extends javax.swing.JPanel {
     }
     
     public INotification getAsNotification(IActivity act) {
-        Calendar notDate = act.getStartTime();
+        Calendar notDate = Calendar.getInstance();
+        notDate.setTimeInMillis(act.getStartTime().getTimeInMillis());
         switch (notificationComboBox.getSelectedIndex()) {
-            case 0: return null;
+            case 0: 
+                return null;
             case 1: 
                 break;
-            case 2: notDate.add(notDate.MINUTE, -5); 
+            case 2: notDate.add(notDate.MINUTE, -5);
                 break;
             case 3: notDate.add(notDate.MINUTE, -10); 
                 break;
@@ -459,7 +461,7 @@ public class AddActivityCard extends javax.swing.JPanel {
             case 6: notDate.add(notDate.MINUTE, -60);
                 break;                
         }
-        INotification inot = new Notification(notDate, act.getName(), act);
+        INotification inot = new Notification(notDate, act.getName(), act.getDescription(), act);
         return inot;
     }
             
@@ -499,6 +501,9 @@ public class AddActivityCard extends javax.swing.JPanel {
     public void resetFields() {
         nameTextField.setText("");
         Calendar c = Calendar.getInstance();
+        c.add(c.MINUTE, 5 - (c.get(c.MINUTE) % 5));
+        // ToDo - remove next line later
+        c.add(c.HOUR_OF_DAY, 2);
         sDayComboBox.setSelectedIndex(c.get(c.DAY_OF_MONTH)-1);
         sMonthComboBox.setSelectedIndex(c.get(c.MONTH));
         sYearComboBox.setSelectedItem(c.get(c.YEAR));
@@ -540,14 +545,14 @@ public class AddActivityCard extends javax.swing.JPanel {
                 lstring = c.getName();
         }
         nonAttendeeList.setModel(nonAttendeeListModel);
-        nonAttendeeList.setPrototypeCellValue(lstring+ "     ");
+        nonAttendeeList.setPrototypeCellValue(lstring+ "        ");
         nonAttendeeScrollPane.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
         
         //Set the chosen contacts
         attendeeList.removeAll();
         attendeeListModel.removeAllElements();
         attendeeList.setModel(attendeeListModel);
-        attendeeList.setPrototypeCellValue(lstring+ "     ");
+        attendeeList.setPrototypeCellValue(lstring+ "        ");
         attendeeScrollPane.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
     }
 

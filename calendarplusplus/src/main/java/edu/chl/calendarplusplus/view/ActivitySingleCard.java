@@ -5,8 +5,10 @@
  */
 package edu.chl.calendarplusplus.view;
 
+import edu.chl.calendarplusplus.model.CalendarPlus;
 import edu.chl.calendarplusplus.model.IActivity;
 import edu.chl.calendarplusplus.model.IContact;
+import edu.chl.calendarplusplus.model.INotification;
 import java.awt.Dimension;
 import java.beans.PropertyChangeSupport;
 import java.util.Calendar;
@@ -23,13 +25,15 @@ public class ActivitySingleCard extends javax.swing.JPanel {
     private PropertyChangeSupport pcs;
     private boolean buttonPressed;
     private IActivity act;
+    private CalendarPlus cal;
     
     /**
      * Creates new form ActivitySingleCard
      */
-   
-    public ActivitySingleCard() {
+    ActivitySingleCard(CalendarPlus cal) {
         initComponents();
+        this.cal = cal;        
+        attendeeScrollPane.getVerticalScrollBar().setUnitIncrement(20);
     }
     
     public void setFields(IActivity act) {
@@ -37,16 +41,34 @@ public class ActivitySingleCard extends javax.swing.JPanel {
         nameLabel.setText(act.getName());
         startdate = act.getStartTime();
         enddate = act.getEndTime();
-        start = startdate.get(startdate.DAY_OF_MONTH) + "." + (startdate.get(startdate.MONTH)+1) + "." + startdate.get(startdate.YEAR) + " - kl. " + startdate.get(startdate.HOUR_OF_DAY) + ":" + (startdate.get(startdate.MINUTE) <= 5 ? "0" + startdate.get(startdate.MINUTE) : startdate.get(startdate.MINUTE));
-        end = enddate.get(enddate.DAY_OF_MONTH) + "." + (enddate.get(enddate.MONTH)+1) + "." + enddate.get(enddate.YEAR) + " - kl. " + enddate.get(enddate.HOUR_OF_DAY) + ":" + (enddate.get(enddate.MINUTE) <= 5 ? "0" + enddate.get(enddate.MINUTE) : enddate.get(enddate.MINUTE));
-        dateLabel.setText(start + " ---" + end);
+        start = startdate.get(startdate.DAY_OF_MONTH) + "." + (startdate.get(startdate.MONTH)+1) + "." + startdate.get(startdate.YEAR) + " kl. " + startdate.get(startdate.HOUR_OF_DAY) + ":" + (startdate.get(startdate.MINUTE) <= 5 ? "0" + startdate.get(startdate.MINUTE) : startdate.get(startdate.MINUTE));
+        end = enddate.get(enddate.DAY_OF_MONTH) + "." + (enddate.get(enddate.MONTH)+1) + "." + enddate.get(enddate.YEAR) + " kl. " + enddate.get(enddate.HOUR_OF_DAY) + ":" + (enddate.get(enddate.MINUTE) <= 5 ? "0" + enddate.get(enddate.MINUTE) : enddate.get(enddate.MINUTE));
+        dateLabel.setText(start + " -- " + end);
         locationLabel.setText(act.getLocation());
         descriptionTextArea.setText(act.getDescription());
         descriptionTextArea.setEditable(false);
+        attendeesPanel.removeAll();
+        attendeesPanel.setPreferredSize(new Dimension(500,act.getAttendees().size()*(20+5)));
         for (IContact c : act.getAttendees()) {
             JLabel label = new JLabel(c.getName());
             label.setPreferredSize(new Dimension(500,20));
             attendeesPanel.add(label);
+        }
+        INotification not = cal.getNotificationManager().getNotification(act);
+        if (not == null) {
+            notificationLabel.setText("None");
+        } else {
+            long diff = act.getStartTime().getTimeInMillis() - not.getAlarm().getTimeInMillis();
+            int nottime = (int) (diff/(1000*60));
+            System.out.println(nottime);
+            switch (nottime) {
+                case 0: notificationLabel.setText("When activity starts"); break;
+                case 5: notificationLabel.setText("5 minutes before"); break;
+                case 10: notificationLabel.setText("10 minutes before"); break;
+                case 15: notificationLabel.setText("15 minutes before"); break;
+                case 30: notificationLabel.setText("30 minutes before"); break;
+                case 60: notificationLabel.setText("60 minutes before"); break;
+            }
         }
     }
 
@@ -110,6 +132,11 @@ public class ActivitySingleCard extends javax.swing.JPanel {
         locationLabel.setFont(new java.awt.Font("Source Sans Pro", 1, 18)); // NOI18N
         locationLabel.setText("#LOCATION");
 
+        attendeeScrollPane.setBorder(null);
+        attendeeScrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
+        attendeesPanel.setBorder(null);
+        attendeesPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEADING));
         attendeeScrollPane.setViewportView(attendeesPanel);
 
         editButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/editButton.png"))); // NOI18N
@@ -150,8 +177,7 @@ public class ActivitySingleCard extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(editButton)
                         .addGap(18, 18, 18)
-                        .addComponent(removeButton)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(removeButton))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(staticNotificationLabel)
@@ -160,16 +186,13 @@ public class ActivitySingleCard extends javax.swing.JPanel {
                             .addComponent(staticLocationLabel)
                             .addComponent(staticAttendeesLabel))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(attendeeScrollPane)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(locationLabel)
-                                    .addComponent(dateLabel)
-                                    .addComponent(descriptionScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(notificationLabel))
-                                .addGap(0, 361, Short.MAX_VALUE)))))
-                .addContainerGap())
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(locationLabel)
+                            .addComponent(dateLabel)
+                            .addComponent(descriptionScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
+                            .addComponent(notificationLabel)
+                            .addComponent(attendeeScrollPane))))
+                .addContainerGap(373, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -198,9 +221,11 @@ public class ActivitySingleCard extends javax.swing.JPanel {
                     .addComponent(notificationLabel))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(staticAttendeesLabel)
-                    .addComponent(attendeeScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(44, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(staticAttendeesLabel)
+                        .addGap(0, 309, Short.MAX_VALUE))
+                    .addComponent(attendeeScrollPane))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
