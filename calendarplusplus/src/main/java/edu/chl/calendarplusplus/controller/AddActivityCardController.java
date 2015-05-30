@@ -58,6 +58,17 @@ public class AddActivityCardController implements PropertyChangeListener {
             ac.addAttendee();
         } else if (evtName.equalsIgnoreCase("RemoveAttendee")) {
             ac.removeAttendee();
+        } else if (evtName.equalsIgnoreCase("EditActivity")) {
+            IActivity act = (IActivity) evt.getNewValue();
+            // ToDo Update lists and database
+            //cal.updateActivity(act, act.getAttendees());
+            INotification not = ac.getAsNotification(act);
+            if (not == null) {
+                cal.getNotificationManager().removeNotification(act);
+            } else {
+                cal.getNotificationManager().setNotification(act, not);
+            }
+            ac.resetFields();
         }
     }
 

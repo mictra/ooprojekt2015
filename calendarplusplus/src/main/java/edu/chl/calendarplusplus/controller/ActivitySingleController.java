@@ -41,6 +41,7 @@ public class ActivitySingleController implements PropertyChangeListener {
 //            projV.showActivitySingle(act);
             IActivity act = (IActivity) evt.getNewValue();
             System.out.println(act.getName() + " Edit button clicked");
+            projV.editActivity(act);
         }
         if (evtName.equalsIgnoreCase("RemoveActivityClicked")) {
             IActivity act = (IActivity) evt.getNewValue();
