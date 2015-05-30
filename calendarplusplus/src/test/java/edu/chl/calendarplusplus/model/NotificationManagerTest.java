@@ -36,18 +36,15 @@ public class NotificationManagerTest {
         Assert.assertEquals(n1, n.getNotification(a1));
     }
     
-    //@Test
+    @Test
     public void editNotification(){
         a1 = new Activity(time_1, time_2, "An Activity", "", "", null);
         n1 = new Notification(time_1, "Old Notification", a1);
         n.setNotification(a1, n1);
-        
+        Assert.assertEquals(n1, n.getNotification(a1));
         Notification n2 = new Notification(time_1, "New Notification", a1);
         n.setNotification(a1, n2);
-        
         Assert.assertEquals(n2, n.getNotification(a1));
-        //Assert.assertNotSame(n1, n.getNotification(a1));
-        Assert.assertNotSame(a1, n1.getActivity()); //n1.getActivity() = a1!
     }
     
 }

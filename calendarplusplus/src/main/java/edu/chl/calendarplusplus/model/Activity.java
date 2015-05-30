@@ -48,19 +48,9 @@ public class Activity implements IActivity, Serializable {
     public Activity(Calendar st, Calendar et, String name,
             String loc, String desc, List<IContact> att) {
         
-        if(st.getTimeInMillis() < et.getTimeInMillis()){
-            this.startTime = st;
-            this.endTime = et;
-        }else{
-            AddActivityCard.invalidParameters();
-        }
-        
-        if(!name.equals("")){
-            this.name = name;
-        }else{
-            AddActivityCard.invalidParameters();
-        }
-        
+        this.startTime = st;
+        this.endTime = et;
+        this.name = name;
         this.description = desc;
         this.location = loc;
         

@@ -22,10 +22,7 @@ import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
  */
 public class AddContactCard extends javax.swing.JPanel {
 
-    public static void invalidParameters() {
-                JOptionPane.showMessageDialog(null, "Invalid parameters (name)");
-    }
-
+    
     private final CalendarPlus cal;
     private boolean updateMode = false;
     DefaultListModel nonMemberListModel, memberListModel;
@@ -44,7 +41,7 @@ public class AddContactCard extends javax.swing.JPanel {
         memberListModel = new DefaultListModel();
         resetFields();
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -258,7 +255,6 @@ public class AddContactCard extends javax.swing.JPanel {
                 } else {
                     pcs.firePropertyChange("AddContact", null, null);
                 }
-                
             }
             if (evt.getSource() == cancelButton) {
                 pcs.firePropertyChange("BackToContacts", null, null);

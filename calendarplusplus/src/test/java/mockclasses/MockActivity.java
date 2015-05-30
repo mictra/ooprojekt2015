@@ -42,7 +42,7 @@ public class MockActivity implements IActivity {
     @Override
     public Calendar getEndTime() {
         endTime = Calendar.getInstance();
-        endTime.set(2015, 4, 31, 13, 0);
+        endTime.set(2015, 4, 31, 14, 0);
         return this.endTime;
     }
 

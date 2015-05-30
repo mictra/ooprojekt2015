@@ -5,6 +5,7 @@
  */
 package edu.chl.calendarplusplus.view;
 
+import edu.chl.calendarplusplus.model.CalendarPlus;
 import java.awt.Color;
 import java.beans.PropertyChangeSupport;
 import static java.time.temporal.ChronoField.MONTH_OF_YEAR;
@@ -42,7 +43,18 @@ public class MonthViewCard extends javax.swing.JPanel {
     monthLabel.setText(monthNames[month]+ " " + currentDate.get(Calendar.YEAR));
 
     }
-    
+    /*
+    public Boolean hasActivity(Calendar day){
+        Calendar start = Calendar.getInstance();
+        Calendar end = Calendar.getInstance();
+        
+        start.set(day.YEAR, day.MONTH, day.DATE, 0, 0);
+        end.set(day.YEAR, day.MONTH, day.DATE, 23, 59);
+        CalendarPlus.getActivitiesByHour(start, end);
+        return null;
+        
+    }
+    /*
     /*
     Updates the monthview and sets all attributes. Including colors, week
     number, day number etc.
@@ -79,6 +91,8 @@ public class MonthViewCard extends javax.swing.JPanel {
                         && (tempDate.get(c.YEAR) == today.get(c.YEAR))){
                 mvec.setBackground(new Color(255, 140, 140));
             }
+                
+            
             mvec.addListener(pcs);
             dayPanel.add(mvec);
             revalidate();
