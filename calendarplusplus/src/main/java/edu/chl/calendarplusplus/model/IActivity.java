@@ -14,6 +14,10 @@ import java.util.List;
  */
 public interface IActivity {
     
+    public void setId(int id);
+    
+    public int getId();
+    
     public void setStartTime(Calendar st);
     
     public Calendar getStartTime();

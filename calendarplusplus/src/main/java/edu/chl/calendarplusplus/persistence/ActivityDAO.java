@@ -5,6 +5,7 @@
  */
 package edu.chl.calendarplusplus.persistence;
 
+import edu.chl.calendarplusplus.model.Activity;
 import edu.chl.calendarplusplus.model.IActivity;
 import java.util.List;
 
@@ -26,6 +27,13 @@ public class ActivityDAO extends AbstractDAO<IActivity, Integer> {
     public void deleteAll(){
         em.getTransaction().begin();
         em.createQuery("DELETE FROM Activity a").executeUpdate();
+        em.getTransaction().commit();
+    }
+    
+    public void delete(int id){
+        Activity act = em.getReference(Activity.class, id);
+        em.getTransaction().begin();
+        em.remove(act);
         em.getTransaction().commit();
     }
     

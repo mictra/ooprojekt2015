@@ -33,6 +33,7 @@ public class AddActivityCard extends javax.swing.JPanel {
     private final IContactManager conman;
     String lstring = "";
     private IActivity act;
+    private INotification not;
     private boolean updateMode;
     
     /**
@@ -495,6 +496,9 @@ public class AddActivityCard extends javax.swing.JPanel {
                 break;                
         }
         INotification inot = new Notification(notDate, act.getName(), act.getDescription(), act);
+        if(updateMode && not != null){
+            inot.setId(not.getId());
+        }
         return inot;
     }
             
@@ -598,8 +602,9 @@ public class AddActivityCard extends javax.swing.JPanel {
         attendeeScrollPane.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
     }
 
-    void editActivity(IActivity act) {
+    void editActivity(IActivity act, INotification not) {
         this.act = act;
+        this.not = not;
         updateMode = true;
         
         nameTextField.setText(act.getName());

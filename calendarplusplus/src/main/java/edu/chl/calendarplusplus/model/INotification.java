@@ -15,6 +15,10 @@ public interface INotification {
     
     public void setAlarm(Calendar time);
     
+    public void setId(int id);
+    
+    public int getId();
+    
     public Calendar getAlarm();
     
     public void setAlarmName(String name);
