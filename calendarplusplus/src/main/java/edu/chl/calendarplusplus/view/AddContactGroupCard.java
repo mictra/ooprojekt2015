@@ -11,6 +11,8 @@ import edu.chl.calendarplusplus.model.IContact;
 import edu.chl.calendarplusplus.model.IContactGroup;
 import edu.chl.calendarplusplus.model.IContactManager;
 import java.beans.PropertyChangeSupport;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.DefaultListModel;
 import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
 
@@ -25,7 +27,7 @@ public class AddContactGroupCard extends javax.swing.JPanel {
     String lstring = "";
     private boolean updateMode = false;
     private IContactGroup cg;
-    
+
     /**
      * Creates new form AddContactGroupCard
      */
@@ -234,15 +236,17 @@ public class AddContactGroupCard extends javax.swing.JPanel {
             }
             if (evt.getSource() == cancelButton) {
                 pcs.firePropertyChange("BackToContactGroups", evt, cg);
-                
+
             }
             if (evt.getSource() == addButton) {
-                if (nonMemberListModel.size() > 0 && !nonMemberList.isSelectionEmpty())
+                if (nonMemberListModel.size() > 0 && !nonMemberList.isSelectionEmpty()) {
                     pcs.firePropertyChange("AddContactGroupCardAddMember", null, null);
+                }
             }
             if (evt.getSource() == removeButton) {
-                if (memberListModel.size() > 0 && !memberList.isSelectionEmpty())
+                if (memberListModel.size() > 0 && !memberList.isSelectionEmpty()) {
                     pcs.firePropertyChange("AddContactGroupCardRemoveMember", null, null);
+                }
             }
         }
     }//GEN-LAST:event_labelMouseReleased
@@ -282,14 +286,13 @@ public class AddContactGroupCard extends javax.swing.JPanel {
 
     private PropertyChangeSupport pcs;
     private boolean buttonPressed;
-    
-    /*
-    public void registerListener(ProjectViewController controller){
-        saveButton.addActionListener(controller);
-        cancelButton.addActionListener(controller);
-    }
-    */
 
+    /*
+     public void registerListener(ProjectViewController controller){
+     saveButton.addActionListener(controller);
+     cancelButton.addActionListener(controller);
+     }
+     */
     public IContactGroup getAsContactGroup() {
         ContactGroup cg = new ContactGroup(nameTextField.getText());
         for (int i = 0; i < memberList.getModel().getSize(); i++) {
@@ -297,13 +300,21 @@ public class AddContactGroupCard extends javax.swing.JPanel {
         }
         return cg;
     }
-    
+
+    public List<IContact> getNonMemberList() {
+        List<IContact> removedMembers = new ArrayList<>();
+        for (int i = 0; i < nonMemberList.getModel().getSize(); i++) {
+            removedMembers.add((IContact) nonMemberList.getModel().getElementAt(i));
+        }
+        return removedMembers;
+    }
+
     public void resetFields() {
         updateMode = false;
         nameTextField.setText("");
         setLists();
     }
-    
+
     public void addListener(PropertyChangeSupport pcs) {
         this.pcs = pcs;
     }
@@ -314,18 +325,19 @@ public class AddContactGroupCard extends javax.swing.JPanel {
         nonMemberListModel.removeAllElements();
         for (IContact c : cal.getContactManager().getAllContacts()) {
             nonMemberListModel.addElement(c);
-            if (lstring.length() < c.getName().length())
+            if (lstring.length() < c.getName().length()) {
                 lstring = c.getName();
+            }
         }
         nonMemberList.setModel(nonMemberListModel);
-        nonMemberList.setPrototypeCellValue(lstring+ "        ");
+        nonMemberList.setPrototypeCellValue(lstring + "        ");
         nonMemberScrollPane.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
-        
+
         //Set the chosen contacts
         memberList.removeAll();
         memberListModel.removeAllElements();
         memberList.setModel(memberListModel);
-        memberList.setPrototypeCellValue(lstring+ "        ");
+        memberList.setPrototypeCellValue(lstring + "        ");
         memberScrollPane.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
     }
 
@@ -343,27 +355,26 @@ public class AddContactGroupCard extends javax.swing.JPanel {
         updateMode = true;
         this.cg = cg;
         nameTextField.setText(cg.getGroupName());
-        
-        
+
         //Set the chosen contacts
         memberList.removeAll();
         memberListModel.removeAllElements();
         nonMemberList.removeAll();
         nonMemberListModel.removeAllElements();
-        
-        for (IContact c: cal.getContactManager().getAllContacts()) {
+
+        for (IContact c : cal.getContactManager().getAllContacts()) {
             if (cg.hasContact(c)) {
                 memberListModel.addElement(c);
             } else {
                 nonMemberListModel.addElement(c);
             }
         }
-        
+
         memberList.setModel(memberListModel);
-        memberList.setPrototypeCellValue(lstring+ "        ");
+        memberList.setPrototypeCellValue(lstring + "        ");
         memberScrollPane.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
         nonMemberList.setModel(nonMemberListModel);
-        nonMemberList.setPrototypeCellValue(lstring+ "        ");
+        nonMemberList.setPrototypeCellValue(lstring + "        ");
         nonMemberScrollPane.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
     }
 

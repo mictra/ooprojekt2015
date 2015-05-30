@@ -18,5 +18,6 @@ public interface IActivityManager {
     public List<IActivity> getContactActivities(IContact c);
     public void removeContact(IContact c);
     void addNewGroup(IContact c, IActivity a);
+    void removeActivityFromContact(IContact c, IActivity a);
     
 }

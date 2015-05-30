@@ -9,6 +9,7 @@ import edu.chl.calendarplusplus.persistence.ActivityDAO;
 import edu.chl.calendarplusplus.persistence.AlarmDAO;
 import edu.chl.calendarplusplus.persistence.ContactDAO;
 import edu.chl.calendarplusplus.persistence.ContactGroupDAO;
+import edu.chl.calendarplusplus.persistence.NotificationDAO;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -25,6 +26,7 @@ public class CalendarPlus implements ICalendarPlus {
     private List<IActivity> activities;
     private List<IContactGroup> groups;
     private List<IAlarm> alarms;
+    private List<INotification> notifications;
     private IContactManager contactManager;
     private IActivityManager activityManager;
     private INotificationManager notificationManager;
@@ -32,6 +34,7 @@ public class CalendarPlus implements ICalendarPlus {
     private ContactDAO cDAO;
     private ActivityDAO aDAO;
     private AlarmDAO alarmDAO;
+    private NotificationDAO notDAO;
     private IContactGroup defaultGroup;
 
     public CalendarPlus() {
@@ -39,8 +42,9 @@ public class CalendarPlus implements ICalendarPlus {
         cDAO = new ContactDAO();
         aDAO = new ActivityDAO();
         alarmDAO = new AlarmDAO();
+        notDAO = new NotificationDAO();
         activities = aDAO.findAll();
-        if(activities.isEmpty()){
+        if (activities.isEmpty()) {
             activities = new ArrayList<>();
         }
         groups = cgDAO.findAll();
@@ -49,47 +53,64 @@ public class CalendarPlus implements ICalendarPlus {
             groups = cgDAO.findAll();
         }
         alarms = alarmDAO.findAll();
-        if(alarms.isEmpty()){
+        if (alarms.isEmpty()) {
             alarms = new ArrayList<>();
+        }
+        notifications = notDAO.findAll();
+        if(notifications.isEmpty()){
+            notifications = new ArrayList<>();
         }
         contactManager = new ContactManager();
         activityManager = new ActivityManager();
         notificationManager = new NotificationManager();
         /*
-        * Go through all contacts and see which groups and activities they're in. 
-        * Add them as a key-value pair into the ContactManager and ActivityManager.
-        * All data retrieved from the database.
-        */
-        for(IContact c : cDAO.findAll()){
+         * Go through all contacts and see which groups and activities they're in. 
+         * Add them as a key-value pair into the ContactManager and ActivityManager.
+         * All data retrieved from the database.
+         */
+        for (IContact c : cDAO.findAll()) {
             List<IContactGroup> contactGroups = new ArrayList<>();
             List<IActivity> attendActivities = new ArrayList<>();
             System.out.println("Contact: " + c.getName() + " has groups:");
-            for(IContactGroup cg : groups){
-                if(cg.hasContact(c)){
+            for (IContactGroup cg : groups) {
+                if (cg.hasContact(c)) {
                     contactGroups.add(cg);
                     System.out.println(cg.getGroupName());
                 }
             }
             System.out.println("Contact: " + c.getName() + " is in activities:");
-            for(IActivity a : activities){
-                if(a.hasContact(c)){
+            for (IActivity a : activities) {
+                if (a.hasContact(c)) {
                     attendActivities.add(a);
                     System.out.println(a.getName());
                 }
             }
-            
+
             contactManager.setContactGroups(c, contactGroups);
             activityManager.setContactActivities(c, attendActivities);
         }
         defaultGroup = getContactGroupByName("Default");
     }
 
-    public void addActivity(IActivity a, List<IContact> attendees) {
+    public void addActivity(IActivity a) {
         aDAO.create(a);
-        activities.add(a);
-        for(IContact c : attendees){
+        for (IContact c : a.getAttendees()) {
             activityManager.addNewGroup(c, a);
         }
+        activities = aDAO.findAll();
+    }
+
+    public void updateActivity(IActivity a, List<IContact> removedAttendees) {
+        //Add new members to ActivityManager
+        for (IContact c : a.getAttendees()) {
+            activityManager.addNewGroup(c, a);
+        }
+        //Remove the deleted members from ActivityManager
+        for (IContact c : removedAttendees) {
+            activityManager.removeActivityFromContact(c, a);
+        }
+        aDAO.update(a);
+        activities = aDAO.findAll();
     }
 
     public void addContact(IContact contact, List<IContactGroup> contactGroups) {
@@ -104,9 +125,9 @@ public class CalendarPlus implements ICalendarPlus {
 
     public void addContactGroup(IContactGroup group) {
         //Remove the contact members in the group from the Default group.
-        for(IContact c : group.getContacts()){
+        for (IContact c : group.getContacts()) {
             boolean isRemoved = defaultGroup.remove(c);
-            if(isRemoved){
+            if (isRemoved) {
                 contactManager.removeGroup(c, defaultGroup);
             }
             contactManager.addNewGroup(c, group);
@@ -115,17 +136,32 @@ public class CalendarPlus implements ICalendarPlus {
         cgDAO.create(group);
         groups = cgDAO.findAll();
     }
-    
-    public void updateContactGroup(IContactGroup group){
+
+    public void updateContactGroup(IContactGroup group, List<IContact> deletedMembers) {
+        //Add new members to the ContactManager
+        for (IContact c : group.getContacts()) {
+            boolean isRemoved = defaultGroup.remove(c);
+            if (isRemoved) {
+                contactManager.removeGroup(c, defaultGroup);
+            }
+            contactManager.addNewGroup(c, group);
+        }
+        //Remove the deleted members from the ContactManager
+        for (IContact c : deletedMembers) {
+            contactManager.removeGroup(c, group);
+            if (contactManager.getContactGroups(c).isEmpty()) {
+                defaultGroup.addContact(c);
+                contactManager.addNewGroup(c, defaultGroup);
+            }
+        }
         cgDAO.update(group);
         groups = cgDAO.findAll();
     }
-    
-    public void removeContactGroup(IContactGroup cg){
-        for(IContact c : cg.getContacts()){
+
+    public void removeContactGroup(IContactGroup cg) {
+        for (IContact c : cg.getContacts()) {
             contactManager.removeGroup(c, cg);
-            //TODO: FIX! IT IS NULL ONLY IF U ADD GROUPS DIRECTLY WHEN CREATING A CONTACT!
-            if(contactManager.getContactGroups(c).isEmpty()){
+            if (contactManager.getContactGroups(c).isEmpty()) {
                 defaultGroup.addContact(c);
                 contactManager.addNewGroup(c, defaultGroup);
             }
@@ -140,7 +176,7 @@ public class CalendarPlus implements ICalendarPlus {
         alarms = alarmDAO.findAll();
         //alarms.add(a);
     }
-    
+
     public void updateAlarm(IAlarm a) {
         alarmDAO.update(a);
         //update the list
@@ -202,8 +238,8 @@ public class CalendarPlus implements ICalendarPlus {
     public IActivityManager getActivityManager() {
         return activityManager;
     }
-    
-    public INotificationManager getNotificationManager(){
+
+    public INotificationManager getNotificationManager() {
         return notificationManager;
     }
 
@@ -211,7 +247,7 @@ public class CalendarPlus implements ICalendarPlus {
         List<IActivity> tempActList = new ArrayList<>();
         for (IActivity act : activities) {
             if ((act.getStartTime().getTimeInMillis() >= start.getTimeInMillis()
-                    && act.getStartTime().getTimeInMillis() < end.getTimeInMillis())                    
+                    && act.getStartTime().getTimeInMillis() < end.getTimeInMillis())
                     || (act.getEndTime().getTimeInMillis() > start.getTimeInMillis()
                     && act.getEndTime().getTimeInMillis() < end.getTimeInMillis())
                     || (act.getStartTime().getTimeInMillis() < start.getTimeInMillis()

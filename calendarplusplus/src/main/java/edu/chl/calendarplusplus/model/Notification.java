@@ -26,10 +26,6 @@ import javax.persistence.OneToOne;
 @Entity
 public class Notification extends Alarm implements INotification, Serializable {
     
-    @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
-    private int id;
-    
     @OneToOne(targetEntity = Activity.class)
     private IActivity activity;
 
@@ -42,11 +38,6 @@ public class Notification extends Alarm implements INotification, Serializable {
         if (d.before(a.getEndTime()) || d.equals(a.getEndTime())){
             activity = a;
         }
-    }
-    
-    @Override
-    public int getId(){
-        return id;
     }
       
     @Override

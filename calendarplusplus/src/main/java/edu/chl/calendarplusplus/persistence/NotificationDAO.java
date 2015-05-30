@@ -5,16 +5,36 @@
  */
 package edu.chl.calendarplusplus.persistence;
 
+import edu.chl.calendarplusplus.model.INotification;
 import edu.chl.calendarplusplus.model.Notification;
+import java.util.List;
 
 /**
  *
  * @author Michael
  */
-public class NotificationDAO extends AbstractDAO<Notification, Integer> {
+public class NotificationDAO extends AbstractDAO<INotification, Integer> {
 
-    public NotificationDAO(Class<Notification> clazz) {
-        super(clazz);
+    public NotificationDAO() {
+        super(INotification.class);
+    }
+    
+    @Override
+    public List<INotification> findAll(){
+        return em.createQuery("select n from Notification n", INotification.class).getResultList();
+    }
+    
+    public void deleteAll(){
+        em.getTransaction().begin();
+        em.createQuery("DELETE FROM Notification n").executeUpdate();
+        em.getTransaction().commit();
+    }
+    
+    public void delete(int id){
+        Notification not = em.getReference(Notification.class, id);
+        em.getTransaction().begin();
+        em.remove(not);
+        em.getTransaction().commit();
     }
     
 }

@@ -64,6 +64,14 @@ public class ActivityManager implements IActivityManager {
         activityManager.put(c, temp);
     }
     
+    public void removeActivityFromContact(IContact c, IActivity a){
+        List<IActivity> temp = activityManager.get(c);
+        if (temp != null) {
+            temp.remove(c);
+            activityManager.put(c, temp);
+        }
+    }
+    
     public void removeContact(IContact c){
         activityManager.remove(c);
     }

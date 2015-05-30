@@ -506,6 +506,14 @@ public class AddActivityCard extends javax.swing.JPanel {
         return attendees;
     }
     
+    public List<IContact> getNonMemberList() {
+        List<IContact> removedAttendees = new ArrayList<>();
+        for (int i = 0; i < nonAttendeeList.getModel().getSize(); i++) {
+            removedAttendees.add((IContact) nonAttendeeList.getModel().getElementAt(i));
+        }
+        return removedAttendees;
+    }
+    
     /*
     public void registerListener(ProjectViewController controller){
         saveButton.addActionListener(controller);
