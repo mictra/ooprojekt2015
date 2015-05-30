@@ -30,7 +30,7 @@ public class NotificationManagerTest {
     @Test
     public void getNotification(){
         a1 = new Activity(time_1, time_2, "An Activity", "", "", null);
-        n1 = new Notification(time_1, "A Notification", a1);
+        n1 = new Notification(time_1, "A Notification", "A Description", a1);
         n.setNotification(a1, n1);
         
         Assert.assertEquals(n1, n.getNotification(a1));
@@ -39,10 +39,15 @@ public class NotificationManagerTest {
     @Test
     public void editNotification(){
         a1 = new Activity(time_1, time_2, "An Activity", "", "", null);
-        n1 = new Notification(time_1, "Old Notification", a1);
+        n1 = new Notification(time_1, "Old Notification", "A Description",a1);
         n.setNotification(a1, n1);
+<<<<<<< HEAD
         Assert.assertEquals(n1, n.getNotification(a1));
         Notification n2 = new Notification(time_1, "New Notification", a1);
+=======
+        
+        Notification n2 = new Notification(time_1, "New Notification", "A Description", a1);
+>>>>>>> origin/master
         n.setNotification(a1, n2);
         Assert.assertEquals(n2, n.getNotification(a1));
     }

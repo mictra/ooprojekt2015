@@ -318,14 +318,14 @@ public class AddContactGroupCard extends javax.swing.JPanel {
                 lstring = c.getName();
         }
         nonMemberList.setModel(nonMemberListModel);
-        nonMemberList.setPrototypeCellValue(lstring+ "     ");
+        nonMemberList.setPrototypeCellValue(lstring+ "        ");
         nonMemberScrollPane.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
         
         //Set the chosen contacts
         memberList.removeAll();
         memberListModel.removeAllElements();
         memberList.setModel(memberListModel);
-        memberList.setPrototypeCellValue(lstring+ "     ");
+        memberList.setPrototypeCellValue(lstring+ "        ");
         memberScrollPane.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
     }
 
@@ -360,10 +360,10 @@ public class AddContactGroupCard extends javax.swing.JPanel {
         }
         
         memberList.setModel(memberListModel);
-        memberList.setPrototypeCellValue(lstring+ "     ");
+        memberList.setPrototypeCellValue(lstring+ "        ");
         memberScrollPane.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
         nonMemberList.setModel(nonMemberListModel);
-        nonMemberList.setPrototypeCellValue(lstring+ "     ");
+        nonMemberList.setPrototypeCellValue(lstring+ "        ");
         nonMemberScrollPane.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
     }
 

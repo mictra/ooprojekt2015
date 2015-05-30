@@ -22,7 +22,7 @@ public class NotificationTest {
     public NotificationTest(){
         time_2.add(Calendar.MINUTE, 30);
         a = new Activity(time_1, time_2, "An Activity", "", "", null);
-        n = new Notification(time_1, "A Notification", a);
+        n = new Notification(time_1, "A Notification", "A Description", a);
     }
     
     @Test
@@ -36,20 +36,20 @@ public class NotificationTest {
     public void invalidNotification(){
         Calendar alarm = Calendar.getInstance();
         alarm.add(Calendar.HOUR_OF_DAY, 2);
-        n = new Notification(alarm, "A Notification", a);
+        n = new Notification(alarm, "A Notification", "A Description", a);
         Assert.assertNull(n.getActivity());
     }
     
     @Test
     public void editNotificationName(){
-        n = new Notification(time_1, "Old Notification", a);
+        n = new Notification(time_1, "Old Notification", "A Description", a);
         n.setAlarmName("New Notification");
         Assert.assertEquals("New Notification", n.getAlarmName());
     }
     
     @Test
     public void addNotificationDesc(){
-        n = new Notification(time_1, "Old Notification", a);
+        n = new Notification(time_1, "Old Notification", "Old Description", a);
         n.setDescName("New Notification");
         Assert.assertEquals("New Notification", n.getDescName());
     }
