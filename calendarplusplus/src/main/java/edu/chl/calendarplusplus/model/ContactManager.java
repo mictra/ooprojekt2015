@@ -27,7 +27,12 @@ public class ContactManager implements IContactManager {
     }
 
     public List<IContactGroup> getContactGroups(IContact c) {
-        return groups.get(c);
+        for (IContact contact : getAllContacts()) {
+            if (c.getName() == contact.getName() && c.getId() == contact.getId()) {
+                return groups.get(contact);
+            }
+        }
+        return new ArrayList<>();
     }
 
     public void setContactGroups(IContact c, List<IContactGroup> groupList) {
@@ -36,26 +41,34 @@ public class ContactManager implements IContactManager {
     }
 
     public void addNewGroup(IContact c, IContactGroup cg) {
-        List<IContactGroup> temp = groups.get(c);
+        IContact foundContact = findContact(c);
+        if (foundContact == null) {
+            return;
+        }
+        List<IContactGroup> temp = groups.get(foundContact);
         if (temp == null) {
             temp = new ArrayList<>();
         }
         temp.add(cg);
-        groups.put(c, temp);
+        groups.put(foundContact, temp);
     }
 
     public void removeGroup(IContact c, IContactGroup cg) {
-        List<IContactGroup> temp = groups.get(c);
-        if (temp != null) {
+        IContact foundContact = findContact(c);
+        List<IContactGroup> temp = groups.get(foundContact);
+        if (foundContact != null && temp != null) {
             temp.remove(cg);
-            groups.put(c, temp);
+            groups.put(foundContact, temp);
         }
     }
 
     public void clearGroups(IContact c) {
-        List<IContactGroup> temp = groups.get(c);
-        temp.clear();
-        groups.put(c, temp);
+        IContact contact = findContact(c);
+        List<IContactGroup> temp = groups.get(contact);
+        if (contact != null && temp != null) {
+            temp.clear();
+            groups.put(c, temp);
+        }
     }
 
     public void removeContact(IContact c) {
@@ -68,6 +81,15 @@ public class ContactManager implements IContactManager {
             contacts.add(c);
         }
         return contacts;
+    }
+
+    private IContact findContact(IContact contact) {
+        for (IContact c : getAllContacts()) {
+            if (c.getName().equals(contact.getName()) && c.getId() == contact.getId()) {
+                return c;
+            }
+        }
+        return null;
     }
 
 }

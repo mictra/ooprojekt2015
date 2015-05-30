@@ -136,7 +136,6 @@ public class CalendarPlus implements ICalendarPlus {
     }
 
     public void addAlarm(IAlarm a) {
-        System.out.println("ADD ALARM IS CALLED");
         alarmDAO.create(a);
         alarms = alarmDAO.findAll();
         //alarms.add(a);

@@ -58,6 +58,7 @@ public class ContactGroup implements IContactGroup, Serializable {
     }
     
     public void addContact(IContact member){
+        /*
         // Check if the contact's name already exist in the group.
         for(IContact c : members){
             if (member.getName().equals(c.getName())){
@@ -76,6 +77,7 @@ public class ContactGroup implements IContactGroup, Serializable {
                 }
             }
         }
+                */
         // Here we add the member to the last position.
         members.add(member);
     }
