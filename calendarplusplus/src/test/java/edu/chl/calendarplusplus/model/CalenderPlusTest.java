@@ -86,11 +86,7 @@ public class CalenderPlusTest {
         Assert.assertTrue(cal.getAlarmList().size() == 1);
     }
     
-<<<<<<< HEAD
-   // @Test
-=======
     //@Test
->>>>>>> origin/master
     public void testRemoveAlarm(){
         cal.addAlarm(al1);
         Assert.assertTrue(cal.getAlarmList().size() == 1);
