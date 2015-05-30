@@ -62,8 +62,6 @@ public class MonthViewElement extends javax.swing.JPanel {
                     if(evt.getSource() == dateLabel){
                         System.out.println(week);
                            pcs.firePropertyChange("MonthViewDayPressed", null, week);
-                           
-
                     }
                     
                 }

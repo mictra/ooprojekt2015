@@ -595,6 +595,10 @@ public class ProjectView extends javax.swing.JFrame {
     public ContactGroupCard getContactGroupSingleCard() {
         return this.contactGroups;
     }
+    
+     public MonthViewCard getMonthViewCard() {
+        return this.monthView;
+    }
 
     /* Maybe use this to add listener?
     public void registerListener(ProjectController controller) {
@@ -727,5 +731,7 @@ public class ProjectView extends javax.swing.JFrame {
         tabCards.show(mainPanel, "AddContactGroupCard");
         headlineLabel.setText("Edit contactgroup");
     }
+
+   
 
 }

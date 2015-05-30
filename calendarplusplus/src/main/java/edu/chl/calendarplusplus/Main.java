@@ -64,6 +64,7 @@ public final class Main {
                     AlarmSingleController.create(cal, projectView, projectView.getAlarmSingleCard());
                     ContactSingleController.create(cal, projectView, projectView.getContactSingleCard());
                     ContactGroupSingleController.create(cal, projectView, projectView.getContactGroupSingleCard());
+                    MonthViewController.create(cal, projectView, projectView.getMonthViewCard());
                     projectView.setVisible(true);
                     initTest(cal);
                 });

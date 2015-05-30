@@ -332,6 +332,7 @@ public class WeekViewCard extends javax.swing.JPanel {
         c.set(c.WEEK_OF_YEAR, week);
         updateDaysStatic(c);
         setDays(c);
+        setWeekLabel(c);
     }
     
 }
