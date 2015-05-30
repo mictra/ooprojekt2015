@@ -15,7 +15,6 @@ import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.util.Calendar;
 import java.util.List;
 import javax.swing.JLabel;
 
@@ -515,7 +514,7 @@ public class ProjectView extends javax.swing.JFrame {
     private WeekViewCard weekView;
     private ContactGroupCard contactGroups = new ContactGroupCard();
     private ContactCard contacts = new ContactCard();
-    private MonthViewCard monthView = new MonthViewCard();
+    private MonthViewCard monthView;
     private AlarmCard alarms = new AlarmCard();
     private ActivitySingleCard actsingle;
 
@@ -619,6 +618,7 @@ public class ProjectView extends javax.swing.JFrame {
         addContactGroup = new AddContactGroupCard(cal);
         weekView = new WeekViewCard(cal);
         actsingle = new ActivitySingleCard(cal);
+        monthView = new MonthViewCard(cal);
         mainLayeredPane.setPreferredSize(new Dimension(1270, 750));
         mainLayeredPane.setSize(new Dimension(1270, 750));
         searchTextField.setVisible(false);

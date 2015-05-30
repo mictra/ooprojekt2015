@@ -1,14 +1,14 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
+*/
 package edu.chl.calendarplusplus.view;
 
 import edu.chl.calendarplusplus.model.CalendarPlus;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.beans.PropertyChangeSupport;
-import static java.time.temporal.ChronoField.MONTH_OF_YEAR;
 import java.util.Calendar;
 
 /**
@@ -24,9 +24,11 @@ public class MonthViewCard extends javax.swing.JPanel {
     private Boolean previousButtonPressed;
     private Boolean nextButtonPressed;
     private PropertyChangeSupport pcs;
-
+    private CalendarPlus cal;
     
-    public MonthViewCard() {
+    
+    public MonthViewCard(CalendarPlus cal) {
+        this.cal = cal;
         initComponents();
         currentDate = Calendar.getInstance();
         updateMonthView();
@@ -38,30 +40,41 @@ public class MonthViewCard extends javax.swing.JPanel {
     }
     
     public void setMonthName(){
-    String[] monthNames = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
-    int month = currentDate.get(currentDate.MONTH);
-    monthLabel.setText(monthNames[month]+ " " + currentDate.get(Calendar.YEAR));
-
+        String[] monthNames = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+        int month = currentDate.get(currentDate.MONTH);
+        monthLabel.setText(monthNames[month]+ " " + currentDate.get(Calendar.YEAR));
+        
     }
-    /*
+    
     public Boolean hasActivity(Calendar day){
         Calendar start = Calendar.getInstance();
+        start.setTimeInMillis(day.getTimeInMillis());
         Calendar end = Calendar.getInstance();
+        end.setTimeInMillis(day.getTimeInMillis());
         
-        start.set(day.YEAR, day.MONTH, day.DATE, 0, 0);
-        end.set(day.YEAR, day.MONTH, day.DATE, 23, 59);
-        CalendarPlus.getActivitiesByHour(start, end);
-        return null;
+        
+        start.set(day.get(Calendar.YEAR), day.get(Calendar.MONTH), day.get(Calendar.DATE), 0, 0, 0);
+        end.set(day.get(Calendar.YEAR), day.get(Calendar.MONTH), day.get(Calendar.DATE), 23, 59, 0);
+        
+        System.out.println(start.get(Calendar.MINUTE) + " " 
+                + end.get(Calendar.HOUR_OF_DAY) +
+                " " + start.get(Calendar.DATE) + " " +  end.get(Calendar.DATE));
+        if(cal.getActivitiesByHour(start, end).isEmpty()){;
+        return false;
+        }
+        return true;
         
     }
-    /*
+    
+    
     /*
     Updates the monthview and sets all attributes. Including colors, week
     number, day number etc.
     */
     
     public void updateMonthStatic(Calendar c){
-        
+        System.out.println(cal);
+        //  hasActivity(c);
         dayPanel.removeAll();
         boolean setWeek = false;
         Calendar today = Calendar.getInstance();
@@ -79,21 +92,25 @@ public class MonthViewCard extends javax.swing.JPanel {
             }
             tempDate.add(Calendar.DATE, 1);
             
-            MonthViewElement mvec = 
+            MonthViewElement mvec =
                     new MonthViewElement(tempDate.get(c.DATE),
-                    tempDate.get(c.WEEK_OF_YEAR),
-                    tempDate.get(c.DAY_OF_YEAR), setWeek);
+                            tempDate.get(c.WEEK_OF_YEAR),
+                            tempDate.get(c.DAY_OF_YEAR), setWeek);
             
             if(!(tempDate.get(c.MONTH) == currentDate.get(c.MONTH))){
                 mvec.setBackground(Color.LIGHT_GRAY);
             }else if((tempDate.get(c.DATE) == today.get(c.DATE))
-                        && (tempDate.get(c.MONTH) == today.get(c.MONTH))
-                        && (tempDate.get(c.YEAR) == today.get(c.YEAR))){
+                    && (tempDate.get(c.MONTH) == today.get(c.MONTH))
+                    && (tempDate.get(c.YEAR) == today.get(c.YEAR))){
                 mvec.setBackground(new Color(255, 140, 140));
+            }else if(hasActivity(tempDate)){
+                System.out.println("hej");
+                mvec.setBackground(new Color(200, 255, 255));
             }
-                
+            
             
             mvec.addListener(pcs);
+            mvec.setPreferredSize(new Dimension(138, 82));
             dayPanel.add(mvec);
             revalidate();
             repaint();
@@ -105,7 +122,7 @@ public class MonthViewCard extends javax.swing.JPanel {
         this.pcs = pcs;
     }
     
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -287,11 +304,11 @@ public class MonthViewCard extends javax.swing.JPanel {
                 .addComponent(dayPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
+    
     private void previousMonthButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_previousMonthButtonMousePressed
-       previousButtonPressed = true;
+        previousButtonPressed = true;
     }//GEN-LAST:event_previousMonthButtonMousePressed
-
+    
     private void previousMonthButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_previousMonthButtonMouseReleased
         if(previousButtonPressed){
             currentDate.add(Calendar.MONTH, -1);
@@ -299,11 +316,11 @@ public class MonthViewCard extends javax.swing.JPanel {
             setMonthName();
         }
     }//GEN-LAST:event_previousMonthButtonMouseReleased
-
+    
     private void nextMonthButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nextMonthButtonMousePressed
         nextButtonPressed = true;
     }//GEN-LAST:event_nextMonthButtonMousePressed
-
+    
     private void nextMonthButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nextMonthButtonMouseReleased
         if(nextButtonPressed){
             currentDate.add(Calendar.MONTH, 1);
@@ -311,24 +328,24 @@ public class MonthViewCard extends javax.swing.JPanel {
             setMonthName();
         }        // TODO add your handling code here:
     }//GEN-LAST:event_nextMonthButtonMouseReleased
-
+    
     private void previousMonthButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_previousMonthButtonMouseEntered
         previousMonthButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arrowsLeftHover.png")));
     }//GEN-LAST:event_previousMonthButtonMouseEntered
-
+    
     private void previousMonthButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_previousMonthButtonMouseExited
         previousMonthButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arrowsLeft.png")));
     }//GEN-LAST:event_previousMonthButtonMouseExited
-
+    
     private void nextMonthButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nextMonthButtonMouseEntered
         nextMonthButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arrowsRightHover.png")));
     }//GEN-LAST:event_nextMonthButtonMouseEntered
-
+    
     private void nextMonthButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nextMonthButtonMouseExited
         nextMonthButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arrowsRight.png")));
     }//GEN-LAST:event_nextMonthButtonMouseExited
-
-
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel dayPanel;
     private javax.swing.JLabel jLabel2;
