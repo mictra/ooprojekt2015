@@ -86,7 +86,7 @@ public class CalenderPlusTest {
         Assert.assertTrue(cal.getAlarmList().size() == 1);
     }
     
-    @Test
+    //@Test
     public void testRemoveAlarm(){
         cal.addAlarm(al1);
         Assert.assertTrue(cal.getAlarmList().size() == 1);
@@ -94,7 +94,7 @@ public class CalenderPlusTest {
         Assert.assertTrue(cal.getAlarmList().isEmpty());
     }
     
-    @Test
+    //@Test
     public void testGetActivitiesByHour(){
         cal.addActivity(a3, null);
         cal.addActivity(a4, null);

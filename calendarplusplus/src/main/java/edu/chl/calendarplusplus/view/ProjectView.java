@@ -517,7 +517,7 @@ public class ProjectView extends javax.swing.JFrame {
     private ContactCard contacts = new ContactCard();
     private MonthViewCard monthView = new MonthViewCard();
     private AlarmCard alarms = new AlarmCard();
-    private ActivitySingleCard actsingle = new ActivitySingleCard();
+    private ActivitySingleCard actsingle;
 
     // Non-generated variables end
     public JLabel getNewActivityLabel() {
@@ -614,6 +614,7 @@ public class ProjectView extends javax.swing.JFrame {
         addActivity = new AddActivityCard(cal.getContactManager());
         addContactGroup = new AddContactGroupCard(cal);
         weekView = new WeekViewCard(cal);
+        actsingle = new ActivitySingleCard(cal);
         mainLayeredPane.setPreferredSize(new Dimension(1270, 750));
         mainLayeredPane.setSize(new Dimension(1270, 750));
         searchTextField.setVisible(false);

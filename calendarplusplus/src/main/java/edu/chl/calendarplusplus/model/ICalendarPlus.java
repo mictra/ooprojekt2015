@@ -48,6 +48,6 @@ public interface ICalendarPlus {
     
     IActivityManager getActivityManager();
     
-    
+    INotificationManager getNotificationManager();
     
 }
