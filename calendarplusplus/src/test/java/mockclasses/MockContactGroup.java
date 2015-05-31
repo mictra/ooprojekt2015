@@ -67,6 +67,11 @@ public class MockContactGroup implements IContactGroup {
     public boolean remove(IContact contact) {
         return true;
     }
+
+    @Override
+    public int compareTo(IContactGroup cg) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }
     
