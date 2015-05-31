@@ -167,6 +167,61 @@ public class CalendarPlus implements ICalendarPlus {
         groups = cgDAO.findAll();
         contactManager.setContactGroups(contact, contactGroups);
     }
+    
+    public void updateContact(IContact contact, List<IContactGroup> addedGroups, List<IContactGroup> removedGroups){
+        if(!addedGroups.isEmpty()){
+            defaultGroup.remove(contact);
+            //Add only if the contact hasn't been added already.
+            for(IContactGroup cg : addedGroups){
+                System.out.println("GROUPNAME: " + cg.getGroupName());
+                if(!cg.hasContact(contact)){
+                    cg.addContact(contact);
+                    cgDAO.update(cg);
+                }
+            }
+            contactManager.setContactGroups(contact, addedGroups);
+        } else{
+            //TODO: Check that it doesn't contain a defaultgroup in the manager already.
+            List<IContactGroup> temp = new ArrayList<>();
+            temp.add(defaultGroup);
+            contactManager.setContactGroups(contact, temp);
+        }
+        
+        if(!removedGroups.isEmpty()){
+            for(IContactGroup cgr : removedGroups){
+                cgr.remove(contact);
+                cgDAO.update(cgr);
+            }
+        }
+        
+        cDAO.update(contact);
+        groups = cgDAO.findAll();
+    }
+    
+    public void removeContact(IContact contact){
+        //Remove contact from all contactgroups that has this contact and from the ContactManager
+        List<IContactGroup> cgroups = contactManager.getContactGroups(contact);
+        if(!cgroups.isEmpty()){
+            for(IContactGroup contgroup : cgroups){
+                contgroup.remove(contact);
+                //Check if this is the same as in groups...
+                cgDAO.update(contgroup);
+            }
+            contactManager.removeContact(contact);
+        }
+        //Remove contact from all activities that has this contact and from the ActivityManager
+        List<IActivity> acts = activityManager.getContactActivities(contact);
+        if(acts != null){
+            for(IActivity act : acts){
+                act.remove(contact);
+                aDAO.update(act);
+            }
+            activityManager.removeContact(contact);
+        }
+        cDAO.delete(contact.getId());
+        groups = cgDAO.findAll();
+        activities = aDAO.findAll();
+    }
 
     public void addContactGroup(IContactGroup group) {
         //Remove the contact members in the group from the Default group.

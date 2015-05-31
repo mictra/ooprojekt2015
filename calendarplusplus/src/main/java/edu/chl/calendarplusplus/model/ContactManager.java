@@ -36,8 +36,12 @@ public class ContactManager implements IContactManager {
     }
 
     public void setContactGroups(IContact c, List<IContactGroup> groupList) {
-        groups.put(c, groupList);
-
+        IContact contact = findContact(c);
+        if (contact != null) {
+            groups.put(contact, groupList);
+        } else {
+            groups.put(c, groupList);
+        }
     }
 
     public void addNewGroup(IContact c, IContactGroup cg) {
@@ -72,7 +76,10 @@ public class ContactManager implements IContactManager {
     }
 
     public void removeContact(IContact c) {
-        groups.remove(c);
+        IContact contact = findContact(c);
+        if (contact != null) {
+            groups.remove(contact);
+        }
     }
 
     public List<IContact> getAllContacts() {

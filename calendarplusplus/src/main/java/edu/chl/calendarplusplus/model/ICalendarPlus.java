@@ -24,6 +24,10 @@ public interface ICalendarPlus {
     
     public void addContact(IContact contact, List<IContactGroup> contactGroups);
     
+    public void updateContact(IContact contact, List<IContactGroup> addedGroups, List<IContactGroup> removedGroups);
+    
+    public void removeContact(IContact contact);
+    
     public void addContactGroup(IContactGroup group);
     
     public void addAlarm(IAlarm a);
