@@ -3,8 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package edu.chl.calendarplusplus.model;
+
 import java.io.Serializable;
 import java.util.Calendar;
 import javax.persistence.Entity;
@@ -19,68 +19,65 @@ import javax.persistence.Lob;
  */
 
 /* The alarm will be set by the user later on. So that will be the case to
-   use the setAlarm()-method. When it comes to the String-variables, we would
-   like to have a set- and a get-method for each one of them. So that we can
-   both modify them and receive its data, since that is the purpose after all.
-*/
+ use the setAlarm()-method. When it comes to the String-variables, we would
+ like to have a set- and a get-method for each one of them. So that we can
+ both modify them and receive its data, since that is the purpose after all.
+ */
 @Entity
 public class Alarm implements IAlarm, Serializable, Comparable<IAlarm> {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private int id;
-    
+
     private Calendar alarmTime;
     private String name;
-    
+
     @Lob
     private String description;
 
     public Alarm() {
     }
-    
-    public Alarm(Calendar d, String n, String desc){
-        if (n.isEmpty()) { return; }
-        if (d.after(Calendar.getInstance()) || d.equals(Calendar.getInstance())){
-            this.alarmTime = d;
-            this.name = n;
-            if (desc == null) {
-                this.description = "";
-            } else {
-                this.description = desc;
-            }
+
+    public Alarm(Calendar d, String n, String desc) {
+        this.alarmTime = d;
+        this.name = n;
+        if (desc == null) {
+            this.description = "";
+        } else {
+            this.description = desc;
         }
     }
-    
-    public void setId(int id){
+
+    public void setId(int id) {
         this.id = id;
     }
-    
-    public int getId(){
+
+    public int getId() {
         return id;
     }
-    
-    public void setAlarm(Calendar time){
+
+    public void setAlarm(Calendar time) {
         this.alarmTime = time;
     }
-    
-    public Calendar getAlarm(){
+
+    public Calendar getAlarm() {
         return alarmTime;
     }
-    
-    public void setAlarmName(String name){
+
+    public void setAlarmName(String name) {
         this.name = name;
     }
-    
-    public String getAlarmName(){
+
+    public String getAlarmName() {
         return name;
     }
-    
-    public void setDescName(String desc){
+
+    public void setDescName(String desc) {
         this.description = desc;
     }
-    
-    public String getDescName(){
+
+    public String getDescName() {
         return description;
     }
 
