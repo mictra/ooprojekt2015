@@ -1,8 +1,9 @@
 # Calendar++
 Calendar++ Object-oriented project
 
-Initial ideas on functionalities: https://docs.google.com/document/d/1yEA_iie6Ezxm9xay5WS6icpMF5bSOBJ8TQHIVAIvUwk/edit?usp=sharing
+NOTE ON RUNNING THE PROGRAM:
 
-RAD: https://docs.google.com/document/d/150Z2kVCRwCXdYIdPiY9B5Izc7As9xX_cUC6Nb6U9wFA/edit?usp=sharing
+We have had troubles running the program outside the netbeans environment. Maven gives us errors we have yet to figure out how to solve.
 
-SDD: https://docs.google.com/document/d/1ttDPbXWsf1017q2-P_kwjQSKU0RxfR56BcKVJym44zE/edit?usp=sharing
+When we build the project in netbeans, we get no issues.
+If there are any issues with running the .jar file from the terminal, please consider running it thorugh netbeans. We have not been able to fix this issue in time.
