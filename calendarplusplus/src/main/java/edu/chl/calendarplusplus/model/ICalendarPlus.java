@@ -6,6 +6,7 @@
 package edu.chl.calendarplusplus.model;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -47,6 +48,8 @@ public interface ICalendarPlus {
     public void setAlarmList(ArrayList l);
     
     public List<IActivity> getActivityList();
+    
+    public List<IActivity> getActivitiesByHour(Calendar start, Calendar end);
     
     public List<IContactGroup> getContactGroupList();
     

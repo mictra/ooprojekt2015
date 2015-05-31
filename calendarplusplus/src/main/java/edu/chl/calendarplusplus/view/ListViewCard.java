@@ -9,6 +9,8 @@ import edu.chl.calendarplusplus.model.CalendarPlus;
 import edu.chl.calendarplusplus.model.IActivity;
 import java.awt.Dimension;
 import java.beans.PropertyChangeSupport;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
