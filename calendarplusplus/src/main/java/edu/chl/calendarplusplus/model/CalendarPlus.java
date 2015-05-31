@@ -176,10 +176,13 @@ public class CalendarPlus implements ICalendarPlus {
             for(IContactGroup cg : addedGroups){
                 System.out.println("GROUPNAME: " + cg.getGroupName());
                 if(!cg.hasContact(contact)){
+                    //This is if we change the contact name we have to remove the old one and update with the new.
+                    cg.remove(contact);
                     cg.addContact(contact);
                     cgDAO.update(cg);
                 }
             }
+            contactManager.removeContact(contact);
             contactManager.setContactGroups(contact, addedGroups);
         } else{
             //TODO: Check that it doesn't contain a defaultgroup in the manager already.

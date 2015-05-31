@@ -92,7 +92,7 @@ public class ContactManager implements IContactManager {
 
     private IContact findContact(IContact contact) {
         for (IContact c : getAllContacts()) {
-            if (c.getName().equals(contact.getName()) && c.getId() == contact.getId()) {
+            if (c.getId() == contact.getId()) {
                 return c;
             }
         }

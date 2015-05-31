@@ -31,7 +31,7 @@ public class NotificationManager implements INotificationManager {
     public INotification getNotification(IActivity a) {
         //Normal equals doesn't work, since we use JPA
         for (IActivity act : notificationManager.keySet()) {
-            if (a.getId() == act.getId() && act.getName().equals(a.getName())) {
+            if (a.getId() == act.getId()) {
                 return notificationManager.get(act);
             }
         }
@@ -40,7 +40,7 @@ public class NotificationManager implements INotificationManager {
 
     public void removeNotification(IActivity a) {
         for (IActivity act : notificationManager.keySet()) {
-            if (a.getId() == act.getId() && act.getName().equals(a.getName())) {
+            if (a.getId() == act.getId()) {
                 notificationManager.remove(act);
             }
         }
