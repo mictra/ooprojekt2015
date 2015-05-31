@@ -46,7 +46,7 @@ public class MonthViewElement extends javax.swing.JPanel {
         }else{
             weekLabel.setText("");
         }
-        dateLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+        this.addMouseListener(new java.awt.event.MouseAdapter() {
             
             @Override
             public void mouseExited(java.awt.event.MouseEvent evt) {
@@ -59,16 +59,15 @@ public class MonthViewElement extends javax.swing.JPanel {
             @Override
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 if(dayPressed){
-                    if(evt.getSource() == dateLabel){
-                        System.out.println(week);
-                           pcs.firePropertyChange("MonthViewDayPressed", null, week);
-                    }
+                    // if(evt.getSource() == this){
+                    pcs.firePropertyChange("MonthViewDayPressed", null, week);
+                    // }
                     
                 }
             }
         });
-                
-                }
+        
+    }
     
     public void addListener(PropertyChangeSupport pcs) {
         this.pcs = pcs;
@@ -89,7 +88,16 @@ public class MonthViewElement extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         setPreferredSize(new java.awt.Dimension(136, 65));
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                formMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                formMouseEntered(evt);
+            }
+        });
 
         dateLabel.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
         dateLabel.setText("#D");
@@ -100,12 +108,18 @@ public class MonthViewElement extends javax.swing.JPanel {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 dateLabelMouseReleased(evt);
             }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                dateLabelMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                dateLabelMouseEntered(evt);
+            }
         });
 
         dayOfYearLabel.setFont(new java.awt.Font("Lucida Grande", 0, 8)); // NOI18N
         dayOfYearLabel.setText("#Act");
 
-        weekLabel.setFont(new java.awt.Font("Lucida Grande", 0, 10)); // NOI18N
+        weekLabel.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
         weekLabel.setText("jLabel1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -117,7 +131,7 @@ public class MonthViewElement extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(weekLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
                         .addComponent(dayOfYearLabel))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(dateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -129,7 +143,7 @@ public class MonthViewElement extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(dateLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(dayOfYearLabel, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(weekLabel, javax.swing.GroupLayout.Alignment.TRAILING))
@@ -138,12 +152,28 @@ public class MonthViewElement extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
     
     private void dateLabelMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dateLabelMouseReleased
-      //deprecated
+        //deprecated
     }//GEN-LAST:event_dateLabelMouseReleased
     
     private void dateLabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dateLabelMousePressed
         dayPressed = true;
     }//GEN-LAST:event_dateLabelMousePressed
+    
+    private void formMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseEntered
+        dateLabel.setFont(new java.awt.Font("Lucida Grande", 1, 24));
+    }//GEN-LAST:event_formMouseEntered
+    
+    private void formMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseExited
+        dateLabel.setFont(new java.awt.Font("Lucida Grande", 0, 24));        // TODO add your handling code here:
+    }//GEN-LAST:event_formMouseExited
+    
+    private void dateLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dateLabelMouseEntered
+        dateLabel.setFont(new java.awt.Font("Lucida Grande", 1, 24));
+    }//GEN-LAST:event_dateLabelMouseEntered
+    
+    private void dateLabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dateLabelMouseExited
+        dateLabel.setFont(new java.awt.Font("Lucida Grande", 0, 24));
+    }//GEN-LAST:event_dateLabelMouseExited
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

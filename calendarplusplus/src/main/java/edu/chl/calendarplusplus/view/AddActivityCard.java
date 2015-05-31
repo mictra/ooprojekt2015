@@ -1,8 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
+*/
 package edu.chl.calendarplusplus.view;
 
 import edu.chl.calendarplusplus.model.Activity;
@@ -12,6 +12,7 @@ import edu.chl.calendarplusplus.model.IContact;
 import edu.chl.calendarplusplus.model.IContactManager;
 import edu.chl.calendarplusplus.model.INotification;
 import edu.chl.calendarplusplus.model.Notification;
+import java.awt.Color;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -25,11 +26,11 @@ import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
  * @author cain
  */
 public class AddActivityCard extends javax.swing.JPanel {
-
+    
     public static void invalidParameters() {
         JOptionPane.showMessageDialog(null, "Invalid parameters (time and/or name)");
     }
-
+    
     DefaultListModel attendeeListModel, nonAttendeeListModel;
     private final ICalendarPlus cal;
     String lstring = "";
@@ -48,7 +49,27 @@ public class AddActivityCard extends javax.swing.JPanel {
         initComboBoxes();
         resetFields();
     }
-
+    
+    public Boolean checkActivity(){
+        IActivity act = getAsActivity();
+        boolean flag = true;
+        if(act.getName().equals("")){
+            nameLabel.setForeground(Color.red);
+            flag = false;
+        }
+        if(act.getStartTime().getTimeInMillis() < Calendar.getInstance().getTimeInMillis()){
+            startDateLabel.setForeground(Color.red);
+            flag = false;
+        }
+        if(act.getStartTime().getTimeInMillis() >= act.getEndTime().getTimeInMillis()){
+            startDateLabel.setForeground(Color.red);
+            endDateLabel.setForeground(Color.red);
+            flag = false;
+        }
+        return flag;
+            
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -330,37 +351,38 @@ public class AddActivityCard extends javax.swing.JPanel {
                 .addGap(0, 19, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
+    
     private void saveButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_saveButtonMouseEntered
         saveButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/saveButtonHover.png")));
     }//GEN-LAST:event_saveButtonMouseEntered
-
+    
     private void saveButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_saveButtonMouseExited
         saveButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/saveButton.png")));
         buttonPressed = false;
     }//GEN-LAST:event_saveButtonMouseExited
-
+    
     private void cancelButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelButtonMouseEntered
         cancelButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cancelButtonHover.png")));
     }//GEN-LAST:event_cancelButtonMouseEntered
-
+    
     private void cancelButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelButtonMouseExited
         cancelButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cancelButton.png")));
         buttonPressed = false;
     }//GEN-LAST:event_cancelButtonMouseExited
-
+    
     private void labelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelMousePressed
         buttonPressed = true;
     }//GEN-LAST:event_labelMousePressed
-
+    
     private void labelMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelMouseReleased
         if (buttonPressed) {
             if (evt.getSource() == saveButton) {
-                if (updateMode) {
+                if(checkActivity()){
+                if (updateMode) { 
                     act.setName(nameTextField.getText());
                     act.setLocation(locationTextField.getText());
                     act.setDescription(descriptionTextArea.getText());
-                    Calendar startDate = Calendar.getInstance();     
+                    Calendar startDate = Calendar.getInstance();
                     int sYear = (Integer) sYearComboBox.getSelectedItem();
                     int sMonth = sMonthComboBox.getSelectedIndex();
                     int sDay = sDayComboBox.getSelectedIndex()+1;
@@ -381,12 +403,13 @@ public class AddActivityCard extends javax.swing.JPanel {
                     act.removeAllAttendees();
                     for (int i = 0; i < attendeeList.getModel().getSize(); i++) {
                         act.addAttendee((IContact) attendeeList.getModel().getElementAt(i));
-                    }                   
+                    }
                     pcs.firePropertyChange("EditActivity", evt, act);
                     updateMode = false;
                     
                 } else {
                     pcs.firePropertyChange("AddActivity", null, null);
+                }
                 }
             }
             if (evt.getSource() == cancelButton) {
@@ -402,26 +425,26 @@ public class AddActivityCard extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_labelMouseReleased
-
+    
     private void addButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addButtonMouseEntered
         addButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arrowsLeftHover.png")));
     }//GEN-LAST:event_addButtonMouseEntered
-
+    
     private void addButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addButtonMouseExited
         addButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arrowsLeft.png")));
         buttonPressed = false;
     }//GEN-LAST:event_addButtonMouseExited
-
+    
     private void removeButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_removeButtonMouseEntered
         removeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arrowsRightHover.png")));
     }//GEN-LAST:event_removeButtonMouseEntered
-
+    
     private void removeButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_removeButtonMouseExited
         removeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arrowsRight.png")));
         buttonPressed = false;
     }//GEN-LAST:event_removeButtonMouseExited
-
-
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel addButton;
     private javax.swing.JLabel attendeeLabel;
@@ -454,7 +477,7 @@ public class AddActivityCard extends javax.swing.JPanel {
     private javax.swing.JLabel saveButton;
     private javax.swing.JLabel startDateLabel;
     // End of variables declaration//GEN-END:variables
-
+    
     private PropertyChangeSupport pcs;
     private boolean buttonPressed;
     
@@ -484,20 +507,20 @@ public class AddActivityCard extends javax.swing.JPanel {
         Calendar notDate = Calendar.getInstance();
         notDate.setTimeInMillis(act.getStartTime().getTimeInMillis());
         switch (notificationComboBox.getSelectedIndex()) {
-            case 0: 
+            case 0:
                 return null;
-            case 1: 
+            case 1:
                 break;
             case 2: notDate.add(notDate.MINUTE, -5);
-                break;
-            case 3: notDate.add(notDate.MINUTE, -10); 
-                break;
-            case 4: notDate.add(notDate.MINUTE, -15); 
-                break;
+            break;
+            case 3: notDate.add(notDate.MINUTE, -10);
+            break;
+            case 4: notDate.add(notDate.MINUTE, -15);
+            break;
             case 5: notDate.add(notDate.MINUTE, -30);
-                break;
+            break;
             case 6: notDate.add(notDate.MINUTE, -60);
-                break;                
+            break;
         }
         INotification inot = new Notification(notDate, act.getName(), act.getDescription(), act);
         if(updateMode && not != null){
@@ -505,7 +528,7 @@ public class AddActivityCard extends javax.swing.JPanel {
         }
         return inot;
     }
-            
+    
     public List<IContact> getAttendees() {
         List<IContact> attendees = new ArrayList<>();
         for (int i = 0; i < attendeeList.getModel().getSize(); i++) {
@@ -524,12 +547,12 @@ public class AddActivityCard extends javax.swing.JPanel {
     
     /*
     public void registerListener(ProjectViewController controller){
-        saveButton.addActionListener(controller);
-        cancelButton.addActionListener(controller);
+    saveButton.addActionListener(controller);
+    cancelButton.addActionListener(controller);
     }
     */
     
-   
+    
     private void initComboBoxes() {
         // Set the days
         sDayComboBox.removeAllItems();
@@ -544,10 +567,13 @@ public class AddActivityCard extends javax.swing.JPanel {
         for (int i = 2015; i <= 2020; i++) {
             sYearComboBox.addItem(i);
             eYearComboBox.addItem(i);
-        }      
+        }
     }
     
     public void resetFields() {
+        nameLabel.setForeground(Color.BLACK);
+        startDateLabel.setForeground(Color.BLACK);
+        endDateLabel.setForeground(Color.BLACK);
         updateMode = false;
         nameTextField.setText("");
         Calendar c = Calendar.getInstance();
@@ -570,16 +596,16 @@ public class AddActivityCard extends javax.swing.JPanel {
         notificationComboBox.setSelectedIndex(0);
         setLists();
     }
-
+    
     public void addListener(PropertyChangeSupport pcs) {
         this.pcs = pcs;
     }
-
+    
     public void addAttendee() {
         attendeeListModel.addElement(nonAttendeeList.getSelectedValue());
         nonAttendeeListModel.remove(nonAttendeeList.getSelectedIndex());
     }
-
+    
     public void removeAttendee() {
         nonAttendeeListModel.addElement(attendeeList.getSelectedValue());
         attendeeListModel.remove(attendeeList.getSelectedIndex());
@@ -606,7 +632,7 @@ public class AddActivityCard extends javax.swing.JPanel {
         nonAttendeeScrollPane.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
         
     }
-
+    
     void editActivity(IActivity act, INotification not) {
         this.act = act;
         this.not = not;
@@ -668,5 +694,5 @@ public class AddActivityCard extends javax.swing.JPanel {
             }
         }
     }
-
+    
 }

@@ -1,8 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
+*/
 package edu.chl.calendarplusplus.view;
 
 import edu.chl.calendarplusplus.model.CalendarPlus;
@@ -26,7 +26,7 @@ import javax.swing.JLabel;
  */
 public class ProjectView extends javax.swing.JFrame {
     private CalendarPlus cal;
-
+    
     /**
      * Creates new form ProjectView
      */
@@ -34,13 +34,13 @@ public class ProjectView extends javax.swing.JFrame {
         initComponents();
         tweekingInitComponents();
     }
-
+    
     public ProjectView(Project project, CalendarPlus cal) {
         initComponents();
         this.cal = cal;
         tweekingInitComponents();
     }
-
+    
     @Override
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         listeners.addPropertyChangeListener(listener);
@@ -387,7 +387,7 @@ public class ProjectView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
     private void menuCalendarLabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuCalendarLabelMousePressed
         // TODO add your handling code here:
         if (menuCalendarPanel.isVisible()) {
@@ -401,9 +401,9 @@ public class ProjectView extends javax.swing.JFrame {
             menuAlarmPanel.setVisible(false);
             menuAlarmLabel.setIcon((new javax.swing.ImageIcon(getClass().getResource("/arrow_right.png"))));
         }
-
+        
     }//GEN-LAST:event_menuCalendarLabelMousePressed
-
+    
     private void menuContactsLabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuContactsLabelMousePressed
         // TODO add your handling code here:
         if (menuContactsPanel.isVisible()) {
@@ -418,7 +418,7 @@ public class ProjectView extends javax.swing.JFrame {
             menuAlarmLabel.setIcon((new javax.swing.ImageIcon(getClass().getResource("/arrow_right.png"))));
         }
     }//GEN-LAST:event_menuContactsLabelMousePressed
-
+    
     private void menuSettingsLabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuSettingsLabelMousePressed
         // TODO add your handling code here:
         menuContactsPanel.setVisible(false);
@@ -427,7 +427,7 @@ public class ProjectView extends javax.swing.JFrame {
         menuCalendarLabel.setIcon((new javax.swing.ImageIcon(getClass().getResource("/arrow_right.png"))));
         headlineLabel.setText("Settings");
     }//GEN-LAST:event_menuSettingsLabelMousePressed
-
+    
     private void menuAlarmLabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuAlarmLabelMousePressed
         // TODO add your handling code here:
         if (menuAlarmPanel.isVisible()) {
@@ -442,7 +442,7 @@ public class ProjectView extends javax.swing.JFrame {
             menuContactsLabel.setIcon((new javax.swing.ImageIcon(getClass().getResource("/arrow_right.png"))));
         }
     }//GEN-LAST:event_menuAlarmLabelMousePressed
-
+    
     /**
      * @param args the command line arguments
      */
@@ -450,8 +450,8 @@ public class ProjectView extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+        * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+        */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -469,7 +469,7 @@ public class ProjectView extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(ProjectView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -477,7 +477,7 @@ public class ProjectView extends javax.swing.JFrame {
             }
         });
     }
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel addAlarmLabel;
     private javax.swing.JLabel addContactGroupLabel;
@@ -505,7 +505,7 @@ public class ProjectView extends javax.swing.JFrame {
     private javax.swing.JPanel topPanel;
     private javax.swing.JLabel weekViewLabel;
     // End of variables declaration//GEN-END:variables
-
+    
     // Non-generated variables declaration
     private final PropertyChangeSupport listeners = new PropertyChangeSupport(this);
     private CardLayout tabCards;
@@ -513,27 +513,27 @@ public class ProjectView extends javax.swing.JFrame {
     private AddContactGroupCard addContactGroup;
     private AddContactCard addContact;
     private AddAlarmCard addAlarm = new AddAlarmCard();
-    private ListViewCard listView;    
+    private ListViewCard listView;
     private WeekViewCard weekView;
     private ContactGroupCard contactGroups = new ContactGroupCard();
     private ContactCard contacts = new ContactCard();
     private MonthViewCard monthView;
     private AlarmCard alarms = new AlarmCard();
     private ActivitySingleCard actsingle;
-
+    
     // Non-generated variables end
     public JLabel getNewActivityLabel() {
         return this.newActivityLabel;
     }
-
+    
     public JLabel getListViewLabel() {
         return this.listViewLabel;
     }
-
+    
     public JLabel getAddContactGroupLabel() {
         return this.addContactGroupLabel;
     }
-
+    
     public JLabel getAddContactLabel() {
         return this.addContactLabel;
     }
@@ -549,15 +549,15 @@ public class ProjectView extends javax.swing.JFrame {
     public JLabel getWeekViewLabel() {
         return this.weekViewLabel;
     }
-
+    
     public AddActivityCard getAddActivityCard() {
         return addActivity;
     }
-
+    
     public AddContactGroupCard getAddContactGroupCard() {
         return addContactGroup;
     }
-
+    
     public AddContactCard getAddContactCard() {
         return addContact;
     }
@@ -565,11 +565,11 @@ public class ProjectView extends javax.swing.JFrame {
     public JLabel getMonthViewLabel() {
         return this.monthViewLabel;
     }
-
+    
     public JLabel getAddAlarmLabel() {
         return this.addAlarmLabel;
     }
-
+    
     public JLabel getAllAlarmsLabel() {
         return this.allAlarmsLabel;
     }
@@ -577,15 +577,15 @@ public class ProjectView extends javax.swing.JFrame {
     public AddAlarmCard getAddAlarmCard() {
         return this.addAlarm;
     }
-
+    
     public WeekViewCard getWeekViewCard() {
         return weekView;
     }
-
+    
     public ActivitySingleCard getActivitySingleCard() {
         return this.actsingle;
     }
-
+    
     public AlarmCard getAlarmSingleCard() {
         return this.alarms;
     }
@@ -598,23 +598,23 @@ public class ProjectView extends javax.swing.JFrame {
         return this.contactGroups;
     }
     
-     public MonthViewCard getMonthViewCard() {
+    public MonthViewCard getMonthViewCard() {
         return this.monthView;
     }
-
+    
     /* Maybe use this to add listener?
     public void registerListener(ProjectController controller) {
-        newActivityLabel.addMouseListener(controller);
-        listViewLabel.addMouseListener(controller);
-        addContactGroupLabel.addMouseListener(controller);
-        addContactLabel.addMouseListener(controller);
-        allContactsLabel.addMouseListener(controller);
-        addActivity.registerListener(controller);
-        addContact.registerListener(controller);
-        addContactGroup.registerListener(controller);
+    newActivityLabel.addMouseListener(controller);
+    listViewLabel.addMouseListener(controller);
+    addContactGroupLabel.addMouseListener(controller);
+    addContactLabel.addMouseListener(controller);
+    allContactsLabel.addMouseListener(controller);
+    addActivity.registerListener(controller);
+    addContact.registerListener(controller);
+    addContactGroup.registerListener(controller);
     }
     */
-
+    
     private void tweekingInitComponents() {
         setTitle("CalendarPlusPlus");
         addContact = new AddContactCard(cal);
@@ -627,13 +627,13 @@ public class ProjectView extends javax.swing.JFrame {
         mainLayeredPane.setPreferredSize(new Dimension(1270, 750));
         mainLayeredPane.setSize(new Dimension(1270, 750));
         searchTextField.setVisible(false);
-
+        
         menuContactsPanel.setVisible(false);
         menuContactsLabel.setIcon((new javax.swing.ImageIcon(getClass().getResource("/arrow_right.png"))));
         menuAlarmPanel.setVisible(false);
         menuAlarmLabel.setIcon((new javax.swing.ImageIcon(getClass().getResource("/arrow_right.png"))));
         headlineLabel.setText("CalendarPlusPlus");
-
+        
         tabCards = (CardLayout) mainPanel.getLayout();
         mainPanel.add(addActivity, "AddActivityCard");
         mainPanel.add(addContactGroup, "AddContactGroupCard");
@@ -648,7 +648,7 @@ public class ProjectView extends javax.swing.JFrame {
         mainPanel.add(actsingle, "ActivitySingleCard");
         changeCard("ListViewCard");
     }
-
+    
     public void changeCard(String card) {
         if (card.equals("AddActivityCard")) {
             headlineLabel.setText("Add an activity");
@@ -683,7 +683,7 @@ public class ProjectView extends javax.swing.JFrame {
         }
         tabCards.show(mainPanel, card);
     }
-
+    
     public void updateListView(List<IActivity> activityList) {
         listView.updateListView(activityList);
     }
@@ -695,7 +695,7 @@ public class ProjectView extends javax.swing.JFrame {
     public void updateMonthView() {
         monthView.updateMonthView();
     }
-
+    
     public void updateContactGroups(List<IContactGroup> contactgroups) {
         contactGroups.updateContactGroups(contactgroups);
     }
@@ -703,7 +703,7 @@ public class ProjectView extends javax.swing.JFrame {
     public void updateContacts(List<IContact> contactlist) {
         contacts.updateContacts(contactlist);
     }
-
+    
     public void updateAlarms(List<IAlarm> alarmlist) {
         alarms.updateAlarms(alarmlist);
     }
@@ -713,7 +713,7 @@ public class ProjectView extends javax.swing.JFrame {
         tabCards.show(mainPanel, "ActivitySingleCard");
         headlineLabel.setText("Activity");
     }
-
+    
     public void editAlarm(IAlarm al) {
         addAlarm.restoreFields(al);
         tabCards.show(mainPanel, "AddAlarmCard");
@@ -721,33 +721,29 @@ public class ProjectView extends javax.swing.JFrame {
     }
     
     public void monthToWeek(int week){
-        System.out.println("hit kommer jag");
         weekView.updateWeekViewFromMonth(week);
-        
         tabCards.show(mainPanel, "WeekViewCard");
         headlineLabel.setText("Weekview");
-
-
     }
-
+    
     public void editContact(IContact c) {
         addContact.editContact(c);
         tabCards.show(mainPanel, "AddContactCard");
         headlineLabel.setText("Edit contact");
     }
-
+    
     public void editContactGroup(IContactGroup cg) {
         addContactGroup.editContactGroup(cg);
         tabCards.show(mainPanel, "AddContactGroupCard");
         headlineLabel.setText("Edit contactgroup");
     }
-
+    
     public void editActivity(IActivity act, INotification not) {
         addActivity.editActivity(act, not);
         tabCards.show(mainPanel, "AddActivityCard");
         headlineLabel.setText("Edit activity");
     }
-
-   
-
+    
+    
+    
 }

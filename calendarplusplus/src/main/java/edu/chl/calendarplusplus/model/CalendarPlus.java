@@ -21,6 +21,7 @@ import java.util.List;
  * Class to represent a calendar object.
  *
  */
+
 public class CalendarPlus implements ICalendarPlus {
 
     private List<IActivity> activities;
@@ -338,7 +339,7 @@ public class CalendarPlus implements ICalendarPlus {
     public INotificationManager getNotificationManager() {
         return notificationManager;
     }
-
+    
     public List<IActivity> getActivitiesByHour(Calendar start, Calendar end) {
         List<IActivity> tempActList = new ArrayList<>();
         for (IActivity act : activities) {
@@ -351,8 +352,6 @@ public class CalendarPlus implements ICalendarPlus {
                 tempActList.add(act);
             }
         }
-
         return tempActList;
     }
-
 }

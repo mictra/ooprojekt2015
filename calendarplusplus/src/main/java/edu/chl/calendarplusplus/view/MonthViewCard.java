@@ -46,26 +46,25 @@ public class MonthViewCard extends javax.swing.JPanel {
         
     }
     
+    /*
+    this method uses a method in the CalendarPlus class to see if thier is
+    any activity in a given time span. This is used to determine coloring of
+    monthview objects.
+    */
+    
     public Boolean hasActivity(Calendar day){
         Calendar start = Calendar.getInstance();
         start.setTimeInMillis(day.getTimeInMillis());
         Calendar end = Calendar.getInstance();
         end.setTimeInMillis(day.getTimeInMillis());
-        
-        
         start.set(day.get(Calendar.YEAR), day.get(Calendar.MONTH), day.get(Calendar.DATE), 0, 0, 0);
         end.set(day.get(Calendar.YEAR), day.get(Calendar.MONTH), day.get(Calendar.DATE), 23, 59, 0);
-        
-        System.out.println(start.get(Calendar.MINUTE) + " " 
-                + end.get(Calendar.HOUR_OF_DAY) +
-                " " + start.get(Calendar.DATE) + " " +  end.get(Calendar.DATE));
         if(cal.getActivitiesByHour(start, end).isEmpty()){
             return false;
         }
         return true;
         
     }
-    
     
     /*
     Updates the monthview and sets all attributes. Including colors, week
@@ -91,12 +90,10 @@ public class MonthViewCard extends javax.swing.JPanel {
                 setWeek = false;
             }
             tempDate.add(Calendar.DATE, 1);
-            
             MonthViewElement mvec =
                     new MonthViewElement(tempDate.get(c.DATE),
                             tempDate.get(c.WEEK_OF_YEAR),
                             tempDate.get(c.DAY_OF_YEAR), setWeek);
-            
             if(!(tempDate.get(c.MONTH) == currentDate.get(c.MONTH))){
                 mvec.setBackground(Color.LIGHT_GRAY);
             }else if((tempDate.get(c.DATE) == today.get(c.DATE))
@@ -104,10 +101,8 @@ public class MonthViewCard extends javax.swing.JPanel {
                     && (tempDate.get(c.YEAR) == today.get(c.YEAR))){
                 mvec.setBackground(new Color(255, 140, 140));
             }else if(hasActivity(tempDate)){
-                System.out.println("hej");
                 mvec.setBackground(new Color(200, 255, 255));
             }
-            
             
             mvec.addListener(pcs);
             mvec.setPreferredSize(new Dimension(137, 82));
@@ -121,7 +116,6 @@ public class MonthViewCard extends javax.swing.JPanel {
     public void addListener(PropertyChangeSupport pcs) {
         this.pcs = pcs;
     }
-    
     
     /**
      * This method is called from within the constructor to initialize the form.

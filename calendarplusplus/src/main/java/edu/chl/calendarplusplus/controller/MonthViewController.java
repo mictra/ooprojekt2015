@@ -24,7 +24,6 @@ public class MonthViewController implements PropertyChangeListener {
     private final ProjectView projV;
     private final MonthViewCard mvc;
     
-    
     public static MonthViewController create(ICalendarPlus cal, ProjectView projV, MonthViewCard mvc) {
         return new MonthViewController(cal, projV, mvc);
     }
