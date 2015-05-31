@@ -675,6 +675,7 @@ public class ProjectView extends javax.swing.JFrame {
         } else if (card.equals("MonthView")){
             headlineLabel.setText("Monthview");
         } else if (card.endsWith("AlarmCard")) {
+            updateAlarms(cal.getAlarmList());
             headlineLabel.setText("Alarms");
         }
         tabCards.show(mainPanel, card);

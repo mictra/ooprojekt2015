@@ -43,6 +43,7 @@ public class AddContactCardController implements PropertyChangeListener {
             List<IContactGroup> contactGroups = cc.getContactGroups();
             cal.addContact(contact, contactGroups);
             cc.resetFields();
+            projV.changeCard("ContactCard");
         } else if (evtName.equalsIgnoreCase("BackToContacts")) {
             projV.changeCard("ContactCard");
         } else if (evtName.equalsIgnoreCase("AddContactCardAddGroup")) {
@@ -55,6 +56,7 @@ public class AddContactCardController implements PropertyChangeListener {
             List<IContactGroup> contactGroups = cc.getContactGroups();
             List<IContactGroup> removedGroups = cc.getRemovedCG();
             cal.updateContact(c, contactGroups, removedGroups);
+            projV.changeCard("ContactCard");
         }
     }
 
