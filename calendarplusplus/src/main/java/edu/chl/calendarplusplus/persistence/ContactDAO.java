@@ -5,6 +5,7 @@
  */
 package edu.chl.calendarplusplus.persistence;
 
+import edu.chl.calendarplusplus.model.Contact;
 import edu.chl.calendarplusplus.model.IContact;
 import java.util.List;
 
@@ -26,6 +27,13 @@ public class ContactDAO extends AbstractDAO<IContact, Integer> {
     public void deleteAll(){
         em.getTransaction().begin();
         em.createQuery("DELETE FROM Contact c").executeUpdate();
+        em.getTransaction().commit();
+    }
+    
+    public void delete(int id){
+        Contact c = em.getReference(Contact.class, id);
+        em.getTransaction().begin();
+        em.remove(c);
         em.getTransaction().commit();
     }
     

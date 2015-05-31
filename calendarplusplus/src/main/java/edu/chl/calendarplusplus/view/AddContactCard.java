@@ -334,6 +334,18 @@ public class AddContactCard extends javax.swing.JPanel {
         }
         return contactGroups;
     }
+    
+    public List<IContactGroup> getRemovedCG(){
+        List<IContactGroup> contactGroups = new ArrayList<>();
+        if (nonMemberList.getModel().getSize() == 0) {
+            return contactGroups;
+        } else {
+            for (int i = 0; i < nonMemberList.getModel().getSize(); i++) {
+                contactGroups.add((IContactGroup) nonMemberList.getModel().getElementAt(i));
+            }
+        }
+        return contactGroups;
+    }
 
     public void resetFields() {
         updateMode = false;
@@ -400,10 +412,13 @@ public class AddContactCard extends javax.swing.JPanel {
         
         for (IContactGroup cg : cal.getContactGroupList()) {
             if (cg.hasContact(c)) {
-                if (!cg.getGroupName().equals("Default"))
+                if (!cg.getGroupName().equals("Default")){
                     memberListModel.addElement(cg);
+                }
             } else {
-                nonMemberListModel.addElement(cg);
+                if (!cg.getGroupName().equals("Default")){
+                    nonMemberListModel.addElement(cg);
+                }
             }
             if (lstring.length() < cg.getGroupName().length()) {
                 lstring = cg.getGroupName();

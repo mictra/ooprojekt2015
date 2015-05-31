@@ -48,4 +48,6 @@ public interface IActivity {
     
     public boolean hasContact(IContact contact);
     
+    public boolean remove(IContact contact);
+    
 }

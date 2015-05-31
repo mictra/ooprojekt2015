@@ -45,6 +45,9 @@ public class ContactSingleController implements PropertyChangeListener {
             IContact c = (IContact) evt.getNewValue();
             System.out.println(c.getName() + " Remove Contact Clicked.");
             // ToDo remove contact fromlists and database
+            cal.removeContact(c);
+            projV.updateContacts(cal.getAllContacts());
+            projV.changeCard("ContactCard");
         }
     }
     

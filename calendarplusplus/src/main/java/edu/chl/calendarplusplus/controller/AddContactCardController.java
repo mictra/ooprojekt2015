@@ -53,7 +53,8 @@ public class AddContactCardController implements PropertyChangeListener {
             IContact c = (IContact) evt.getNewValue();
             System.out.println(c.getName() + " shall be updated now.");
             List<IContactGroup> contactGroups = cc.getContactGroups();
-            // ToDo -- update in lists and database
+            List<IContactGroup> removedGroups = cc.getRemovedCG();
+            cal.updateContact(c, contactGroups, removedGroups);
         }
     }
 

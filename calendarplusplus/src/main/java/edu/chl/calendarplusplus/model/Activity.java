@@ -146,4 +146,15 @@ public class Activity implements IActivity, Serializable {
         return false;
     }
     
+    //Own implementation of remove, since the List remove won't work on objects created by JPA
+    public boolean remove(IContact contact){
+        for(IContact c : attendees){
+            if(contact.getId() == c.getId() && contact.getName().equals(c.getName())){
+                attendees.remove(c);
+                return true;
+            }
+        }
+        return false;
+    }
+    
 }
