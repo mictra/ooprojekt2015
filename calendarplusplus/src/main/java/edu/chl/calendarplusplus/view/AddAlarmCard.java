@@ -229,6 +229,7 @@ public class AddAlarmCard extends javax.swing.JPanel {
     public boolean checkAlarm(){
         IAlarm alarm = getAsAlarm();
         boolean flag = true;
+        System.out.println(alarm.getAlarmName());
         if(alarm.getAlarmName().equals("")){
             nameLabel.setForeground(Color.red);
             flag = false;

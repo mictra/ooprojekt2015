@@ -366,6 +366,7 @@ public class AddContactGroupCard extends javax.swing.JPanel {
     }
     
     void editContactGroup(IContactGroup cg) {
+        nameLabel.setForeground(Color.BLACK);
         updateMode = true;
         this.cg = cg;
         nameTextField.setText(cg.getGroupName());

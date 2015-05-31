@@ -411,6 +411,7 @@ public class AddContactCard extends javax.swing.JPanel {
     }
     
     void editContact(IContact c) {
+        nameLabel.setForeground(Color.BLACK);
         this.c = c;
         updateMode = true;
         nameTextField.setText(c.getName());
