@@ -5,8 +5,8 @@
  */
 package edu.chl.calendarplusplus.persistence;
 
-import edu.chl.calendarplusplus.contact.Contact;
-import edu.chl.calendarplusplus.contact.IContact;
+import edu.chl.calendarplusplus.contact.model.Contact;
+import edu.chl.calendarplusplus.contact.model.IContact;
 import java.util.List;
 
 /**

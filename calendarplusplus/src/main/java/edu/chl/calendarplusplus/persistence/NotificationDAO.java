@@ -5,8 +5,8 @@
  */
 package edu.chl.calendarplusplus.persistence;
 
-import edu.chl.calendarplusplus.alarmnotification.INotification;
-import edu.chl.calendarplusplus.alarmnotification.Notification;
+import edu.chl.calendarplusplus.alarmnotification.model.INotification;
+import edu.chl.calendarplusplus.alarmnotification.model.Notification;
 import java.util.List;
 
 /**

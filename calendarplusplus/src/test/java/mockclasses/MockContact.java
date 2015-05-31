@@ -5,7 +5,7 @@
  */
 package mockclasses;
 
-import edu.chl.calendarplusplus.contact.IContact;
+import edu.chl.calendarplusplus.contact.model.IContact;
 
 /**
  *

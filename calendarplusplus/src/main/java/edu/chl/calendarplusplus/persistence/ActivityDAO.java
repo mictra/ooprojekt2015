@@ -5,8 +5,8 @@
  */
 package edu.chl.calendarplusplus.persistence;
 
-import edu.chl.calendarplusplus.activity.Activity;
-import edu.chl.calendarplusplus.activity.IActivity;
+import edu.chl.calendarplusplus.activity.model.Activity;
+import edu.chl.calendarplusplus.activity.model.IActivity;
 import java.util.List;
 
 /**

@@ -5,11 +5,10 @@
  */
 package edu.chl.calendarplusplus.model;
 
-import edu.chl.calendarplusplus.CalendarPlus;
-import edu.chl.calendarplusplus.alarmnotification.IAlarm;
-import edu.chl.calendarplusplus.contact.IContact;
-import edu.chl.calendarplusplus.activity.Activity;
-import edu.chl.calendarplusplus.activity.IActivity;
+import edu.chl.calendarplusplus.alarmnotification.model.IAlarm;
+import edu.chl.calendarplusplus.contact.model.IContact;
+import edu.chl.calendarplusplus.activity.model.Activity;
+import edu.chl.calendarplusplus.activity.model.IActivity;
 import java.util.ArrayList;
 import java.util.Calendar;
 import mockclasses.MockActivity;
