@@ -632,6 +632,9 @@ public class AddActivityCard extends javax.swing.JPanel {
     }
     
     void editActivity(IActivity act, INotification not) {
+        nameLabel.setForeground(Color.BLACK);
+        startDateLabel.setForeground(Color.BLACK);
+        endDateLabel.setForeground(Color.BLACK);
         this.act = act;
         this.not = not;
         updateMode = true;

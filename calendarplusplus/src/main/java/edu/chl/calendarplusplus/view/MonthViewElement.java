@@ -59,10 +59,25 @@ public class MonthViewElement extends javax.swing.JPanel {
             @Override
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 if(dayPressed){
-                    // if(evt.getSource() == this){
                     pcs.firePropertyChange("MonthViewDayPressed", null, week);
-                    // }
                     
+                }
+            }
+        });
+        dateLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            
+            @Override
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                dayPressed = false;
+            }
+            @Override
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                dayPressed = true;
+            }
+            @Override
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                if(dayPressed){
+                    pcs.firePropertyChange("MonthViewDayPressed", null, week);
                 }
             }
         });

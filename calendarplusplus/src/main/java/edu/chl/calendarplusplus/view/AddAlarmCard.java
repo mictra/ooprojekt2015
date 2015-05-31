@@ -1,8 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
+*/
 package edu.chl.calendarplusplus.view;
 
 import edu.chl.calendarplusplus.model.Alarm;
@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
  * @author cain
  */
 public class AddAlarmCard extends javax.swing.JPanel {
-
+    
     /**
      * Creates new form AddActivityCard
      */
@@ -26,7 +26,7 @@ public class AddAlarmCard extends javax.swing.JPanel {
         initComboBoxes();
         resetFields();
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -167,29 +167,29 @@ public class AddAlarmCard extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
+    
     private void saveButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_saveButtonMouseEntered
         saveButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/saveButtonHover.png")));
     }//GEN-LAST:event_saveButtonMouseEntered
-
+    
     private void saveButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_saveButtonMouseExited
         saveButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/saveButton.png")));
         buttonPressed = false;
     }//GEN-LAST:event_saveButtonMouseExited
-
+    
     private void cancelButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelButtonMouseEntered
         cancelButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cancelButtonHover.png")));
     }//GEN-LAST:event_cancelButtonMouseEntered
-
+    
     private void cancelButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelButtonMouseExited
         cancelButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cancelButton.png")));
         buttonPressed = false;
     }//GEN-LAST:event_cancelButtonMouseExited
-
+    
     private void labelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelMousePressed
         buttonPressed = true;
     }//GEN-LAST:event_labelMousePressed
-
+    
     private void labelMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelMouseReleased
         if (buttonPressed) {
             if (evt.getSource() == saveButton && !isEdit) {
@@ -205,8 +205,8 @@ public class AddAlarmCard extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_labelMouseReleased
-
-
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel cancelButton;
     private javax.swing.JComboBox dayComboBox;
@@ -222,15 +222,16 @@ public class AddAlarmCard extends javax.swing.JPanel {
     private javax.swing.JLabel startDateLabel;
     private javax.swing.JComboBox yearComboBox;
     // End of variables declaration//GEN-END:variables
-
+    
     private PropertyChangeSupport pcs;
     private boolean buttonPressed;
     private boolean isEdit = false;
     private int alarmId;
-
+    
     public boolean checkAlarm() {
         IAlarm alarm = getAsAlarm();
         boolean flag = true;
+        System.out.println(alarm.getAlarmName());
         if (alarm.getAlarmName().equals("")) {
             nameLabel.setForeground(Color.red);
             flag = false;
@@ -241,7 +242,7 @@ public class AddAlarmCard extends javax.swing.JPanel {
         }
         return flag;
     }
-
+    
     public IAlarm getAsAlarm() {
         Calendar timeDate = Calendar.getInstance();
         int sYear = (Integer) yearComboBox.getSelectedItem();
@@ -256,13 +257,13 @@ public class AddAlarmCard extends javax.swing.JPanel {
         }
         return a;
     }
-
+    
     /*
-     public void registerListener(ProjectViewController controller){
-     saveButton.addActionListener(controller);
-     cancelButton.addActionListener(controller);
-     }
-     */
+    public void registerListener(ProjectViewController controller){
+    saveButton.addActionListener(controller);
+    cancelButton.addActionListener(controller);
+    }
+    */
     private void initComboBoxes() {
         // Set the days
         dayComboBox.removeAllItems();
@@ -289,9 +290,9 @@ public class AddAlarmCard extends javax.swing.JPanel {
 //        for (int i = 10; i <= 55; i = i+5) {
 //            sMinuteComboBox.addItem(i);
 //        }
-
+        
     }
-
+    
     public void resetFields() {
         nameLabel.setForeground(Color.black);
         startDateLabel.setForeground(Color.black);
@@ -307,7 +308,7 @@ public class AddAlarmCard extends javax.swing.JPanel {
         c.add(c.HOUR, 1);
         descriptionTextArea.setText("");
     }
-
+    
     public void restoreFields(IAlarm al) {
         isEdit = true;
         alarmId = al.getId();
@@ -321,9 +322,9 @@ public class AddAlarmCard extends javax.swing.JPanel {
         //c.add(c.HOUR, 1);
         descriptionTextArea.setText(al.getDescName());
     }
-
+    
     public void addListener(PropertyChangeSupport pcs) {
         this.pcs = pcs;
     }
-
+    
 }
