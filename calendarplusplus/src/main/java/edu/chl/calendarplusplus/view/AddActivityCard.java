@@ -577,9 +577,7 @@ public class AddActivityCard extends javax.swing.JPanel {
         updateMode = false;
         nameTextField.setText("");
         Calendar c = Calendar.getInstance();
-        c.add(c.MINUTE, 5 - (c.get(c.MINUTE) % 5));
-        // ToDo - remove next line later
-        c.add(c.HOUR_OF_DAY, 2);
+        c.add(c.MINUTE, 5 - (c.get(c.MINUTE) % 5));;
         sDayComboBox.setSelectedIndex(c.get(c.DAY_OF_MONTH)-1);
         sMonthComboBox.setSelectedIndex(c.get(c.MONTH));
         sYearComboBox.setSelectedItem(c.get(c.YEAR));
