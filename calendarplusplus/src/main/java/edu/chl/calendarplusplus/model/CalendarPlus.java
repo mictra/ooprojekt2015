@@ -72,18 +72,14 @@ public class CalendarPlus implements ICalendarPlus {
         for (IContact c : cDAO.findAll()) {
             List<IContactGroup> contactGroups = new ArrayList<>();
             List<IActivity> attendActivities = new ArrayList<>();
-            System.out.println("Contact: " + c.getName() + " has groups:");
             for (IContactGroup cg : groups) {
                 if (cg.hasContact(c)) {
                     contactGroups.add(cg);
-                    System.out.println(cg.getGroupName());
                 }
             }
-            System.out.println("Contact: " + c.getName() + " is in activities:");
             for (IActivity a : activities) {
                 if (a.hasContact(c)) {
                     attendActivities.add(a);
-                    System.out.println(a.getName());
                 }
             }
 
@@ -174,7 +170,6 @@ public class CalendarPlus implements ICalendarPlus {
             defaultGroup.remove(contact);
             //Add only if the contact hasn't been added already.
             for(IContactGroup cg : addedGroups){
-                System.out.println("GROUPNAME: " + cg.getGroupName());
                 if(!cg.hasContact(contact)){
                     //This is if we change the contact name we have to remove the old one and update with the new.
                     cg.remove(contact);

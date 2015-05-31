@@ -103,7 +103,6 @@ public class CalenderPlusTest {
         Assert.assertTrue(cal.getActivitiesByTimeInterval(end, t4).size() == 1 );
         Assert.assertTrue(cal.getActivitiesByTimeInterval(start, t3).size() == 1 );
 
-        System.out.println("LISTAN: " + cal.getActivitiesByTimeInterval(start, t4));
     }
     
 }

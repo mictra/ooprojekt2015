@@ -72,8 +72,6 @@ public class MonthViewCard extends javax.swing.JPanel {
     */
     
     public void updateMonthStatic(Calendar c){
-        System.out.println(cal);
-        //  hasActivity(c);
         dayPanel.removeAll();
         boolean setWeek = false;
         Calendar today = Calendar.getInstance();

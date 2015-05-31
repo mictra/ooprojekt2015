@@ -39,11 +39,9 @@ public class ContactGroupSingleController implements PropertyChangeListener {
         if (evtName.equalsIgnoreCase("EditContactGroupButtonClicked")) {
             IContactGroup cg = (IContactGroup) evt.getNewValue();
             projV.editContactGroup(cg);
-            //System.out.println(cg.getGroupName() + " Edit ContactGroup Clicked.");
         } 
         if(evtName.equalsIgnoreCase("RemoveContactGroupButtonClicked")) {
             IContactGroup cg = (IContactGroup) evt.getNewValue();
-            System.out.println(cg.getGroupName() + " Remove ContactGroup Clicked.");
             cal.removeContactGroup(cg);
             projV.updateContactGroups(cal.getContactGroupList());
             //ToDo remove group from lists and database

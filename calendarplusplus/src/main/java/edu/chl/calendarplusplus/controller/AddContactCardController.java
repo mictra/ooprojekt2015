@@ -52,7 +52,6 @@ public class AddContactCardController implements PropertyChangeListener {
             cc.removeMemberGroup();
         } else if (evtName.equalsIgnoreCase("EditContact")) {
             IContact c = (IContact) evt.getNewValue();
-            System.out.println(c.getName() + " shall be updated now.");
             List<IContactGroup> contactGroups = cc.getContactGroups();
             List<IContactGroup> removedGroups = cc.getRemovedCG();
             cal.updateContact(c, contactGroups, removedGroups);

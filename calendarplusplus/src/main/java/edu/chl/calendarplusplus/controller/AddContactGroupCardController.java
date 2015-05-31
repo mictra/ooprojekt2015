@@ -48,12 +48,10 @@ public class AddContactGroupCardController implements PropertyChangeListener {
             acgc.removeMember();
         } else if (evtName.equalsIgnoreCase("EditContactGroup")) {
             IContactGroup cg = (IContactGroup) evt.getNewValue();
-            System.out.println(cg.getGroupName()+ " shall be updated now");
             cal.updateContactGroup(cg, acgc.getNonMemberList());
             projV.changeCard("ContactGroupCard");
         } else if (evtName.equalsIgnoreCase("RemoveContactGroup")) {
             IContactGroup cg = (IContactGroup) evt.getNewValue();
-            System.out.println(cg.getGroupName()+ " shall be removed now");
             cal.removeContactGroup(cg);
         }
     }

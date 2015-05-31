@@ -40,12 +40,10 @@ public class ActivitySingleController implements PropertyChangeListener {
 //            IActivity act = (IActivity) evt.getNewValue();
 //            projV.showActivitySingle(act);
             IActivity act = (IActivity) evt.getNewValue();
-            System.out.println(act.getName() + " Edit button clicked");
             projV.editActivity(act, cal.getNotificationManager().getNotification(act));
         }
         if (evtName.equalsIgnoreCase("RemoveActivityClicked")) {
             IActivity act = (IActivity) evt.getNewValue();
-            System.out.println(act.getName() + " Remove button clicked");
             cal.removeActivity(act);
             projV.changeCard("ListViewCard");
         }
