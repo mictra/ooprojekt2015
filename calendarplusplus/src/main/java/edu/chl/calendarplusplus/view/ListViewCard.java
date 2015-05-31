@@ -34,6 +34,8 @@ public class ListViewCard extends javax.swing.JPanel {
     }
 
     public void updateListView(List<IActivity> actlist) {
+        Collections.sort(actlist);
+        
         elementList.removeAll();
         elementList.setPreferredSize(new Dimension(elementwidth, actlist.size() * (elementheight + 5) + 5));
         for (IActivity a : actlist) {

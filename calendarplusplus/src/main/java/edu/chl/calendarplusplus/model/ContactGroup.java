@@ -20,7 +20,7 @@ import javax.persistence.OneToMany;
  * @author johan
  */
 @Entity
-public class ContactGroup implements IContactGroup, Serializable {
+public class ContactGroup implements IContactGroup, Serializable, Comparable<IContactGroup> {
     
     
     @Id
@@ -114,6 +114,11 @@ public class ContactGroup implements IContactGroup, Serializable {
     @Override
     public String toString() {
         return name;
+    }
+
+    @Override
+    public int compareTo(IContactGroup cg) {
+        return this.name.compareTo(cg.getGroupName());
     }
     
 }

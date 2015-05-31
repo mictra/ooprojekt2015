@@ -24,7 +24,7 @@ import javax.persistence.Lob;
    both modify them and receive its data, since that is the purpose after all.
 */
 @Entity
-public class Alarm implements IAlarm, Serializable {
+public class Alarm implements IAlarm, Serializable, Comparable<IAlarm> {
     
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
@@ -82,5 +82,14 @@ public class Alarm implements IAlarm, Serializable {
     
     public String getDescName(){
         return description;
+    }
+
+    @Override
+    public int compareTo(IAlarm a) {
+        if (this.alarmTime.getTimeInMillis() > a.getAlarm().getTimeInMillis()) {
+            return 1;
+        } else {
+            return -1;
+        }
     }
 }

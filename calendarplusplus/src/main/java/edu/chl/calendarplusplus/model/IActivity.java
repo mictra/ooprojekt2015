@@ -12,7 +12,7 @@ import java.util.List;
  *
  * @author erikforsberg
  */
-public interface IActivity {
+public interface IActivity extends Comparable<IActivity> {
     
     public void setId(int id);
     
@@ -49,5 +49,8 @@ public interface IActivity {
     public boolean hasContact(IContact contact);
     
     public boolean remove(IContact contact);
+    
+    @Override
+    public int compareTo(IActivity act);
     
 }

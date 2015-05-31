@@ -8,7 +8,9 @@ package edu.chl.calendarplusplus.view;
 import edu.chl.calendarplusplus.model.IContact;
 import java.awt.Dimension;
 import java.beans.PropertyChangeSupport;
+import java.util.Collections;
 import java.util.List;
+import org.eclipse.persistence.internal.core.helper.CoreClassConstants;
 
 /**
  *
@@ -28,6 +30,7 @@ public class ContactCard extends javax.swing.JPanel {
     }
     
     public void updateContacts(List<IContact> contactlist){
+        Collections.sort(contactlist);
         int height = contactlist.size() % 2 == 0 ? (1+contactlist.size()/2)*15 + contactlist.size()/2*elementheight : (1+contactlist.size()/2)*15 + (contactlist.size()/2+1)*elementheight;
         elementList.removeAll();
         elementList.setPreferredSize(new Dimension(1008,height));

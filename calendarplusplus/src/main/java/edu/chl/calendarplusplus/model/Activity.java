@@ -5,7 +5,6 @@
 */
 package edu.chl.calendarplusplus.model;
 
-import edu.chl.calendarplusplus.view.AddActivityCard;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -22,7 +21,7 @@ import javax.persistence.OneToMany;
  * @author erikforsberg
  */
 @Entity
-public class Activity implements IActivity, Serializable {
+public class Activity implements IActivity, Serializable, Comparable<IActivity> {
     
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
@@ -155,6 +154,15 @@ public class Activity implements IActivity, Serializable {
             }
         }
         return false;
+    }
+
+    @Override
+    public int compareTo(IActivity act) {
+        if (this.startTime.getTimeInMillis() > act.getStartTime().getTimeInMillis()) {
+            return 1;
+        } else {
+            return -1;
+        }
     }
     
 }

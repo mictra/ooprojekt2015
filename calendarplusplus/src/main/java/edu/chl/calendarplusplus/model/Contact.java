@@ -18,7 +18,7 @@ import javax.persistence.Id;
  */
 
 @Entity
-public class Contact implements IContact, Serializable {
+public class Contact implements IContact, Serializable, Comparable<IContact> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
@@ -71,6 +71,11 @@ public class Contact implements IContact, Serializable {
     @Override
     public String toString() {
         return this.name;
+    }
+
+    @Override
+    public int compareTo(IContact c) {
+        return this.name.compareTo(c.getName());
     }
 
 }

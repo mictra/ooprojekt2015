@@ -5,9 +5,11 @@
  */
 package edu.chl.calendarplusplus.view;
 
+import edu.chl.calendarplusplus.model.ContactGroup;
 import edu.chl.calendarplusplus.model.IContactGroup;
 import java.awt.Dimension;
 import java.beans.PropertyChangeSupport;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -28,6 +30,12 @@ public class ContactGroupCard extends javax.swing.JPanel {
     }
     
     public void updateContactGroups(List<IContactGroup> contactgroups) {
+        IContactGroup def = new ContactGroup();
+        def = contactgroups.get(0);
+        contactgroups.remove(0);
+        Collections.sort(contactgroups);
+        contactgroups.add(0, def);
+        
         int height = contactgroups.size() % 2 == 0 ? (1+contactgroups.size()/2)*15 + contactgroups.size()/2*elementheight : (1+contactgroups.size()/2)*15 + (contactgroups.size()/2+1)*elementheight;
         elementList.removeAll();
         elementList.setPreferredSize(new Dimension(1008,height));

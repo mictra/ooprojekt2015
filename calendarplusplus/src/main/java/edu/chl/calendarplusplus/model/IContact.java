@@ -9,7 +9,7 @@ package edu.chl.calendarplusplus.model;
  *
  * @author erikforsberg
  */
-public interface IContact {
+public interface IContact extends Comparable<IContact> {
     
     void setName(String n);
     
@@ -24,5 +24,8 @@ public interface IContact {
     String getEmail();
     
     int getId();
+    
+    @Override
+    public int compareTo(IContact c);
     
 }

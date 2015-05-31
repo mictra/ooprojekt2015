@@ -8,6 +8,7 @@ package edu.chl.calendarplusplus.view;
 import edu.chl.calendarplusplus.model.IAlarm;
 import java.awt.Dimension;
 import java.beans.PropertyChangeSupport;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -27,10 +28,11 @@ public class AlarmCard extends javax.swing.JPanel {
         listViewScrollPane.getVerticalScrollBar().setUnitIncrement(20);
     }
     
-    public void updateAlarms (List<IAlarm> actlist) {
+    public void updateAlarms (List<IAlarm> alarmlist) {
+        Collections.sort(alarmlist);
         elementList.removeAll();
-        elementList.setPreferredSize(new Dimension(alarmwidth,actlist.size()*(alarmheight+5) + 5));
-        for (IAlarm a : actlist) {
+        elementList.setPreferredSize(new Dimension(alarmwidth,alarmlist.size()*(alarmheight+5) + 5));
+        for (IAlarm a : alarmlist) {
             System.out.println("ALARM ID: " + a.getId());
             AlarmElement ale = new AlarmElement(a);
             ale.setPreferredSize(new Dimension(alarmwidth,alarmheight));

@@ -11,7 +11,7 @@ import java.util.List;
  *
  * @author erikforsberg
  */
-public interface IContactGroup {
+public interface IContactGroup extends Comparable<IContactGroup> {
     
     public void setId(int id);
     
@@ -31,4 +31,6 @@ public interface IContactGroup {
 
     public void removeAllContacts();
     
+    @Override
+    public int compareTo(IContactGroup cg);
 }

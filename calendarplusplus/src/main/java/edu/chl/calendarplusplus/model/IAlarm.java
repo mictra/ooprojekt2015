@@ -11,7 +11,7 @@ import java.util.Calendar;
  *
  * @author erikforsberg
  */
-public interface IAlarm {
+public interface IAlarm extends Comparable<IAlarm> {
     
     int getId();
     
@@ -29,4 +29,6 @@ public interface IAlarm {
     
     String getDescName();
     
+    @Override
+    public int compareTo(IAlarm a);
 }
