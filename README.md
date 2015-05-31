@@ -1,6 +1,9 @@
 # Calendar++
 Calendar++ Object-oriented project
 
+All meeting protocols are in the meetings folder.
+RAD and SDD documents are in the documents folder.
+
 NOTE ON RUNNING THE PROGRAM:
 
 We had troubles running the program outside the NetBeans environment. 
