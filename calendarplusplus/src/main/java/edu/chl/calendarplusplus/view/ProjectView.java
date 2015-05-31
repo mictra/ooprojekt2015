@@ -16,6 +16,7 @@ import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.util.Calendar;
 import java.util.List;
 import javax.swing.JLabel;
 
@@ -615,6 +616,7 @@ public class ProjectView extends javax.swing.JFrame {
     */
 
     private void tweekingInitComponents() {
+        setTitle("CalendarPlusPlus");
         addContact = new AddContactCard(cal);
         addActivity = new AddActivityCard(cal);
         addContactGroup = new AddContactGroupCard(cal);
@@ -644,7 +646,7 @@ public class ProjectView extends javax.swing.JFrame {
         mainPanel.add(contacts, "ContactCard");
         mainPanel.add(alarms, "AlarmCard");
         mainPanel.add(actsingle, "ActivitySingleCard");
-        tabCards.show(mainPanel, "ListViewCard");
+        changeCard("ListViewCard");
     }
 
     public void changeCard(String card) {
@@ -662,7 +664,10 @@ public class ProjectView extends javax.swing.JFrame {
             addAlarm.resetFields();
         } else if (card.equals("ListViewCard")) {
             headlineLabel.setText("Listview");
-            listView.updateListView(cal.getActivityList());
+            Calendar start = Calendar.getInstance();
+            Calendar end = Calendar.getInstance();
+            end.add(end.YEAR, 1);
+            listView.updateListView(cal.getActivitiesByHour(start, end));
         } else if (card.equals("WeekViewCard")) {
             headlineLabel.setText("Weekview");
         } else if (card.endsWith("ContactGroupCard")) {

@@ -4,6 +4,7 @@ import edu.chl.calendarplusplus.model.ICalendarPlus;
 import edu.chl.calendarplusplus.view.ProjectView;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Calendar;
 import javax.swing.JLabel;
 
 public class ProjectViewController implements MouseListener {
@@ -64,7 +65,11 @@ public class ProjectViewController implements MouseListener {
             projectView.changeCard("AddActivityCard");
         } else if (e.getSource() == listViewLabel) {
             projectView.changeCard("ListViewCard");
-            projectView.updateListView(cal.getActivityList());
+            //projectView.updateListView(cal.getActivityList());
+            Calendar start = Calendar.getInstance();
+            Calendar end = Calendar.getInstance();
+            end.add(end.YEAR, 1);
+            projectView.updateListView(cal.getActivitiesByHour(start, end));
         } else if (e.getSource() == weekViewLabel) {
             projectView.changeCard("WeekViewCard");
             projectView.updateWeekView();           
