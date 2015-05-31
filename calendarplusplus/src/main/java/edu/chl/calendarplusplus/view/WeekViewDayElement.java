@@ -42,7 +42,7 @@ public class WeekViewDayElement extends javax.swing.JPanel {
         end.setTimeInMillis(start.getTimeInMillis());
         end.add(end.HOUR_OF_DAY, 1);
         activitylist = new ArrayList<>();
-        activitylist = cal.getActivitiesByHour(start, end);
+        activitylist = cal.getActivitiesByTimeInterval(start, end);
         labelMap = new HashMap<>();
         for (IActivity act: activitylist) {
             minute = act.getStartTime().get(act.getStartTime().MINUTE) <= 5 ? "0"+Integer.toString(act.getStartTime().get(act.getStartTime().MINUTE)) : Integer.toString(act.getStartTime().get(act.getStartTime().MINUTE));

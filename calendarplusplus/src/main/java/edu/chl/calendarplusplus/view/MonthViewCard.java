@@ -59,7 +59,7 @@ public class MonthViewCard extends javax.swing.JPanel {
         end.setTimeInMillis(day.getTimeInMillis());
         start.set(day.get(Calendar.YEAR), day.get(Calendar.MONTH), day.get(Calendar.DATE), 0, 0, 0);
         end.set(day.get(Calendar.YEAR), day.get(Calendar.MONTH), day.get(Calendar.DATE), 23, 59, 0);
-        if(cal.getActivitiesByHour(start, end).isEmpty()){
+        if(cal.getActivitiesByTimeInterval(start, end).isEmpty()){
             return false;
         }
         return true;

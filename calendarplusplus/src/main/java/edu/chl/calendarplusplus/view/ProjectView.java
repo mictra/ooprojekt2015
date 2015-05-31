@@ -667,7 +667,7 @@ public class ProjectView extends javax.swing.JFrame {
             Calendar start = Calendar.getInstance();
             Calendar end = Calendar.getInstance();
             end.add(end.YEAR, 1);
-            listView.updateListView(cal.getActivitiesByHour(start, end));
+            listView.updateListView(cal.getActivitiesByTimeInterval(start, end));
         } else if (card.equals("WeekViewCard")) {
             headlineLabel.setText("Weekview");
         } else if (card.endsWith("ContactGroupCard")) {
