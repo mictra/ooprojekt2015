@@ -270,7 +270,7 @@ public class ProjectView extends javax.swing.JFrame {
                     .addGroup(menuPanelLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(logoLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(logoLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
                             .addComponent(logoSeparator, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuPanelLayout.createSequentialGroup()
                                 .addGap(12, 12, 12)
@@ -327,11 +327,8 @@ public class ProjectView extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        mainPanel.setBackground(new java.awt.Color(187, 222, 251));
         mainPanel.setPreferredSize(new java.awt.Dimension(996, 646));
         mainPanel.setLayout(new java.awt.CardLayout());
-
-        topPanel.setBackground(new java.awt.Color(165, 214, 167));
 
         headlineLabel.setFont(new java.awt.Font("Source Sans Pro", 1, 36)); // NOI18N
         headlineLabel.setText("Headline");
@@ -678,6 +675,7 @@ public class ProjectView extends javax.swing.JFrame {
         } else if (card.equals("MonthView")){
             headlineLabel.setText("Monthview");
         } else if (card.endsWith("AlarmCard")) {
+            updateAlarms(cal.getAlarmList());
             headlineLabel.setText("Alarms");
         }
         tabCards.show(mainPanel, card);
