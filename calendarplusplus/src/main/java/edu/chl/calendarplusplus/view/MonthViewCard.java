@@ -59,8 +59,8 @@ public class MonthViewCard extends javax.swing.JPanel {
         System.out.println(start.get(Calendar.MINUTE) + " " 
                 + end.get(Calendar.HOUR_OF_DAY) +
                 " " + start.get(Calendar.DATE) + " " +  end.get(Calendar.DATE));
-        if(cal.getActivitiesByHour(start, end).isEmpty()){;
-        return false;
+        if(cal.getActivitiesByHour(start, end).isEmpty()){
+            return false;
         }
         return true;
         
@@ -110,7 +110,7 @@ public class MonthViewCard extends javax.swing.JPanel {
             
             
             mvec.addListener(pcs);
-            mvec.setPreferredSize(new Dimension(138, 82));
+            mvec.setPreferredSize(new Dimension(137, 82));
             dayPanel.add(mvec);
             revalidate();
             repaint();

@@ -49,23 +49,28 @@ public class WeekViewDayElement extends javax.swing.JPanel {
             JLabel label = new JLabel(act.getStartTime().get(act.getStartTime().HOUR_OF_DAY)+":"+minute+" "+act.getName());
             label.setPreferredSize(new Dimension(120,15));
             label.setOpaque(true);
-            label.setBackground(Color.green);
+            label.setBackground(new Color(187,222,251));
             label.addMouseListener(new java.awt.event.MouseAdapter() {
                 @Override
                 public void mouseEntered(java.awt.event.MouseEvent evt) {
-                    //trashIconMouseEntered(evt);
                 }
                 @Override
                 public void mouseExited(java.awt.event.MouseEvent evt) {
-                    mouseExitedButton(evt);
+                    buttonPressed = false;
                 }
                 @Override
                 public void mousePressed(java.awt.event.MouseEvent evt) {
-                    buttonPressed(evt);
+                    buttonPressed = true;
                 }
                 @Override
                 public void mouseReleased(java.awt.event.MouseEvent evt) {
-                    buttonReleased(evt);
+                    if(buttonPressed) {
+                        for (JLabel label: labelMap.keySet()) {
+                            if (evt.getSource() == label) {
+                                pcs.firePropertyChange("ActivityNameLabelLabelClicked", evt, labelMap.get(label));
+                            }
+                        }
+                    }
                 }
             });
             labelMap.put(label, act);
@@ -113,24 +118,24 @@ public class WeekViewDayElement extends javax.swing.JPanel {
         this.pcs = pcs;
     }
     
-    private void buttonPressed(java.awt.event.MouseEvent evt) {                               
-        buttonPressed = true;
-    }                              
-
-    private void buttonReleased(java.awt.event.MouseEvent evt) {                                
-        if(buttonPressed) {
-            for (JLabel label: labelMap.keySet()) {
-                if (evt.getSource() == label) {
-                    //System.out.println(labelMap.get(label).getName());
-                    pcs.firePropertyChange("WeekViewLabelClicked", evt, labelMap.get(label));
-                }
-            }
-        }
-    }                               
-
-    private void mouseExitedButton(java.awt.event.MouseEvent evt) {                                   
-        buttonPressed = false;
-    } 
+//    private void buttonPressed(java.awt.event.MouseEvent evt) {                               
+//        buttonPressed = true;
+//    }                              
+//
+//    private void buttonReleased(java.awt.event.MouseEvent evt) {                                
+//        if(buttonPressed) {
+//            for (JLabel label: labelMap.keySet()) {
+//                if (evt.getSource() == label) {
+//                    //System.out.println(labelMap.get(label).getName());
+//                    pcs.firePropertyChange("WeekViewLabelClicked", evt, labelMap.get(label));
+//                }
+//            }
+//        }
+//    }                               
+//
+//    private void mouseExitedButton(java.awt.event.MouseEvent evt) {                                   
+//        buttonPressed = false;
+//    } 
 
     public HashMap<JLabel,IActivity> getLabelMap() {
         return labelMap;

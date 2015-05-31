@@ -5,9 +5,10 @@
  */
 package edu.chl.calendarplusplus.view;
 
-import edu.chl.calendarplusplus.model.Activity;
+import edu.chl.calendarplusplus.model.CalendarPlus;
 import edu.chl.calendarplusplus.model.IActivity;
 import java.awt.Dimension;
+import java.beans.PropertyChangeSupport;
 import java.util.List;
 
 /**
@@ -16,21 +17,27 @@ import java.util.List;
  */
 public class ListViewCard extends javax.swing.JPanel {
 
+    private PropertyChangeSupport pcs;
+    private CalendarPlus cal;
+    private int elementwidth = 650;
+    private int elementheight = 109;
+    
     /**
      * Creates new form ListViewCard
      */
-    public ListViewCard() {
+    public ListViewCard(CalendarPlus cal) {
         initComponents();
+        this.cal = cal;
         listViewScrollPane.getVerticalScrollBar().setUnitIncrement(20);
     }
     
     public void updateListView (List<IActivity> actlist) {
         elementList.removeAll();
-        elementList.setPreferredSize(new Dimension(684,500));
-        elementList.setSize(684, 500);
+        elementList.setPreferredSize(new Dimension(elementwidth,actlist.size()*(elementheight+5) + 5));
         for (IActivity a: actlist) {
-            ListViewElement lve = new ListViewElement(a);
-            lve.setPreferredSize(new Dimension(650,141));
+            ListViewElement lve = new ListViewElement(a, cal.getNotificationManager().getNotification(a));
+            lve.setPreferredSize(new Dimension(elementwidth,elementheight));
+            lve.addListener(pcs);
             elementList.add(lve);
             revalidate();
             repaint();
@@ -71,4 +78,9 @@ public class ListViewCard extends javax.swing.JPanel {
     private javax.swing.JPanel elementList;
     private javax.swing.JScrollPane listViewScrollPane;
     // End of variables declaration//GEN-END:variables
+
+    public void addListener(PropertyChangeSupport pcs) {
+        this.pcs = pcs;
+    }
+
 }

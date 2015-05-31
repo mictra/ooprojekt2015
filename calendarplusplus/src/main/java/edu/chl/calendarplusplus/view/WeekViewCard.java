@@ -6,13 +6,11 @@
 package edu.chl.calendarplusplus.view;
 
 import edu.chl.calendarplusplus.model.CalendarPlus;
-import edu.chl.calendarplusplus.model.IActivity;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import javax.swing.JLabel;
@@ -40,7 +38,6 @@ public class WeekViewCard extends javax.swing.JPanel {
         daylist = getDayList();
         c = Calendar.getInstance();
         setWeekLabel(c);
-        //weekLabel.setText("Week " + c.get(c.WEEK_OF_YEAR) + ", " + c.get(c.YEAR));
         updateDaysStatic(c);
         setHours();
         setDays(c);
@@ -186,14 +183,12 @@ public class WeekViewCard extends javax.swing.JPanel {
             if (evt.getSource() == nextWeekButton) {
                 c.add(c.WEEK_OF_YEAR, 1);
                 setWeekLabel(c);
-                //weekLabel.setText("Week " + c.get(c.WEEK_OF_YEAR) + ", " + c.get(c.YEAR));
                 updateDaysStatic(c);
                 setDays(c);
             }
             if (evt.getSource() == previousWeekButton) {
                 c.add(c.WEEK_OF_YEAR, -1);
                 setWeekLabel(c);
-                //weekLabel.setText("Week " + c.get(c.WEEK_OF_YEAR) + ", " + c.get(c.YEAR));
                 updateDaysStatic(c);
                 setDays(c);
             }
@@ -242,25 +237,18 @@ public class WeekViewCard extends javax.swing.JPanel {
             c.set(c.DAY_OF_WEEK, 2 + i);
             WeekViewDayStatic wvds = new WeekViewDayStatic(c);
             wvds.setPreferredSize(new Dimension(daywidth,18));
-            //System.out.println(c.getDisplayName(c.DAY_OF_WEEK, c.SHORT, Locale.ENGLISH) + " " + c.get(c.DAY_OF_MONTH));
             staticPanel.add(wvds);
             revalidate();
             repaint();
             revalidate();
         }
-//        c.set(c.DAY_OF_WEEK, 2);
-//        monthLabel.setText(c.getDisplayName(c.MONTH, c.LONG, Locale.ENGLISH));
-//        c.set(c.DAY_OF_WEEK,8);
-//        if (!c.getDisplayName(c.MONTH, c.LONG, Locale.ENGLISH).equals(monthLabel.getText())) {
-//            monthLabel.setText(monthLabel.getText() + "/" + c.getDisplayName(c.MONTH, c.LONG, Locale.ENGLISH));
-//        }
     }
 
     private void setHours() {
         timePanel.setPreferredSize(new Dimension(60,24*(dayheight)));
         timePanel.setSize(new Dimension(60,24*(dayheight)));
         timePanel.removeAll();
-        String hour = "";
+        String hour;
         for (int i = 0; i < 24; i++) {
             hour = (i < 10 ? "0" + Integer.toString(i) : Integer.toString(i)) + ":00";
             WeekViewTimeElement wvte = new WeekViewTimeElement(hour);
@@ -285,7 +273,7 @@ public class WeekViewCard extends javax.swing.JPanel {
             for (int i = 0; i < 24; i++) {
                 WeekViewDayElement wvde = new WeekViewDayElement(cal, c);
                 wvde.setPreferredSize(new Dimension(daywidth, dayheight));
-                wvde.addListener(pcs);              
+                wvde.addListener(pcs);  
                 panel.add(wvde);               
                 revalidate();
                 repaint();

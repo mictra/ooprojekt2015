@@ -52,6 +52,7 @@ public class ProjectView extends javax.swing.JFrame {
         contacts.addListener(listeners);
         contactGroups.addListener(listeners);
         monthView.addListener(listeners);
+        listView.addListener(listeners);
     }
     
     /**
@@ -510,7 +511,7 @@ public class ProjectView extends javax.swing.JFrame {
     private AddContactGroupCard addContactGroup;
     private AddContactCard addContact;
     private AddAlarmCard addAlarm = new AddAlarmCard();
-    private ListViewCard listView = new ListViewCard();    
+    private ListViewCard listView;    
     private WeekViewCard weekView;
     private ContactGroupCard contactGroups = new ContactGroupCard();
     private ContactCard contacts = new ContactCard();
@@ -614,11 +615,12 @@ public class ProjectView extends javax.swing.JFrame {
 
     private void tweekingInitComponents() {
         addContact = new AddContactCard(cal);
-        addActivity = new AddActivityCard(cal.getContactManager());
+        addActivity = new AddActivityCard(cal);
         addContactGroup = new AddContactGroupCard(cal);
         weekView = new WeekViewCard(cal);
         actsingle = new ActivitySingleCard(cal);
         monthView = new MonthViewCard(cal);
+        listView = new ListViewCard(cal);
         mainLayeredPane.setPreferredSize(new Dimension(1270, 750));
         mainLayeredPane.setSize(new Dimension(1270, 750));
         searchTextField.setVisible(false);
@@ -659,6 +661,7 @@ public class ProjectView extends javax.swing.JFrame {
             addAlarm.resetFields();
         } else if (card.equals("ListViewCard")) {
             headlineLabel.setText("Listview");
+            listView.updateListView(cal.getActivityList());
         } else if (card.equals("WeekViewCard")) {
             headlineLabel.setText("Weekview");
         } else if (card.endsWith("ContactGroupCard")) {

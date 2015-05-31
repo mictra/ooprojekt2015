@@ -54,9 +54,10 @@ public class AddActivityCardController implements PropertyChangeListener {
                 cal.getNotificationManager().setNotification(act, not);
             }
             ac.resetFields();
-        } else if (evtName.equalsIgnoreCase("AddAttendee")) {
+            projV.showActivitySingle(act);
+        } else if (evtName.equalsIgnoreCase("AddActivityCardAddAttendee")) {
             ac.addAttendee();
-        } else if (evtName.equalsIgnoreCase("RemoveAttendee")) {
+        } else if (evtName.equalsIgnoreCase("AddActivityCardRemoveAttendee")) {
             ac.removeAttendee();
         } else if (evtName.equalsIgnoreCase("EditActivity")) {
             IActivity act = (IActivity) evt.getNewValue();
@@ -68,6 +69,9 @@ public class AddActivityCardController implements PropertyChangeListener {
                 cal.getNotificationManager().setNotification(act, not);
             }
             ac.resetFields();
+            projV.showActivitySingle(act);
+        } else if (evtName.equalsIgnoreCase("AddActivityCardCancelButtonClicked")) {
+            projV.changeCard("ListViewCard");
         }
     }
 

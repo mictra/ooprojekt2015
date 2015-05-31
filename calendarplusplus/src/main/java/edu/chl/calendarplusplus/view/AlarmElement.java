@@ -8,8 +8,6 @@ package edu.chl.calendarplusplus.view;
 import edu.chl.calendarplusplus.model.IAlarm;
 import java.beans.PropertyChangeSupport;
 import java.util.Calendar;
-import java.util.HashMap;
-import javax.swing.JLabel;
 
 /**
  *
@@ -20,6 +18,7 @@ public class AlarmElement extends javax.swing.JPanel {
     private IAlarm al;
     private PropertyChangeSupport pcs;
     private boolean buttonPressed;
+    private final int length = 75;
     
     /**
      * Creates new form ListViewElement
@@ -30,7 +29,11 @@ public class AlarmElement extends javax.swing.JPanel {
         Calendar c = a.getAlarm();
         String date = c.get(c.DAY_OF_MONTH) + "." + (c.get(c.MONTH)+1) + "." + c.get(c.YEAR) + " - kl. " + c.get(c.HOUR_OF_DAY) + ":" + (c.get(c.MINUTE) <= 5 ? "0" + c.get(c.MINUTE) : c.get(c.MINUTE));
         dateLabel.setText(date);
-        descriptionLabel.setText(a.getDescName());
+        if (a.getDescName().length() < length) {
+            descriptionLabel.setText(a.getDescName());
+        } else {
+            descriptionLabel.setText(a.getDescName().substring(0, length-1) + "...");
+        }
         this.al = a;
     }
     
@@ -51,7 +54,6 @@ public class AlarmElement extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(121, 134, 203));
         setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
-        setPreferredSize(new java.awt.Dimension(661, 138));
 
         nameLabel.setFont(new java.awt.Font("Source Sans Pro", 1, 24)); // NOI18N
         nameLabel.setForeground(new java.awt.Color(255, 255, 255));
@@ -101,7 +103,7 @@ public class AlarmElement extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(nameLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 477, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 469, Short.MAX_VALUE)
                         .addComponent(editButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(removeButton))
@@ -120,9 +122,9 @@ public class AlarmElement extends javax.swing.JPanel {
                     .addComponent(nameLabel)
                     .addComponent(editButton)
                     .addComponent(removeButton))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(dateLabel)
-                .addGap(27, 27, 27)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(descriptionLabel)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );

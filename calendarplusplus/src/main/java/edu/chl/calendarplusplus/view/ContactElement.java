@@ -7,6 +7,7 @@ package edu.chl.calendarplusplus.view;
 
 import edu.chl.calendarplusplus.model.IContact;
 import java.beans.PropertyChangeSupport;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -136,7 +137,13 @@ public class ContactElement extends javax.swing.JPanel {
                 pcs.firePropertyChange("EditContactButtonClicked", evt, c);
             }
             if (evt.getSource() == removeButton) {
-                pcs.firePropertyChange("RemoveContactButtonClicked", evt, c);
+                int op = JOptionPane.showConfirmDialog(this,
+                        "Are you sure you want to delete this contact?",
+                        "Remove the Contact?",
+                        JOptionPane.YES_NO_OPTION);
+                if (op == JOptionPane.YES_OPTION) {
+                    pcs.firePropertyChange("RemoveContactButtonClicked", evt, c);
+                }
             }
         }
     }//GEN-LAST:event_labelMouseReleased

@@ -17,9 +17,10 @@ import java.util.List;
 public class AlarmCard extends javax.swing.JPanel {
 
     private PropertyChangeSupport pcs;
-    
+    private final int alarmwidth = 650;
+    private final int alarmheight = 114;
     /**
-     * Creates new form ListViewCard
+     * Creates new form AlarmCard
      */
     public AlarmCard() {
         initComponents();
@@ -28,12 +29,11 @@ public class AlarmCard extends javax.swing.JPanel {
     
     public void updateAlarms (List<IAlarm> actlist) {
         elementList.removeAll();
-        elementList.setPreferredSize(new Dimension(684,500));
-        elementList.setSize(684, 500);
+        elementList.setPreferredSize(new Dimension(alarmwidth,actlist.size()*(alarmheight+5) + 5));
         for (IAlarm a : actlist) {
             System.out.println("ALARM ID: " + a.getId());
             AlarmElement ale = new AlarmElement(a);
-            ale.setPreferredSize(new Dimension(650,141));
+            ale.setPreferredSize(new Dimension(alarmwidth,alarmheight));
             ale.addListener(pcs);
             elementList.add(ale);
             revalidate();

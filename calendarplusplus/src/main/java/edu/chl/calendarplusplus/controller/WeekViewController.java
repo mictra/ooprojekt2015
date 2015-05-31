@@ -36,7 +36,7 @@ public class WeekViewController implements PropertyChangeListener {
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         String evtName = evt.getPropertyName();
-        if (evtName.equalsIgnoreCase("WeekViewLabelClicked")) {
+        if (evtName.equalsIgnoreCase("ActivityNameLabelLabelClicked")) {
             IActivity act = (IActivity) evt.getNewValue();
             projV.showActivitySingle(act);
         }

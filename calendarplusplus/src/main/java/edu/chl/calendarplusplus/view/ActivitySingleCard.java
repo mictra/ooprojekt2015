@@ -13,6 +13,7 @@ import java.awt.Dimension;
 import java.beans.PropertyChangeSupport;
 import java.util.Calendar;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -43,7 +44,7 @@ public class ActivitySingleCard extends javax.swing.JPanel {
         enddate = act.getEndTime();
         start = startdate.get(startdate.DAY_OF_MONTH) + "." + (startdate.get(startdate.MONTH)+1) + "." + startdate.get(startdate.YEAR) + " kl. " + startdate.get(startdate.HOUR_OF_DAY) + ":" + (startdate.get(startdate.MINUTE) <= 5 ? "0" + startdate.get(startdate.MINUTE) : startdate.get(startdate.MINUTE));
         end = enddate.get(enddate.DAY_OF_MONTH) + "." + (enddate.get(enddate.MONTH)+1) + "." + enddate.get(enddate.YEAR) + " kl. " + enddate.get(enddate.HOUR_OF_DAY) + ":" + (enddate.get(enddate.MINUTE) <= 5 ? "0" + enddate.get(enddate.MINUTE) : enddate.get(enddate.MINUTE));
-        dateLabel.setText(start + " -- " + end);
+        dateLabel.setText(start + " - " + end);
         locationLabel.setText(act.getLocation());
         descriptionTextArea.setText(act.getDescription());
         descriptionTextArea.setEditable(false);
@@ -243,7 +244,13 @@ public class ActivitySingleCard extends javax.swing.JPanel {
                 pcs.firePropertyChange("EditActivityClicked", evt, act);
             }
             if (evt.getSource() == removeButton) {
-                pcs.firePropertyChange("RemoveActivityClicked", evt, act);
+                int op = JOptionPane.showConfirmDialog(this,
+                        "Are you sure you want to delete this activity?",
+                        "Remove the Activity?",
+                        JOptionPane.YES_NO_OPTION);
+                if (op == JOptionPane.YES_OPTION) {
+                    pcs.firePropertyChange("RemoveActivityClicked", evt, act);
+                }
             }
         }
     }//GEN-LAST:event_labelMouseReleased

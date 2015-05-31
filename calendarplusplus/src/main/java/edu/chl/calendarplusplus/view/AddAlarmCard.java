@@ -278,6 +278,7 @@ public class AddAlarmCard extends javax.swing.JPanel {
         isEdit = false;
         nameTextField.setText("");
         Calendar c = Calendar.getInstance();
+        c.add(c.MINUTE, 5 - (c.get(c.MINUTE) % 5));
         dayComboBox.setSelectedIndex(c.get(c.DAY_OF_MONTH) - 1);
         monthComboBox.setSelectedIndex(c.get(c.MONTH));
         yearComboBox.setSelectedItem(c.get(c.YEAR));

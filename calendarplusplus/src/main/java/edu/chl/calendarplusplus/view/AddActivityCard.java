@@ -7,6 +7,7 @@ package edu.chl.calendarplusplus.view;
 
 import edu.chl.calendarplusplus.model.Activity;
 import edu.chl.calendarplusplus.model.IActivity;
+import edu.chl.calendarplusplus.model.ICalendarPlus;
 import edu.chl.calendarplusplus.model.IContact;
 import edu.chl.calendarplusplus.model.IContactManager;
 import edu.chl.calendarplusplus.model.INotification;
@@ -30,7 +31,7 @@ public class AddActivityCard extends javax.swing.JPanel {
     }
 
     DefaultListModel attendeeListModel, nonAttendeeListModel;
-    private final IContactManager conman;
+    private final ICalendarPlus cal;
     String lstring = "";
     private IActivity act;
     private boolean updateMode;
@@ -38,9 +39,9 @@ public class AddActivityCard extends javax.swing.JPanel {
     /**
      * Creates new form AddActivityCard
      */
-    public AddActivityCard(IContactManager conman) {
+    public AddActivityCard(ICalendarPlus cal) {
         initComponents();
-        this.conman = conman;
+        this.cal = cal;
         attendeeListModel = new DefaultListModel();
         nonAttendeeListModel = new DefaultListModel();
         initComboBoxes();
@@ -385,15 +386,15 @@ public class AddActivityCard extends javax.swing.JPanel {
                 }
             }
             if (evt.getSource() == cancelButton) {
-                
+                pcs.firePropertyChange("AddActivityCardCancelButtonClicked", null, null);
             }
             if (evt.getSource() == addButton) {
                 if (nonAttendeeListModel.size() > 0 && !nonAttendeeList.isSelectionEmpty())
-                    pcs.firePropertyChange("AddAttendee", null, null);
+                    pcs.firePropertyChange("AddActivityCardAddAttendee", null, null);
             }
             if (evt.getSource() == removeButton) {
                 if (attendeeListModel.size() > 0 && !attendeeList.isSelectionEmpty())
-                    pcs.firePropertyChange("RemoveAttendee", null, null);
+                    pcs.firePropertyChange("AddActivityCardRemoveAttendee", null, null);
             }
         }
     }//GEN-LAST:event_labelMouseReleased
@@ -578,10 +579,17 @@ public class AddActivityCard extends javax.swing.JPanel {
     }
     
     private void setLists() {
+        //Set the chosen contacts
+        attendeeList.removeAll();
+        attendeeListModel.removeAllElements();
+        attendeeList.setModel(attendeeListModel);
+        attendeeList.setPrototypeCellValue(lstring+ "        ");
+        attendeeScrollPane.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
+        
         //Set the available contacts
         nonAttendeeList.removeAll();
         nonAttendeeListModel.removeAllElements();
-        for (IContact c : conman.getAllContacts()) {
+        for (IContact c : cal.getContactManager().getAllContacts()) {
             nonAttendeeListModel.addElement(c);
             if (lstring.length() < c.getName().length())
                 lstring = c.getName();
@@ -590,12 +598,6 @@ public class AddActivityCard extends javax.swing.JPanel {
         nonAttendeeList.setPrototypeCellValue(lstring+ "        ");
         nonAttendeeScrollPane.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
         
-        //Set the chosen contacts
-        attendeeList.removeAll();
-        attendeeListModel.removeAllElements();
-        attendeeList.setModel(attendeeListModel);
-        attendeeList.setPrototypeCellValue(lstring+ "        ");
-        attendeeScrollPane.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
     }
 
     void editActivity(IActivity act) {
@@ -620,15 +622,13 @@ public class AddActivityCard extends javax.swing.JPanel {
         eHourComboBox.setSelectedIndex(c.get(c.HOUR_OF_DAY));
         eMinuteComboBox.setSelectedIndex(c.get(c.MINUTE) / 5);
         
-
         attendeeList.removeAll();
         attendeeListModel.removeAllElements();
         nonAttendeeList.removeAll();
         nonAttendeeListModel.removeAllElements();
         
         lstring = "";
-        
-        for (IContact cont: conman.getAllContacts()) {
+        for (IContact cont: cal.getContactManager().getAllContacts()) {
             if (act.hasContact(cont)) {
                 attendeeListModel.addElement(cont);
             } else {
@@ -645,6 +645,21 @@ public class AddActivityCard extends javax.swing.JPanel {
         nonAttendeeList.setPrototypeCellValue(lstring+ "        ");
         nonAttendeeScrollPane.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
         
+        INotification not = cal.getNotificationManager().getNotification(act);
+        if (not == null) {
+            notificationComboBox.setSelectedIndex(0);
+        } else {
+            long diff = act.getStartTime().getTimeInMillis() - not.getAlarm().getTimeInMillis();
+            int nottime = (int) (diff/(1000*60));
+            switch (nottime) {
+                case 0: notificationComboBox.setSelectedIndex(1); break;
+                case 5: notificationComboBox.setSelectedIndex(2); break;
+                case 10: notificationComboBox.setSelectedIndex(3); break;
+                case 15: notificationComboBox.setSelectedIndex(4); break;
+                case 30: notificationComboBox.setSelectedIndex(5); break;
+                case 60: notificationComboBox.setSelectedIndex(6); break;
+            }
+        }
     }
 
 }
