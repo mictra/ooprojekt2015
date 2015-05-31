@@ -1,8 +1,8 @@
 /*
-* To change this license header, choose License Headers in Project Properties.
-* To change this template file, choose Tools | Templates
-* and open the template in the editor.
-*/
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package edu.chl.calendarplusplus.view;
 
 import edu.chl.calendarplusplus.model.CalendarPlus;
@@ -22,14 +22,13 @@ import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER;
  * @author cain
  */
 public class AddContactCard extends javax.swing.JPanel {
-    
-    
+
     private final CalendarPlus cal;
     private boolean updateMode = false;
     DefaultListModel nonMemberListModel, memberListModel;
     String lstring = "";
     private IContact c;
-    
+
     /**
      * Creates new form AddContactCard
      *
@@ -42,7 +41,7 @@ public class AddContactCard extends javax.swing.JPanel {
         memberListModel = new DefaultListModel();
         resetFields();
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -230,24 +229,24 @@ public class AddContactCard extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-    
+
     private void saveButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_saveButtonMouseEntered
         saveButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/saveButtonHover.png")));
     }//GEN-LAST:event_saveButtonMouseEntered
-    
+
     private void saveButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_saveButtonMouseExited
         saveButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/saveButton.png")));
         buttonPressed = false;
     }//GEN-LAST:event_saveButtonMouseExited
-    
+
     private void labelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelMousePressed
         buttonPressed = true;
     }//GEN-LAST:event_labelMousePressed
-    
+
     private void labelMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelMouseReleased
         if (buttonPressed) {
             if (evt.getSource() == saveButton) {
-                if(checkContact()){
+                if (checkContact()) {
                     if (updateMode) {
                         c.setName(nameTextField.getText());
                         c.setEmail(emailTextField.getText());
@@ -258,49 +257,52 @@ public class AddContactCard extends javax.swing.JPanel {
                         pcs.firePropertyChange("AddContact", null, null);
                     }
                 }
-                if (evt.getSource() == cancelButton) {
-                    pcs.firePropertyChange("BackToContacts", null, null);
-                }
-                if (evt.getSource() == addButton) {
-                    if (nonMemberListModel.size() > 0 && !nonMemberList.isSelectionEmpty())
-                        pcs.firePropertyChange("AddContactCardAddGroup", null, null);
-                }
-                if (evt.getSource() == removeButton) {
-                    if (memberListModel.size() > 0 && !memberList.isSelectionEmpty())
-                        pcs.firePropertyChange("AddContactCardRemoveGroup", null, null);
+            }
+            if (evt.getSource() == cancelButton) {
+                pcs.firePropertyChange("BackToContacts", null, null);
+            }
+            if (evt.getSource() == addButton) {
+                if (nonMemberListModel.size() > 0 && !nonMemberList.isSelectionEmpty()) {
+                    pcs.firePropertyChange("AddContactCardAddGroup", null, null);
                 }
             }
+            if (evt.getSource() == removeButton) {
+                if (memberListModel.size() > 0 && !memberList.isSelectionEmpty()) {
+                    pcs.firePropertyChange("AddContactCardRemoveGroup", null, null);
+                }
+            }
+
         }
     }//GEN-LAST:event_labelMouseReleased
-    
+
     private void cancelButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelButtonMouseEntered
         cancelButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cancelButtonHover.png")));
     }//GEN-LAST:event_cancelButtonMouseEntered
-    
+
     private void cancelButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelButtonMouseExited
         cancelButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cancelButton.png")));
         buttonPressed = false;
     }//GEN-LAST:event_cancelButtonMouseExited
-    
+
     private void addButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addButtonMouseEntered
         addButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arrowsLeftHover.png")));
     }//GEN-LAST:event_addButtonMouseEntered
-    
+
     private void addButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addButtonMouseExited
         addButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arrowsLeft.png")));
         buttonPressed = false;
     }//GEN-LAST:event_addButtonMouseExited
-    
+
     private void removeButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_removeButtonMouseEntered
         removeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arrowsRightHover.png")));
     }//GEN-LAST:event_removeButtonMouseEntered
-    
+
     private void removeButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_removeButtonMouseExited
         removeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/arrowsRight.png")));
         buttonPressed = false;
     }//GEN-LAST:event_removeButtonMouseExited
-    
-    
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel addButton;
     private javax.swing.JLabel cancelButton;
@@ -318,24 +320,24 @@ public class AddContactCard extends javax.swing.JPanel {
     private javax.swing.JLabel removeButton;
     private javax.swing.JLabel saveButton;
     // End of variables declaration//GEN-END:variables
-    
+
     private PropertyChangeSupport pcs;
     private boolean buttonPressed;
-    
-    public boolean checkContact(){
+
+    public boolean checkContact() {
         IContact c = getAsContact();
         boolean flag = true;
-        if(c.getName().equals("")){
+        if (c.getName().equals("")) {
             nameLabel.setForeground(Color.red);
             flag = false;
         }
         return flag;
     }
-    
+
     public IContact getAsContact() {
         return new Contact(nameTextField.getText(), phoneTextField.getText(), emailTextField.getText());
     }
-    
+
     public List<IContactGroup> getContactGroups() {
         List<IContactGroup> contactGroups = new ArrayList<>();
         if (memberList.getModel().getSize() == 0) {
@@ -347,8 +349,8 @@ public class AddContactCard extends javax.swing.JPanel {
         }
         return contactGroups;
     }
-    
-    public List<IContactGroup> getRemovedCG(){
+
+    public List<IContactGroup> getRemovedCG() {
         List<IContactGroup> contactGroups = new ArrayList<>();
         if (nonMemberList.getModel().getSize() == 0) {
             return contactGroups;
@@ -359,14 +361,14 @@ public class AddContactCard extends javax.swing.JPanel {
         }
         return contactGroups;
     }
-    
+
     public void resetFields() {
         nameLabel.setForeground(Color.black);
         updateMode = false;
         nameTextField.setText("");
         emailTextField.setText("");
         phoneTextField.setText("");
-        
+
         // Set the non-member groups
         nonMemberList.removeAll();
         nonMemberListModel.removeAllElements();
@@ -381,16 +383,16 @@ public class AddContactCard extends javax.swing.JPanel {
         nonMemberList.setModel(nonMemberListModel);
         nonMemberList.setPrototypeCellValue(lstring + "        ");
         nonMemberScrollPane.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
-        
+
         //Set the member groups (empty list from start)
         memberList.removeAll();
         memberListModel.removeAllElements();
         memberList.setModel(memberListModel);
         memberList.setPrototypeCellValue(lstring + "        ");
         memberScrollPane.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
-        
+
     }
-    
+
     public void addMemberGroup() {
         //Check if an item in the list is actually selected, otherwise error
         if (nonMemberList.getSelectedIndex() >= 0) {
@@ -398,39 +400,38 @@ public class AddContactCard extends javax.swing.JPanel {
             nonMemberListModel.remove(nonMemberList.getSelectedIndex());
         }
     }
-    
+
     public void removeMemberGroup() {
         if (memberList.getSelectedIndex() >= 0) {
             nonMemberListModel.addElement((IContactGroup) memberList.getSelectedValue());
             memberListModel.remove(memberList.getSelectedIndex());
         }
     }
-    
+
     public void addListener(PropertyChangeSupport pcs) {
         this.pcs = pcs;
     }
-    
+
     void editContact(IContact c) {
         this.c = c;
         updateMode = true;
         nameTextField.setText(c.getName());
         emailTextField.setText(c.getEmail());
         phoneTextField.setText(c.getPhone());
-        
-        
+
         //Set the groups
         memberList.removeAll();
         memberListModel.removeAllElements();
         nonMemberList.removeAll();
         nonMemberListModel.removeAllElements();
-        
+
         for (IContactGroup cg : cal.getContactGroupList()) {
             if (cg.hasContact(c)) {
-                if (!cg.getGroupName().equals("Default")){
+                if (!cg.getGroupName().equals("Default")) {
                     memberListModel.addElement(cg);
                 }
             } else {
-                if (!cg.getGroupName().equals("Default")){
+                if (!cg.getGroupName().equals("Default")) {
                     nonMemberListModel.addElement(cg);
                 }
             }
@@ -438,7 +439,7 @@ public class AddContactCard extends javax.swing.JPanel {
                 lstring = cg.getGroupName();
             }
         }
-        
+
         memberList.setModel(memberListModel);
         memberList.setPrototypeCellValue(lstring + "        ");
         memberScrollPane.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
@@ -446,5 +447,5 @@ public class AddContactCard extends javax.swing.JPanel {
         nonMemberList.setPrototypeCellValue(lstring + "        ");
         nonMemberScrollPane.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
     }
-    
+
 }
