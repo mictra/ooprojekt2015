@@ -70,11 +70,7 @@ public class MockContactGroup implements IContactGroup {
 
     @Override
     public int compareTo(IContactGroup cg) {
-<<<<<<< HEAD
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-=======
         return 0;
->>>>>>> origin/master
     }
     
 }

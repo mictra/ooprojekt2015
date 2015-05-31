@@ -113,10 +113,6 @@ public class MockActivity implements IActivity {
 
     @Override
     public int compareTo(IActivity act) {
-<<<<<<< HEAD
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-=======
         return 0;
->>>>>>> origin/master
     }
 }
