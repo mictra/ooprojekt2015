@@ -666,15 +666,15 @@ public class ProjectView extends javax.swing.JFrame {
             listView.updateListView(cal.getActivitiesByTimeInterval(start, end));
         } else if (card.equals("WeekViewCard")) {
             headlineLabel.setText("Weekview");
-        } else if (card.endsWith("ContactGroupCard")) {
+        } else if (card.equals("ContactGroupCard")) {
             headlineLabel.setText("Contactgroups");
             contactGroups.updateContactGroups(cal.getContactGroupList());
-        } else if (card.endsWith("ContactCard")) {
+        } else if (card.equals("ContactCard")) {
             headlineLabel.setText("Contacts");
             contacts.updateContacts(cal.getAllContacts());
-        } else if (card.equals("MonthView")){
+        } else if (card.equals("MonthViewCard")){
             headlineLabel.setText("Monthview");
-        } else if (card.endsWith("AlarmCard")) {
+        } else if (card.equals("AlarmCard")) {
             updateAlarms(cal.getAlarmList());
             headlineLabel.setText("Alarms");
         }
