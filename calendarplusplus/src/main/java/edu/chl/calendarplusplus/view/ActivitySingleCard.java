@@ -61,7 +61,6 @@ public class ActivitySingleCard extends javax.swing.JPanel {
         } else {
             long diff = act.getStartTime().getTimeInMillis() - not.getAlarm().getTimeInMillis();
             int nottime = (int) (diff/(1000*60));
-            System.out.println(nottime);
             switch (nottime) {
                 case 0: notificationLabel.setText("When activity starts"); break;
                 case 5: notificationLabel.setText("5 minutes before"); break;

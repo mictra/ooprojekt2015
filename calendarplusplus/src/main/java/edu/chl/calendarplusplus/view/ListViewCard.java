@@ -64,8 +64,10 @@ public class ListViewCard extends javax.swing.JPanel {
         listViewScrollPane = new javax.swing.JScrollPane();
         elementList = new javax.swing.JPanel();
 
-        setPreferredSize(new java.awt.Dimension(710, 850));
+        setBorder(null);
+        setPreferredSize(new java.awt.Dimension(1008, 640));
 
+        listViewScrollPane.setBorder(null);
         listViewScrollPane.setViewportView(elementList);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

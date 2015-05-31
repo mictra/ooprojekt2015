@@ -19,6 +19,7 @@ import java.beans.PropertyChangeSupport;
 import java.util.Calendar;
 import java.util.List;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -102,7 +103,12 @@ public class ProjectView extends javax.swing.JFrame {
         logoLabel.setFont(new java.awt.Font("Source Sans Pro", 1, 24)); // NOI18N
         logoLabel.setForeground(new java.awt.Color(255, 255, 255));
         logoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        logoLabel.setText("Kalender++_logo");
+        logoLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logo.png"))); // NOI18N
+        logoLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                logoLabelMousePressed(evt);
+            }
+        });
 
         menuCalendarLabel.setFont(new java.awt.Font("Source Sans Pro", 1, 24)); // NOI18N
         menuCalendarLabel.setForeground(new java.awt.Color(255, 255, 255));
@@ -196,7 +202,7 @@ public class ProjectView extends javax.swing.JFrame {
                     .addComponent(addContactGroupLabel)
                     .addComponent(allContactsLabel)
                     .addComponent(allContactGroupsLabel))
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         menuContactsPanelLayout.setVerticalGroup(
             menuContactsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -270,7 +276,7 @@ public class ProjectView extends javax.swing.JFrame {
                     .addGroup(menuPanelLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(logoLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
+                            .addComponent(logoLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
                             .addComponent(logoSeparator, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuPanelLayout.createSequentialGroup()
                                 .addGap(12, 12, 12)
@@ -279,7 +285,7 @@ public class ProjectView extends javax.swing.JFrame {
                                 .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(menuCalendarLabel)
                                     .addComponent(menuContactsLabel))
-                                .addGap(0, 0, Short.MAX_VALUE))))
+                                .addGap(0, 107, Short.MAX_VALUE))))
                     .addGroup(menuPanelLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(searchTextField))
@@ -305,7 +311,7 @@ public class ProjectView extends javax.swing.JFrame {
             menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(menuPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(logoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(logoLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(logoSeparator, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -322,7 +328,7 @@ public class ProjectView extends javax.swing.JFrame {
                 .addComponent(menuAlarmPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(menuSettingsLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addComponent(searchTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -439,6 +445,14 @@ public class ProjectView extends javax.swing.JFrame {
             menuContactsLabel.setIcon((new javax.swing.ImageIcon(getClass().getResource("/arrow_right.png"))));
         }
     }//GEN-LAST:event_menuAlarmLabelMousePressed
+
+    private void logoLabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoLabelMousePressed
+        JOptionPane.showMessageDialog(this,
+                "CalendarPlusPlus \u00A9 2015\n"
+                        + "Authors: Erik Forsberg, Johan Ben Mohammad, Michael Tran & Patrick Franz",
+                "About CalendarPlusPlus",
+                JOptionPane.PLAIN_MESSAGE);
+    }//GEN-LAST:event_logoLabelMousePressed
     
     /**
      * @param args the command line arguments
@@ -624,6 +638,7 @@ public class ProjectView extends javax.swing.JFrame {
         mainLayeredPane.setPreferredSize(new Dimension(1270, 750));
         mainLayeredPane.setSize(new Dimension(1270, 750));
         searchTextField.setVisible(false);
+        menuSettingsLabel.setVisible(false);
         
         menuContactsPanel.setVisible(false);
         menuContactsLabel.setIcon((new javax.swing.ImageIcon(getClass().getResource("/arrow_right.png"))));
