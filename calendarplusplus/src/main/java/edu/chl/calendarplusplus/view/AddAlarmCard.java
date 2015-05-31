@@ -70,7 +70,10 @@ public class AddAlarmCard extends javax.swing.JPanel {
         descriptionLabel.setFont(new java.awt.Font("Source Sans Pro", 1, 14)); // NOI18N
         descriptionLabel.setText("Description");
 
+        descriptionScrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
         descriptionTextArea.setColumns(20);
+        descriptionTextArea.setLineWrap(true);
         descriptionTextArea.setRows(5);
         descriptionScrollPane.setViewportView(descriptionTextArea);
 
