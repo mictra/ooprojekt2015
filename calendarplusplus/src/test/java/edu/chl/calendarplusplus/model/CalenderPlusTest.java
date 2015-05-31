@@ -98,12 +98,12 @@ public class CalenderPlusTest {
     public void testGetActivitiesByHour(){
         cal.addActivity(a3);
         cal.addActivity(a4);
-        Assert.assertTrue(cal.getActivitiesByHour(start, end).size() == 1 );
-        Assert.assertTrue(cal.getActivitiesByHour(start, t4).size() == 2 );
-        Assert.assertTrue(cal.getActivitiesByHour(end, t4).size() == 1 );
-        Assert.assertTrue(cal.getActivitiesByHour(start, t3).size() == 1 );
+        Assert.assertTrue(cal.getActivitiesByTimeInterval(start, end).size() == 1 );
+        Assert.assertTrue(cal.getActivitiesByTimeInterval(start, t4).size() == 2 );
+        Assert.assertTrue(cal.getActivitiesByTimeInterval(end, t4).size() == 1 );
+        Assert.assertTrue(cal.getActivitiesByTimeInterval(start, t3).size() == 1 );
 
-        System.out.println("LISTAN: " + cal.getActivitiesByHour(start, t4));
+        System.out.println("LISTAN: " + cal.getActivitiesByTimeInterval(start, t4));
     }
     
 }

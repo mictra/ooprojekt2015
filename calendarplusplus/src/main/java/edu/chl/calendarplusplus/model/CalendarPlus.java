@@ -340,7 +340,7 @@ public class CalendarPlus implements ICalendarPlus {
         return notificationManager;
     }
     
-    public List<IActivity> getActivitiesByHour(Calendar start, Calendar end) {
+    public List<IActivity> getActivitiesByTimeInterval(Calendar start, Calendar end) {
         List<IActivity> tempActList = new ArrayList<>();
         for (IActivity act : activities) {
             if ((act.getStartTime().getTimeInMillis() >= start.getTimeInMillis()

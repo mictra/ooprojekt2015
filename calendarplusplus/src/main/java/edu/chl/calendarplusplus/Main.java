@@ -66,6 +66,7 @@ public final class Main {
                     ContactGroupSingleController.create(cal, projectView, projectView.getContactGroupSingleCard());
                     MonthViewController.create(cal, projectView, projectView.getMonthViewCard());
                     projectView.setVisible(true);
+                    projectView.changeCard("ListViewCard");
                     initTest(cal);
                 });
 	}

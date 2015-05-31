@@ -49,7 +49,7 @@ public interface ICalendarPlus {
     
     public List<IActivity> getActivityList();
     
-    public List<IActivity> getActivitiesByHour(Calendar start, Calendar end);
+    public List<IActivity> getActivitiesByTimeInterval(Calendar start, Calendar end);
     
     public List<IContactGroup> getContactGroupList();
     

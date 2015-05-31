@@ -69,7 +69,7 @@ public class ProjectViewController implements MouseListener {
             Calendar start = Calendar.getInstance();
             Calendar end = Calendar.getInstance();
             end.add(end.YEAR, 1);
-            projectView.updateListView(cal.getActivitiesByHour(start, end));
+            projectView.updateListView(cal.getActivitiesByTimeInterval(start, end));
         } else if (e.getSource() == weekViewLabel) {
             projectView.changeCard("WeekViewCard");
             projectView.updateWeekView();           
