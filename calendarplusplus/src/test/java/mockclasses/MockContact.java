@@ -53,7 +53,11 @@ public class MockContact implements IContact {
 
     @Override
     public int compareTo(IContact c) {
+<<<<<<< HEAD
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+=======
         return 0;
+>>>>>>> origin/master
     }
     
 }
