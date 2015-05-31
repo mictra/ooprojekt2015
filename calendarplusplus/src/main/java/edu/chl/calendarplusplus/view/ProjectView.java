@@ -646,7 +646,6 @@ public class ProjectView extends javax.swing.JFrame {
         mainPanel.add(contacts, "ContactCard");
         mainPanel.add(alarms, "AlarmCard");
         mainPanel.add(actsingle, "ActivitySingleCard");
-        changeCard("ListViewCard");
     }
     
     public void changeCard(String card) {

@@ -58,5 +58,10 @@ public class MockAlarm implements IAlarm {
     public int getId() {
         return 0;
     }
+
+    @Override
+    public int compareTo(IAlarm a) {
+        return 0;
+    }
     
 }

@@ -67,6 +67,11 @@ public class MockContactGroup implements IContactGroup {
     public boolean remove(IContact contact) {
         return true;
     }
+
+    @Override
+    public int compareTo(IContactGroup cg) {
+        return 0;
+    }
     
 }
     

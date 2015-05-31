@@ -110,4 +110,9 @@ public class MockActivity implements IActivity {
     public boolean remove(IContact contact) {
         return true;
     }
+
+    @Override
+    public int compareTo(IActivity act) {
+        return 0;
+    }
 }
