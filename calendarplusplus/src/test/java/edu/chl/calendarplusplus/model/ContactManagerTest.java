@@ -5,6 +5,10 @@
 */
 package edu.chl.calendarplusplus.model;
 
+import edu.chl.calendarplusplus.contact.IContact;
+import edu.chl.calendarplusplus.contact.IContactManager;
+import edu.chl.calendarplusplus.contact.ContactManager;
+import edu.chl.calendarplusplus.contact.IContactGroup;
 import java.util.ArrayList;
 import mockclasses.MockContact;
 import mockclasses.MockContactGroup;

@@ -5,6 +5,12 @@
  */
 package edu.chl.calendarplusplus.model;
 
+import edu.chl.calendarplusplus.contact.IContact;
+import edu.chl.calendarplusplus.contact.Contact;
+import edu.chl.calendarplusplus.activity.Activity;
+import edu.chl.calendarplusplus.activity.IActivityManager;
+import edu.chl.calendarplusplus.activity.ActivityManager;
+import edu.chl.calendarplusplus.activity.IActivity;
 import java.util.ArrayList;
 import java.util.Calendar;
 import org.junit.Assert;

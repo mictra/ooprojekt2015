@@ -5,6 +5,8 @@
  */
 package edu.chl.calendarplusplus.model;
 
+import edu.chl.calendarplusplus.alarmnotification.Alarm;
+import edu.chl.calendarplusplus.alarmnotification.IAlarm;
 import java.util.Calendar;
 import org.junit.Assert;
 import org.junit.Test;
