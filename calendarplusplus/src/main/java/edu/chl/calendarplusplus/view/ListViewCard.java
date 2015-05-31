@@ -21,7 +21,7 @@ public class ListViewCard extends javax.swing.JPanel {
     private CalendarPlus cal;
     private int elementwidth = 650;
     private int elementheight = 109;
-    
+
     /**
      * Creates new form ListViewCard
      */
@@ -30,19 +30,22 @@ public class ListViewCard extends javax.swing.JPanel {
         this.cal = cal;
         listViewScrollPane.getVerticalScrollBar().setUnitIncrement(20);
     }
-    
-    public void updateListView (List<IActivity> actlist) {
+
+    public void updateListView(List<IActivity> actlist) {
         elementList.removeAll();
-        elementList.setPreferredSize(new Dimension(elementwidth,actlist.size()*(elementheight+5) + 5));
-        for (IActivity a: actlist) {
+        elementList.setPreferredSize(new Dimension(elementwidth, actlist.size() * (elementheight + 5) + 5));
+        for (IActivity a : actlist) {
             ListViewElement lve = new ListViewElement(a, cal.getNotificationManager().getNotification(a));
-            lve.setPreferredSize(new Dimension(elementwidth,elementheight));
+            lve.setPreferredSize(new Dimension(elementwidth, elementheight));
             lve.addListener(pcs);
             elementList.add(lve);
             revalidate();
             repaint();
             revalidate();
         }
+        revalidate();
+        repaint();
+        revalidate();
     }
 
     /**

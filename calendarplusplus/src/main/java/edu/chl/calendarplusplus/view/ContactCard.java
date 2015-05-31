@@ -40,7 +40,9 @@ public class ContactCard extends javax.swing.JPanel {
             repaint();
             revalidate();
         }
-        
+        revalidate();
+        repaint();
+        revalidate();
     }
     
 

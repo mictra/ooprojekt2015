@@ -40,6 +40,9 @@ public class AlarmCard extends javax.swing.JPanel {
             repaint();
             revalidate();
         }
+        revalidate();
+        repaint();
+        revalidate();
     }
 
     /**
