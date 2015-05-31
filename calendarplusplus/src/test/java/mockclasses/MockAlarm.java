@@ -5,7 +5,7 @@
  */
 package mockclasses;
 
-import edu.chl.calendarplusplus.alarmnotification.model.IAlarm;
+import edu.chl.calendarplusplus.model.IAlarm;
 import java.util.Calendar;
 
 /**

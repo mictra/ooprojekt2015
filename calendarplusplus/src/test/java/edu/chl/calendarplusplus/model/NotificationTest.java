@@ -5,10 +5,6 @@
  */
 package edu.chl.calendarplusplus.model;
 
-import edu.chl.calendarplusplus.alarmnotification.model.Notification;
-import edu.chl.calendarplusplus.alarmnotification.model.INotification;
-import edu.chl.calendarplusplus.activity.model.Activity;
-import edu.chl.calendarplusplus.activity.model.IActivity;
 import java.util.Calendar;
 import org.junit.Assert;
 import org.junit.Test;

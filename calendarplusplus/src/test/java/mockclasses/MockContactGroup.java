@@ -5,8 +5,8 @@
  */
 package mockclasses;
 
-import edu.chl.calendarplusplus.contact.model.IContact;
-import edu.chl.calendarplusplus.contact.model.IContactGroup;
+import edu.chl.calendarplusplus.model.IContact;
+import edu.chl.calendarplusplus.model.IContactGroup;
 import java.util.ArrayList;
 
 /**

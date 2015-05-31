@@ -5,10 +5,6 @@
  */
 package edu.chl.calendarplusplus.model;
 
-import edu.chl.calendarplusplus.contact.model.IContact;
-import edu.chl.calendarplusplus.contact.model.Contact;
-import edu.chl.calendarplusplus.contact.model.ContactGroup;
-import edu.chl.calendarplusplus.contact.model.IContactGroup;
 import org.junit.Assert;
 import org.junit.Test;
 

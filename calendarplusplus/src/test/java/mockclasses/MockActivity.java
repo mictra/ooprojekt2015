@@ -5,9 +5,9 @@
  */
 package mockclasses;
 
-import edu.chl.calendarplusplus.contact.model.Contact;
-import edu.chl.calendarplusplus.activity.model.IActivity;
-import edu.chl.calendarplusplus.contact.model.IContact;
+import edu.chl.calendarplusplus.model.Contact;
+import edu.chl.calendarplusplus.model.IActivity;
+import edu.chl.calendarplusplus.model.IContact;
 import java.util.ArrayList;
 import java.util.Calendar;
 

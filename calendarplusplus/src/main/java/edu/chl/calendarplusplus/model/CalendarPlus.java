@@ -5,18 +5,6 @@
  */
 package edu.chl.calendarplusplus.model;
 
-import edu.chl.calendarplusplus.alarmnotification.model.NotificationManager;
-import edu.chl.calendarplusplus.alarmnotification.model.INotificationManager;
-import edu.chl.calendarplusplus.alarmnotification.model.INotification;
-import edu.chl.calendarplusplus.alarmnotification.model.IAlarm;
-import edu.chl.calendarplusplus.contact.model.IContactManager;
-import edu.chl.calendarplusplus.contact.model.IContact;
-import edu.chl.calendarplusplus.contact.model.IContactGroup;
-import edu.chl.calendarplusplus.contact.model.ContactManager;
-import edu.chl.calendarplusplus.contact.model.ContactGroup;
-import edu.chl.calendarplusplus.activity.model.ActivityManager;
-import edu.chl.calendarplusplus.activity.model.IActivityManager;
-import edu.chl.calendarplusplus.activity.model.IActivity;
 import edu.chl.calendarplusplus.persistence.ActivityDAO;
 import edu.chl.calendarplusplus.persistence.AlarmDAO;
 import edu.chl.calendarplusplus.persistence.ContactDAO;

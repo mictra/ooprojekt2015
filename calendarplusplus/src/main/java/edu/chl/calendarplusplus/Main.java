@@ -1,26 +1,17 @@
 package edu.chl.calendarplusplus;
 
-import edu.chl.calendarplusplus.controller.ProjectViewController;
-import edu.chl.calendarplusplus.view.ProjectView;
+import edu.chl.calendarplusplus.controller.*;
 import edu.chl.calendarplusplus.model.CalendarPlus;
-import edu.chl.calendarplusplus.alarmnotification.controller.AlarmSingleController;
-import edu.chl.calendarplusplus.alarmnotification.controller.AddAlarmCardController;
-import edu.chl.calendarplusplus.contact.controller.ContactGroupSingleController;
-import edu.chl.calendarplusplus.contact.controller.AddContactGroupCardController;
-import edu.chl.calendarplusplus.contact.controller.AddContactCardController;
-import edu.chl.calendarplusplus.contact.controller.ContactSingleController;
-import edu.chl.calendarplusplus.activity.controller.ActivitySingleController;
-import edu.chl.calendarplusplus.activity.controller.AddActivityCardController;
-import edu.chl.calendarplusplus.activity.controller.WeekViewController;
-import edu.chl.calendarplusplus.activity.controller.MonthViewController;
-import edu.chl.calendarplusplus.contact.model.Contact;
-import edu.chl.calendarplusplus.contact.model.ContactGroup;
-import edu.chl.calendarplusplus.contact.model.IContact;
-import edu.chl.calendarplusplus.contact.model.IContactGroup;
+import edu.chl.calendarplusplus.model.Contact;
+import edu.chl.calendarplusplus.model.ContactGroup;
+import edu.chl.calendarplusplus.model.IContact;
+import edu.chl.calendarplusplus.model.IContactGroup;
+import edu.chl.calendarplusplus.model.Project;
 import edu.chl.calendarplusplus.persistence.ActivityDAO;
 import edu.chl.calendarplusplus.persistence.AlarmDAO;
 import edu.chl.calendarplusplus.persistence.ContactDAO;
 import edu.chl.calendarplusplus.persistence.ContactGroupDAO;
+import edu.chl.calendarplusplus.view.ProjectView;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -57,8 +48,9 @@ public final class Main {
                                        
                     setLookAndFeel();
                     
+                    final Project project = new Project();
                     final CalendarPlus cal = new CalendarPlus();
-                    final ProjectView projectView = new ProjectView(cal);
+                    final ProjectView projectView = new ProjectView(project, cal);
                     
                     ProjectViewController.create(cal, projectView);
                     //Maybe we should create own view objects here and use them instead of in the projectView?

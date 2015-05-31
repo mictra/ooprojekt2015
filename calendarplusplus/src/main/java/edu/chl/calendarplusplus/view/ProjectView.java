@@ -5,23 +5,13 @@
 */
 package edu.chl.calendarplusplus.view;
 
-import edu.chl.calendarplusplus.alarmnotification.view.AlarmCard;
-import edu.chl.calendarplusplus.alarmnotification.view.AddAlarmCard;
-import edu.chl.calendarplusplus.contact.view.ContactCard;
-import edu.chl.calendarplusplus.contact.view.AddContactGroupCard;
-import edu.chl.calendarplusplus.contact.view.AddContactCard;
-import edu.chl.calendarplusplus.contact.view.ContactGroupCard;
-import edu.chl.calendarplusplus.activity.view.MonthViewCard;
-import edu.chl.calendarplusplus.activity.view.WeekViewCard;
-import edu.chl.calendarplusplus.activity.view.ListViewCard;
-import edu.chl.calendarplusplus.activity.view.AddActivityCard;
-import edu.chl.calendarplusplus.activity.view.ActivitySingleCard;
 import edu.chl.calendarplusplus.model.CalendarPlus;
-import edu.chl.calendarplusplus.activity.model.IActivity;
-import edu.chl.calendarplusplus.alarmnotification.model.IAlarm;
-import edu.chl.calendarplusplus.contact.model.IContact;
-import edu.chl.calendarplusplus.contact.model.IContactGroup;
-import edu.chl.calendarplusplus.alarmnotification.model.INotification;
+import edu.chl.calendarplusplus.model.IActivity;
+import edu.chl.calendarplusplus.model.IAlarm;
+import edu.chl.calendarplusplus.model.IContact;
+import edu.chl.calendarplusplus.model.IContactGroup;
+import edu.chl.calendarplusplus.model.INotification;
+import edu.chl.calendarplusplus.model.Project;
 import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.beans.PropertyChangeListener;
@@ -45,7 +35,7 @@ public class ProjectView extends javax.swing.JFrame {
         tweekingInitComponents();
     }
     
-    public ProjectView(CalendarPlus cal) {
+    public ProjectView(Project project, CalendarPlus cal) {
         initComponents();
         this.cal = cal;
         tweekingInitComponents();
@@ -280,7 +270,7 @@ public class ProjectView extends javax.swing.JFrame {
                     .addGroup(menuPanelLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(logoLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
+                            .addComponent(logoLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
                             .addComponent(logoSeparator, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuPanelLayout.createSequentialGroup()
                                 .addGap(12, 12, 12)
@@ -332,7 +322,7 @@ public class ProjectView extends javax.swing.JFrame {
                 .addComponent(menuAlarmPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(menuSettingsLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
                 .addComponent(searchTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -365,7 +355,7 @@ public class ProjectView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(mainLayeredPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(topPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1010, Short.MAX_VALUE)))
+                    .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1008, Short.MAX_VALUE)))
         );
         mainLayeredPaneLayout.setVerticalGroup(
             mainLayeredPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
