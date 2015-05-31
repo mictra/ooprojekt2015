@@ -68,6 +68,10 @@ public class Activity implements IActivity, Serializable {
     
     // Setters and getters
     
+    public void setId(int id){
+        this.id = id;
+    }
+    
     public int getId(){
         return id;
     }

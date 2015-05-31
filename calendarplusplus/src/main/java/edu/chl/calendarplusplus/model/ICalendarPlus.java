@@ -18,6 +18,10 @@ public interface ICalendarPlus {
     
     public void updateActivity(IActivity a, List<IContact> removedAttendees);
     
+    public void addNotification(INotification not);
+    
+    public void updateNotification(INotification not, IActivity a);
+    
     public void addContact(IContact contact, List<IContactGroup> contactGroups);
     
     public void addContactGroup(IContactGroup group);

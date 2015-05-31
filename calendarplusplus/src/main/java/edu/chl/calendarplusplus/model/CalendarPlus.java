@@ -57,7 +57,7 @@ public class CalendarPlus implements ICalendarPlus {
             alarms = new ArrayList<>();
         }
         notifications = notDAO.findAll();
-        if(notifications.isEmpty()){
+        if (notifications.isEmpty()) {
             notifications = new ArrayList<>();
         }
         contactManager = new ContactManager();
@@ -89,6 +89,10 @@ public class CalendarPlus implements ICalendarPlus {
             contactManager.setContactGroups(c, contactGroups);
             activityManager.setContactActivities(c, attendActivities);
         }
+        for (INotification n : notDAO.findAll()) {
+            System.out.println("TIME TO NOTIFY: " + n.getAlarm().getTime());
+            notificationManager.setNotification(n.getActivity(), n);
+        }
         defaultGroup = getContactGroupByName("Default");
     }
 
@@ -111,6 +115,47 @@ public class CalendarPlus implements ICalendarPlus {
         }
         aDAO.update(a);
         activities = aDAO.findAll();
+    }
+
+    public void removeActivity(IActivity a) {
+        //Remove the notification from NotificationManager and Database if there is one
+        INotification not = notificationManager.getNotification(a);
+        if (not != null) {
+            not.setActivity(null);
+            notificationManager.removeNotification(a);
+            notDAO.delete(not.getId());
+            notifications = notDAO.findAll();
+        }
+        for (IContact c : a.getAttendees()) {
+            activityManager.removeActivityFromContact(c, a);
+        }
+        a.removeAllAttendees();
+        aDAO.delete(a.getId());
+        activities = aDAO.findAll();
+    }
+
+    public void addNotification(INotification not) {
+        notDAO.create(not);
+        notificationManager.setNotification(not.getActivity(), not);
+        notifications = notDAO.findAll();
+    }
+
+    public void updateNotification(INotification not, IActivity a) {
+        if (not != null) {
+            if (notificationManager.getNotification(a) != null) {
+                notDAO.update(not);
+            } else {
+                notDAO.create(not);
+            }
+            notificationManager.setNotification(not.getActivity(), not);
+        } else {
+            //Check that it is not already removed
+            if (notificationManager.getNotification(a) != null) {
+                notDAO.delete(notificationManager.getNotification(a).getId());
+                notificationManager.removeNotification(a);
+            }
+        }
+        notifications = notDAO.findAll();
     }
 
     public void addContact(IContact contact, List<IContactGroup> contactGroups) {
@@ -181,10 +226,6 @@ public class CalendarPlus implements ICalendarPlus {
         alarmDAO.update(a);
         //update the list
         alarms = alarmDAO.findAll();
-    }
-
-    public void removeActivity(IActivity a) {
-        activities.remove(a);
     }
 
     public void removeAlarm(IAlarm a) {

@@ -34,6 +34,7 @@ public class AddActivityCard extends javax.swing.JPanel {
     private final ICalendarPlus cal;
     String lstring = "";
     private IActivity act;
+    private INotification not;
     private boolean updateMode;
     
     /**
@@ -496,6 +497,9 @@ public class AddActivityCard extends javax.swing.JPanel {
                 break;                
         }
         INotification inot = new Notification(notDate, act.getName(), act.getDescription(), act);
+        if(updateMode && not != null){
+            inot.setId(not.getId());
+        }
         return inot;
     }
             
@@ -600,8 +604,9 @@ public class AddActivityCard extends javax.swing.JPanel {
         
     }
 
-    void editActivity(IActivity act) {
+    void editActivity(IActivity act, INotification not) {
         this.act = act;
+        this.not = not;
         updateMode = true;
         
         nameTextField.setText(act.getName());
@@ -645,7 +650,6 @@ public class AddActivityCard extends javax.swing.JPanel {
         nonAttendeeList.setPrototypeCellValue(lstring+ "        ");
         nonAttendeeScrollPane.setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
         
-        INotification not = cal.getNotificationManager().getNotification(act);
         if (not == null) {
             notificationComboBox.setSelectedIndex(0);
         } else {

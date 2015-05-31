@@ -11,27 +11,39 @@ import java.util.HashMap;
  *
  * @author Johan
  */
-public class NotificationManager implements INotificationManager{
+public class NotificationManager implements INotificationManager {
 
     HashMap<IActivity, INotification> notificationManager;
-    
-    public NotificationManager(){
+
+    public NotificationManager() {
         notificationManager = new HashMap<>();
     }
-    
-    public void setNotification(IActivity a, INotification n){
-        if(getNotification(a) != null){
-            notificationManager.remove(n.getActivity());
-        }
+
+    public void setNotification(IActivity a, INotification n) {
+        /*
+         if(getNotification(a) != null){
+         notificationManager.remove(n.getActivity());
+         }
+         */
         notificationManager.put(a, n);
     }
-    
-    public INotification getNotification(IActivity a){
-        return notificationManager.get(a);
+
+    public INotification getNotification(IActivity a) {
+        //Normal equals doesn't work, since we use JPA
+        for (IActivity act : notificationManager.keySet()) {
+            if (a.getId() == act.getId() && act.getName().equals(a.getName())) {
+                return notificationManager.get(act);
+            }
+        }
+        return null;
     }
-    
-    public void removeNotification(IActivity a){
-        notificationManager.remove(a);
+
+    public void removeNotification(IActivity a) {
+        for (IActivity act : notificationManager.keySet()) {
+            if (a.getId() == act.getId() && act.getName().equals(a.getName())) {
+                notificationManager.remove(act);
+            }
+        }
     }
-    
+
 }

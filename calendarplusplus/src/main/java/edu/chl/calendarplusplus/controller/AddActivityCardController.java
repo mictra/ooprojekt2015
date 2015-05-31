@@ -50,8 +50,7 @@ public class AddActivityCardController implements PropertyChangeListener {
             cal.addActivity(act);
             INotification not = ac.getAsNotification(act);
             if (not != null) {
-                //Add notification to manager or update or remove
-                cal.getNotificationManager().setNotification(act, not);
+                cal.addNotification(not);
             }
             ac.resetFields();
             projV.showActivitySingle(act);
@@ -63,11 +62,7 @@ public class AddActivityCardController implements PropertyChangeListener {
             IActivity act = (IActivity) evt.getNewValue();
             cal.updateActivity(act, act.getAttendees());
             INotification not = ac.getAsNotification(act);
-            if (not == null) {
-                cal.getNotificationManager().removeNotification(act);
-            } else {
-                cal.getNotificationManager().setNotification(act, not);
-            }
+            cal.updateNotification(not, act);
             ac.resetFields();
             projV.showActivitySingle(act);
         } else if (evtName.equalsIgnoreCase("AddActivityCardCancelButtonClicked")) {

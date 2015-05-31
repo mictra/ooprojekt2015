@@ -95,4 +95,14 @@ public class MockActivity implements IActivity {
     public void removeAllAttendees() {
         
     }
+
+    @Override
+    public void setId(int id) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int getId() {
+        return 0;
+    }
 }

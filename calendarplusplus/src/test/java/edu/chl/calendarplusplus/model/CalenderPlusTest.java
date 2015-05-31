@@ -63,16 +63,16 @@ public class CalenderPlusTest {
    // @Test
     public void testAddActivity(){
         Assert.assertTrue(cal.getActivityList().isEmpty());
-        cal.addActivity(a1, null);
+        cal.addActivity(a1);
         Assert.assertTrue(cal.getActivityList().size() == 1);
-        cal.addActivity(a2, null);
+        cal.addActivity(a2);
         Assert.assertTrue(cal.getActivityList().size() == 2);
     }
     
   //  @Test
     public void testRemoveActivity(){
-        cal.addActivity(a1, null);
-        cal.addActivity(a2, null);
+        cal.addActivity(a1);
+        cal.addActivity(a2);
         Assert.assertTrue(cal.getActivityList().size() == 2);
         cal.removeActivity(a1);
         Assert.assertTrue(cal.getActivityList().size() == 1);
@@ -96,8 +96,8 @@ public class CalenderPlusTest {
     
     //@Test
     public void testGetActivitiesByHour(){
-        cal.addActivity(a3, null);
-        cal.addActivity(a4, null);
+        cal.addActivity(a3);
+        cal.addActivity(a4);
         Assert.assertTrue(cal.getActivitiesByHour(start, end).size() == 1 );
         Assert.assertTrue(cal.getActivitiesByHour(start, t4).size() == 2 );
         Assert.assertTrue(cal.getActivitiesByHour(end, t4).size() == 1 );

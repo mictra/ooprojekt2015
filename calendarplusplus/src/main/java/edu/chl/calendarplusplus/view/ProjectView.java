@@ -10,6 +10,7 @@ import edu.chl.calendarplusplus.model.IActivity;
 import edu.chl.calendarplusplus.model.IAlarm;
 import edu.chl.calendarplusplus.model.IContact;
 import edu.chl.calendarplusplus.model.IContactGroup;
+import edu.chl.calendarplusplus.model.INotification;
 import edu.chl.calendarplusplus.model.Project;
 import java.awt.CardLayout;
 import java.awt.Dimension;
@@ -736,8 +737,8 @@ public class ProjectView extends javax.swing.JFrame {
         headlineLabel.setText("Edit contactgroup");
     }
 
-    public void editActivity(IActivity act) {
-        addActivity.editActivity(act);
+    public void editActivity(IActivity act, INotification not) {
+        addActivity.editActivity(act, not);
         tabCards.show(mainPanel, "AddActivityCard");
         headlineLabel.setText("Edit activity");
     }
